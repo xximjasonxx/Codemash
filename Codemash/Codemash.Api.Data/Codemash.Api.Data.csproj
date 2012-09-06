@@ -39,10 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\MasterSession.cs" />
-    <Compile Include="Entities\MasterSpeaker.cs" />
+    <Compile Include="Entities\Session.cs" />
+    <Compile Include="Entities\Speaker.cs" />
+    <Compile Include="Ex\RepositoryNotLoadedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IMasterRepository.cs" />
+    <Compile Include="Provider\IMasterDataProvider.cs" />
+    <Compile Include="Provider\Impl\SkydriveMasterDataProvider.cs" />
+    <Compile Include="Repositories\Impl\BlobSessionRepository.cs" />
+    <Compile Include="Repositories\Impl\BlobSpeakerRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\ISessionRepository.cs" />
+    <Compile Include="Repositories\ISpeakerRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Codemash.Server.Core\Codemash.Server.Core.csproj">
@@ -50,6 +57,7 @@
       <Name>Codemash.Server.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

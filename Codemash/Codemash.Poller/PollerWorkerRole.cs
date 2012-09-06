@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Threading;
-using Codemash.Api.Data.Repositories;
-using Microsoft.WindowsAzure;
-using Microsoft.WindowsAzure.Diagnostics;
+using System.Threading.Tasks;
+using Codemash.Poller.Container;
+using Codemash.Poller.Process;
+using Codemash.Server.Core;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Ninject;
 
@@ -14,34 +11,36 @@ namespace Codemash.Poller
 {
     public class PollerWorkerRole : RoleEntryPoint
     {
-        public IMasterRepository MasterRepository { get; private set; }
+        private readonly PollerContainer _container;
 
-        [Inject]
-        public PollerWorkerRole(IMasterRepository masterRepository)
+        public PollerWorkerRole()
         {
-            MasterRepository = masterRepository;
+            _container = new PollerContainer();
         }
 
         public override void Run()
         {
-            // This is a sample worker implementation. Replace with your logic.
-            Trace.WriteLine("Codemash.Poller entry point called", "Information");
+            // spin off a thread which will fire every configurable minutes to check our source for changes
+            // not using Timer here because we need the process to be blocking as each execution could be longer than others
+            var task = new Task(() =>
+                {
+                    while (true)
+                    {
+                        var process = _container.Get<PollerWorkerProcess>();
+                        process.Execute();
 
-            while (true)
-            {
-                Thread.Sleep(10000);
-                Trace.WriteLine("Working", "Information");
-            }
+                        // wait to check again
+                        Thread.Sleep(Config.MinutesWaitTime);
+                    }
+                });
+
+            task.Start(TaskScheduler.Current);
         }
 
         public override bool OnStart()
         {
             // Set the maximum number of concurrent connections 
             ServicePointManager.DefaultConnectionLimit = 12;
-
-            // For information on handling configuration changes
-            // see the MSDN topic at http://go.microsoft.com/fwlink/?LinkId=166357.
-
             return base.OnStart();
         }
     }

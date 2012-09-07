@@ -3,7 +3,7 @@
 namespace Codemash.Server.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-    internal class EnumKeyAttribute : Attribute
+    public class EnumKeyAttribute : Attribute
     {
         public string AlternativeName { get; private set; }
 

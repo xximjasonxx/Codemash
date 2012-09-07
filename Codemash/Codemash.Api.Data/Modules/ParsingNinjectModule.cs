@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Codemash.Api.Data.Parsing.Impl;
 using Ninject.Modules;
 
-namespace Codemash.Server.Core.Modules
+namespace Codemash.Api.Data.Modules
 {
-    public class DataProviderInjectModule : NinjectModule
+    public class ParsingNinjectModule : NinjectModule
     {
         #region Overrides of NinjectModule
 
@@ -15,7 +12,8 @@ namespace Codemash.Server.Core.Modules
         /// </summary>
         public override void Load()
         {
-            
+            Bind<RoomParse>().ToSelf().InSingletonScope();
+            Bind<TrackParse>().ToSelf().InSingletonScope();
         }
 
         #endregion

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Codemash.Server.Core.Extensions
 {
-    public static class ParsingExtensions
+    public static class PrimitiveParsingExtensions
     {
         /// <summary>
         /// Return a string parsed to an integer - return MinValue if the parse fails

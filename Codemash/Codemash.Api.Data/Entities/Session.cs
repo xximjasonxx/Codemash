@@ -17,7 +17,7 @@ namespace Codemash.Api.Data.Entities
         public Track Track { get; set; }
         public Room Room { get; set; }
 
-        public string SpeakerName { get; set; }
+        //public string SpeakerName { get; set; }
         public int SpeakerId { get; set; }
     }
 }

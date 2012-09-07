@@ -1,4 +1,5 @@
-﻿using Codemash.Api.Data.Provider;
+﻿using Codemash.Api.Data.Modules;
+using Codemash.Api.Data.Provider;
 using Codemash.Api.Data.Repositories;
 using Codemash.Poller.Container;
 using Codemash.Poller.Process;
@@ -12,14 +13,14 @@ namespace Server.CoreTests
     public class PollerWorkerProcessTests
     {
         [TestMethod]
-        public void test_that_an_instance_can_be_extracted_from_poller_container()
+        public void test_that_a_process_instance_can_be_extracted_from_poller_container()
         {
             var container = new PollerContainer();
-            Assert.AreNotEqual(null, container.TryGet<PollerWorkerProcess>());
+            Assert.AreNotEqual(null, container.Get<PollerWorkerProcess>());
         }
 
         [TestMethod]
-        public void test_that_execute_can_be_run()
+        public void test_that_process_execute_can_be_run()
         {
             var container = new StandardKernel();
             container.Bind<IMasterDataProvider>().ToConstant(new Mock<IMasterDataProvider>().Object);

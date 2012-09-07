@@ -46,8 +46,7 @@
     <Compile Include="Attributes\EnumKeyAttribute.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Enum.cs" />
-    <Compile Include="Extensions\ParsingExtensions.cs" />
-    <Compile Include="Modules\DataProviderInjectModule.cs" />
+    <Compile Include="Extensions\PrimitiveParsingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

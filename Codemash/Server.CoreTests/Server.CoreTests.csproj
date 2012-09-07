@@ -60,10 +60,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="EnumParsingTests.cs" />
     <Compile Include="Factory\MoqSessionRepositoryFactory.cs" />
     <Compile Include="Factory\MoqSpeakerRepositoryFactory.cs" />
     <Compile Include="LoadedSessionRepositoryTests.cs" />
     <Compile Include="LoadedSpeakerRespositoryTests.cs" />
+    <Compile Include="PrimitiveParsingExtensionsTests.cs" />
     <Compile Include="PollerContainerTests.cs" />
     <Compile Include="PollerWorkerProcessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

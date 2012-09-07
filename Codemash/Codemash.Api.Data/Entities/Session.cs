@@ -13,7 +13,7 @@ namespace Codemash.Api.Data.Entities
         public string Abstract { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public Level Difficulty { get; set; }
+        public Level Level { get; set; }
         public Track Track { get; set; }
         public Room Room { get; set; }
 

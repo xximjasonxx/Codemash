@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using Codemash.Api.Data.Entities;
+using Codemash.Api.Data.Extensions;
 using Codemash.Api.Data.Parsing.Impl;
 using Codemash.Server.Core.Extensions;
 using Newtonsoft.Json.Linq;
@@ -11,7 +12,7 @@ using Ninject;
 
 namespace Codemash.Api.Data.Provider.Impl
 {
-    public class DropboxMasterDataProvider : IMasterDataProvider
+    public class DevLinkMasterDataProvider : IMasterDataProvider
     {
         [Inject]
         public RoomParse RoomParser { get; set; }
@@ -35,7 +36,14 @@ namespace Codemash.Api.Data.Provider.Impl
                     select new Session
                         {
                             SessionId = it["SessionId"].ToString().AsInt(),
-                            Track = TrackParser.Parse(it["Track"].ToString(), Track.Unknown)
+                            Title = it["Title"].ToString(),
+                            Abstract = it["Abstract"].ToString(),
+                            Level = it["Level"].ToString().AsLevel(Level.Unknown),
+                            Track = TrackParser.Parse(it["Track"].ToString(), Track.Unknown),
+                            Room = RoomParser.Parse(it["Room"].ToString(), Room.Unknown),
+                            Start = it["StartTime"].ToString().AsDateTime(),
+                            End = it["EndTime"].ToString().AsDateTime(),
+                            SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()
                         }).ToList();
         }
 

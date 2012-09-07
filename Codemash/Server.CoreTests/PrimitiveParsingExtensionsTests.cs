@@ -1,4 +1,5 @@
-﻿using Codemash.Server.Core.Extensions;
+﻿using System;
+using Codemash.Server.Core.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Server.CoreTests
@@ -18,6 +19,25 @@ namespace Server.CoreTests
         {
             var str = "abc";
             Assert.AreEqual(int.MinValue, str.AsInt());
+        }
+
+        [TestMethod]
+        public void test_that_given_a_valid_date_string_method_will_return_a_DateTime_representing_the_given_string()
+        {
+            var str = "1/13/1983";
+            var dt = str.AsDateTime();
+            Assert.AreNotEqual(DateTime.MinValue, dt);
+
+            Assert.AreEqual(1, dt.Month);
+            Assert.AreEqual(13, dt.Day);
+            Assert.AreEqual(1983, dt.Year);
+        }
+
+        [TestMethod]
+        public void test_that_given_an_invalid_date_string_datetime_min_value_is_returned()
+        {
+            var str = "abc";
+            Assert.AreEqual(DateTime.MinValue, str.AsDateTime());
         }
     }
 }

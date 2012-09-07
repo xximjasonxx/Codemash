@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Codemash.Api.Data;
+using Codemash.Api.Data.Extensions;
 using Codemash.Api.Data.Parsing.Impl;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -57,6 +58,20 @@ namespace Server.CoreTests
             var str = "Conv. Ctr. E, F, G";
             var enumParser = new RoomParse();
             Assert.AreEqual(Room.CtrEFG, enumParser.Parse(str, Room.Unknown));
+        }
+
+        [TestMethod]
+        public void test_that_parsing_a_valid_level_string_returns_the_appropriate_enum()
+        {
+            var str = "Beginner";
+            Assert.AreEqual(Level.Beginner, str.AsLevel(Level.Unknown));
+        }
+
+        [TestMethod]
+        public void test_that_parsing_an_invalid_level_string_returns_the_default_enum_value()
+        {
+            var str = "abc";
+            Assert.AreEqual(Level.Unknown, str.AsLevel(Level.Unknown));
         }
     }
 }

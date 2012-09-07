@@ -1,9 +1,5 @@
 ﻿using System.Collections.Generic;
 using Codemash.Api.Data.Modules;
-using Codemash.Api.Data.Provider;
-using Codemash.Api.Data.Provider.Impl;
-using Codemash.Api.Data.Repositories;
-using Codemash.Api.Data.Repositories.Impl;
 using Codemash.Poller.Process;
 using Ninject;
 using Ninject.Modules;

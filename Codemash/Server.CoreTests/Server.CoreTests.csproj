@@ -61,11 +61,14 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Factory\MoqSessionRepositoryFactory.cs" />
+    <Compile Include="Factory\MoqSpeakerRepositoryFactory.cs" />
     <Compile Include="LoadedSessionRepositoryTests.cs" />
+    <Compile Include="LoadedSpeakerRespositoryTests.cs" />
     <Compile Include="PollerContainerTests.cs" />
     <Compile Include="PollerWorkerProcessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnloadedSessionRepositoryTests.cs" />
+    <Compile Include="UnloadedSpeakerRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Codemash.Api.Data\Codemash.Api.Data.csproj">

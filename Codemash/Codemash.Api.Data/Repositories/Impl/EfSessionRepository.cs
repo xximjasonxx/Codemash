@@ -6,7 +6,7 @@ using Codemash.Api.Data.Entities;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {
-    public class EfSessionRepository : ISessionRepository
+    public class EfSessionRepository : RepositoryBase<Session>, ISessionRepository
     {
         #region Implementation of IReadRepository<Session,int>
 
@@ -57,12 +57,16 @@ namespace Codemash.Api.Data.Repositories.Impl
             throw new NotImplementedException();
         }
 
+        #endregion
+
+        #region Overrides of RepositoryBase<Session>
+
         /// <summary>
-        /// Empty the repository without saving any values
+        /// Name of the repository
         /// </summary>
-        public void Clear()
+        public override string RepositoryName
         {
-            throw new NotImplementedException();
+            get { return "Session"; }
         }
 
         #endregion

@@ -6,7 +6,7 @@ using Codemash.Api.Data.Entities;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {
-    public class EfSpeakerRepository : ISpeakerRepository
+    public class EfSpeakerRepository : RepositoryBase<Speaker>, ISpeakerRepository
     {
         #region Implementation of IReadRepository<Speaker,int>
 
@@ -57,12 +57,16 @@ namespace Codemash.Api.Data.Repositories.Impl
             throw new NotImplementedException();
         }
 
+        #endregion
+
+        #region Overrides of RepositoryBase<Speaker>
+
         /// <summary>
-        /// Empty the repository without saving any values
+        /// Name of the repository
         /// </summary>
-        public void Clear()
+        public override string RepositoryName
         {
-            throw new NotImplementedException();
+            get { return "Speakers"; }
         }
 
         #endregion

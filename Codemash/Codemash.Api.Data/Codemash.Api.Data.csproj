@@ -74,6 +74,7 @@
     <Compile Include="Repositories\Impl\EfSessionChangeRepository.cs" />
     <Compile Include="Repositories\Impl\EfSessionRepository.cs" />
     <Compile Include="Repositories\Impl\EfSpeakerRepository.cs" />
+    <Compile Include="Repositories\Impl\RepositoryBase.cs" />
     <Compile Include="Repositories\IReadRepository.cs" />
     <Compile Include="Repositories\ISessionChangeRepository.cs" />
     <Compile Include="Repositories\ISessionRepository.cs" />

@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Codemash.Api.Data.Entities
 {
     public class SessionChange : EntityBase
@@ -9,6 +11,11 @@ namespace Codemash.Api.Data.Entities
         private string _value;
 
         public int SessionChangeId { get; set; }
+
+        /// <summary>
+        /// Allows changes to be grouped in blocks by when they were created
+        /// </summary>
+        internal DateTime ChangeTime { get; set; }
 
         public int SessionId
         {

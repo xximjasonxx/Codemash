@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Codemash.Api.Data.Entities;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {
-    public class EfSessionChangeRepository : List<SessionChange>, ISessionChangeRepository
+    public class EfSessionChangeRepository : RepositoryBase<SessionChange>, ISessionChangeRepository
     {
         #region Implementation of IWriteRepository<SessionChange,int>
 
@@ -13,7 +14,17 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         public void Save()
         {
-            throw new NotImplementedException();
+            var saveTime = DateTime.UtcNow;
+            using (var context = new CodemashSessions())
+            {
+                foreach (var item in this.Where(item => item.IsDirty))
+                {
+                    item.ChangeTime = saveTime;
+                    context.SessionChanges.Add(item);
+                }
+
+                context.SaveChanges();
+            }
         }
 
         #endregion
@@ -25,17 +36,31 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         public void Load()
         {
-            throw new NotImplementedException();
+            var loadedChangeIds = this.Select(sc => sc.SessionChangeId);
+            using (var context = new CodemashSessions())
+            {
+                context.SessionChanges.ToList().ForEach(sc =>
+                    {
+                        if (!loadedChangeIds.Contains(sc.SessionChangeId))
+                        {
+                            sc.MarkAsExisting();
+                            Add(sc);
+                        }
+                    });
+            }
+
+            RepositoryHasLoaded();
         }
 
         /// <summary>
         /// Get an item from the repository by a primary key
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The SessionChangeId to key on</param>
+        /// <returns>The Session Change with the given SessionChangeId</returns>
         public SessionChange Get(int id)
         {
-            throw new NotImplementedException();
+            CheckRepositoryHasLoaded();
+            return this.FirstOrDefault(sc => sc.SessionChangeId == id);
         }
 
         /// <summary>
@@ -45,7 +70,8 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public SessionChange Get(Func<SessionChange, bool> condition)
         {
-            throw new NotImplementedException();
+            CheckRepositoryHasLoaded();
+            return this.FirstOrDefault(condition);
         }
 
         /// <summary>
@@ -54,7 +80,8 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IList<SessionChange> GetAll()
         {
-            throw new NotImplementedException();
+            CheckRepositoryHasLoaded();
+            return this;
         }
 
         /// <summary>
@@ -64,7 +91,20 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IList<SessionChange> GetAll(Func<SessionChange, bool> condition)
         {
-            throw new NotImplementedException();
+            CheckRepositoryHasLoaded();
+            return this.Where(condition).ToList();
+        }
+
+        #endregion
+
+        #region Overrides of RepositoryBase<SessionChange>
+
+        /// <summary>
+        /// Name of the repository
+        /// </summary>
+        public override string RepositoryName
+        {
+            get { return "SessionChange"; }
         }
 
         #endregion

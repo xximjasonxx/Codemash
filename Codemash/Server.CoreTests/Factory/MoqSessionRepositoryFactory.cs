@@ -4,6 +4,7 @@ using System.Linq;
 using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Ex;
 using Codemash.Api.Data.Repositories;
+using Codemash.Server.Core.Extensions;
 using Moq;
 
 namespace Server.CoreTests.Factory
@@ -27,6 +28,8 @@ namespace Server.CoreTests.Factory
                             new Session { SessionId = 342, Title = "Controlling ASP.NET MVC4" },
                             new Session { SessionId = 215, Title = "Go, Google's New Language" },
                         };
+
+                    _sessionRepository.Apply(s => s.MarkAsExisting());
                 });
 
             mock.Setup(m => m.Get(It.IsAny<int>())).Returns((int inValue) =>

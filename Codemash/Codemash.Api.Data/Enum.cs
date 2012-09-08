@@ -59,4 +59,12 @@ namespace Codemash.Api.Data
         Modify,
         Delete
     }
+
+    public enum EntityState
+    {
+        New,
+        Modified,
+        Removed,
+        Unmodified
+    }
 }

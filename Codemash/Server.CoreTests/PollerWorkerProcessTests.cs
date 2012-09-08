@@ -8,6 +8,7 @@ using Codemash.Poller.Process;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ninject;
+using Server.CoreTests.Factory;
 
 namespace Server.CoreTests
 {
@@ -39,6 +40,40 @@ namespace Server.CoreTests
 
             var process = container.Get<PollerWorkerProcess>();
             process.Execute();
+        }
+
+        [TestMethod]
+        public void test_that_in_the_scenario_where_there_are_no_difference_between_master_and_local_the_sessionchange_repository_should_remain_empty()
+        {
+            var kernel = new StandardKernel();
+            kernel.Bind<ISessionRepository>().ToConstant(MoqPollerWorkerProcessTestFactory.GetStandardSessionRepository());
+            kernel.Bind<IMasterDataProvider>().ToConstant(MoqPollerWorkerProcessTestFactory.GetStandardMasterDataProvider());
+            kernel.Bind<ISpeakerRepository>().ToConstant(new Mock<ISpeakerRepository>().Object);
+            kernel.Bind<SessionCompare>().ToConstant(new SessionCompare());
+            kernel.Bind<ISessionChangeRepository>().ToConstant(MoqPollerWorkerProcessTestFactory.GetSessionChangeRepository()).InSingletonScope();
+
+            var process = kernel.Get<PollerWorkerProcess>();
+            process.Execute();
+
+            var repository = kernel.Get<ISessionChangeRepository>();
+            Assert.AreEqual(0, repository.GetAll().Count);
+        }
+
+        [TestMethod]
+        public void test_that_in_the_scenario_where_there_are_differences_between_the_sessions_in_master_and_local_session_sessionchange_repository_should_not_be_empty()
+        {
+            var kernel = new StandardKernel();
+            kernel.Bind<ISessionRepository>().ToConstant(MoqPollerWorkerProcessTestFactory.GetNonStandardSessionRepository());
+            kernel.Bind<IMasterDataProvider>().ToConstant(MoqPollerWorkerProcessTestFactory.GetStandardMasterDataProvider());
+            kernel.Bind<SessionCompare>().ToConstant(new SessionCompare());
+            kernel.Bind<ISessionChangeRepository>().ToConstant(MoqPollerWorkerProcessTestFactory.GetSessionChangeRepository()).InSingletonScope();
+            kernel.Bind<ISpeakerRepository>().ToConstant(new Mock<ISpeakerRepository>().Object);
+
+            var process = kernel.Get<PollerWorkerProcess>();
+            process.Execute();
+
+            var repository = kernel.Get<ISessionChangeRepository>();
+            Assert.AreNotEqual(0, repository.GetAll().Count);
         }
     }
 }

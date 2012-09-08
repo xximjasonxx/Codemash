@@ -1,19 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Codemash.Api.Data.Entities
 {
     public abstract class EntityBase
     {
-        public bool IsDirty { get; protected set; }
-        public bool IsNew { get; protected set; }
+        /// <summary>
+        /// The current state of the entity
+        /// </summary>
+        public EntityState CurrentState { get; private set; }
 
-        // methods
-        internal bool IsExisting
+        /// <summary>
+        /// Has the entity been modified in anyway
+        /// </summary>
+        public bool IsDirty
         {
-            set { IsNew = !value; }
+            get { return CurrentState != EntityState.Unmodified; }
+        }
+
+        /// <summary>
+        /// When the constructor is invoked the entity is assumed to be New
+        /// </summary>
+        protected EntityBase()
+        {
+            CurrentState = EntityState.New;
+        }
+
+        /// <summary>
+        /// Indicate that this is a known existing entity and that it should override whatever CurrentState is
+        /// </summary>
+        public void MarkAsExisting()
+        {
+            CurrentState = EntityState.Unmodified;
+        }
+
+        /// <summary>
+        /// Indicate that a property on the Entity has changed
+        /// </summary>
+        protected void ValueChanged()
+        {
+            if (CurrentState != EntityState.New)
+                CurrentState = EntityState.Modified;
         }
     }
 }

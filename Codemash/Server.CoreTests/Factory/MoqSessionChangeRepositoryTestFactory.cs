@@ -3,6 +3,7 @@ using System.Linq;
 using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Ex;
 using Codemash.Api.Data.Repositories;
+using Codemash.Server.Core.Extensions;
 using Moq;
 
 namespace Server.CoreTests.Factory
@@ -20,6 +21,8 @@ namespace Server.CoreTests.Factory
                         {
                             new SessionChange()
                         };
+
+                    _sessionChangeRepository.Apply(sc => sc.MarkAsExisting());
                 });
 
             mockedRepository.Setup(m => m.GetAll()).Returns(() =>
@@ -35,6 +38,8 @@ namespace Server.CoreTests.Factory
                     .ForEach(sc => _sessionChangeRepository.Add(sc)));
 
             mockedRepository.Setup(m => m.Clear()).Callback(() => _sessionChangeRepository.Clear());
+
+            mockedRepository.Setup(m => m.Save()).Callback(() => _sessionChangeRepository.Apply(m => m.MarkAsExisting()));
 
             return mockedRepository.Object;
         }

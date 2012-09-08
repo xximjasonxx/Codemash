@@ -68,10 +68,12 @@
   <ItemGroup>
     <Compile Include="CompareExtensionMethodTests.cs" />
     <Compile Include="EnumParsingTests.cs" />
+    <Compile Include="Factory\MoqPollerWorkerProcessTestFactory.cs" />
     <Compile Include="Factory\MoqSessionChangeRepositoryTestFactory.cs" />
     <Compile Include="Factory\MoqSessionCompareTestFactory.cs" />
     <Compile Include="Factory\MoqSessionRepositoryFactory.cs" />
     <Compile Include="Factory\MoqSpeakerRepositoryFactory.cs" />
+    <Compile Include="ListManipulationsTests.cs" />
     <Compile Include="LoadedSessionChangeRepositoryTests.cs" />
     <Compile Include="LoadedSessionRepositoryTests.cs" />
     <Compile Include="LoadedSpeakerRespositoryTests.cs" />

@@ -45,9 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compare\SessionCompare.cs" />
     <Compile Include="Entities\Session.cs" />
+    <Compile Include="Entities\SessionChange.cs" />
     <Compile Include="Entities\Speaker.cs" />
     <Compile Include="Enum.cs" />
+    <Compile Include="Extensions\ComparisonExtensionMethods.cs" />
     <Compile Include="Extensions\EnumParsingExtensions.cs" />
     <Compile Include="Ex\RepositoryNotLoadedException.cs" />
     <Compile Include="Modules\DataProviderNinjectModule.cs" />
@@ -59,11 +62,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\IMasterDataProvider.cs" />
     <Compile Include="Provider\Impl\DevLinkMasterDataProvider.cs" />
+    <Compile Include="Repositories\Impl\BlobSessionChangeRepository.cs" />
     <Compile Include="Repositories\Impl\BlobSessionRepository.cs" />
     <Compile Include="Repositories\Impl\BlobSpeakerRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IReadRepository.cs" />
+    <Compile Include="Repositories\ISessionChangeRepository.cs" />
     <Compile Include="Repositories\ISessionRepository.cs" />
     <Compile Include="Repositories\ISpeakerRepository.cs" />
+    <Compile Include="Repositories\IWriteRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Codemash.Server.Core\Codemash.Server.Core.csproj">

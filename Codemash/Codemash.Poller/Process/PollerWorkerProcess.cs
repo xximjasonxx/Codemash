@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Codemash.Api.Data.Compare;
 using Codemash.Api.Data.Provider;
 using Codemash.Api.Data.Repositories;
 using Ninject;
@@ -16,39 +17,29 @@ namespace Codemash.Poller.Process
         [Inject]
         public ISpeakerRepository SpeakerRepository { get; set; }
 
+        [Inject]
+        public SessionCompare SessionComparer { get; set; }
+
+        [Inject]
+        public ISessionChangeRepository SessionChangeRepository { get; set; }
+
         public void Execute()
         {
-            // perform the check for changes against the master Session data
-            // since this can be a heavy operation - it will be spun off into its own thread
-            // same with the speaker check
-            // this will be hosted in the cloud, we should have multi core processing available to us
-            var sessionTask = new Task(PerformSessionsCheck);
-            var speakerTask = new Task(PerformSpeakersCheck);
+            // first step is to get the Session master data
+            var masterSessionList = MasterDataProvider.GetAllSessions();
 
-            // start each task and then wait for it to complete
-            sessionTask.Start();
-            speakerTask.Start();
-
-            // wait for the tasks to complete
-            Task.WaitAll(new[] { sessionTask, speakerTask });
-        }
-
-        /// <summary>
-        /// Check the Session master against the local sessions and record any differences
-        /// </summary>
-        private void PerformSessionsCheck()
-        {
-            // this loads all the data in the data store into repository
+            // get the local session List for comparison
             SessionRepository.Load();
-        }
+            var localSessionList = SessionRepository.GetAll();
 
-        /// <summary>
-        /// Check the Speaker master against the local speakers and record any differences
-        /// </summary>
-        private void PerformSpeakersCheck()
-        {
-            // this loads all the data in the data store into the repository
-            SpeakerRepository.Load();
+            // perform the comparison
+            var sessionDifferences = SessionComparer.CompareSessionLists(masterSessionList, localSessionList);
+
+            // add the items to the change repository
+            SessionChangeRepository.AddRange(sessionDifferences);
+
+            // save
+            SessionChangeRepository.Save();
         }
     }
 }

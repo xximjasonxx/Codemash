@@ -8,7 +8,7 @@ namespace Codemash.Api.Data.Repositories.Impl
 {
     public class BlobSpeakerRepository : ISpeakerRepository
     {
-        #region Implementation of IRepository<Speaker,int>
+        #region Implementation of IReadRepository<Speaker,int>
 
         /// <summary>
         /// Indicates the Repository should load all data from the local data store

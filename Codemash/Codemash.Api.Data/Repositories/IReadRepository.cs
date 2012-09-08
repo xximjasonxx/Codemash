@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Codemash.Api.Data.Repositories
 {
-    public interface IRepository<T, U>
+    public interface IReadRepository<T, U>
     {
         /// <summary>
         /// Indicates the Repository should load all data from the local data store

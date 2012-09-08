@@ -2,7 +2,7 @@
 
 namespace Codemash.Api.Data.Repositories
 {
-    public interface ISessionRepository : IRepository<Session, int>
+    public interface ISessionRepository : IReadRepository<Session, int>
     {
     }
 }

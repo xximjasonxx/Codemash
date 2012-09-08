@@ -45,14 +45,14 @@ namespace Server.CoreTests
         [TestMethod]
         public void test_that_given_a_valid_predicate_repository_returns_an_instance_of_speaker()
         {
-            var speaker = _speakerRepository.Get(s => s.Name.Length > 0);
+            var speaker = _speakerRepository.Get(s => s.FirstName.Length > 0);
             Assert.AreNotEqual(null, speaker);
         }
 
         [TestMethod]
         public void test_that_given_an_invalid_predicate_matching_no_speaker_returns_a_null_speaker_instance()
         {
-            var speaker = _speakerRepository.Get(s => s.Name == string.Empty);
+            var speaker = _speakerRepository.Get(s => s.FirstName == string.Empty);
             Assert.AreEqual(null, speaker);
         }
 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CodemashCloud" generation="1" functional="0" release="0" Id="eaf501ce-fb8e-4af1-881a-4bb56cbe621c" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CodemashCloud" generation="1" functional="0" release="0" Id="3b7de42a-dad0-4b15-9bb1-93c2aec0e361" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="CodemashCloudGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -106,9 +106,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="d71340ff-54a7-4a56-85c8-1d20155390ee" ref="Microsoft.RedDog.Contract\ServiceContract\CodemashCloudContract@ServiceDefinition.build">
+    <implementation Id="a65a92f5-10c4-444c-8697-2d3bd2ab716f" ref="Microsoft.RedDog.Contract\ServiceContract\CodemashCloudContract@ServiceDefinition.build">
       <interfacereferences>
-        <interfaceReference Id="c6ebed8c-b246-4382-98d0-5ca86f07fb6c" ref="Microsoft.RedDog.Contract\Interface\Codemash.DeltaApi:Endpoint1@ServiceDefinition.build">
+        <interfaceReference Id="8c2583d1-7410-4bdd-b4cb-f06ea46c3c14" ref="Microsoft.RedDog.Contract\Interface\Codemash.DeltaApi:Endpoint1@ServiceDefinition.build">
           <inPort>
             <inPortMoniker name="/CodemashCloud/CodemashCloudGroup/Codemash.DeltaApi:Endpoint1" />
           </inPort>

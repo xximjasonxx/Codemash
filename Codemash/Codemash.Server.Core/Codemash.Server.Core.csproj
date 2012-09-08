@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ComparablePropertyAttribute.cs" />
     <Compile Include="Attributes\EnumKeyAttribute.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Enum.cs" />

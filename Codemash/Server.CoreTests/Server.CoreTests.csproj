@@ -39,6 +39,10 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.4.5.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
@@ -60,7 +64,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CompareExtensionMethodTests.cs" />
     <Compile Include="EnumParsingTests.cs" />
+    <Compile Include="Factory\MoqSessionCompareTestFactory.cs" />
     <Compile Include="Factory\MoqSessionRepositoryFactory.cs" />
     <Compile Include="Factory\MoqSpeakerRepositoryFactory.cs" />
     <Compile Include="LoadedSessionRepositoryTests.cs" />
@@ -69,6 +75,7 @@
     <Compile Include="PollerContainerTests.cs" />
     <Compile Include="PollerWorkerProcessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionCompareTests.cs" />
     <Compile Include="UnloadedSessionRepositoryTests.cs" />
     <Compile Include="UnloadedSpeakerRepositoryTests.cs" />
   </ItemGroup>
@@ -87,6 +94,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Factory\StandardSession.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

@@ -1,4 +1,6 @@
-﻿using Codemash.Api.Data.Modules;
+﻿using System.Collections.Generic;
+using Codemash.Api.Data.Compare;
+using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Provider;
 using Codemash.Api.Data.Repositories;
 using Codemash.Poller.Container;
@@ -23,9 +25,17 @@ namespace Server.CoreTests
         public void test_that_process_execute_can_be_run()
         {
             var container = new StandardKernel();
-            container.Bind<IMasterDataProvider>().ToConstant(new Mock<IMasterDataProvider>().Object);
-            container.Bind<ISessionRepository>().ToConstant(new Mock<ISessionRepository>().Object);
+            var masterMock = new Mock<IMasterDataProvider>();
+            masterMock.Setup(m => m.GetAllSessions()).Returns(new List<Session>());
+            container.Bind<IMasterDataProvider>().ToConstant(masterMock.Object);
+
+            var sessionMock = new Mock<ISessionRepository>();
+            sessionMock.Setup(m => m.GetAll()).Returns(new List<Session>());
+            container.Bind<ISessionRepository>().ToConstant(sessionMock.Object);
+
             container.Bind<ISpeakerRepository>().ToConstant(new Mock<ISpeakerRepository>().Object);
+            container.Bind<SessionCompare>().ToConstant(new Mock<SessionCompare>().Object);
+            container.Bind<ISessionChangeRepository>().ToConstant(new Mock<ISessionChangeRepository>().Object);
 
             var process = container.Get<PollerWorkerProcess>();
             process.Execute();

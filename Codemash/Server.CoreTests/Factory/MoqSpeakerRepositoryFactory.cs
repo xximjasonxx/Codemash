@@ -20,10 +20,10 @@ namespace Server.CoreTests.Factory
                 {
                     _speakerRepository = new List<Speaker>
                         {
-                            new Speaker { SpeakerId = 113, Name = "Sven Aelterman" },
-                            new Speaker { SpeakerId = 130, Name = "Gregory Beamer" },
-                            new Speaker { SpeakerId = 135, Name = "Sergey Barskiy" },
-                            new Speaker { SpeakerId = 84, Name = "Steve Bodnar" }
+                            new Speaker { SpeakerId = 113, FirstName = "Sven Aelterman" },
+                            new Speaker { SpeakerId = 130, FirstName = "Gregory Beamer" },
+                            new Speaker { SpeakerId = 135, FirstName = "Sergey Barskiy" },
+                            new Speaker { SpeakerId = 84, FirstName = "Steve Bodnar" }
                         };
                 });
 

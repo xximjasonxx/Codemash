@@ -52,4 +52,11 @@ namespace Codemash.Api.Data
         [EnumKey("Conv. Ctr. 14 (Infragistics)")] Ctr14,
         [EnumKey("Conv. Ctr. 9, 10 (TEKsystems)")] Ctr910
     }
+
+    public enum SessionChangeAction
+    {
+        Add,
+        Modify,
+        Delete
+    }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace Codemash.Api.Data.Entities
 {
-    public class Speaker
+    public class Speaker : EntityBase
     {
         public int SpeakerId { get; set; }
         public string Biography { get; set; }

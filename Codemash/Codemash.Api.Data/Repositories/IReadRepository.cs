@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Codemash.Api.Data.Entities;
 
 namespace Codemash.Api.Data.Repositories
 {
-    public interface IReadRepository<T, U>
+    public interface IReadRepository<T, U> where T : EntityBase
     {
         /// <summary>
         /// Indicates the Repository should load all data from the local data store

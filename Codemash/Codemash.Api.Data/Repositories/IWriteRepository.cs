@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Codemash.Api.Data.Entities;
 
 namespace Codemash.Api.Data.Repositories
 {
-    public interface IWriteRepository<T, U>
+    public interface IWriteRepository<T, U> where T : EntityBase
     {
         /// <summary>
         /// Add items to the Repository

@@ -3,7 +3,7 @@ using Codemash.Server.Core.Attributes;
 
 namespace Codemash.Api.Data.Entities
 {
-    public class Session
+    public class Session : EntityBase
     {
         public int SessionId { get; set; }
         

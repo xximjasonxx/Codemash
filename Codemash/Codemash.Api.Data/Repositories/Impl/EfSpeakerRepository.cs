@@ -15,7 +15,18 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         public void Load()
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashSessionsContext())
+            {
+                var loadedSpeakers = this.Select(sp => sp.SpeakerId);
+                context.Speakers.Where(sp => !loadedSpeakers.Contains(sp.SpeakerId))
+                    .ToList().ForEach(sp =>
+                        {
+                            sp.MarkAsExisting();
+                            Add(sp);
+                        });
+            }
+
+            RepositoryHasLoaded();
         }
 
         /// <summary>
@@ -25,7 +36,8 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public Speaker Get(int id)
         {
-            throw new NotImplementedException();
+            CheckRepositoryHasLoaded();
+            return this.FirstOrDefault(sp => sp.SpeakerId == id);
         }
 
         /// <summary>

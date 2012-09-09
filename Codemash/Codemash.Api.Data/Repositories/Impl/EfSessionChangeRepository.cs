@@ -15,7 +15,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         public void Save()
         {
             var saveTime = DateTime.UtcNow;
-            using (var context = new CodemashSessions())
+            using (var context = new CodemashSessionsContext())
             {
                 foreach (var item in this.Where(item => item.IsDirty))
                 {
@@ -37,7 +37,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         public void Load()
         {
             var loadedChangeIds = this.Select(sc => sc.SessionChangeId);
-            using (var context = new CodemashSessions())
+            using (var context = new CodemashSessionsContext())
             {
                 context.SessionChanges.ToList().ForEach(sc =>
                     {

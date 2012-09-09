@@ -5,6 +5,7 @@ namespace Codemash.Api.Data.Repositories.Impl
 {
     /// <summary>
     /// Context class allowing access to the database
+    /// We will use this to define the tables in the database
     /// </summary>
     public class CodemashSessionsContext : DbContext
     {

@@ -5,6 +5,22 @@ namespace Codemash.Api.Data.Entities
 {
     public class Session : EntityBase
     {
+        // static fields
+        public static Session Dummy = new Session();
+
+        // constructor
+        public Session()
+        {
+            _title = string.Empty;
+            _abstract = string.Empty;
+            _start = DateTime.MinValue;
+            _end = DateTime.MinValue;
+            _level = Level.Unknown;
+            _room = Room.Unknown;
+            _track = Track.Unknown;
+        }
+
+        // member fields
         private string _title;
         private string _abstract;
         private DateTime _start;
@@ -14,8 +30,11 @@ namespace Codemash.Api.Data.Entities
         private Room _room;
 
         public int SessionId { get; set; }
+
+        [Comparable]
         public int SpeakerId { get; set; }
 
+        [Comparable]
         public string Title
         {
             get { return _title; }
@@ -26,6 +45,7 @@ namespace Codemash.Api.Data.Entities
             }
         }
 
+        [Comparable]
         public string Abstract
         {
             get { return _abstract; }
@@ -36,6 +56,7 @@ namespace Codemash.Api.Data.Entities
             }
         }
 
+        [Comparable]
         public DateTime Start
         {
             get { return _start; }
@@ -46,6 +67,7 @@ namespace Codemash.Api.Data.Entities
             }
         }
 
+        [Comparable]
         public DateTime End
         {
             get { return _end; }
@@ -56,6 +78,7 @@ namespace Codemash.Api.Data.Entities
             }
         }
 
+        [Comparable]
         public Level Level
         {
             get { return _level; }
@@ -66,6 +89,7 @@ namespace Codemash.Api.Data.Entities
             }
         }
 
+        [Comparable]
         public Track Track
         {
             get { return _track; }
@@ -76,6 +100,7 @@ namespace Codemash.Api.Data.Entities
             }
         }
 
+        [Comparable]
         public Room Room
         {
             get { return _room; }

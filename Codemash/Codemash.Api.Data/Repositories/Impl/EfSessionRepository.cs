@@ -8,7 +8,7 @@ namespace Codemash.Api.Data.Repositories.Impl
 {
     public class EfSessionRepository : RepositoryBase<Session>, ISessionRepository
     {
-        #region Implementation of IReadRepository<Session,int>
+        #region Implementation of ISessionRepository
 
         /// <summary>
         /// Indicates the Repository should load all data from the local data store
@@ -53,6 +53,39 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <param name="condition">A condition passed as a lambda predicate</param>
         /// <returns></returns>
         public IList<Session> GetAll(Func<Session, bool> condition)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+            
+        }
+
+        /// <summary>
+        /// Mark an entry in the repository as removed
+        /// </summary>
+        /// <param name="id"></param>
+        public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Make a modification to an existing session
+        /// </summary>
+        /// <param name="change"> </param>
+        public void ModifySession(SessionChange change)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Adds a session based on data from a SessionChange occurence
+        /// </summary>
+        /// <param name="sessionInformation"></param>
+        public void AddSession(IList<SessionChange> sessionInformation)
         {
             throw new NotImplementedException();
         }

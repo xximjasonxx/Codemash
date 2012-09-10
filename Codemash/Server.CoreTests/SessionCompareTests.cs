@@ -48,5 +48,31 @@ namespace Server.CoreTests
             var differences = new SessionCompare().CompareSessionLists(masterList, childList);
             Assert.AreEqual(4, differences.Count);
         }
+
+        [TestMethod]
+        public void test_that_a_session_removed_from_the_master_is_recorded_as_a_delete_action_for_session_change()
+        {
+            var masterList = MoqSessionCompareTestFactory.GetStandardSessionList();
+            var localList = MoqSessionCompareTestFactory.GetStandardSessionList();
+
+            // remove the first session
+            masterList.RemoveAt(0);
+
+            var differences = new SessionCompare().CompareSessionLists(masterList, localList);
+            Assert.AreNotEqual(0, differences.Count);
+        }
+
+        [TestMethod]
+        public void test_that_a_session_added_to_master_is_recorded_as_an_add_action_for_all_properties()
+        {
+            var masterList = MoqSessionCompareTestFactory.GetStandardSessionList();
+            var localList = MoqSessionCompareTestFactory.GetStandardSessionList();
+
+            // remove the first session from local
+            localList.RemoveAt(0);
+
+            var differences = new SessionCompare().CompareSessionLists(masterList, localList);
+            Assert.AreNotEqual(0, differences.Count);
+        }
     }
 }

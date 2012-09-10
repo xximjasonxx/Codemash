@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\EntityExtensions.cs" />
+    <Compile Include="Ex\ItemNotFoundException.cs" />
+    <Compile Include="Ex\PropertyNotFoundException.cs" />
     <Compile Include="Repositories\Impl\CodemashSessionsContext.cs" />
     <Compile Include="Compare\SessionCompare.cs" />
     <Compile Include="Entities\EntityBase.cs" />

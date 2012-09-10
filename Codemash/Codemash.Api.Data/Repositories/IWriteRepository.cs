@@ -15,5 +15,11 @@ namespace Codemash.Api.Data.Repositories
         /// Commit all changes in the repository
         /// </summary>
         void Save();
+
+        /// <summary>
+        /// Mark an entry in the repository as removed
+        /// </summary>
+        /// <param name="id"></param>
+        void Remove(U id);
     }
 }

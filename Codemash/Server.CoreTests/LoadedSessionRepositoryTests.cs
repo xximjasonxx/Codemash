@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Codemash.Api.Data;
+using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Ex;
 using Codemash.Api.Data.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -60,9 +62,37 @@ namespace Server.CoreTests
             Assert.AreNotEqual(0, _sessionRepository.GetAll(s => s.Title.StartsWith("P")).Count);
         }
 
+        [TestMethod]
         public void test_get_all_with_non_matching_predicate_returns_non_empty_list()
         {
             Assert.AreEqual(0, _sessionRepository.GetAll(s => s.Title == string.Empty).Count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ItemNotFoundException))]
+        public void test_modifying_a_session_not_in_the_repository_throws_an_exception()
+        {
+            _sessionRepository.ModifySession(new SessionChange() { SessionId = int.MaxValue });
+        }
+
+        [TestMethod]
+        public void test_modifying_a_session_in_the_repository_affects_the_session()
+        {
+            var affectedSessionId = _sessionRepository.GetAll()[0].SessionId;
+            var change = new SessionChange()
+                             {
+                                 SessionId = affectedSessionId,
+                                 Action = SessionChangeAction.Modify,
+                                 Key = "Title",
+                                 Value = "My New Title"
+                             };
+
+            // modify the session
+            _sessionRepository.ModifySession(change);
+
+            // get the session
+            var session = _sessionRepository.Get(affectedSessionId);
+            Assert.AreEqual("My New Title", session.Title);
         }
     }
 }

@@ -67,6 +67,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CompareExtensionMethodTests.cs" />
+    <Compile Include="EntityExtensionTests.cs" />
     <Compile Include="EnumParsingTests.cs" />
     <Compile Include="Factory\MoqPollerWorkerProcessTestFactory.cs" />
     <Compile Include="Factory\MoqSessionChangeRepositoryTestFactory.cs" />

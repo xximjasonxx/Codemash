@@ -27,6 +27,15 @@ namespace Codemash.Api.Data.Repositories.Impl
             }
         }
 
+        /// <summary>
+        /// Mark an entry in the repository as removed
+        /// </summary>
+        /// <param name="id"></param>
+        public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region Implementation of IReadRepository<SessionChange,int>

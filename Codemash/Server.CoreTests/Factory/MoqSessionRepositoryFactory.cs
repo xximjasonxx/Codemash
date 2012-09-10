@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Ex;
+using Codemash.Api.Data.Extensions;
 using Codemash.Api.Data.Repositories;
 using Codemash.Server.Core.Extensions;
 using Moq;
@@ -65,6 +66,17 @@ namespace Server.CoreTests.Factory
             });
 
             mock.Setup(m => m.Clear()).Callback(() => _sessionRepository.Clear());
+
+            mock.Setup(m => m.ModifySession(It.IsAny<SessionChange>()))
+                .Callback((SessionChange change) =>
+                              {
+                                  var session = _sessionRepository.FirstOrDefault(s => s.SessionId == change.SessionId);
+                                  if (session == null)
+                                    throw new ItemNotFoundException("Session", change.SessionId);
+
+                                  // make the change
+                                  session.ApplyChange(change.Key, change.Value);
+                              });
 
             return mock.Object;
         }

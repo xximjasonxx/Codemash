@@ -18,7 +18,7 @@ namespace Codemash.Api.Data.Extensions
             // begin looping through the values of thisSession
             // only properties marked for comparison
             var masterProperties = thisSession.GetType().GetProperties()
-                .Where(p => p.GetCustomAttributes(false).OfType<ComparablePropertyAttribute>().Any())
+                .Where(p => p.GetCustomAttributes(false).OfType<ComparableAttribute>().Any())
                 .ToList();
 
             var returnResults = new Dictionary<string, string>();

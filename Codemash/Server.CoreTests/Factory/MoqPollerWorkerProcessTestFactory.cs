@@ -44,7 +44,7 @@ namespace Server.CoreTests.Factory
                     sessionList[randomNumber].Title = "This is another test";
                     sessionList[randomNumber].End = sessionList[randomNumber].End.AddHours(1);
 
-                    sessionList.Apply(s => s.MarkAsExisting());
+                    sessionList.Apply(s => s.MarkUnmodified());
                     return sessionList;
                 });
 
@@ -72,6 +72,8 @@ namespace Server.CoreTests.Factory
                         _sessionChangeRepository.Add(sessionChange);
                 });
 
+            mock.Setup(m => m.Save()).Callback(() => _sessionChangeRepository.Apply(sc => sc.MarkUnmodified()));
+
             return mock.Object;
         }
 
@@ -84,19 +86,21 @@ namespace Server.CoreTests.Factory
                 var trackParser = new TrackParse();
                 var roomParser = new RoomParse();
 
-                return (from it in array.AsJEnumerable()
-                        select new Session
-                        {
-                            SessionId = it["SessionId"].ToString().AsInt(),
-                            Title = it["Title"].ToString(),
-                            Abstract = it["Abstract"].ToString(),
-                            Level = it["Level"].ToString().AsLevel(Level.Unknown),
-                            Track = trackParser.Parse(it["Track"].ToString(), Track.Unknown),
-                            Room = roomParser.Parse(it["Room"].ToString(), Room.Unknown),
-                            Start = it["StartTime"].ToString().AsDateTime(),
-                            End = it["EndTime"].ToString().AsDateTime(),
-                            SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()
-                        }).ToList();
+                var sessions = (from it in array.AsJEnumerable()
+                                select new Session
+                                           {
+                                               SessionId = it["SessionId"].ToString().AsInt(),
+                                               Title = it["Title"].ToString(),
+                                               Abstract = it["Abstract"].ToString(),
+                                               Level = it["Level"].ToString().AsLevel(Level.Unknown),
+                                               Track = trackParser.Parse(it["Track"].ToString(), Track.Unknown),
+                                               Room = roomParser.Parse(it["Room"].ToString(), Room.Unknown),
+                                               Start = it["StartTime"].ToString().AsDateTime(),
+                                               End = it["EndTime"].ToString().AsDateTime(),
+                                               SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()
+                                           }).ToList();
+                sessions.Apply(s => s.MarkUnmodified());
+                return sessions;
             }
         }
 
@@ -128,6 +132,8 @@ namespace Server.CoreTests.Factory
                                   }
                               });
 
+            mock.Setup(m => m.Save()).Callback(() => _sessionChangeRepository.Apply(sc => sc.MarkUnmodified()));
+
             return mock.Object;
         }
 
@@ -157,6 +163,12 @@ namespace Server.CoreTests.Factory
                         }
                     }
                 });
+
+            mock.Setup(m => m.Save()).Callback(() =>
+                                                   {
+                                                       var sessionToRemove = _sessionRepository.First(s => s.CurrentState == EntityState.Removed);
+                                                       _sessionRepository.Remove(sessionToRemove);
+                                                   });
 
             return mock.Object;
         }

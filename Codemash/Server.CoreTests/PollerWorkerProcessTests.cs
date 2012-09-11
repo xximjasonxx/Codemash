@@ -36,7 +36,6 @@ namespace Server.CoreTests
             sessionMock.Setup(m => m.GetAll()).Returns(new List<Session>());
             container.Bind<ISessionRepository>().ToConstant(sessionMock.Object);
 
-            container.Bind<ISpeakerRepository>().ToConstant(new Mock<ISpeakerRepository>().Object);
             container.Bind<SessionCompare>().ToConstant(new Mock<SessionCompare>().Object);
             container.Bind<ISessionChangeRepository>().ToConstant(new Mock<ISessionChangeRepository>().Object);
 
@@ -50,7 +49,6 @@ namespace Server.CoreTests
             var kernel = new StandardKernel();
             kernel.Bind<ISessionRepository>().ToConstant(MoqPollerWorkerProcessTestFactory.GetStandardSessionRepository());
             kernel.Bind<IMasterDataProvider>().ToConstant(MoqPollerWorkerProcessTestFactory.GetStandardMasterDataProvider());
-            kernel.Bind<ISpeakerRepository>().ToConstant(new Mock<ISpeakerRepository>().Object);
             kernel.Bind<SessionCompare>().ToConstant(new SessionCompare());
             kernel.Bind<ISessionChangeRepository>().ToConstant(MoqPollerWorkerProcessTestFactory.GetSessionChangeRepository()).InSingletonScope();
 
@@ -69,13 +67,13 @@ namespace Server.CoreTests
             kernel.Bind<IMasterDataProvider>().ToConstant(MoqPollerWorkerProcessTestFactory.GetStandardMasterDataProvider());
             kernel.Bind<SessionCompare>().ToConstant(new SessionCompare());
             kernel.Bind<ISessionChangeRepository>().ToConstant(MoqPollerWorkerProcessTestFactory.GetSessionChangeRepository()).InSingletonScope();
-            kernel.Bind<ISpeakerRepository>().ToConstant(new Mock<ISpeakerRepository>().Object);
 
             var process = kernel.Get<PollerWorkerProcess>();
             process.Execute();
 
             var repository = kernel.Get<ISessionChangeRepository>();
             Assert.AreNotEqual(0, repository.GetAll().Count);
+            Assert.AreEqual(0, repository.GetAll().Count(sc => sc.IsDirty));
         }
 
         [TestMethod]
@@ -86,7 +84,6 @@ namespace Server.CoreTests
             kernel.Bind<IMasterDataProvider>().ToConstant(MoqPollerWorkerProcessTestFactory.GetStandardMasterDataProvider());
             kernel.Bind<SessionCompare>().ToConstant(new SessionCompare());
             kernel.Bind<ISessionChangeRepository>().ToConstant(new Mock<ISessionChangeRepository>().Object);
-            kernel.Bind<ISpeakerRepository>().ToConstant(new Mock<ISpeakerRepository>().Object);
 
             var process = kernel.Get<PollerWorkerProcess>();
             process.Execute();
@@ -94,6 +91,7 @@ namespace Server.CoreTests
             var repository = kernel.Get<ISessionRepository>();
             var provider = kernel.Get<IMasterDataProvider>();
             Assert.AreEqual(provider.GetAllSessions().Count, repository.GetAll().Count);
+            Assert.AreEqual(0, repository.GetAll().Count(sc => sc.IsDirty));
         }
 
         [TestMethod]
@@ -104,14 +102,14 @@ namespace Server.CoreTests
             kernel.Bind<IMasterDataProvider>().ToConstant(MoqPollerWorkerProcessTestFactory.GetOneLessMasterDataProvider());
             kernel.Bind<SessionCompare>().ToConstant(new SessionCompare());
             kernel.Bind<ISessionChangeRepository>().ToConstant(new Mock<ISessionChangeRepository>().Object);
-            kernel.Bind<ISpeakerRepository>().ToConstant(new Mock<ISpeakerRepository>().Object);
 
             var process = kernel.Get<PollerWorkerProcess>();
             process.Execute();
 
             var repository = kernel.Get<ISessionRepository>();
             var provider = kernel.Get<IMasterDataProvider>();
-            Assert.AreEqual(provider.GetAllSessions().Count, repository.GetAll().Count(s => s.CurrentState != EntityState.Removed));
+            Assert.AreEqual(provider.GetAllSessions().Count, repository.GetAll().Count);
+            Assert.AreEqual(0, repository.GetAll().Count(sc => sc.IsDirty));
         }
     }
 }

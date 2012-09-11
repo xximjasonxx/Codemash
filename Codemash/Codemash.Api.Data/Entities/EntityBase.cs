@@ -27,7 +27,7 @@ namespace Codemash.Api.Data.Entities
         /// <summary>
         /// Indicate that this is a known existing entity and that it should override whatever CurrentState is
         /// </summary>
-        public void MarkAsExisting()
+        public void MarkUnmodified()
         {
             CurrentState = EntityState.Unmodified;
         }

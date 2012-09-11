@@ -16,9 +16,6 @@ namespace Codemash.Poller.Process
         public ISessionRepository SessionRepository { get; set; }
 
         [Inject]
-        public ISpeakerRepository SpeakerRepository { get; set; }
-
-        [Inject]
         public SessionCompare SessionComparer { get; set; }
 
         [Inject]

@@ -52,7 +52,7 @@ namespace Codemash.Api.Data.Repositories.Impl
                     {
                         if (!loadedChangeIds.Contains(sc.SessionChangeId))
                         {
-                            sc.MarkAsExisting();
+                            sc.MarkUnmodified();
                             Add(sc);
                         }
                     });

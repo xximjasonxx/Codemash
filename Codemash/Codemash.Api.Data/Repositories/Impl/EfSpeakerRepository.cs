@@ -21,7 +21,7 @@ namespace Codemash.Api.Data.Repositories.Impl
                 context.Speakers.Where(sp => !loadedSpeakers.Contains(sp.SpeakerId))
                     .ToList().ForEach(sp =>
                         {
-                            sp.MarkAsExisting();
+                            sp.MarkUnmodified();
                             Add(sp);
                         });
             }

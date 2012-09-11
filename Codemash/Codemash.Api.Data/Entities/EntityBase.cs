@@ -33,6 +33,14 @@ namespace Codemash.Api.Data.Entities
         }
 
         /// <summary>
+        /// Mark the given entity as removed - the save operation will delete it
+        /// </summary>
+        public void MarkRemoved()
+        {
+            CurrentState = EntityState.Removed;
+        }
+
+        /// <summary>
         /// Indicate that a property on the Entity has changed
         /// </summary>
         protected void ValueChanged()

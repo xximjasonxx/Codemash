@@ -16,7 +16,7 @@ namespace Server.CoreTests.Factory
         public static ISpeakerRepository GetSpeakerRepositoryMock()
         {
             var mock = new Mock<ISpeakerRepository>();
-            mock.Setup(m => m.Load()).Callback(() =>
+            /*mock.Setup(m => m.Load()).Callback(() =>
                 {
                     _speakerRepository = new List<Speaker>
                         {
@@ -25,7 +25,7 @@ namespace Server.CoreTests.Factory
                             new Speaker { SpeakerId = 135, FirstName = "Sergey Barskiy" },
                             new Speaker { SpeakerId = 84, FirstName = "Steve Bodnar" }
                         };
-                });
+                });*/
 
             mock.Setup(m => m.Get(It.IsAny<int>())).Returns((int id) =>
                 {

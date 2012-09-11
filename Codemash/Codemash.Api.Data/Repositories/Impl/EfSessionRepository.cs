@@ -73,19 +73,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         }
 
         /// <summary>
-        /// Make a modification to an existing session
+        /// Apply the changes (add/remove) from a Master Session List
         /// </summary>
-        /// <param name="change"> </param>
-        public void ModifySession(SessionChange change)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Adds a session based on data from a SessionChange occurence
-        /// </summary>
-        /// <param name="sessionInformation"></param>
-        public void AddSession(IList<SessionChange> sessionInformation)
+        /// <param name="masterSessionList">The session data from the master source</param>
+        public void ApplyRange(IEnumerable<Session> masterSessionList)
         {
             throw new NotImplementedException();
         }

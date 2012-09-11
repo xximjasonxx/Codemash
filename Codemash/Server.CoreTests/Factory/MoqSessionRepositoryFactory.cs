@@ -19,20 +19,6 @@ namespace Server.CoreTests.Factory
             var mock = new Mock<ISessionRepository>();
 
             // define the mocked load method
-            mock.Setup(m => m.Load()).Callback(() =>
-                {
-                    _sessionRepository = new List<Session>
-                        {
-                            new Session { SessionId = 343, Title = "Programming Style and Your Brain" },
-                            new Session { SessionId = 3430, Title = "Programming Style and Your Brain" },
-                            new Session { SessionId = 193, Title = "Asyncing and Awaiting Windows 8" },
-                            new Session { SessionId = 342, Title = "Controlling ASP.NET MVC4" },
-                            new Session { SessionId = 215, Title = "Go, Google's New Language" },
-                        };
-
-                    _sessionRepository.Apply(s => s.MarkAsExisting());
-                });
-
             mock.Setup(m => m.Get(It.IsAny<int>())).Returns((int inValue) =>
                 {
                     if (_sessionRepository.Count == 0)
@@ -66,17 +52,6 @@ namespace Server.CoreTests.Factory
             });
 
             mock.Setup(m => m.Clear()).Callback(() => _sessionRepository.Clear());
-
-            mock.Setup(m => m.ModifySession(It.IsAny<SessionChange>()))
-                .Callback((SessionChange change) =>
-                              {
-                                  var session = _sessionRepository.FirstOrDefault(s => s.SessionId == change.SessionId);
-                                  if (session == null)
-                                    throw new ItemNotFoundException("Session", change.SessionId);
-
-                                  // make the change
-                                  session.ApplyChange(change.Key, change.Value);
-                              });
 
             return mock.Object;
         }

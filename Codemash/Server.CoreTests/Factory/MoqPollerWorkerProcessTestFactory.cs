@@ -22,13 +22,7 @@ namespace Server.CoreTests.Factory
         public static ISessionRepository GetStandardSessionRepository()
         {
             var mock = new Mock<ISessionRepository>();
-            mock.Setup(m => m.Load()).Callback(() =>
-                {
-                    _sessionRepository = GetStandardSessions();
-                    _sessionRepository.Apply(s => s.MarkAsExisting());
-                });
-
-            mock.Setup(m => m.GetAll()).Returns(() => _sessionRepository);
+            mock.Setup(m => m.GetAll()).Returns(GetStandardSessions);
 
             return mock.Object;
         }
@@ -36,25 +30,23 @@ namespace Server.CoreTests.Factory
         public static ISessionRepository GetNonStandardSessionRepository()
         {
             var mock = new Mock<ISessionRepository>();
-            mock.Setup(m => m.Load()).Callback(() =>
+            mock.Setup(m => m.GetAll()).Returns(() =>
                 {
-                    var sessions = GetStandardSessions();
+                    var sessionList = GetStandardSessions();
                     var rand = new Random(DateTime.Now.Second);
-                    var randomNumber = rand.Next(0, sessions.Count - 1);
+                    var randomNumber = rand.Next(0, sessionList.Count - 1);
 
-                    sessions[randomNumber].Title = "This is a Test";
-                    sessions[randomNumber].Start = sessions[randomNumber].Start.AddHours(-1);
-                    sessions[randomNumber].Abstract = "My new abstract";
+                    sessionList[randomNumber].Title = "This is a Test";
+                    sessionList[randomNumber].Start = sessionList[randomNumber].Start.AddHours(-1);
+                    sessionList[randomNumber].Abstract = "My new abstract";
 
-                    randomNumber = rand.Next(0, sessions.Count - 1);
-                    sessions[randomNumber].Title = "This is another test";
-                    sessions[randomNumber].End = sessions[randomNumber].End.AddHours(1);
+                    randomNumber = rand.Next(0, sessionList.Count - 1);
+                    sessionList[randomNumber].Title = "This is another test";
+                    sessionList[randomNumber].End = sessionList[randomNumber].End.AddHours(1);
 
-                    _sessionRepository = sessions;
-                    _sessionRepository.Apply(s => s.MarkAsExisting());
+                    sessionList.Apply(s => s.MarkAsExisting());
+                    return sessionList;
                 });
-
-            mock.Setup(m => m.GetAll()).Returns(() => _sessionRepository);
 
             return mock.Object;
         }
@@ -106,6 +98,81 @@ namespace Server.CoreTests.Factory
                             SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()
                         }).ToList();
             }
+        }
+
+        public static ISessionRepository GetOneLessSessionRepository()
+        {
+            var mock = new Mock<ISessionRepository>();
+            _sessionRepository = null;
+
+            mock.Setup(m => m.GetAll()).Returns(() =>
+                                                    {
+                                                        if (_sessionRepository == null)
+                                                        {
+                                                            _sessionRepository = GetStandardSessions();
+                                                            _sessionRepository.RemoveAt(0);
+                                                        }
+
+                                                        return _sessionRepository;
+                                                    });
+
+            mock.Setup(m => m.ApplyRange(It.IsAny<IEnumerable<Session>>()))
+                .Callback((IEnumerable<Session> sessions) =>
+                              {
+                                  foreach (var session in sessions)
+                                  {
+                                      if (!_sessionRepository.Select(s => s.SessionId).Contains(session.SessionId))
+                                      {
+                                          _sessionRepository.Add(session);
+                                      }
+                                  }
+                              });
+
+            return mock.Object;
+        }
+
+        public static ISessionRepository GetSessionRepositoryWithAddApplyRange()
+        {
+            var mock = new Mock<ISessionRepository>();
+            _sessionRepository = null;
+
+            mock.Setup(m => m.GetAll()).Returns(() =>
+            {
+                if (_sessionRepository == null)
+                {
+                    _sessionRepository = GetStandardSessions();
+                }
+
+                return _sessionRepository;
+            });
+
+            mock.Setup(m => m.ApplyRange(It.IsAny<IEnumerable<Session>>()))
+                .Callback((IEnumerable<Session> sessions) =>
+                {
+                    foreach (var session in _sessionRepository)
+                    {
+                        if (!sessions.Select(s => s.SessionId).Contains(session.SessionId))
+                        {
+                            _sessionRepository.First(s => s.SessionId == session.SessionId).MarkRemoved();
+                        }
+                    }
+                });
+
+            return mock.Object;
+        }
+
+        public static IMasterDataProvider GetOneLessMasterDataProvider()
+        {
+            var mock = new Mock<IMasterDataProvider>();
+            mock.Setup(m => m.GetAllSessions()).Returns(() =>
+                                                            {
+                                                                var sessionList = GetStandardSessions();
+                                                                sessionList.RemoveAt(0);
+
+                                                                return sessionList;
+                                                            });
+
+            return mock.Object;
         }
     }
 }

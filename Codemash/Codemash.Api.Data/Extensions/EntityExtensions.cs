@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Ex;
 
 namespace Codemash.Api.Data.Extensions
@@ -17,7 +18,7 @@ namespace Codemash.Api.Data.Extensions
         /// <param name="theObject">The object instance being extended</param>
         /// <param name="propertyName">The name of the property to modify</param>
         /// <param name="value">The new value for the property</param>
-        public static void ApplyChange<T>(this T theObject, string propertyName, string value)
+        public static void ApplyChange<T>(this T theObject, string propertyName, string value) where T : EntityBase
         {
             // get the properties for T
             var properties = typeof (T).GetProperties();

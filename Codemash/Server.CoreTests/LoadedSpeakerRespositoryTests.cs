@@ -17,7 +17,6 @@ namespace Server.CoreTests
             var kernel = new StandardKernel();
             kernel.Bind<ISpeakerRepository>().ToConstant(MoqSpeakerRepositoryFactory.GetSpeakerRepositoryMock());
             _speakerRepository = kernel.Get<ISpeakerRepository>();
-            _speakerRepository.Load();
         }
 
         [TestMethod]

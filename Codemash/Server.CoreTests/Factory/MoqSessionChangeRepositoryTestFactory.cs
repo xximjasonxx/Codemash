@@ -15,16 +15,6 @@ namespace Server.CoreTests.Factory
         public static ISessionChangeRepository GetSessionChangeRepository()
         {
             var mockedRepository = new Mock<ISessionChangeRepository>();
-            mockedRepository.Setup(m => m.Load()).Callback(() =>
-                {
-                    _sessionChangeRepository = new List<SessionChange>
-                        {
-                            new SessionChange()
-                        };
-
-                    _sessionChangeRepository.Apply(sc => sc.MarkAsExisting());
-                });
-
             mockedRepository.Setup(m => m.GetAll()).Returns(() =>
                 {
                     if (_sessionChangeRepository == null || _sessionChangeRepository.Count == 0)

@@ -30,7 +30,6 @@ namespace Codemash.Poller.Process
             var masterSessionList = MasterDataProvider.GetAllSessions();
 
             // get the local session List for comparison
-            SessionRepository.Load();
             var localSessionList = SessionRepository.GetAll();
 
             // perform the comparison
@@ -42,11 +41,10 @@ namespace Codemash.Poller.Process
                 {
                     // add the items to the change repository
                     SessionChangeRepository.AddRange(sessionDifferences);
-
-                    // save the changes
                     SessionChangeRepository.Save();
 
-                    // save the session data
+                    // add the master session data into the respository
+                    SessionRepository.ApplyRange(masterSessionList);
                     SessionRepository.Save();
 
                     // commit the transaction

@@ -7,11 +7,6 @@ namespace Codemash.Api.Data.Repositories
     public interface IReadRepository<T, U> where T : EntityBase
     {
         /// <summary>
-        /// Indicates the Repository should load all data from the local data store
-        /// </summary>
-        void Load();
-
-        /// <summary>
         /// Get an item from the repository by a primary key
         /// </summary>
         /// <param name="id"></param>

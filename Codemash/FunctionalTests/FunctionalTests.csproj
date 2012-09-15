@@ -37,6 +37,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Codemash.Poller\bin\Debug\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
@@ -44,6 +48,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Transactions" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -69,6 +74,10 @@
     <ProjectReference Include="..\Codemash.Poller\Codemash.Poller.csproj">
       <Project>{d1c10041-2eb0-4f7f-bd01-e8daff5ef3a1}</Project>
       <Name>Codemash.Poller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Codemash.Server.Core\Codemash.Server.Core.csproj">
+      <Project>{de4a2f3e-5896-4356-8603-473a7fd436d7}</Project>
+      <Name>Codemash.Server.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

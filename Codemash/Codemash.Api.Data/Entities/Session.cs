@@ -3,11 +3,8 @@ using Codemash.Server.Core.Attributes;
 
 namespace Codemash.Api.Data.Entities
 {
-    public class Session : EntityBase
+    public class Session : EntityBase, IHasIdentifier
     {
-        // static fields
-        public static Session Dummy = new Session();
-
         // constructor
         public Session()
         {
@@ -110,5 +107,11 @@ namespace Codemash.Api.Data.Entities
                 _room = value;
             }
         }
+
+        #region Implementation of IHasIdentifier
+
+        public int ID { get { return SessionId; } }
+
+        #endregion
     }
 }

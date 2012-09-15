@@ -6,6 +6,7 @@ using Codemash.Poller.Process;
 using Codemash.Server.Core;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Ninject;
+using Ninject.Parameters;
 
 namespace Codemash.Poller
 {
@@ -26,8 +27,16 @@ namespace Codemash.Poller
                 {
                     while (true)
                     {
-                        var process = _container.Get<PollerWorkerProcess>();
-                        process.Execute();
+                        // create the session process
+                        var sessionProcess = _container.Get<IProcess>("Session", new IParameter[0]);
+                        var speakerProcess = _container.Get<IProcess>("Speaker", new IParameter[0]);
+
+                        // create the tasks
+                        Task sessionTask = new Task(sessionProcess.Execute);
+                        Task speakerTask = new Task(speakerProcess.Execute);
+
+                        // wait for all tasks to complete
+                        Task.WaitAll(sessionTask, speakerTask);
 
                         // wait to check again
                         Thread.Sleep(Config.MinutesWaitTime);

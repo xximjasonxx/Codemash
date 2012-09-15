@@ -1,22 +1,20 @@
 ﻿using System.Threading.Tasks;
 using System.Transactions;
-using Codemash.Api.Data.Compare;
+using Codemash.Api.Data.Entities;
+using Codemash.Api.Data.Extensions;
 using Codemash.Api.Data.Provider;
 using Codemash.Api.Data.Repositories;
 using Ninject;
 
 namespace Codemash.Poller.Process
 {
-    public class PollerWorkerProcess
+    public class SessionWorkerProcess : IProcess
     {
         [Inject]
         public IMasterDataProvider MasterDataProvider { get; set; }
 
         [Inject]
         public ISessionRepository SessionRepository { get; set; }
-
-        [Inject]
-        public SessionCompare SessionComparer { get; set; }
 
         [Inject]
         public ISessionChangeRepository SessionChangeRepository { get; set; }
@@ -30,7 +28,7 @@ namespace Codemash.Poller.Process
             var localSessionList = SessionRepository.GetAll();
 
             // perform the comparison
-            var sessionDifferences = SessionComparer.CompareSessionLists(masterSessionList, localSessionList);
+            var sessionDifferences = masterSessionList.Compare<Session, SessionChange>(localSessionList);
             if (sessionDifferences.Count > 0)
             {
                 // session data has changed since last save

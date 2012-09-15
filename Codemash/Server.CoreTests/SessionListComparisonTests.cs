@@ -1,13 +1,14 @@
 ﻿using System.Linq;
 using Codemash.Api.Data;
-using Codemash.Api.Data.Compare;
+using Codemash.Api.Data.Entities;
+using Codemash.Api.Data.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Server.CoreTests.Factory;
 
 namespace Server.CoreTests
 {
     [TestClass]
-    public class SessionCompareTests
+    public class SessionListComparisonTests
     {
         [TestMethod]
         public void test_that_comparing_two_equivalent_session_lists_empty_list_is_returned()
@@ -15,7 +16,7 @@ namespace Server.CoreTests
             var masterSessionList = MoqSessionCompareTestFactory.GetStandardSessionList();
             var localSessionList = MoqSessionCompareTestFactory.GetStandardSessionList();
 
-            var changesList = new SessionCompare().CompareSessionLists(masterSessionList, localSessionList);
+            var changesList = masterSessionList.Compare<Session, SessionChange>(localSessionList);
             Assert.AreNotEqual(null, changesList);
             Assert.AreEqual(0, changesList.Count);
         }
@@ -30,7 +31,7 @@ namespace Server.CoreTests
             // modify the title
             session.Title = "This is a Test";
 
-            var changesList = new SessionCompare().CompareSessionLists(masterList, childList);
+            var changesList = masterList.Compare<Session, SessionChange>(childList);
             Assert.AreNotEqual(0, changesList.Count);
         }
 
@@ -45,7 +46,7 @@ namespace Server.CoreTests
             childList[1].Abstract = "I am a new abstract";
             childList[1].Start = childList[1].Start.AddHours(1);
 
-            var differences = new SessionCompare().CompareSessionLists(masterList, childList);
+            var differences = masterList.Compare<Session, SessionChange>(childList);
             Assert.AreEqual(4, differences.Count);
         }
 
@@ -58,7 +59,7 @@ namespace Server.CoreTests
             // remove the first session
             masterList.RemoveAt(0);
 
-            var differences = new SessionCompare().CompareSessionLists(masterList, localList);
+            var differences = masterList.Compare<Session, SessionChange>(localList);
             Assert.AreNotEqual(0, differences.Count);
         }
 
@@ -71,7 +72,7 @@ namespace Server.CoreTests
             // remove the first session from local
             localList.RemoveAt(0);
 
-            var differences = new SessionCompare().CompareSessionLists(masterList, localList);
+            var differences = masterList.Compare<Session, SessionChange>(localList);
             Assert.AreNotEqual(0, differences.Count);
         }
     }

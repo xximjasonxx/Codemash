@@ -14,7 +14,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Server.CoreTests.Factory
 {
-    public static class MoqPollerWorkerProcessTestFactory
+    public static class MoqSessionWorkerProcessTestFactory
     {
         private static IList<Session> _sessionRepository;
         private static IList<SessionChange> _sessionChangeRepository;

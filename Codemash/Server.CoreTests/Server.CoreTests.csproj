@@ -69,14 +69,18 @@
     <Compile Include="CompareExtensionMethodTests.cs" />
     <Compile Include="EntityExtensionTests.cs" />
     <Compile Include="EnumParsingTests.cs" />
-    <Compile Include="Factory\MoqPollerWorkerProcessTestFactory.cs" />
+    <Compile Include="Factory\MoqSessionWorkerProcessTestFactory.cs" />
     <Compile Include="Factory\MoqSessionCompareTestFactory.cs" />
+    <Compile Include="Factory\MoqSpeakerDataFactory.cs" />
     <Compile Include="ListManipulationsTests.cs" />
     <Compile Include="PrimitiveParsingExtensionsTests.cs" />
     <Compile Include="PollerContainerTests.cs" />
-    <Compile Include="PollerWorkerProcessTests.cs" />
+    <Compile Include="SessionEntityTests.cs" />
+    <Compile Include="SessionWorkerProcessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionCompareTests.cs" />
+    <Compile Include="SessionListComparisonTests.cs" />
+    <Compile Include="SpeakerCompareTests.cs" />
+    <Compile Include="SpeakerEntityTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Codemash.Api.Data\Codemash.Api.Data.csproj">
@@ -95,6 +99,9 @@
   <ItemGroup>
     <None Include="Factory\StandardSession.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Factory\StandardSpeaker.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

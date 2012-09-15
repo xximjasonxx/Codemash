@@ -3,10 +3,10 @@ using System;
 
 namespace Codemash.Api.Data.Entities
 {
-    public class SessionChange : EntityBase
+    public class SessionChange : EntityBase, IChange
     {
         private int _sessionId;
-        private SessionChangeAction _action;
+        private ChangeAction _action;
         private string _key;
         private string _value;
 
@@ -27,7 +27,12 @@ namespace Codemash.Api.Data.Entities
             }
         }
 
-        public SessionChangeAction Action
+        public int ID
+        {
+            set { SessionId = value; }
+        }
+
+        public ChangeAction Action
         {
             get { return _action; }
             set

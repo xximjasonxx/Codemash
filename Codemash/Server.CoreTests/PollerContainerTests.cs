@@ -4,6 +4,7 @@ using Codemash.Poller.Container;
 using Codemash.Poller.Process;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
+using Ninject.Parameters;
 
 namespace Server.CoreTests
 {
@@ -39,7 +40,19 @@ namespace Server.CoreTests
         [TestMethod]
         public void test_poller_container_can_retrieve_instance_of_poller_worker_process()
         {
-            Assert.AreNotEqual(null, TheContainer.TryGet<PollerWorkerProcess>());
+            Assert.AreNotEqual(null, TheContainer.TryGet<SessionWorkerProcess>());
+        }
+
+        [TestMethod]
+        public void test_poller_container_properly_resolves_the_session_worker_process()
+        {
+            Assert.IsInstanceOfType(TheContainer.Get<IProcess>("Session", new IParameter[0]), typeof(SessionWorkerProcess));
+        }
+
+        [TestMethod]
+        public void test_poller_container_properly_resolves_the_speaker_worker_process()
+        {
+            Assert.IsInstanceOfType(TheContainer.Get<IProcess>("Speaker", new IParameter[0]), typeof(SpeakerWorkerProcess));
         }
     }
 }

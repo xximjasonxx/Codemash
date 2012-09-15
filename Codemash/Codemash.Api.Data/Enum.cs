@@ -53,7 +53,7 @@ namespace Codemash.Api.Data
         [EnumKey("Conv. Ctr. 9, 10 (TEKsystems)")] Ctr910
     }
 
-    public enum SessionChangeAction
+    public enum ChangeAction
     {
         Add,
         Modify,

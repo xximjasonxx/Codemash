@@ -11,6 +11,8 @@ namespace Codemash.Api.Data.Repositories.Impl
     {
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Speaker> Speakers { get; set; }
+
         public DbSet<SessionChange> SessionChanges { get; set; }
+        public DbSet<SpeakerChange> SpeakerChanges { get; set; } 
     }
 }

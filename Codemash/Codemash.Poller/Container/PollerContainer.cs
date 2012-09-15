@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Codemash.Api.Data.Compare;
 using Codemash.Api.Data.Modules;
 using Codemash.Poller.Process;
 using Ninject;
@@ -12,8 +11,8 @@ namespace Codemash.Poller.Container
         public PollerContainer()
         {
             // bind the worker process
-            Bind<PollerWorkerProcess>().ToSelf().InSingletonScope();
-            Bind<SessionCompare>().ToSelf();
+            Bind<IProcess>().To<SessionWorkerProcess>().InSingletonScope().Named("Session");
+            Bind<IProcess>().To<SpeakerWorkerProcess>().InSingletonScope().Named("Speaker");
 
             // define all external modules
             var dataProviderModule = new DataProviderNinjectModule();

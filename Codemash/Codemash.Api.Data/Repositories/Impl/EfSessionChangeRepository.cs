@@ -14,17 +14,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         public void Save()
         {
-            var saveTime = DateTime.UtcNow;
-            using (var context = new CodemashSessionsContext())
-            {
-                foreach (var item in this.Where(item => item.IsDirty))
-                {
-                    item.ChangeTime = saveTime;
-                    context.SessionChanges.Add(item);
-                }
-
-                context.SaveChanges();
-            }
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -45,31 +35,17 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         public void Load()
         {
-            var loadedChangeIds = this.Select(sc => sc.SessionChangeId);
-            using (var context = new CodemashSessionsContext())
-            {
-                context.SessionChanges.ToList().ForEach(sc =>
-                    {
-                        if (!loadedChangeIds.Contains(sc.SessionChangeId))
-                        {
-                            sc.MarkUnmodified();
-                            Add(sc);
-                        }
-                    });
-            }
-
-            RepositoryHasLoaded();
+            throw new NotImplementedException();
         }
 
         /// <summary>
         /// Get an item from the repository by a primary key
         /// </summary>
-        /// <param name="id">The SessionChangeId to key on</param>
-        /// <returns>The Session Change with the given SessionChangeId</returns>
+        /// <param name="id">The SessionChangeID to key on</param>
+        /// <returns>The Session Change with the given SessionChangeID</returns>
         public SessionChange Get(int id)
         {
-            CheckRepositoryHasLoaded();
-            return this.FirstOrDefault(sc => sc.SessionChangeId == id);
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -79,8 +55,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public SessionChange Get(Func<SessionChange, bool> condition)
         {
-            CheckRepositoryHasLoaded();
-            return this.FirstOrDefault(condition);
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -89,8 +64,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IList<SessionChange> GetAll()
         {
-            CheckRepositoryHasLoaded();
-            return this;
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -100,8 +74,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IList<SessionChange> GetAll(Func<SessionChange, bool> condition)
         {
-            CheckRepositoryHasLoaded();
-            return this.Where(condition).ToList();
+            throw new NotImplementedException();
         }
 
         #endregion

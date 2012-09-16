@@ -1,22 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Codemash.Api.Data.Entities.Interfaces;
 using Codemash.Server.Core.Attributes;
 
 namespace Codemash.Api.Data.Entities
 {
     public class Session : EntityBase, IHasIdentifier
     {
-        // constructor
-        public Session()
-        {
-            _title = string.Empty;
-            _abstract = string.Empty;
-            _start = DateTime.MinValue;
-            _end = DateTime.MinValue;
-            _level = Level.Unknown;
-            _room = Room.Unknown;
-            _track = Track.Unknown;
-        }
-
         // member fields
         private string _title;
         private string _abstract;
@@ -26,12 +16,14 @@ namespace Codemash.Api.Data.Entities
         private Track _track;
         private Room _room;
 
-        public int SessionId { get; set; }
+        [Key]
+        public int SessionID { get; set; }
 
         [Comparable]
-        public int SpeakerId { get; set; }
+        public int SpeakerID { get; set; }
 
         [Comparable]
+        [StringLength(100)]
         public string Title
         {
             get { return _title; }
@@ -43,6 +35,7 @@ namespace Codemash.Api.Data.Entities
         }
 
         [Comparable]
+        [StringLength(1000)]
         public string Abstract
         {
             get { return _abstract; }
@@ -108,9 +101,21 @@ namespace Codemash.Api.Data.Entities
             }
         }
 
+        // constructor
+        public Session()
+        {
+            _title = string.Empty;
+            _abstract = string.Empty;
+            _start = DateTime.MinValue;
+            _end = DateTime.MinValue;
+            _level = Level.Unknown;
+            _room = Room.Unknown;
+            _track = Track.Unknown;
+        }
+
         #region Implementation of IHasIdentifier
 
-        public int ID { get { return SessionId; } }
+        public int ID { get { return SessionID; } }
 
         #endregion
     }

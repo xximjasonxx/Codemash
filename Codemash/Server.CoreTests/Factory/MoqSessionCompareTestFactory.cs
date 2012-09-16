@@ -23,9 +23,9 @@ namespace Server.CoreTests.Factory
                 var roomParser = new RoomParse();
 
                 return (from it in array.AsJEnumerable()
-                        select new Session
+                        select new Session()
                         {
-                            SessionId = it["SessionId"].ToString().AsInt(),
+                            SessionID = it["SessionId"].ToString().AsInt(),
                             Title = it["Title"].ToString(),
                             Abstract = it["Abstract"].ToString(),
                             Level = it["Level"].ToString().AsLevel(Level.Unknown),
@@ -33,7 +33,7 @@ namespace Server.CoreTests.Factory
                             Room = roomParser.Parse(it["Room"].ToString(), Room.Unknown),
                             Start = it["StartTime"].ToString().AsDateTime(),
                             End = it["EndTime"].ToString().AsDateTime(),
-                            SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()
+                            SpeakerID = it["Speaker"]["SpeakerId"].ToString().AsInt()
                         }).ToList();
             }
         }

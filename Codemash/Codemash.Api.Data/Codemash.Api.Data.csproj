@@ -52,13 +52,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\IChange.cs" />
-    <Compile Include="Entities\IHasIdentifier.cs" />
+    <Compile Include="Entities\Interfaces\IChange.cs" />
+    <Compile Include="Entities\Interfaces\IHasIdentifier.cs" />
     <Compile Include="Entities\SpeakerChange.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Ex\ItemNotFoundException.cs" />
     <Compile Include="Ex\PropertyNotFoundException.cs" />
-    <Compile Include="Repositories\Impl\CodemashSessionsContext.cs" />
+    <Compile Include="Repositories\Impl\CodemashContext.cs" />
     <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="Entities\Session.cs" />
     <Compile Include="Entities\SessionChange.cs" />
@@ -81,6 +81,7 @@
     <Compile Include="Repositories\Impl\EfSpeakerChangeRepository.cs" />
     <Compile Include="Repositories\Impl\EfSpeakerRepository.cs" />
     <Compile Include="Repositories\Impl\RepositoryBase.cs" />
+    <Compile Include="Repositories\Initialize\CodemashInitializer.cs" />
     <Compile Include="Repositories\IReadRepository.cs" />
     <Compile Include="Repositories\ISessionChangeRepository.cs" />
     <Compile Include="Repositories\ISessionRepository.cs" />

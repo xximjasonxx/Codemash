@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Codemash.Api.Data.Entities;
-using Codemash.Server.Core.Attributes;
+using Codemash.Api.Data.Entities.Interfaces;
 using Codemash.Server.Core.Extensions;
 
 namespace Codemash.Api.Data.Extensions
@@ -64,7 +64,7 @@ namespace Codemash.Api.Data.Extensions
             var removals = localIds.Where(id => !masterIds.Contains(id));
             return removals.Select(id => new TChange
                                                     {
-                                                        ID = id,
+                                                        ChangeEntityID = id,
                                                         Action = ChangeAction.Delete
                                                     }).ToList();
         }
@@ -93,35 +93,6 @@ namespace Codemash.Api.Data.Extensions
         #endregion
 
         /// <summary>
-        /// Analyze a Sesssion object and return a key value pair with Property/Value differences
-        /// </summary>
-        /// <param name="first">The session being extended (new)</param>
-        /// <param name="second">The session being compared against (old)</param>
-        /// <returns></returns>
-        public static IDictionary<string, string> CompareTo<T>(this T first, T second) where T : EntityBase
-        {
-            // begin looping through the values of thisSession
-            // only properties marked for comparison
-            var masterProperties = first.GetType().GetProperties()
-                .Where(p => p.GetCustomAttributes(false).OfType<ComparableAttribute>().Any())
-                .ToList();
-
-            var returnResults = new Dictionary<string, string>();
-            foreach (var property in masterProperties)
-            {
-                var masterValue = property.GetValue(first, null).ToString();
-                var childValue = second.GetType().GetProperty(property.Name).GetValue(second, null).ToString();
-
-                if (masterValue.CompareTo(childValue) != 0)
-                {
-                    returnResults.Add(property.Name, masterValue);
-                }
-            }
-
-            return returnResults;
-        }
-
-        /// <summary>
         /// Based on a Key Value pair of updated values resulting from the comparison of master and local create an
         /// IEnumerable holding those changes
         /// </summary>
@@ -132,7 +103,7 @@ namespace Codemash.Api.Data.Extensions
         {
             return differences.Select(kv => new TChange
             {
-                ID = id,
+                ChangeEntityID = id,
                 Action = ChangeAction.Modify,
                 Key = kv.Key,
                 Value = kv.Value

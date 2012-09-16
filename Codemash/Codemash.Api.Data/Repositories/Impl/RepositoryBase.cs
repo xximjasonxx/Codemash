@@ -5,12 +5,12 @@ namespace Codemash.Api.Data.Repositories.Impl
 {
     public abstract class RepositoryBase<T> : List<T>
     {
-        private bool RepositoryLoaded { get; set; }
+        //private bool RepositoryLoaded { get; set; }
 
         /// <summary>
         /// Reset the internal flag responsible for indicating whether the repository has called Load or not
         /// </summary>
-        protected void ResetHasLoadedFlag()
+        /*protected void ResetHasLoadedFlag()
         {
             RepositoryLoaded = false;
         }
@@ -30,7 +30,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         {
             if (!RepositoryLoaded && Count == 0)
                 throw new RepositoryNotLoadedException(RepositoryName);
-        }
+        }*/
 
         /// <summary>
         /// Name of the repository

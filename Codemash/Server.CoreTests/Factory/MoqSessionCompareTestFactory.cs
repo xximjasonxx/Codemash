@@ -28,9 +28,9 @@ namespace Server.CoreTests.Factory
                             SessionId = it["SessionId"].ToString().AsInt(),
                             Title = it["Title"].ToString(),
                             Abstract = it["Abstract"].ToString(),
-                            Level = it["Level"].ToString().AsLevel(Level.Unknown),
-                            Track = trackParser.Parse(it["Track"].ToString(), Track.Unknown),
-                            Room = roomParser.Parse(it["Room"].ToString(), Room.Unknown),
+                            LevelType = it["Level"].ToString().AsLevel(Level.Unknown),
+                            TrackType = trackParser.Parse(it["Track"].ToString(), Track.Unknown),
+                            RoomType = roomParser.Parse(it["Room"].ToString(), Room.Unknown),
                             Start = it["StartTime"].ToString().AsDateTime(),
                             End = it["EndTime"].ToString().AsDateTime(),
                             SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()

@@ -67,7 +67,6 @@ namespace Server.CoreTests
 
             var repository = kernel.Get<ISessionChangeRepository>();
             Assert.AreNotEqual(0, repository.GetAll().Count);
-            Assert.AreEqual(0, repository.GetAll().Count(sc => sc.IsDirty));
         }
 
         [TestMethod]
@@ -84,14 +83,13 @@ namespace Server.CoreTests
             var repository = kernel.Get<ISessionRepository>();
             var provider = kernel.Get<IMasterDataProvider>();
             Assert.AreEqual(provider.GetAllSessions().Count, repository.GetAll().Count);
-            Assert.AreEqual(0, repository.GetAll().Count(sc => sc.IsDirty));
         }
 
         [TestMethod]
         public void test_that_if_a_session_does_not_exist_in_the_master_it_is_removed_from_the_local_repository()
         {
             var kernel = new StandardKernel();
-            kernel.Bind<ISessionRepository>().ToConstant(MoqSessionWorkerProcessTestFactory.GetSessionRepositoryWithAddApplyRange());
+            kernel.Bind<ISessionRepository>().ToConstant(MoqSessionWorkerProcessTestFactory.GetSessionRepositoryWithAddApplyRange()).InSingletonScope();
             kernel.Bind<IMasterDataProvider>().ToConstant(MoqSessionWorkerProcessTestFactory.GetOneLessMasterDataProvider());
             kernel.Bind<ISessionChangeRepository>().ToConstant(new Mock<ISessionChangeRepository>().Object);
 
@@ -101,7 +99,6 @@ namespace Server.CoreTests
             var repository = kernel.Get<ISessionRepository>();
             var provider = kernel.Get<IMasterDataProvider>();
             Assert.AreEqual(provider.GetAllSessions().Count, repository.GetAll().Count);
-            Assert.AreEqual(0, repository.GetAll().Count(sc => sc.IsDirty));
         }
     }
 }

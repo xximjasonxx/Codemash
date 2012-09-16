@@ -42,7 +42,7 @@ namespace Server.CoreTests
             var childList = MoqSessionCompareTestFactory.GetStandardSessionList();
 
             childList[0].Title = "I have been changed";
-            childList[0].Room = Room.Ctr14;
+            childList[0].RoomType = Room.Ctr14;
             childList[1].Abstract = "I am a new abstract";
             childList[1].Start = childList[1].Start.AddHours(1);
 

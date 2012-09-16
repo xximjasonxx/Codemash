@@ -8,15 +8,6 @@ namespace Codemash.Api.Data.Entities
 {
     public class Session : EntityBase, IHasIdentifier
     {
-        // member fields
-        private string _title;
-        private string _abstract;
-        private DateTime _start;
-        private DateTime _end;
-        private Level _level;
-        private Track _track;
-        private Room _room;
-
         [Key]
         public int SessionId { get; set; }
 
@@ -27,101 +18,57 @@ namespace Codemash.Api.Data.Entities
         [ForeignKey("SpeakerId")]
         public Speaker Speaker { get; set; }
 
-        [Comparable]
-        [Required]
-        [StringLength(100)]
-        public string Title
-        {
-            get { return _title; }
-            set
-            {
-                ValueChanged();
-                _title = value;
-            }
-        }
+        [Comparable, Required, StringLength(100)]
+        public string Title { get; set; }
+
+        [Comparable, Required]
+        public string Abstract { get; set; }
+
+        [Comparable, Required]
+        public DateTime Start { get; set; }
 
         [Comparable]
+        public DateTime End { get; set; }
+
+        [Comparable("Level")]
         [Required]
-        public string Abstract
+        public Level LevelType
         {
-            get { return _abstract; }
-            set
-            {
-                ValueChanged();
-                _abstract = value;
-            }
+            get { return (Level) this.Level; }
+            set { this.Level = (int) value; }
         }
 
-        [Comparable]
+        [Comparable("Track")]
         [Required]
-        public DateTime Start
+        public Track TrackType
         {
-            get { return _start; }
-            set
-            {
-                ValueChanged();
-                _start = value;
-            }
+            get { return (Track) this.Track; }
+            set { this.Track = (int) value; }
         }
 
-        [Comparable]
-        public DateTime End
-        {
-            get { return _end; }
-            set
-            {
-                ValueChanged();
-                _end = value;
-            }
-        }
-
-        [Comparable]
+        [Comparable("Roonm")]
         [Required]
-        public Level Level
+        public Room RoomType
         {
-            get { return _level; }
-            set
-            {
-                ValueChanged();
-                _level = value;
-            }
-        }
-
-        [Comparable]
-        [Required]
-        public Track Track
-        {
-            get { return _track; }
-            set
-            {
-                ValueChanged();
-                _track = value;
-            }
-        }
-
-        [Comparable]
-        [Required]
-        public Room Room
-        {
-            get { return _room; }
-            set
-            {
-                ValueChanged();
-                _room = value;
-            }
+            get { return (Room) this.Room; }
+            set { this.Room = (int) value; }
         }
 
         // constructor
         public Session()
         {
-            _title = string.Empty;
-            _abstract = string.Empty;
-            _start = DateTime.MinValue;
-            _end = DateTime.MinValue;
-            _level = Level.Unknown;
-            _room = Room.Unknown;
-            _track = Track.Unknown;
+            Title = string.Empty;
+            Abstract = string.Empty;
+            Start = DateTime.MinValue;
+            End = DateTime.MinValue;
+            LevelType = Data.Level.Unknown;
+            RoomType = Data.Room.Unknown;
+            TrackType = Data.Track.Unknown;
         }
+
+        public int Level { get; private set; }
+        public int Room { get; private set; }
+        public int Track { get; private set; }
 
         #region Implementation of IHasIdentifier
 

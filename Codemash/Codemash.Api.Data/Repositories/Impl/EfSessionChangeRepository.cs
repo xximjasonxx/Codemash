@@ -5,23 +5,14 @@ using Codemash.Api.Data.Entities;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {
-    public class EfSessionChangeRepository : RepositoryBase<SessionChange>, ISessionChangeRepository
+    public class EfSessionChangeRepository : ISessionChangeRepository
     {
         #region Implementation of IWriteRepository<SessionChange,int>
 
         /// <summary>
         /// Commit all changes in the repository
         /// </summary>
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Mark an entry in the repository as removed
-        /// </summary>
-        /// <param name="id"></param>
-        public void Remove(int id)
+        public void SaveRange(IEnumerable<SessionChange> entityList)
         {
             throw new NotImplementedException();
         }
@@ -31,18 +22,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         #region Implementation of IReadRepository<SessionChange,int>
 
         /// <summary>
-        /// Indicates the Repository should load all data from the local data store
-        /// </summary>
-        public void Load()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Get an item from the repository by a primary key
         /// </summary>
-        /// <param name="id">The SessionChangeId to key on</param>
-        /// <returns>The Session Change with the given SessionChangeId</returns>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public SessionChange Get(int id)
         {
             throw new NotImplementedException();
@@ -75,18 +58,6 @@ namespace Codemash.Api.Data.Repositories.Impl
         public IList<SessionChange> GetAll(Func<SessionChange, bool> condition)
         {
             throw new NotImplementedException();
-        }
-
-        #endregion
-
-        #region Overrides of RepositoryBase<SessionChange>
-
-        /// <summary>
-        /// Name of the repository
-        /// </summary>
-        public override string RepositoryName
-        {
-            get { return "SessionChange"; }
         }
 
         #endregion

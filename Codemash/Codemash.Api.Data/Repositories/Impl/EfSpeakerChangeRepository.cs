@@ -49,40 +49,14 @@ namespace Codemash.Api.Data.Repositories.Impl
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Empty the repository without saving any values
-        /// </summary>
-        public void Clear()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
 
         #region Implementation of IWriteRepository<SpeakerChange,int>
 
         /// <summary>
-        /// Add items to the Repository
-        /// </summary>
-        /// <param name="items">The items to be added to the repository</param>
-        public void AddRange(IEnumerable<SpeakerChange> items)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Commit all changes in the repository
         /// </summary>
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Mark an entry in the repository as removed
-        /// </summary>
-        /// <param name="id"></param>
-        public void Remove(int id)
+        public void SaveRange(IEnumerable<SpeakerChange> entityList)
         {
             throw new NotImplementedException();
         }

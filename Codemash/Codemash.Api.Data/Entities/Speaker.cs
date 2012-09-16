@@ -8,115 +8,41 @@ namespace Codemash.Api.Data.Entities
 {
     public class Speaker : EntityBase, IHasIdentifier
     {
-        private string _biography;
-        private string _twitter;
-        private string _emailAddress;
-        private string _blogUrl;
-        private string _firstName;
-        private string _lastName;
-        private string _company;
-
         [Key]
         public int SpeakerId { get; set; }
 
-        [Comparable]
-        [Required]
-        public string Biography
-        {
-            get { return _biography; }
-            set
-            {
-                ValueChanged();
-                _biography = value;
-            }
-        }
+        [Comparable, Required]
+        public string Biography { get; set; }
 
-        [Comparable]
-        [StringLength(100)]
-        public string Twitter
-        {
-            get { return _twitter; }
-            set
-            {
-                ValueChanged();
-                _twitter = value;
-            }
-        }
+        [Comparable, StringLength(100)]
+        public string Twitter { get; set; }
 
-        [Comparable]
-        [Required]
-        [StringLength(100)]
-        public string EmailAddress
-        {
-            get { return _emailAddress; }
-            set
-            {
-                ValueChanged();
-                _emailAddress = value;
-            }
-        }
+        [Comparable, Required, StringLength(100)]
+        public string EmailAddress { get; set; }
 
-        [Comparable]
-        [StringLength(100)]
-        public string BlogUrl
-        {
-            get { return _blogUrl; }
-            set
-            {
-                ValueChanged();
-                _blogUrl = value;
-            }
-        }
+        [Comparable, StringLength(100)]
+        public string BlogUrl { get; set; }
 
-        [Comparable]
-        [Required]
-        [StringLength(100)]
-        public string FirstName
-        {
-            get { return _firstName; }
-            set
-            {
-                ValueChanged();
-                _firstName = value;
-            }
-        }
+        [Comparable, Required, StringLength(100)]
+        public string FirstName { get; set; }
 
-        [Comparable]
-        [Required]
-        [StringLength(100)]
-        public string LastName
-        {
-            get { return _lastName; }
-            set
-            {
-                ValueChanged();
-                _lastName = value;
-            }
-        }
+        [Comparable, Required, StringLength(100)]
+        public string LastName { get; set; }
 
-        [Comparable]
-        [StringLength(100)]
-        public string Company
-        {
-            get { return _company; }
-            set
-            {
-                ValueChanged();
-                _company = value;
-            }
-        }
+        [Comparable, StringLength(100)]
+        public string Company { get; set; }
 
         public ICollection<Session> Sessions { get; set; }
 
         public Speaker()
         {
-            _biography = string.Empty;
-            _twitter = string.Empty;
-            _emailAddress = string.Empty;
-            _blogUrl = string.Empty;
-            _firstName = string.Empty;
-            _lastName = string.Empty;
-            _company = string.Empty;
+            Biography = string.Empty;
+            Twitter = string.Empty;
+            EmailAddress = string.Empty;
+            BlogUrl = string.Empty;
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            Company = string.Empty;
         }
 
         #region Implementation of IHasIdentifier

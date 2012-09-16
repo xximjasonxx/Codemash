@@ -38,9 +38,9 @@ namespace Codemash.Api.Data.Provider.Impl
                             SessionId = it["SessionId"].ToString().AsInt(),
                             Title = it["Title"].ToString(),
                             Abstract = it["Abstract"].ToString(),
-                            Level = it["Level"].ToString().AsLevel(Level.Unknown),
-                            Track = TrackParser.Parse(it["Track"].ToString(), Track.Unknown),
-                            Room = RoomParser.Parse(it["Room"].ToString(), Room.Unknown),
+                            LevelType = it["Level"].ToString().AsLevel(Level.Unknown),
+                            TrackType = TrackParser.Parse(it["Track"].ToString(), Track.Unknown),
+                            RoomType = RoomParser.Parse(it["Room"].ToString(), Room.Unknown),
                             Start = it["StartTime"].ToString().AsDateTime(),
                             End = it["EndTime"].ToString().AsDateTime(),
                             SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()

@@ -1,22 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Codemash.Api.Data.Entities;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {
-    public class EfSessionRepository : RepositoryBase<Session>, ISessionRepository
+    public class EfSessionRepository : ISessionRepository
     {
         #region Implementation of ISessionRepository
-
-        /// <summary>
-        /// Indicates the Repository should load all data from the local data store
-        /// </summary>
-        public void Load()
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         /// Get an item from the repository by a primary key
@@ -44,7 +35,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IList<Session> GetAll()
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                return context.Sessions.ToList();
+            }
         }
 
         /// <summary>
@@ -54,13 +48,31 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IList<Session> GetAll(Func<Session, bool> condition)
         {
+            using (var context = new CodemashContext())
+            {
+                return context.Sessions.Where(condition).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Apply the changes (add/remove) from a Master Session List
+        /// </summary>
+        /// <param name="masterSessionList">The session data from the master source</param>
+        public void SaveRange(IEnumerable<Session> masterSessionList)
+        {
             throw new NotImplementedException();
         }
 
+        #endregion
+
+        #region Implementation of IWriteRepository<Session,int>
+
+        /// <summary>
+        /// Commit all changes in the repository
+        /// </summary>
         public void Save()
         {
             throw new NotImplementedException();
-            
         }
 
         /// <summary>
@@ -70,27 +82,6 @@ namespace Codemash.Api.Data.Repositories.Impl
         public void Remove(int id)
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Apply the changes (add/remove) from a Master Session List
-        /// </summary>
-        /// <param name="masterSessionList">The session data from the master source</param>
-        public void ApplyRange(IEnumerable<Session> masterSessionList)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
-        #region Overrides of RepositoryBase<Session>
-
-        /// <summary>
-        /// Name of the repository
-        /// </summary>
-        public override string RepositoryName
-        {
-            get { return "Session"; }
         }
 
         #endregion

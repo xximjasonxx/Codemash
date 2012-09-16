@@ -52,7 +52,13 @@ namespace Codemash.Api.Data.Extensions
 
                 if (masterValue.CompareTo(childValue) != 0)
                 {
-                    returnResults.Add(property.Name, masterValue);
+                    var compAttr = property.GetCustomAttributes(false).OfType<ComparableAttribute>().First();
+                    var keyName = compAttr.KeyName;
+
+                    if (string.IsNullOrEmpty(keyName))
+                        returnResults.Add(property.Name, masterValue);
+                    else
+                        returnResults.Add(keyName, masterValue);
                 }
             }
 

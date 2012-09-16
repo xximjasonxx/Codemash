@@ -53,12 +53,12 @@ namespace Server.CoreTests
         {
             var session1 = MoqSessionCompareTestFactory.GetStandardSessionList().First();
             var session2 = MoqSessionCompareTestFactory.GetStandardSessionList().First();
-            session2.Track = Track.ProfessionalDevelopment;
+            session2.TrackType = Track.ProfessionalDevelopment;
 
             var trackParser = new TrackParse();
             var result = session1.CompareTo(session2);
             Assert.AreEqual(true, result.ContainsKey("Track"));
-            Assert.AreEqual(session1.Track, trackParser.Parse(result["Track"], Track.Unknown));
+            Assert.AreEqual(session1.TrackType, trackParser.Parse(result["Track"], Track.Unknown));
         }
 
         [TestMethod]

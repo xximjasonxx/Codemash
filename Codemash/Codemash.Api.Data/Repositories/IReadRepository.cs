@@ -32,10 +32,5 @@ namespace Codemash.Api.Data.Repositories
         /// <param name="condition">A condition passed as a lambda predicate</param>
         /// <returns></returns>
         IList<T> GetAll(Func<T, bool> condition);
-
-        /// <summary>
-        /// Empty the repository without saving any values
-        /// </summary>
-        void Clear();
     }
 }

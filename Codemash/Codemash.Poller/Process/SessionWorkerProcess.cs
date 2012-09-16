@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Transactions;
+﻿using System.Transactions;
 using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Extensions;
 using Codemash.Api.Data.Provider;
@@ -35,12 +34,10 @@ namespace Codemash.Poller.Process
                 using (var transaction = new TransactionScope())
                 {
                     // add the items to the change repository
-                    SessionChangeRepository.AddRange(sessionDifferences);
-                    SessionChangeRepository.Save();
+                    SessionChangeRepository.SaveRange(sessionDifferences);
 
                     // add the master session data into the respository
-                    SessionRepository.ApplyRange(masterSessionList);
-                    SessionRepository.Save();
+                    SessionRepository.SaveRange(masterSessionList);
 
                     // commit the transaction
                     transaction.Complete();

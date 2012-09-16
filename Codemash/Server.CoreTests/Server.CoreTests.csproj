@@ -76,12 +76,10 @@
     <Compile Include="ListManipulationsTests.cs" />
     <Compile Include="PrimitiveParsingExtensionsTests.cs" />
     <Compile Include="PollerContainerTests.cs" />
-    <Compile Include="SessionEntityTests.cs" />
     <Compile Include="SessionWorkerProcessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionListComparisonTests.cs" />
     <Compile Include="SpeakerCompareTests.cs" />
-    <Compile Include="SpeakerEntityTests.cs" />
     <Compile Include="SpeakerWorkerProcessTests.cs" />
   </ItemGroup>
   <ItemGroup>

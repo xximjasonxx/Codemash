@@ -44,7 +44,6 @@ namespace Server.CoreTests.Factory
                     sessionList[randomNumber].Title = "This is another test";
                     sessionList[randomNumber].End = sessionList[randomNumber].End.AddHours(1);
 
-                    sessionList.Apply(s => s.MarkUnmodified());
                     return sessionList;
                 });
 
@@ -63,16 +62,14 @@ namespace Server.CoreTests.Factory
         {
             var mock = new Mock<ISessionChangeRepository>();
             mock.Setup(m => m.GetAll()).Returns(() => _sessionChangeRepository ?? (_sessionChangeRepository = new List<SessionChange>()));
-            mock.Setup(m => m.AddRange(It.IsAny<IEnumerable<SessionChange>>())).Callback((IEnumerable<SessionChange> changes) =>
-                {
-                    if (_sessionChangeRepository == null)
-                        _sessionChangeRepository = new List<SessionChange>();
+            mock.Setup(m => m.SaveRange(It.IsAny<IEnumerable<SessionChange>>())).Callback(
+                (IEnumerable<SessionChange> sessions) =>
+                    {
+                        if (_sessionChangeRepository == null)
+                            _sessionChangeRepository = new List<SessionChange>();
 
-                    foreach (var sessionChange in changes)
-                        _sessionChangeRepository.Add(sessionChange);
-                });
-
-            mock.Setup(m => m.Save()).Callback(() => _sessionChangeRepository.Apply(sc => sc.MarkUnmodified()));
+                        sessions.ToList().ForEach(s => _sessionChangeRepository.Add(s));
+                    });
 
             return mock.Object;
         }
@@ -86,21 +83,19 @@ namespace Server.CoreTests.Factory
                 var trackParser = new TrackParse();
                 var roomParser = new RoomParse();
 
-                var sessions = (from it in array.AsJEnumerable()
-                                select new Session
-                                           {
-                                               SessionId = it["SessionId"].ToString().AsInt(),
-                                               Title = it["Title"].ToString(),
-                                               Abstract = it["Abstract"].ToString(),
-                                               Level = it["Level"].ToString().AsLevel(Level.Unknown),
-                                               Track = trackParser.Parse(it["Track"].ToString(), Track.Unknown),
-                                               Room = roomParser.Parse(it["Room"].ToString(), Room.Unknown),
-                                               Start = it["StartTime"].ToString().AsDateTime(),
-                                               End = it["EndTime"].ToString().AsDateTime(),
-                                               SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()
-                                           }).ToList();
-                sessions.Apply(s => s.MarkUnmodified());
-                return sessions;
+                return (from it in array.AsJEnumerable()
+                        select new Session
+                                   {
+                                       SessionId = it["SessionId"].ToString().AsInt(),
+                                       Title = it["Title"].ToString(),
+                                       Abstract = it["Abstract"].ToString(),
+                                       LevelType = it["Level"].ToString().AsLevel(Level.Unknown),
+                                       TrackType = trackParser.Parse(it["Track"].ToString(), Track.Unknown),
+                                       RoomType = roomParser.Parse(it["Room"].ToString(), Room.Unknown),
+                                       Start = it["StartTime"].ToString().AsDateTime(),
+                                       End = it["EndTime"].ToString().AsDateTime(),
+                                       SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()
+                                   }).ToList();
             }
         }
 
@@ -120,19 +115,15 @@ namespace Server.CoreTests.Factory
                                                         return _sessionRepository;
                                                     });
 
-            mock.Setup(m => m.ApplyRange(It.IsAny<IEnumerable<Session>>()))
+            mock.Setup(m => m.SaveRange(It.IsAny<IEnumerable<Session>>()))
                 .Callback((IEnumerable<Session> sessions) =>
                               {
-                                  foreach (var session in sessions)
-                                  {
-                                      if (!_sessionRepository.Select(s => s.SessionId).Contains(session.SessionId))
-                                      {
-                                          _sessionRepository.Add(session);
-                                      }
-                                  }
-                              });
+                                  if (_sessionRepository == null)
+                                      _sessionRepository = new List<Session>();
 
-            mock.Setup(m => m.Save()).Callback(() => _sessionChangeRepository.Apply(sc => sc.MarkUnmodified()));
+                                  _sessionRepository.Clear();
+                                  sessions.ToList().ForEach(s => _sessionRepository.Add(s));
+                              });
 
             return mock.Object;
         }
@@ -152,23 +143,15 @@ namespace Server.CoreTests.Factory
                 return _sessionRepository;
             });
 
-            mock.Setup(m => m.ApplyRange(It.IsAny<IEnumerable<Session>>()))
+            mock.Setup(m => m.SaveRange(It.IsAny<IEnumerable<Session>>()))
                 .Callback((IEnumerable<Session> sessions) =>
                 {
-                    foreach (var session in _sessionRepository)
-                    {
-                        if (!sessions.Select(s => s.SessionId).Contains(session.SessionId))
-                        {
-                            _sessionRepository.First(s => s.SessionId == session.SessionId).MarkRemoved();
-                        }
-                    }
-                });
+                    if (_sessionRepository == null)
+                        _sessionRepository = new List<Session>();
 
-            mock.Setup(m => m.Save()).Callback(() =>
-                                                   {
-                                                       var sessionToRemove = _sessionRepository.First(s => s.CurrentState == EntityState.Removed);
-                                                       _sessionRepository.Remove(sessionToRemove);
-                                                   });
+                    _sessionRepository.Clear();
+                    sessions.ToList().ForEach(s => _sessionRepository.Add(s));
+                });
 
             return mock.Object;
         }

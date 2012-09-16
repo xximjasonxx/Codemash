@@ -35,7 +35,10 @@ namespace Codemash.Poller.Process
             if (differences.Count > 0)
             {
                 // differences exist
-                SpeakerChangeRepository.AddRange(differences);
+                SpeakerChangeRepository.SaveRange(differences);
+
+                // save updated speaker data
+                SpeakerRepository.SaveRange(masterSpeakers);
             }
         }
 

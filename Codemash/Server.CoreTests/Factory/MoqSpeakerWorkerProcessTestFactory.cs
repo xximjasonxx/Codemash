@@ -76,7 +76,7 @@ namespace Server.CoreTests.Factory
                                                         return _speakerChangeRepository;
                                                     });
 
-            mock.Setup(m => m.AddRange(It.IsAny<IEnumerable<SpeakerChange>>())).Callback(
+            mock.Setup(m => m.SaveRange(It.IsAny<IEnumerable<SpeakerChange>>())).Callback(
                 (IEnumerable<SpeakerChange> changes) =>
                     {
                         if (_speakerChangeRepository == null)

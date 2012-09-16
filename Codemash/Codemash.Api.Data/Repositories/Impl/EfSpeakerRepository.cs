@@ -6,17 +6,21 @@ using Codemash.Api.Data.Entities;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {
-    public class EfSpeakerRepository : RepositoryBase<Speaker>, ISpeakerRepository
+    public class EfSpeakerRepository : ISpeakerRepository
     {
-        #region Implementation of IReadRepository<Speaker,int>
+        #region Implementation of IWriteRepository<Speaker,int>
 
         /// <summary>
-        /// Indicates the Repository should load all data from the local data store
+        /// Commit all changes in the repository
         /// </summary>
-        public void Load()
+        public void SaveRange(IEnumerable<Speaker> entityList)
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+
+        #region Implementation of IReadRepository<Speaker,int>
 
         /// <summary>
         /// Get an item from the repository by a primary key
@@ -55,18 +59,6 @@ namespace Codemash.Api.Data.Repositories.Impl
         public IList<Speaker> GetAll(Func<Speaker, bool> condition)
         {
             throw new NotImplementedException();
-        }
-
-        #endregion
-
-        #region Overrides of RepositoryBase<Speaker>
-
-        /// <summary>
-        /// Name of the repository
-        /// </summary>
-        public override string RepositoryName
-        {
-            get { return "Speakers"; }
         }
 
         #endregion

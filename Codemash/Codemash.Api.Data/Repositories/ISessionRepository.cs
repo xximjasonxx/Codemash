@@ -9,6 +9,6 @@ namespace Codemash.Api.Data.Repositories
         /// Apply the changes (add/remove) from a Master Session List
         /// </summary>
         /// <param name="masterSessionList">The session data from the master source</param>
-        void ApplyRange(IEnumerable<Session> masterSessionList);
+        void SaveRange(IEnumerable<Session> masterSessionList);
     }
 }

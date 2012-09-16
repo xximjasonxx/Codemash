@@ -2,7 +2,7 @@
 
 namespace Codemash.Api.Data.Repositories
 {
-    public interface ISpeakerRepository : IReadRepository<Speaker, int>
+    public interface ISpeakerRepository : IWriteRepository<Speaker, int>, IReadRepository<Speaker, int>
     {
     }
 }

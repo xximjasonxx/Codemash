@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Codemash.Api.Data.Entities;
 
 namespace Codemash.Api.Data.Repositories.Impl
@@ -15,10 +14,49 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         public void SaveRange(IEnumerable<Speaker> entityList)
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                SaveChanges(context, entityList);
+                SaveRemovals(context, entityList);
+
+                context.SaveChanges();
+            }
         }
 
         #endregion
+
+        private void SaveChanges(CodemashContext context, IEnumerable<Speaker> speakers)
+        {
+            foreach (var entity in speakers)
+            {
+                var result = context.Speakers.FirstOrDefault(sp => sp.SpeakerId == entity.SpeakerId);
+                if (result == null)
+                {
+                    context.Speakers.Add(entity);
+                    continue;
+                }
+
+                result.Biography = entity.Biography;
+                result.BlogUrl = entity.BlogUrl;
+                result.Company = entity.Company;
+                result.EmailAddress = entity.EmailAddress;
+                result.FirstName = entity.FirstName;
+                result.LastName = entity.LastName;
+            }
+        }
+
+        private void SaveRemovals(CodemashContext context, IEnumerable<Speaker> speakers)
+        {
+            var masterSpeakers = speakers.Select(sp => sp.SpeakerId).ToList();
+            var existingSpeakers = context.Speakers.Select(sp => sp.SpeakerId).ToList();
+            var removals = existingSpeakers.Where(sp => !masterSpeakers.Contains(sp));
+
+            foreach (var speakerId in removals)
+            {
+                var speaker = context.Speakers.First(sp => sp.SpeakerId == speakerId);
+                context.Speakers.Remove(speaker);
+            }
+        }
 
         #region Implementation of IReadRepository<Speaker,int>
 
@@ -29,7 +67,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public Speaker Get(int id)
         {
-            throw new NotImplementedException();
+            return Get(sp => sp.SpeakerId == id);
         }
 
         /// <summary>
@@ -39,7 +77,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public Speaker Get(Func<Speaker, bool> condition)
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                return context.Speakers.FirstOrDefault(condition);
+            }
         }
 
         /// <summary>
@@ -48,7 +89,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IList<Speaker> GetAll()
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                return context.Speakers.ToList();
+            }
         }
 
         /// <summary>
@@ -58,7 +102,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IList<Speaker> GetAll(Func<Speaker, bool> condition)
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                return context.Speakers.Where(condition).ToList();
+            }
         }
 
         #endregion

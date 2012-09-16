@@ -16,7 +16,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public Session Get(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                return context.Sessions.FirstOrDefault(s => s.SessionId == id);
+            }
         }
 
         /// <summary>

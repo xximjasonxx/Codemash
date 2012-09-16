@@ -61,8 +61,8 @@ namespace Codemash.Api.Data.Extensions
             var localIds = localList.Select(s => s.ID).ToArray();
 
             // determine which sessions are to be removed
-            var removedSessions = localIds.Where(id => !masterIds.Contains(id));
-            return removedSessions.Select(id => new TChange
+            var removals = localIds.Where(id => !masterIds.Contains(id));
+            return removals.Select(id => new TChange
                                                     {
                                                         ID = id,
                                                         Action = ChangeAction.Delete
@@ -73,10 +73,10 @@ namespace Codemash.Api.Data.Extensions
         {
             // find the IDs of sessions which are in the master but are not in local
             // add them to changes listing going back
-            var localSessions = localList.Select(s => s.ID).ToArray();
+            var locals = localList.Select(s => s.ID).ToArray();
 
             var changes = new List<TChange>();
-            foreach (var entity in masterList.Where(s => !localSessions.Contains(s.ID)))
+            foreach (var entity in masterList.Where(s => !locals.Contains(s.ID)))
             {
                 var newEntity = new T();
                 var differences = CreateDifferencesList<TChange>(entity.CompareTo(newEntity), entity.ID).ToList();

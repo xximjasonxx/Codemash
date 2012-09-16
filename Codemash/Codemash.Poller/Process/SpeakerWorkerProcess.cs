@@ -14,6 +14,9 @@ namespace Codemash.Poller.Process
         [Inject]
         public ISpeakerRepository SpeakerRepository { get; set; }
 
+        [Inject]
+        public ISpeakerChangeRepository SpeakerChangeRepository { get; set; }
+
         #region Implementation of IProcess
 
         /// <summary>
@@ -32,6 +35,7 @@ namespace Codemash.Poller.Process
             if (differences.Count > 0)
             {
                 // differences exist
+                SpeakerChangeRepository.AddRange(differences);
             }
         }
 

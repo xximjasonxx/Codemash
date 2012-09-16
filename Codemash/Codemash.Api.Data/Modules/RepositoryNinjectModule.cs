@@ -16,6 +16,7 @@ namespace Codemash.Api.Data.Modules
             Bind<ISessionRepository>().To<EfSessionRepository>().InThreadScope();
             Bind<ISpeakerRepository>().To<EfSpeakerRepository>().InThreadScope();
             Bind<ISessionChangeRepository>().To<EfSessionChangeRepository>().InThreadScope();
+            Bind<ISpeakerChangeRepository>().To<EfSpeakerChangeRepository>().InThreadScope();
         }
 
         #endregion

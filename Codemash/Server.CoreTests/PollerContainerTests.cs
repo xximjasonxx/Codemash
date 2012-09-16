@@ -54,5 +54,11 @@ namespace Server.CoreTests
         {
             Assert.IsInstanceOfType(TheContainer.Get<IProcess>("Speaker", new IParameter[0]), typeof(SpeakerWorkerProcess));
         }
+
+        [TestMethod]
+        public void test_poller_container_can_properly_resolve_speaker_change_repository()
+        {
+            Assert.IsNotNull(TheContainer.TryGet<ISpeakerChangeRepository>());
+        }
     }
 }

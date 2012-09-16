@@ -72,6 +72,7 @@
     <Compile Include="Factory\MoqSessionWorkerProcessTestFactory.cs" />
     <Compile Include="Factory\MoqSessionCompareTestFactory.cs" />
     <Compile Include="Factory\MoqSpeakerDataFactory.cs" />
+    <Compile Include="Factory\MoqSpeakerWorkerProcessTestFactory.cs" />
     <Compile Include="ListManipulationsTests.cs" />
     <Compile Include="PrimitiveParsingExtensionsTests.cs" />
     <Compile Include="PollerContainerTests.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="SessionListComparisonTests.cs" />
     <Compile Include="SpeakerCompareTests.cs" />
     <Compile Include="SpeakerEntityTests.cs" />
+    <Compile Include="SpeakerWorkerProcessTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Codemash.Api.Data\Codemash.Api.Data.csproj">

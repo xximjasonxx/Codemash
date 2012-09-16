@@ -33,7 +33,7 @@ namespace Server.CoreTests
             var sessionMock = new Mock<ISessionRepository>();
             sessionMock.Setup(m => m.GetAll()).Returns(new List<Session>());
             container.Bind<ISessionRepository>().ToConstant(sessionMock.Object);
-container.Bind<ISessionChangeRepository>().ToConstant(new Mock<ISessionChangeRepository>().Object);
+            container.Bind<ISessionChangeRepository>().ToConstant(new Mock<ISessionChangeRepository>().Object);
 
             var process = container.Get<SessionWorkerProcess>();
             process.Execute();

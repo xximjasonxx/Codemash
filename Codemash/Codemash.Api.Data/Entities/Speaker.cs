@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Codemash.Api.Data.Entities.Interfaces;
 using Codemash.Server.Core.Attributes;
 
@@ -9,6 +10,7 @@ namespace Codemash.Api.Data.Entities
     public class Speaker : EntityBase, IHasIdentifier
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SpeakerId { get; set; }
 
         [Comparable, Required]

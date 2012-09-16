@@ -117,7 +117,9 @@ namespace FunctionalTests
 
             // act
             sessions = repository.GetAll();
-            sessions.Add(GetTestSessionList()[0]);
+            var session = GetTestSessionList()[0];
+            session.SessionId = 4;
+            sessions.Add(session);
             repository.SaveRange(sessions);
 
             // assert
@@ -137,6 +139,7 @@ namespace FunctionalTests
                        {
                            new Session
                                {
+                                   SessionId = 1,
                                    Title = "Session 1",
                                    Abstract = "Abstract",
                                    End = DateTime.Now.AddHours(1),
@@ -147,6 +150,7 @@ namespace FunctionalTests
                                },
                            new Session
                                {
+                                   SessionId = 2,
                                    Title = "Session 2",
                                    Abstract = "Abstract",
                                    End = DateTime.Now.AddHours(1),
@@ -157,6 +161,7 @@ namespace FunctionalTests
                                },
                            new Session
                                {
+                                   SessionId = 3,
                                    Title = "Session 3",
                                    Abstract = "Abstract",
                                    End = DateTime.Now.AddHours(1),

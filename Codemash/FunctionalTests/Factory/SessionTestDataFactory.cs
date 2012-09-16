@@ -26,7 +26,7 @@ namespace FunctionalTests.Factory
 
         public static void CreateStandardSpeaker(SqlConnection connection)
         {
-            const string cmdText = "insert into Speakers(Biography, Twitter, EmailAddress, BlogUrl, FirstName, LastName, Company) values(@Bio, @Twitter, @Email, @Blog, @FirstName, @LastName, @Company)";
+            const string cmdText = "insert into Speakers(SpeakerId, Biography, Twitter, EmailAddress, BlogUrl, FirstName, LastName, Company) values(1, @Bio, @Twitter, @Email, @Blog, @FirstName, @LastName, @Company)";
             using (var command = new SqlCommand(cmdText, connection))
             {
                 command.Parameters.AddWithValue("@Bio", "This is a Biography");
@@ -51,10 +51,11 @@ namespace FunctionalTests.Factory
 
         private static void CreateStandardSessions(int speakerId, SqlConnection connection)
         {
-            const string cmdText = "insert into Sessions(SpeakerId, Title, Abstract, Start, [End], Level, Room, Track) values(@SpkId, @Title, @Abs, @Start, @End, 1, 1, 1)";
+            const string cmdText = "insert into Sessions(SessionId, SpeakerId, Title, Abstract, Start, [End], Level, Room, Track) values(@SessionId, @SpkId, @Title, @Abs, @Start, @End, 1, 1, 1)";
             using (var command = new SqlCommand(cmdText, connection))
             {
                 // session 1
+                command.Parameters.AddWithValue("@SessionId", 1);
                 command.Parameters.AddWithValue("@SpkId", speakerId);
                 command.Parameters.AddWithValue("@Title", "Title 1");
                 command.Parameters.AddWithValue("@Abs", ".NET");
@@ -64,6 +65,7 @@ namespace FunctionalTests.Factory
                 command.Parameters.Clear();
 
                 // session 2
+                command.Parameters.AddWithValue("@SessionId", 2);
                 command.Parameters.AddWithValue("@SpkId", speakerId);
                 command.Parameters.AddWithValue("@Title", "Title 2");
                 command.Parameters.AddWithValue("@Abs", "LINQ");
@@ -73,6 +75,7 @@ namespace FunctionalTests.Factory
                 command.Parameters.Clear();
 
                 // session 3
+                command.Parameters.AddWithValue("@SessionId", 3);
                 command.Parameters.AddWithValue("@SpkId", speakerId);
                 command.Parameters.AddWithValue("@Title", "Title 3");
                 command.Parameters.AddWithValue("@Abs", "Mobile");

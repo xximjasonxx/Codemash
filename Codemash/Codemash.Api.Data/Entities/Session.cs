@@ -9,6 +9,7 @@ namespace Codemash.Api.Data.Entities
     public class Session : EntityBase, IHasIdentifier
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SessionId { get; set; }
 
         [Comparable]

@@ -11,9 +11,10 @@ namespace FunctionalTests.Factory
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString))
             {
                 connection.Open();
-                const string cmdText = "insert into Speakers(Biography, Twitter, EmailAddress, BlogUrl, FirstName, LastName, Company) values(@Bio, @Twitter, @Email, @Blog, @FirstName, @LastName, @Company)";
+                const string cmdText = "insert into Speakers(SpeakerId, Biography, Twitter, EmailAddress, BlogUrl, FirstName, LastName, Company) values(@SpeakerId, @Bio, @Twitter, @Email, @Blog, @FirstName, @LastName, @Company)";
                 using (var command = new SqlCommand(cmdText, connection))
                 {
+                    command.Parameters.AddWithValue("@SpeakerId", 1);
                     command.Parameters.AddWithValue("@Bio", "My Biography");
                     command.Parameters.AddWithValue("@Twitter", string.Empty);
                     command.Parameters.AddWithValue("@Email", "test@example.com");
@@ -24,6 +25,7 @@ namespace FunctionalTests.Factory
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
 
+                    command.Parameters.AddWithValue("@SpeakerId", 2);
                     command.Parameters.AddWithValue("@Bio", "My Biography Again");
                     command.Parameters.AddWithValue("@Twitter", string.Empty);
                     command.Parameters.AddWithValue("@Email", "test@example.com");
@@ -34,6 +36,7 @@ namespace FunctionalTests.Factory
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
 
+                    command.Parameters.AddWithValue("@SpeakerId", 3);
                     command.Parameters.AddWithValue("@Bio", "I like stuff");
                     command.Parameters.AddWithValue("@Twitter", string.Empty);
                     command.Parameters.AddWithValue("@Email", "test@example.com");

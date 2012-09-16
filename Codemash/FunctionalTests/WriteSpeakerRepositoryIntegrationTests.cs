@@ -76,7 +76,9 @@ namespace FunctionalTests
 
             // act
             speakers = repository.GetAll();
-            speakers.Add(GetSpeakerData().First());
+            var speaker = GetSpeakerData().First();
+            speaker.SpeakerId = 4;
+            speakers.Add(speaker);
             repository.SaveRange(speakers);
             speakers = repository.GetAll();
 
@@ -116,6 +118,7 @@ namespace FunctionalTests
                        {
                            new Speaker
                                {
+                                   SpeakerId = 1,
                                    Biography = "Biography 1",
                                    EmailAddress = "test@example.com",
                                    FirstName = "Sam",
@@ -123,6 +126,7 @@ namespace FunctionalTests
                                },
                            new Speaker
                                {
+                                   SpeakerId = 2,
                                    Biography = "Biography 2",
                                    EmailAddress = "test@example.com",
                                    FirstName = "Sam",
@@ -130,6 +134,7 @@ namespace FunctionalTests
                                },
                            new Speaker
                                {
+                                   SpeakerId = 3,
                                    Biography = "Biography 3",
                                    EmailAddress = "test@example.com",
                                    FirstName = "Sam",

@@ -28,7 +28,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public SessionChange Get(int id)
         {
-            throw new NotImplementedException();
+            return Get(sc => sc.SessionChangeId == id);
         }
 
         /// <summary>
@@ -38,7 +38,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public SessionChange Get(Func<SessionChange, bool> condition)
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                return context.SessionChanges.FirstOrDefault(condition);
+            }
         }
 
         /// <summary>
@@ -47,7 +50,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IList<SessionChange> GetAll()
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                return context.SessionChanges.ToList();
+            }
         }
 
         /// <summary>
@@ -57,7 +63,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IList<SessionChange> GetAll(Func<SessionChange, bool> condition)
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                return context.SessionChanges.Where(condition).ToList();
+            }
         }
 
         #endregion

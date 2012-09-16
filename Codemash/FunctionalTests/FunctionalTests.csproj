@@ -68,7 +68,7 @@
     <Compile Include="Factory\SessionTestDataFactory.cs" />
     <Compile Include="Factory\SpeakerTestDataFactory.cs" />
     <Compile Include="MasterDataProviderFunctionalTests.cs" />
-    <Compile Include="ModelInitialization.cs" />
+    <Compile Include="ModelInitializationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadSessionChangeRepositoryIntegrationTests.cs" />
     <Compile Include="ReadSessionRepositoryIntegrationTests.cs" />

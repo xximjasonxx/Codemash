@@ -11,4 +11,8 @@
 _ReSharper.*
 *.resharper
 Ankh.NoLoad
+TestResults
 *.mdf
+*.ldf
+Codemash/TestResults/Codemash.TE.Tests.mdf
+Codemash/TestResults/Codemash.TE.Tests_log.ldf

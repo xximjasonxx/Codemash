@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Factory\SessionTestDataFactory.cs" />
     <Compile Include="MasterDataProviderFunctionalTests.cs" />
+    <Compile Include="ModelInitialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionRepositoryIntegrationTests.cs" />
   </ItemGroup>

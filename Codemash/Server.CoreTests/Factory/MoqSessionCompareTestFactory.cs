@@ -25,7 +25,7 @@ namespace Server.CoreTests.Factory
                 return (from it in array.AsJEnumerable()
                         select new Session()
                         {
-                            SessionID = it["SessionId"].ToString().AsInt(),
+                            SessionId = it["SessionId"].ToString().AsInt(),
                             Title = it["Title"].ToString(),
                             Abstract = it["Abstract"].ToString(),
                             Level = it["Level"].ToString().AsLevel(Level.Unknown),
@@ -33,7 +33,7 @@ namespace Server.CoreTests.Factory
                             Room = roomParser.Parse(it["Room"].ToString(), Room.Unknown),
                             Start = it["StartTime"].ToString().AsDateTime(),
                             End = it["EndTime"].ToString().AsDateTime(),
-                            SpeakerID = it["Speaker"]["SpeakerId"].ToString().AsInt()
+                            SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()
                         }).ToList();
             }
         }

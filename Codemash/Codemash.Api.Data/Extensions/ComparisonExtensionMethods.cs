@@ -64,7 +64,7 @@ namespace Codemash.Api.Data.Extensions
             var removals = localIds.Where(id => !masterIds.Contains(id));
             return removals.Select(id => new TChange
                                                     {
-                                                        ChangeEntityID = id,
+                                                        ChangeEntityId = id,
                                                         Action = ChangeAction.Delete
                                                     }).ToList();
         }
@@ -103,7 +103,7 @@ namespace Codemash.Api.Data.Extensions
         {
             return differences.Select(kv => new TChange
             {
-                ChangeEntityID = id,
+                ChangeEntityId = id,
                 Action = ChangeAction.Modify,
                 Key = kv.Key,
                 Value = kv.Value

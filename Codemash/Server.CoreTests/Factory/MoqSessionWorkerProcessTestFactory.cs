@@ -89,7 +89,7 @@ namespace Server.CoreTests.Factory
                 var sessions = (from it in array.AsJEnumerable()
                                 select new Session
                                            {
-                                               SessionID = it["SessionId"].ToString().AsInt(),
+                                               SessionId = it["SessionId"].ToString().AsInt(),
                                                Title = it["Title"].ToString(),
                                                Abstract = it["Abstract"].ToString(),
                                                Level = it["Level"].ToString().AsLevel(Level.Unknown),
@@ -97,7 +97,7 @@ namespace Server.CoreTests.Factory
                                                Room = roomParser.Parse(it["Room"].ToString(), Room.Unknown),
                                                Start = it["StartTime"].ToString().AsDateTime(),
                                                End = it["EndTime"].ToString().AsDateTime(),
-                                               SpeakerID = it["Speaker"]["SpeakerId"].ToString().AsInt()
+                                               SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()
                                            }).ToList();
                 sessions.Apply(s => s.MarkUnmodified());
                 return sessions;
@@ -125,7 +125,7 @@ namespace Server.CoreTests.Factory
                               {
                                   foreach (var session in sessions)
                                   {
-                                      if (!_sessionRepository.Select(s => s.SessionID).Contains(session.SessionID))
+                                      if (!_sessionRepository.Select(s => s.SessionId).Contains(session.SessionId))
                                       {
                                           _sessionRepository.Add(session);
                                       }
@@ -157,9 +157,9 @@ namespace Server.CoreTests.Factory
                 {
                     foreach (var session in _sessionRepository)
                     {
-                        if (!sessions.Select(s => s.SessionID).Contains(session.SessionID))
+                        if (!sessions.Select(s => s.SessionId).Contains(session.SessionId))
                         {
-                            _sessionRepository.First(s => s.SessionID == session.SessionID).MarkRemoved();
+                            _sessionRepository.First(s => s.SessionId == session.SessionId).MarkRemoved();
                         }
                     }
                 });

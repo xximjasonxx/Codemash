@@ -35,7 +35,7 @@ namespace Codemash.Api.Data.Provider.Impl
             return (from it in jsonArray.AsJEnumerable()
                     select new Session
                         {
-                            SessionID = it["SessionID"].ToString().AsInt(),
+                            SessionId = it["SessionId"].ToString().AsInt(),
                             Title = it["Title"].ToString(),
                             Abstract = it["Abstract"].ToString(),
                             Level = it["Level"].ToString().AsLevel(Level.Unknown),
@@ -43,7 +43,7 @@ namespace Codemash.Api.Data.Provider.Impl
                             Room = RoomParser.Parse(it["Room"].ToString(), Room.Unknown),
                             Start = it["StartTime"].ToString().AsDateTime(),
                             End = it["EndTime"].ToString().AsDateTime(),
-                            SpeakerID = it["Speaker"]["SpeakerID"].ToString().AsInt()
+                            SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()
                         }).ToList();
         }
 
@@ -60,7 +60,7 @@ namespace Codemash.Api.Data.Provider.Impl
             return (from it in jsonArray.AsJEnumerable()
                     select new Speaker
                         {
-                            SpeakerID = it["SpeakerID"].ToString().AsInt(),
+                            SpeakerId = it["SpeakerId"].ToString().AsInt(),
                             FirstName = it["FirstName"].ToString(),
                             LastName = it["LastName"].ToString(),
                             Company = it["Company"].ToString(),

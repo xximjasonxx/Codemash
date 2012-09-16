@@ -41,8 +41,8 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <summary>
         /// Get an item from the repository by a primary key
         /// </summary>
-        /// <param name="id">The SessionChangeID to key on</param>
-        /// <returns>The Session Change with the given SessionChangeID</returns>
+        /// <param name="id">The SessionChangeId to key on</param>
+        /// <returns>The Session Change with the given SessionChangeId</returns>
         public SessionChange Get(int id)
         {
             throw new NotImplementedException();

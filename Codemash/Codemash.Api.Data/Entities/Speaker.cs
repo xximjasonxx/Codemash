@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Codemash.Api.Data.Entities.Interfaces;
 using Codemash.Server.Core.Attributes;
@@ -16,10 +17,10 @@ namespace Codemash.Api.Data.Entities
         private string _company;
 
         [Key]
-        public int SpeakerID { get; set; }
+        public int SpeakerId { get; set; }
 
         [Comparable]
-        [StringLength(1000)]
+        [Required]
         public string Biography
         {
             get { return _biography; }
@@ -43,7 +44,8 @@ namespace Codemash.Api.Data.Entities
         }
 
         [Comparable]
-        [StringLength(255)]
+        [Required]
+        [StringLength(100)]
         public string EmailAddress
         {
             get { return _emailAddress; }
@@ -67,6 +69,7 @@ namespace Codemash.Api.Data.Entities
         }
 
         [Comparable]
+        [Required]
         [StringLength(100)]
         public string FirstName
         {
@@ -79,6 +82,7 @@ namespace Codemash.Api.Data.Entities
         }
 
         [Comparable]
+        [Required]
         [StringLength(100)]
         public string LastName
         {
@@ -102,6 +106,8 @@ namespace Codemash.Api.Data.Entities
             }
         }
 
+        public ICollection<Session> Sessions { get; set; }
+
         public Speaker()
         {
             _biography = string.Empty;
@@ -115,7 +121,7 @@ namespace Codemash.Api.Data.Entities
 
         #region Implementation of IHasIdentifier
 
-        public int ID { get { return SpeakerID; } }
+        public int ID { get { return SpeakerId; } }
 
         #endregion
     }

@@ -10,18 +10,23 @@ namespace Codemash.Api.Data.Entities
     public class SpeakerChange : EntityBase, IChange
     {
         [Key]
-        public int SpeakerChangeID { get; set; }
-        public int SpeakerID { get; set; }
+        public int SpeakerChangeId { get; set; }
+
+        [Required]
+        public int SpeakerId { get; set; }
 
         #region Implementation of IChange
 
-        public int ChangeEntityID { set { SpeakerID = value; } }
+        public int ChangeEntityId { set { SpeakerId = value; } }
+
+        [Required]
         public ChangeAction Action { get; set; }
 
-        [StringLength(100)]
+        [StringLength(50)]
+        [Required]
         public string Key { set; get; }
 
-        [StringLength(1000)]
+        [Required]
         public string Value { set; get; }
 
         #endregion

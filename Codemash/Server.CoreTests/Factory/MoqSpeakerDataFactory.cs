@@ -19,7 +19,7 @@ namespace Server.CoreTests.Factory
                 return (from sp in jsonArray.AsJEnumerable()
                         select new Speaker
                                    {
-                                       SpeakerID = sp["SpeakerId"].ToString().AsInt(),
+                                       SpeakerId = sp["SpeakerId"].ToString().AsInt(),
                                        FirstName = sp["FirstName"].ToString(),
                                        LastName = sp["LastName"].ToString(),
                                        Biography = sp["Bio"].ToString(),

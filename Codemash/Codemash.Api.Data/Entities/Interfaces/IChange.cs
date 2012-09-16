@@ -2,7 +2,7 @@
 {
     public interface IChange
     {
-        int ChangeEntityID { set; }
+        int ChangeEntityId { set; }
         ChangeAction Action { set; }
         string Key { set; }
         string Value { set; }

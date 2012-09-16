@@ -19,6 +19,30 @@ namespace Codemash.Api.Data.Repositories.Impl
         public DbSet<Speaker> Speakers { get; set; }
 
         public DbSet<SessionChange> SessionChanges { get; set; }
-        public DbSet<SpeakerChange> SpeakerChanges { get; set; } 
+        public DbSet<SpeakerChange> SpeakerChanges { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // session
+            modelBuilder.Entity<Session>().Property(s => s.Abstract).HasColumnType("text");
+
+            // speaker
+            modelBuilder.Entity<Speaker>().Property(s => s.Biography).HasColumnType("text");
+
+            // session changes
+            modelBuilder.Entity<SessionChange>().Property(sc => sc.Value).HasColumnType("text");
+
+            // speaker changes
+            modelBuilder.Entity<SpeakerChange>().HasKey(sc => sc.SpeakerChangeId);
+            modelBuilder.Entity<SpeakerChange>().Property(sc => sc.Key).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<SpeakerChange>().Property(sc => sc.Value).HasColumnType("text");
+        }
+
+        protected override bool ShouldValidateEntity(System.Data.Entity.Infrastructure.DbEntityEntry entityEntry)
+        {
+            return false;
+        }
     }
 }

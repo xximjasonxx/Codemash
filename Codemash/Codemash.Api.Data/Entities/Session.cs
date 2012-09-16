@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Codemash.Api.Data.Entities.Interfaces;
 using Codemash.Server.Core.Attributes;
 
@@ -17,12 +18,17 @@ namespace Codemash.Api.Data.Entities
         private Room _room;
 
         [Key]
-        public int SessionID { get; set; }
+        public int SessionId { get; set; }
 
         [Comparable]
-        public int SpeakerID { get; set; }
+        [Required]
+        public int SpeakerId { get; set; }
+
+        [ForeignKey("SpeakerId")]
+        public Speaker Speaker { get; set; }
 
         [Comparable]
+        [Required]
         [StringLength(100)]
         public string Title
         {
@@ -35,7 +41,7 @@ namespace Codemash.Api.Data.Entities
         }
 
         [Comparable]
-        [StringLength(1000)]
+        [Required]
         public string Abstract
         {
             get { return _abstract; }
@@ -47,6 +53,7 @@ namespace Codemash.Api.Data.Entities
         }
 
         [Comparable]
+        [Required]
         public DateTime Start
         {
             get { return _start; }
@@ -69,6 +76,7 @@ namespace Codemash.Api.Data.Entities
         }
 
         [Comparable]
+        [Required]
         public Level Level
         {
             get { return _level; }
@@ -80,6 +88,7 @@ namespace Codemash.Api.Data.Entities
         }
 
         [Comparable]
+        [Required]
         public Track Track
         {
             get { return _track; }
@@ -91,6 +100,7 @@ namespace Codemash.Api.Data.Entities
         }
 
         [Comparable]
+        [Required]
         public Room Room
         {
             get { return _room; }
@@ -115,7 +125,7 @@ namespace Codemash.Api.Data.Entities
 
         #region Implementation of IHasIdentifier
 
-        public int ID { get { return SessionID; } }
+        public int ID { get { return SessionId; } }
 
         #endregion
     }

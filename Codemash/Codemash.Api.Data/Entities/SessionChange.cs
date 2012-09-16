@@ -13,20 +13,24 @@ namespace Codemash.Api.Data.Entities
         private string _value;
 
         [Key]
-        public int SessionChangeID { get; set; }
+        public int SessionChangeId { get; set; }
 
-        public int SessionID { get; set; }
+        [Required]
+        public int SessionId { get; set; }
+
+        [Required]
         public ChangeAction Action { get; set; }
 
-        [StringLength(100)]
+        [StringLength(50)]
+        [Required]
         public string Key { get; set; }
 
-        [StringLength(1000)]
+        [Required]
         public string Value { get; set; }
 
         #region IChange Implementation
 
-        public int ChangeEntityID { set { SessionID = value; } }
+        public int ChangeEntityId { set { SessionId = value; } }
 
         #endregion
     }

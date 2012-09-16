@@ -24,7 +24,7 @@ namespace FunctionalTests.Factory
             }
         }
 
-        private static void CreateStandardSpeaker(SqlConnection connection)
+        public static void CreateStandardSpeaker(SqlConnection connection)
         {
             const string cmdText = "insert into Speakers(Biography, Twitter, EmailAddress, BlogUrl, FirstName, LastName, Company) values(@Bio, @Twitter, @Email, @Blog, @FirstName, @LastName, @Company)";
             using (var command = new SqlCommand(cmdText, connection))
@@ -40,7 +40,7 @@ namespace FunctionalTests.Factory
             }
         }
 
-        private static int GetLastSpeakerId(SqlConnection connection)
+        public static int GetLastSpeakerId(SqlConnection connection)
         {
             const string cmdText = "select max(SpeakerId) from Speakers";
             using (var command = new SqlCommand(cmdText, connection))

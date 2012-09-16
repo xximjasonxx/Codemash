@@ -16,10 +16,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public Session Get(int id)
         {
-            using (var context = new CodemashContext())
-            {
-                return context.Sessions.FirstOrDefault(s => s.SessionId == id);
-            }
+            return Get(s => s.SessionId == id);
         }
 
         /// <summary>
@@ -29,7 +26,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public Session Get(Func<Session, bool> condition)
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                return context.Sessions.FirstOrDefault(condition);
+            }
         }
 
         /// <summary>
@@ -57,36 +57,69 @@ namespace Codemash.Api.Data.Repositories.Impl
             }
         }
 
-        /// <summary>
-        /// Apply the changes (add/remove) from a Master Session List
-        /// </summary>
-        /// <param name="masterSessionList">The session data from the master source</param>
-        public void SaveRange(IEnumerable<Session> masterSessionList)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
 
         #region Implementation of IWriteRepository<Session,int>
 
         /// <summary>
-        /// Commit all changes in the repository
+        /// Apply the changes (add/remove) from a Master Session List
         /// </summary>
-        public void Save()
+        /// <param name="masterSessionList">The session data from the master source</param>
+        /// <remarks>The incoming range is expected to be the full measure of session data</remarks>
+        public void SaveRange(IEnumerable<Session> masterSessionList)
         {
-            throw new NotImplementedException();
-        }
+            var masterList = masterSessionList.ToList();
+            using (var context = new CodemashContext())
+            {
+                SaveChanges(context, masterList);
+                SaveRemovals(context, masterList);
 
-        /// <summary>
-        /// Mark an entry in the repository as removed
-        /// </summary>
-        /// <param name="id"></param>
-        public void Remove(int id)
-        {
-            throw new NotImplementedException();
+                context.SaveChanges();
+            }
         }
 
         #endregion
+
+        /// <summary>
+        /// Save modifications to the existing session data
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="sessions"></param>
+        private void SaveChanges(CodemashContext context, IEnumerable<Session> sessions)
+        {
+            var existingSessions = context.Sessions.ToList();
+            foreach (var session in sessions.ToList())
+            {
+                var existingSession = existingSessions.FirstOrDefault(s => s.SessionId == session.SessionId);
+                if (existingSession == null)
+                {
+                    context.Sessions.Add(session);
+                    continue;
+                }
+
+                // copy the fields to the existing object
+                existingSession.Title = session.Title;
+                existingSession.Abstract = session.Abstract;
+                existingSession.Start = session.Start;
+                existingSession.End = session.End;
+                existingSession.LevelType = session.LevelType;
+                existingSession.RoomType = session.RoomType;
+                existingSession.SpeakerId = session.SpeakerId;
+                existingSession.TrackType = session.TrackType;
+            }
+        }
+
+        /// <summary>
+        /// Remove the sessions in the database which do not appear in the incoming session list
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="sessions"></param>
+        private void SaveRemovals(CodemashContext context, IEnumerable<Session> sessions)
+        {
+            var existingSessions = context.Sessions.Select(s => s.SessionId);
+            var masterSessions = sessions.Select(s => s.SessionId);
+            var sessionsToRemove = existingSessions.Where(i => !masterSessions.Contains(i)).ToList();
+            sessionsToRemove.ForEach(s => context.Sessions.Remove(context.Sessions.FirstOrDefault(se => se.SessionId == s)));
+        }
     }
 }

@@ -91,6 +91,34 @@ namespace FunctionalTests
             Assert.IsNull(session);
         }
 
+        [TestMethod]
+        [TestCategory("Integration")]
+        public void test_that_given_a_matching_condition_get_returns_a_non_null_session_references()
+        {
+            // arrange
+            var container = new PollerContainer();
+
+            // act
+            var session = container.Get<ISessionRepository>().Get(s => s.Title != string.Empty);
+
+            // assert
+            Assert.IsNotNull(session);
+        }
+
+        [TestMethod]
+        [TestCategory("Integration")]
+        public void test_that_given_a_non_matching_condition_get_returns_a_null_session_reference()
+        {
+            // arrange
+            var container = new PollerContainer();
+
+            // act
+            var session = container.Get<ISessionRepository>().Get(s => s.Title == null);
+
+            // assert
+            Assert.IsNull(session);
+        }
+
         [TestCleanup]
         public void TestCleanup()
         {

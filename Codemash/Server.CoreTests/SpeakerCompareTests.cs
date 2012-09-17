@@ -51,7 +51,7 @@ namespace Server.CoreTests
             var differences = masterSpeakers.Compare<Speaker, SpeakerChange>(localSpeakers);
 
             // assert
-            Assert.AreNotEqual(0, differences.Count(d => d.Action == ChangeAction.Delete));
+            Assert.AreNotEqual(0, differences.Count(d => d.ActionType == ChangeAction.Delete));
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace Server.CoreTests
             var differences = masterSpeakers.Compare<Speaker, SpeakerChange>(localSpeakers);
             
             // assert
-            Assert.AreNotEqual(0, differences.Count(d => d.Action == ChangeAction.Add));
+            Assert.AreNotEqual(0, differences.Count(d => d.ActionType == ChangeAction.Add));
         }
     }
 }

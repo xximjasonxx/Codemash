@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Codemash.Api.Data.Entities.Interfaces;
 
@@ -13,12 +14,20 @@ namespace Codemash.Api.Data.Entities
         [Required]
         public int SpeakerId { get; set; }
 
+        public DateTime DateCreated { get; internal set; }
+
         #region Implementation of IChange
 
         public int ChangeEntityId { set { SpeakerId = value; } }
 
         [Required]
-        public ChangeAction Action { get; set; }
+        public ChangeAction ActionType
+        {
+            get { return (ChangeAction) Action; }
+            set { Action = (int) value; }
+        }
+
+        public int Action { get; private set; }
 
         [StringLength(50)]
         [Required]

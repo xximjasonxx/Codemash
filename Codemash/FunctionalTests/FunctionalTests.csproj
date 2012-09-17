@@ -73,6 +73,7 @@
     <Compile Include="ReadSessionChangeRepositoryIntegrationTests.cs" />
     <Compile Include="ReadSessionRepositoryIntegrationTests.cs" />
     <Compile Include="ReadSpeakerRepositoryIntegrationTests.cs" />
+    <Compile Include="WriteSessionChangeRepositoryIntegrationTests.cs" />
     <Compile Include="WriteSessionRepositoryIntegrationTests.cs" />
     <Compile Include="WriteSpeakerRepositoryIntegrationTests.cs" />
   </ItemGroup>
@@ -93,9 +94,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

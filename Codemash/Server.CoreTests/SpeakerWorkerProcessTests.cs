@@ -67,7 +67,7 @@ namespace Server.CoreTests
 
             // assert
             var repository = _theKernel.Get<ISpeakerChangeRepository>();
-            Assert.AreNotEqual(0, repository.GetAll().Count(sc => sc.Action == ChangeAction.Add));
+            Assert.AreNotEqual(0, repository.GetAll().Count(sc => sc.ActionType == ChangeAction.Add));
         }
 
         [TestMethod]
@@ -83,7 +83,7 @@ namespace Server.CoreTests
 
             // assert
             var repository = _theKernel.Get<ISpeakerChangeRepository>();
-            Assert.AreEqual(1, repository.GetAll().Count(sp => sp.Action == ChangeAction.Delete));
+            Assert.AreEqual(1, repository.GetAll().Count(sp => sp.ActionType == ChangeAction.Delete));
         }
 
         [TestCleanup]

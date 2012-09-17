@@ -14,14 +14,19 @@ namespace Codemash.Api.Data.Entities
         private string _value;
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SessionChangeId { get; set; }
 
         [Required]
         public int SessionId { get; set; }
 
         [Required]
-        public ChangeAction Action { get; set; }
+        public ChangeAction ActionType
+        {
+            get { return (ChangeAction) Action; }
+            set { Action = (int) value; }
+        }
+
+        public int Action { get; private set; }
 
         [StringLength(50)]
         [Required]
@@ -29,6 +34,8 @@ namespace Codemash.Api.Data.Entities
 
         [Required]
         public string Value { get; set; }
+
+        public DateTime DateCreated { get; internal set; }
 
         #region IChange Implementation
 

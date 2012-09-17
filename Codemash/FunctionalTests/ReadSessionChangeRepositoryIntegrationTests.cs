@@ -123,7 +123,7 @@ namespace FunctionalTests
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString))
             {
                 connection.Open();
-                const string commandText = "insert into SessionChanges values(@SessionChangeId, @SessionId, @Key, @Value)";
+                const string commandText = "insert into SessionChanges values(@SessionChangeId, @SessionId, 1, @Key, @Value)";
                 using (var command = new SqlCommand(commandText, connection))
                 {
                     // session change #1

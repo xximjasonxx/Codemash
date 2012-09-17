@@ -65,7 +65,7 @@ namespace Codemash.Api.Data.Extensions
             return removals.Select(id => new TChange
                                                     {
                                                         ChangeEntityId = id,
-                                                        Action = ChangeAction.Delete
+                                                        ActionType = ChangeAction.Delete
                                                     }).ToList();
         }
 
@@ -82,7 +82,7 @@ namespace Codemash.Api.Data.Extensions
                 var differences = CreateDifferencesList<TChange>(entity.CompareTo(newEntity), entity.ID).ToList();
 
                 // by defailt CreateDifferencesList will mark the action as modify - we need to override this
-                differences.Apply(d => d.Action = ChangeAction.Add);
+                differences.Apply(d => d.ActionType = ChangeAction.Add);
 
                 changes.AddRange(differences);
             }
@@ -104,7 +104,7 @@ namespace Codemash.Api.Data.Extensions
             return differences.Select(kv => new TChange
             {
                 ChangeEntityId = id,
-                Action = ChangeAction.Modify,
+                ActionType = ChangeAction.Modify,
                 Key = kv.Key,
                 Value = kv.Value
             }).ToList();

@@ -8,6 +8,7 @@ namespace FunctionalTests
     public class ModelInitializationTests
     {
         [TestMethod]
+        [Ignore]
         public void test_that_all_tables_are_empty()
         {
             using (var context = new CodemashContext())

@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Codemash.Api.Data.Entities.Interfaces;
 
 namespace Codemash.Api.Data.Entities
@@ -35,6 +34,7 @@ namespace Codemash.Api.Data.Entities
         [Required]
         public string Value { get; set; }
 
+        [Required]
         public DateTime DateCreated { get; internal set; }
 
         #region IChange Implementation

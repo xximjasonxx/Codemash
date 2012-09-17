@@ -8,12 +8,12 @@ namespace Codemash.Api.Data.Entities
     public class SpeakerChange : EntityBase, IChange
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SpeakerChangeId { get; set; }
 
         [Required]
         public int SpeakerId { get; set; }
 
+        [Required]
         public DateTime DateCreated { get; internal set; }
 
         #region Implementation of IChange

@@ -36,7 +36,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IList<SpeakerChange> GetAll()
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                return context.SpeakerChanges.ToList();
+            }
         }
 
         /// <summary>
@@ -46,7 +49,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IList<SpeakerChange> GetAll(Func<SpeakerChange, bool> condition)
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                return context.SpeakerChanges.Where(condition).ToList();
+            }
         }
 
         #endregion

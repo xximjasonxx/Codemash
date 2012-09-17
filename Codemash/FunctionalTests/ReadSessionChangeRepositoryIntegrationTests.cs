@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Transactions;
 using Codemash.Api.Data.Repositories;
 using Codemash.Poller.Container;
+using Codemash.Server.Core.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
 
@@ -61,11 +59,12 @@ namespace FunctionalTests
             var repository = new PollerContainer().Get<ISessionChangeRepository>();
 
             // act
-            var sessionChange = repository.Get(1);
+            var lastSessionChangeId = GetLastSessionChangeId();
+            var sessionChange = repository.Get(lastSessionChangeId);
 
             // assert
             Assert.IsNotNull(sessionChange);
-            Assert.AreEqual(1, sessionChange.SessionChangeId);
+            Assert.AreEqual(lastSessionChangeId, sessionChange.SessionChangeId);
         }
 
         [TestMethod]
@@ -123,39 +122,52 @@ namespace FunctionalTests
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString))
             {
                 connection.Open();
-                const string commandText = "insert into SessionChanges values(@SessionChangeId, @SessionId, 1, @Key, @Value)";
+                const string commandText = "insert into SessionChanges(SessionId, Action, [Key], Value, DateCreated) values(@SessionId, 1, @Key, @Value, @Created)";
                 using (var command = new SqlCommand(commandText, connection))
                 {
                     // session change #1
-                    command.Parameters.AddWithValue("@SessionChangeId", 1);
                     command.Parameters.AddWithValue("@SessionId", 1);
                     command.Parameters.AddWithValue("@Key", "Title");
                     command.Parameters.AddWithValue("@Value", "My New Title 1");
+                    command.Parameters.AddWithValue("@Created", DateTime.Now);
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
 
                     // session change #2
-                    command.Parameters.AddWithValue("@SessionChangeId", 2);
                     command.Parameters.AddWithValue("@SessionId", 2);
                     command.Parameters.AddWithValue("@Key", "Title");
                     command.Parameters.AddWithValue("@Value", "My New Title 2");
+                    command.Parameters.AddWithValue("@Created", DateTime.Now);
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
 
                     // session change #3
-                    command.Parameters.AddWithValue("@SessionChangeId", 3);
                     command.Parameters.AddWithValue("@SessionId", 3);
                     command.Parameters.AddWithValue("@Key", "Title");
                     command.Parameters.AddWithValue("@Value", "My New Title 3");
+                    command.Parameters.AddWithValue("@Created", DateTime.Now);
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
 
                     // session change #4
-                    command.Parameters.AddWithValue("@SessionChangeId", 4);
                     command.Parameters.AddWithValue("@SessionId", 4);
                     command.Parameters.AddWithValue("@Key", "Title");
                     command.Parameters.AddWithValue("@Value", "My New Title 4");
+                    command.Parameters.AddWithValue("@Created", DateTime.Now);
                     command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private int GetLastSessionChangeId()
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString))
+            {
+                connection.Open();
+                const string cmdText = "select max(sessionchangeid) from sessionchanges";
+                using (var command = new SqlCommand(cmdText, connection))
+                {
+                    return command.ExecuteScalar().ToString().AsInt();
                 }
             }
         }

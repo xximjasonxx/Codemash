@@ -52,22 +52,29 @@ namespace Codemash.Api.Data.Provider.Impl
         /// </summary>
         public IList<Speaker> GetAllSpeakers()
         {
-            var downloadUrl = "http://dl.dropbox.com/u/13029365/DevLink2012_Speakers.json";
-            var client = new WebClient();
-            var jsonString = client.DownloadString(downloadUrl);
-            var jsonArray = JArray.Parse(jsonString);
+            try
+            {
+                var downloadUrl = "http://dl.dropbox.com/u/13029365/DevLink2012_Speakers.json";
+                var client = new WebClient();
+                var jsonString = client.DownloadString(downloadUrl);
+                var jsonArray = JArray.Parse(jsonString);
 
-            return (from it in jsonArray.AsJEnumerable()
-                    select new Speaker
-                        {
-                            SpeakerId = it["SpeakerId"].ToString().AsInt(),
-                            FirstName = it["FirstName"].ToString(),
-                            LastName = it["LastName"].ToString(),
-                            Company = it["Company"].ToString(),
-                            Twitter = it["Twitter"].ToString(),
-                            Biography = it["Bio"].ToString(),
-                            BlogUrl = it["Url"].ToString()
-                        }).ToList();
+                return (from it in jsonArray.AsJEnumerable()
+                        select new Speaker
+                                   {
+                                       SpeakerId = it["SpeakerId"].ToString().AsInt(),
+                                       FirstName = it["FirstName"].ToString(),
+                                       LastName = it["LastName"].ToString(),
+                                       Company = it["Company"].ToString(),
+                                       Twitter = it["Twitter"].ToString(),
+                                       Biography = it["Bio"].ToString(),
+                                       BlogUrl = it["Url"].ToString()
+                                   }).ToList();
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
 
         #endregion

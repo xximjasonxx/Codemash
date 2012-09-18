@@ -35,6 +35,10 @@ namespace Codemash.Poller
                         Task sessionTask = new Task(sessionProcess.Execute);
                         Task speakerTask = new Task(speakerProcess.Execute);
 
+                        // start the tasks
+                        sessionTask.Start();
+                        speakerTask.Start();
+
                         // wait for all tasks to complete
                         Task.WaitAll(sessionTask, speakerTask);
 

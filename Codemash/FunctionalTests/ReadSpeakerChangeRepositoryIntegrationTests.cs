@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Transactions;
 using Codemash.Api.Data.Repositories;
 using Codemash.Poller.Container;
+using Codemash.Server.Core.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
 
@@ -49,6 +50,35 @@ namespace FunctionalTests
             Assert.AreNotEqual(0, list.Count);
         }
 
+        [TestMethod]
+        [TestCategory("Integration")]
+        public void test_that_given_a_condition_which_matches_no_items_in_database_returns_empty_list()
+        {
+            // arrange
+            var repository = new PollerContainer().Get<ISpeakerChangeRepository>();
+
+            // act
+            var list = repository.GetAll(sc => sc.Key == null);
+
+            // assert
+            Assert.AreEqual(0, list.Count);
+        }
+
+        [TestMethod]
+        [TestCategory("Integration")]
+        public void test_that_when_given_a_valid_key_value_the_repository_get_call_will_return_a_non_null_object_with_that_key()
+        {
+            // arrange
+            var repository = new PollerContainer().Get<ISpeakerChangeRepository>();
+
+            // act
+            var speakerChangeId = GetLastSpeakerChangeId();
+            var speaker = repository.Get(speakerChangeId);
+
+            // assert
+            Assert.IsNotNull(speaker);
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
@@ -56,7 +86,7 @@ namespace FunctionalTests
         }
 
         // private method helpers
-        public void CreateSpeakerChangeTestData()
+        private void CreateSpeakerChangeTestData()
         {
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString))
             {
@@ -84,6 +114,19 @@ namespace FunctionalTests
                     command.Parameters.AddWithValue("@Value", "John");
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
+                }
+            }
+        }
+
+        private int GetLastSpeakerChangeId()
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString))
+            {
+                connection.Open();
+                const string commandText = "select max(speakerchangeId) from SpeakerChanges";
+                using (var command = new SqlCommand(commandText, connection))
+                {
+                    return command.ExecuteScalar().ToString().AsInt();
                 }
             }
         }

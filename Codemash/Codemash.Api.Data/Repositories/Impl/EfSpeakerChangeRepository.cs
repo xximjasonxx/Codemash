@@ -17,7 +17,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public SpeakerChange Get(int id)
         {
-            throw new NotImplementedException();
+            return Get(sc => sc.SpeakerChangeId == id);
         }
 
         /// <summary>
@@ -27,7 +27,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public SpeakerChange Get(Func<SpeakerChange, bool> condition)
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                return context.SpeakerChanges.FirstOrDefault(condition);
+            }
         }
 
         /// <summary>

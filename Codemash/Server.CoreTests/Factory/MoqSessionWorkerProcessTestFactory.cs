@@ -169,5 +169,24 @@ namespace Server.CoreTests.Factory
 
             return mock.Object;
         }
+
+        public static ISessionRepository GetEmptySessionRepository()
+        {
+            var mock = new Mock<ISessionRepository>();
+            _sessionRepository = new List<Session>();
+
+            mock.Setup(m => m.GetAll()).Returns(() => _sessionRepository);
+            mock.Setup(m => m.SaveRange(It.IsAny<IEnumerable<Session>>()))
+                .Callback((IEnumerable<Session> sessions) =>
+                {
+                    if (_sessionRepository == null)
+                        _sessionRepository = new List<Session>();
+
+                    _sessionRepository.Clear();
+                    sessions.ToList().ForEach(s => _sessionRepository.Add(s));
+                });
+
+            return mock.Object;
+        }
     }
 }

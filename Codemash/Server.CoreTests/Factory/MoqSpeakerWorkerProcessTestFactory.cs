@@ -87,5 +87,26 @@ namespace Server.CoreTests.Factory
 
             return mock.Object;
         }
+
+        private static IList<Speaker> _speakerRepository;
+
+        public static ISpeakerRepository GetEmptySpeakerRepository()
+        {
+            var mock = new Mock<ISpeakerRepository>();
+            _speakerRepository = new List<Speaker>();
+
+            mock.Setup(m => m.GetAll()).Returns(() => _speakerRepository);
+            mock.Setup(m => m.SaveRange(It.IsAny<IEnumerable<Speaker>>()))
+                .Callback((IEnumerable<Speaker> speakers) =>
+                {
+                    if (_speakerRepository == null)
+                        _speakerRepository = new List<Speaker>();
+
+                    _speakerRepository.Clear();
+                    speakers.ToList().ForEach(s => _speakerRepository.Add(s));
+                });
+
+            return mock.Object;
+        }
     }
 }

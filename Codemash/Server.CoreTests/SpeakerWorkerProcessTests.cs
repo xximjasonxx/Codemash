@@ -86,6 +86,22 @@ namespace Server.CoreTests
             Assert.AreEqual(1, repository.GetAll().Count(sp => sp.ActionType == ChangeAction.Delete));
         }
 
+        [TestMethod]
+        public void test_that_in_the_case_that_no_speakers_are_stored_locally_no_differences_should_be_recorded_for_the_operation_execution()
+        {
+            // arrange;
+            _theKernel.Bind<IMasterDataProvider>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetMasterProviderWithGetSpeakersMocked());
+            _theKernel.Bind<ISpeakerRepository>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetEmptySpeakerRepository()).InSingletonScope();
+
+            // act
+            var process = _theKernel.Get<IProcess>();
+            process.Execute();
+
+            // assert
+            Assert.AreNotEqual(0, _theKernel.Get<ISpeakerRepository>().GetAll().Count);
+            Assert.AreEqual(0, _theKernel.Get<ISpeakerChangeRepository>().GetAll().Count);
+        }
+
         [TestCleanup]
         public void TestCleanup()
         {

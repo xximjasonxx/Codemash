@@ -26,22 +26,23 @@ namespace Codemash.Poller.Process
             // get the local session List for comparison
             var localSessionList = SessionRepository.GetAll();
 
-            // perform the comparison
-            var sessionDifferences = masterSessionList.Compare<Session, SessionChange>(localSessionList);
-            if (sessionDifferences.Count > 0)
+            using (var transaction = new TransactionScope())
             {
-                // session data has changed since last save
-                using (var transaction = new TransactionScope())
+                // add the master session data into the respository
+                SessionRepository.SaveRange(masterSessionList);
+
+                if (localSessionList.Count > 0)
                 {
-                    // add the items to the change repository
-                    SessionChangeRepository.SaveRange(sessionDifferences);
-
-                    // add the master session data into the respository
-                    SessionRepository.SaveRange(masterSessionList);
-
-                    // commit the transaction
-                    transaction.Complete();
+                    // perform the comparison
+                    var sessionDifferences = masterSessionList.Compare<Session, SessionChange>(localSessionList);
+                    if (sessionDifferences.Count > 0)
+                    {
+                        SessionChangeRepository.SaveRange(sessionDifferences);
+                    }
                 }
+
+                // commit the transaction
+                transaction.Complete();
             }
         }
     }

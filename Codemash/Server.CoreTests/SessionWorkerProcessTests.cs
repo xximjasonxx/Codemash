@@ -100,5 +100,23 @@ namespace Server.CoreTests
             var provider = kernel.Get<IMasterDataProvider>();
             Assert.AreEqual(provider.GetAllSessions().Count, repository.GetAll().Count);
         }
+
+        [TestMethod]
+        public void test_that_if_the_local_repository_is_empty_no_differences_should_be_recoreded_during_execution()
+        {
+            // arrange
+            var kernel = new StandardKernel();
+            kernel.Bind<IMasterDataProvider>().ToConstant(MoqSessionWorkerProcessTestFactory.GetStandardMasterDataProvider());
+            kernel.Bind<ISessionRepository>().ToConstant(MoqSessionWorkerProcessTestFactory.GetEmptySessionRepository()).InSingletonScope();
+            kernel.Bind<ISessionChangeRepository>().ToConstant(MoqSessionWorkerProcessTestFactory.GetSessionChangeRepository()).InSingletonScope();
+
+            // act
+            var process = kernel.Get<SessionWorkerProcess>();
+            process.Execute();
+
+            // assert
+            Assert.AreNotEqual(0, kernel.Get<ISessionRepository>().GetAll().Count);
+            Assert.AreEqual(0, kernel.Get<ISessionChangeRepository>().GetAll().Count);
+        }
     }
 }

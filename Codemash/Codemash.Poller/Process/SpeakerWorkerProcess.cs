@@ -1,4 +1,5 @@
-﻿using Codemash.Api.Data.Entities;
+﻿using System.Transactions;
+using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Extensions;
 using Codemash.Api.Data.Provider;
 using Codemash.Api.Data.Repositories;
@@ -30,15 +31,23 @@ namespace Codemash.Poller.Process
             // get the list of Speakers from the local source
             var localSpeakers = SpeakerRepository.GetAll();
 
-            // find the differences between this list
-            var differences = masterSpeakers.Compare<Speaker, SpeakerChange>(localSpeakers);
-            if (differences.Count > 0)
+            using (var scope = new TransactionScope())
             {
-                // differences exist
-                SpeakerChangeRepository.SaveRange(differences);
-
                 // save updated speaker data
                 SpeakerRepository.SaveRange(masterSpeakers);
+
+                if (localSpeakers.Count > 0)
+                {
+                    // find the differences between this list
+                    var differences = masterSpeakers.Compare<Speaker, SpeakerChange>(localSpeakers);
+                    if (differences.Count > 0)
+                    {
+                        // differences exist
+                        SpeakerChangeRepository.SaveRange(differences);
+                    }
+                }
+
+                scope.Complete();
             }
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,31 +24,30 @@ namespace Codemash.Poller
         {
             // spin off a thread which will fire every configurable minutes to check our source for changes
             // not using Timer here because we need the process to be blocking as each execution could be longer than others
-            var task = new Task(() =>
+            while (true)
+            {
+                try
                 {
-                    while (true)
-                    {
-                        // create the session process
-                        var sessionProcess = _container.Get<IProcess>("Session", new IParameter[0]);
-                        var speakerProcess = _container.Get<IProcess>("Speaker", new IParameter[0]);
+                    // create the session process
+                    var sessionProcess = _container.Get<IProcess>("Session", new IParameter[0]);
+                    var speakerProcess = _container.Get<IProcess>("Speaker", new IParameter[0]);
 
-                        // create the tasks
-                        Task sessionTask = new Task(sessionProcess.Execute);
-                        Task speakerTask = new Task(speakerProcess.Execute);
+                    // handle all the speaker data
+                    // since the session data will depend on speaker data, it is important
+                    // that this goes first
+                    speakerProcess.Execute();
 
-                        // start the tasks
-                        sessionTask.Start();
-                        speakerTask.Start();
+                    // now do the session data
+                    sessionProcess.Execute();
 
-                        // wait for all tasks to complete
-                        Task.WaitAll(sessionTask, speakerTask);
-
-                        // wait to check again
-                        Thread.Sleep(Config.MinutesWaitTime);
-                    }
-                });
-
-            task.Start(TaskScheduler.Current);
+                    // wait to check again
+                    Thread.Sleep(Config.MinutesWaitTime);
+                }
+                catch (Exception aex)
+                {
+                    return;
+                }
+            }
         }
 
         public override bool OnStart()

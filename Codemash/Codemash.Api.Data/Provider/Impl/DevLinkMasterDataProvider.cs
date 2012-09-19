@@ -27,7 +27,7 @@ namespace Codemash.Api.Data.Provider.Impl
         /// </summary>
         public IList<Session> GetAllSessions()
         {
-            var downloadUrl = "http://dl.dropbox.com/u/13029365/DevLink2012_Sessions.json";
+            const string downloadUrl = "http://dl.dropbox.com/u/13029365/DevLink2012_Sessions.json";
             var client = new WebClient();
             var jsonString = client.DownloadString(downloadUrl);
             var jsonArray = JArray.Parse(jsonString);

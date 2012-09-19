@@ -19,7 +19,7 @@ namespace Codemash.Api.Data.Entities
         [ForeignKey("SpeakerId")]
         public Speaker Speaker { get; set; }
 
-        [Comparable, Required, StringLength(100)]
+        [Comparable, Required, StringLength(200)]
         public string Title { get; set; }
 
         [Comparable, Required]

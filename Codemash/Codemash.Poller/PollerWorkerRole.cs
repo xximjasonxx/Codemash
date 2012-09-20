@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,6 +29,8 @@ namespace Codemash.Poller
             {
                 try
                 {
+                    Trace.WriteLine("Process beginning");
+
                     // create the session process
                     var sessionProcess = _container.Get<IProcess>("Session", new IParameter[0]);
                     var speakerProcess = _container.Get<IProcess>("Speaker", new IParameter[0]);
@@ -40,12 +43,14 @@ namespace Codemash.Poller
                     // now do the session data
                     sessionProcess.Execute();
 
+                    Trace.WriteLine("Execution Complete");
+
                     // wait to check again
-                    Thread.Sleep(Config.MinutesWaitTime);
+                    Thread.Sleep(TimeSpan.FromMinutes(Config.MinutesWaitTime));
                 }
-                catch (Exception aex)
+                catch (Exception ex)
                 {
-                    return;
+                    Trace.WriteLine(ex.Message);
                 }
             }
         }

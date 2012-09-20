@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CodemashCloud" generation="1" functional="0" release="0" Id="0c9d6533-6622-4af5-8fb6-da0568748709" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CodemashCloud" generation="1" functional="0" release="0" Id="56444dc1-7a1b-47f5-9d7b-f287a5b6a1f8" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="CodemashCloudGroup" generation="1" functional="0" release="0">
       <settings>

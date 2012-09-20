@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Codemash.Api.Data.Entities;
+using Codemash.Server.Core.Extensions;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {
@@ -67,7 +68,14 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         public void SaveRange(IEnumerable<SpeakerChange> entityList)
         {
-            throw new NotImplementedException();
+            using (var context = new CodemashContext())
+            {
+                var dateCreated = DateTime.UtcNow;
+                entityList.ToList().Apply(sc => sc.DateCreated = dateCreated);
+
+                entityList.ToList().ForEach(sc => context.SpeakerChanges.Add(sc));
+                context.SaveChanges();
+            }
         }
 
         #endregion

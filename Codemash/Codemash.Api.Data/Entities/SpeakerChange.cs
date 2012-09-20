@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Codemash.Api.Data.Entities.Interfaces;
 
 namespace Codemash.Api.Data.Entities

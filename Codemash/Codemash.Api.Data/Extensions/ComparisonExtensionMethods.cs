@@ -65,7 +65,9 @@ namespace Codemash.Api.Data.Extensions
             return removals.Select(id => new TChange
                                                     {
                                                         ChangeEntityId = id,
-                                                        ActionType = ChangeAction.Delete
+                                                        ActionType = ChangeAction.Delete,
+                                                        Key = string.Empty,
+                                                        Value = string.Empty
                                                     }).ToList();
         }
 

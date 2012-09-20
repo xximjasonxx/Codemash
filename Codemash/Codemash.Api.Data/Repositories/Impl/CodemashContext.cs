@@ -35,8 +35,6 @@ namespace Codemash.Api.Data.Repositories.Impl
             modelBuilder.Entity<SessionChange>().Property(sc => sc.Value).HasColumnType("text");
 
             // speaker changes
-            modelBuilder.Entity<SpeakerChange>().HasKey(sc => sc.SpeakerChangeId);
-            modelBuilder.Entity<SpeakerChange>().Property(sc => sc.Key).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<SpeakerChange>().Property(sc => sc.Value).HasColumnType("text");
         }
 

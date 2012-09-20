@@ -7,11 +7,6 @@ namespace Codemash.Api.Data.Entities
 {
     public class SessionChange : EntityBase, IChange
     {
-        private int _sessionId;
-        private ChangeAction _action;
-        private string _key;
-        private string _value;
-
         [Key]
         public int SessionChangeId { get; set; }
 

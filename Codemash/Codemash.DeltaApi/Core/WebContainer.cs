@@ -8,7 +8,7 @@ namespace Codemash.DeltaApi.Core
 {
     public class WebContainer : StandardKernel
     {
-        public WebContainer(Assembly theAssembly)
+        public WebContainer()
         {
             // load the other modules
             var controllerModule = new AssemblyIHttpControllerNinjectModule();

@@ -14,7 +14,7 @@ namespace DeltaApi.Web.Tests
         [TestInitialize]
         public void Initialize()
         {
-            var container = new WebContainer(typeof (SessionController).Assembly);
+            var container = new WebContainer();
             _dependencyScope = new CodemashNinjectDependencyResolver(container);
         }
 

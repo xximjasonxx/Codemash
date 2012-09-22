@@ -85,6 +85,7 @@ namespace FunctionalTests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void test_that_if_a_speaker_exists_in_the_repository_but_not_in_the_speaker_range_it_is_removed_from_the_repository()
         {
             // arrange

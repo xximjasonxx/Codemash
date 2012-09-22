@@ -14,14 +14,14 @@ namespace DeltaApi.Web.Tests
         [TestMethod]
         public void test_that_the_web_container_can_be_instantiated()
         {
-            var container = new WebContainer(this.GetType().Assembly);
+            var container = new WebContainer();
             Assert.IsNotNull(container);
         }
 
         [TestMethod]
         public void test_that_a_controller_can_be_extracted_by_interface_and_meta_name()
         {
-            var container = new WebContainer(typeof (SessionController).Assembly);
+            var container = new WebContainer();
             var controller = container.TryGet<IHttpController>("Session", new IParameter[0]);
 
             Assert.IsNotNull(controller);
@@ -30,7 +30,7 @@ namespace DeltaApi.Web.Tests
         [TestMethod]
         public void test_that_session_repository_can_be_fulfilled_by_the_container()
         {
-            var container = new WebContainer(typeof (SessionController).Assembly);
+            var container = new WebContainer();
             var repository = container.TryGet<ISessionRepository>();
 
             Assert.IsNotNull(repository);

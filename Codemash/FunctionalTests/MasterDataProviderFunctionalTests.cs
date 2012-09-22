@@ -10,6 +10,7 @@ namespace FunctionalTests
     public class MasterDataProviderFunctionalTests
     {
         [TestMethod]
+        [TestCategory("Integration")]
         public void test_that_sessions_can_be_downloaded_and_loaded()
         {
             var container = new PollerContainer();
@@ -21,6 +22,7 @@ namespace FunctionalTests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void test_that_speakers_can_be_downloaded_and_loaded()
         {
             var container = new PollerContainer();

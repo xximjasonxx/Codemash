@@ -11,7 +11,7 @@ namespace Codemash.DeltaApi.Core
         /// <returns></returns>
         public static string AsControllerName(this string controllerTypeName)
         {
-            Regex regex = new Regex("controller", RegexOptions.IgnoreCase);
+            Regex regex = new Regex("controller$", RegexOptions.IgnoreCase);
             return regex.IsMatch(controllerTypeName) ? regex.Replace(controllerTypeName, string.Empty) : string.Empty;
         }
     }

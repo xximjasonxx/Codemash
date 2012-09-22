@@ -32,5 +32,14 @@ namespace DeltaApi.Web.Tests
 
             Assert.AreEqual(string.Empty, controllerName);
         }
+
+        [TestMethod]
+        public void test_that_given_a_string_that_contains_controller_in_the_type_name_but_not_at_the_end_returns_empty_string()
+        {
+            const string typeName = "IHttpControllerSelector";
+            var controllerName = typeName.AsControllerName();
+
+            Assert.AreEqual(string.Empty, controllerName);
+        }
     }
 }

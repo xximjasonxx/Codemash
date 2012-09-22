@@ -48,7 +48,7 @@ namespace Codemash.DeltaApi.Dependency
         {
             string controllerName = serviceType.Name.AsControllerName();
             if (string.IsNullOrEmpty(controllerName))
-                return null;
+                return null; // _resolutionRoot.Get(serviceType, new IParameter[0]);
 
             return _resolutionRoot.TryGet<IHttpController>(controllerName, new IParameter[0]);
         }
@@ -62,7 +62,7 @@ namespace Codemash.DeltaApi.Dependency
         /// <param name="serviceType">The collection of services to be retrieved.</param>
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            throw new NotImplementedException();
+            return _resolutionRoot.GetAll(serviceType, new IParameter[0]);
         }
 
         #endregion

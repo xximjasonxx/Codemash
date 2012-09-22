@@ -14,14 +14,14 @@ namespace DeltaApi.Web.Tests
         [TestInitialize]
         public void Initialize()
         {
-            var container = new WebContainer(typeof (SessionsController).Assembly);
+            var container = new WebContainer(typeof (SessionController).Assembly);
             _dependencyScope = new CodemashNinjectDependencyResolver(container);
         }
 
         [TestMethod]
         public void test_that_when_given_a_controller_type_that_the_controller_can_be_resolved_sucessfully()
         {
-            var controller = _dependencyScope.GetService(typeof (SessionsController));
+            var controller = _dependencyScope.GetService(typeof (SessionController));
             Assert.IsNotNull(controller);
         }
 

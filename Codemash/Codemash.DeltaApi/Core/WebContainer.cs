@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Reflection;
-using System.Web.Http.Controllers;
+﻿using System.Reflection;
 using Codemash.Api.Data.Modules;
+using Codemash.DeltaApi.Modules;
 using Ninject;
+using Ninject.Modules;
 
 namespace Codemash.DeltaApi.Core
 {
@@ -10,27 +10,12 @@ namespace Codemash.DeltaApi.Core
     {
         public WebContainer(Assembly theAssembly)
         {
-            var applicableTypes = theAssembly.GetTypes()
-                .Where(t => t.GetInterfaces().Contains(typeof(IHttpController)))
-                .ToList();
-
-            applicableTypes.ForEach(hc =>
-            {
-                if (!string.IsNullOrEmpty(hc.Name))
-                {
-                    var controllerName = hc.Name.AsControllerName();
-                    if (controllerName != string.Empty)
-                        Bind<IHttpController>().To(hc).Named(controllerName);
-                }
-            });
-
             // load the other modules
+            var controllerModule = new AssemblyIHttpControllerNinjectModule();
             var repositoryModule = new RepositoryNinjectModule();
 
-            Load(new[]
-                     {
-                         repositoryModule
-                     });
+            // load em
+            Load(new INinjectModule[] { controllerModule, repositoryModule });
         }
     }
 }

@@ -30,13 +30,14 @@ namespace Codemash.Poller.Process
 
             // get the list of Speakers from the local source
             var localSpeakers = SpeakerRepository.GetAll();
+            var initialCount = localSpeakers.Count;
 
             using (var scope = new TransactionScope())
             {
                 // save updated speaker data
                 SpeakerRepository.SaveRange(masterSpeakers);
 
-                if (localSpeakers.Count > 0)
+                if (initialCount > 0)
                 {
                     // find the differences between this list
                     var differences = masterSpeakers.Compare<Speaker, SpeakerChange>(localSpeakers);

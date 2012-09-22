@@ -60,6 +60,7 @@ namespace Server.CoreTests.Factory
 
         public static ISessionChangeRepository GetSessionChangeRepository()
         {
+            _sessionChangeRepository = null;
             var mock = new Mock<ISessionChangeRepository>();
             mock.Setup(m => m.GetAll()).Returns(() => _sessionChangeRepository ?? (_sessionChangeRepository = new List<SessionChange>()));
             mock.Setup(m => m.SaveRange(It.IsAny<IEnumerable<SessionChange>>())).Callback(

@@ -25,13 +25,14 @@ namespace Codemash.Poller.Process
 
             // get the local session List for comparison
             var localSessionList = SessionRepository.GetAll();
+            var initialCount = localSessionList.Count;
 
             using (var transaction = new TransactionScope())
             {
                 // add the master session data into the respository
                 SessionRepository.SaveRange(masterSessionList);
 
-                if (localSessionList.Count > 0)
+                if (initialCount > 0)
                 {
                     // perform the comparison
                     var sessionDifferences = masterSessionList.Compare<Session, SessionChange>(localSessionList);

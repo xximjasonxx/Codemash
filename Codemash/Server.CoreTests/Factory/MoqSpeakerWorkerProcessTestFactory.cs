@@ -67,6 +67,7 @@ namespace Server.CoreTests.Factory
 
         public static ISpeakerChangeRepository GetStandardSpeakerChangeRepositoryMock()
         {
+            _speakerChangeRepository = null;
             var mock = new Mock<ISpeakerChangeRepository>();
             mock.Setup(m => m.GetAll()).Returns(() =>
                                                     {

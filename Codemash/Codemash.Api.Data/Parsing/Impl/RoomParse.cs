@@ -13,8 +13,8 @@ namespace Codemash.Api.Data.Parsing.Impl
         /// <returns></returns>
         public Room Parse(string str, Room defaultValue)
         {
-            if (HasLookup(str)) return GetKeyValue(str);
-            return TryEnumParse(str, Room.Unknown);
+            if (HasLookup(str.Trim())) return GetKeyValue(str.Trim());
+            return TryEnumParse(str.Trim(), Room.Unknown);
         }
 
         #endregion

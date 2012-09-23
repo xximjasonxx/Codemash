@@ -99,17 +99,20 @@ namespace DeltaApi.Web.Tests.Integration
                 connection.Open();
 
                 // add a speaker
-                var cmdText = "select max(speakerid) from Speakers";
+                var cmdText = "select isnull(max(speakerId), 1) from  Speakers";
                 int speakerId = 0;
                 using (var speakerCommand = new SqlCommand(cmdText, connection))
                 {
                     speakerId = speakerCommand.ExecuteScalar().ToString().AsInt();
                     speakerCommand.CommandText = "insert into Speakers(SpeakerId, Biography, EmailAddress, FirstName, LastName) Values(" + speakerId + 1 + ", 'a', 'b', 'c', 'd');";
                     speakerCommand.ExecuteNonQuery();
+
+                    speakerCommand.CommandText = "select max(SpeakerId) from Speakers";
+                    speakerId = speakerCommand.ExecuteScalar().ToString().AsInt();
                 }
 
                 // add the sessions
-                cmdText = "select max(SessionId) + 1 from Sessions";
+                cmdText = "select isnull(max(SessionId), 0) + 1 from Sessions";
                 using (var sessionCommand = new SqlCommand(cmdText, connection))
                 {
                     var startingSessionId = sessionCommand.ExecuteScalar().ToString().AsInt();

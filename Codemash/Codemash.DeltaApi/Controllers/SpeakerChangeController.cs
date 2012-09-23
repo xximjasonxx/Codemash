@@ -10,7 +10,7 @@ namespace Codemash.DeltaApi.Controllers
 {
     public class SpeakerChangeController : ApiController
     {
-        public IEnumerable<SpeakerChangeViewModel> Get()
+        public IEnumerable<SpeakerChangeViewModel> Get(string blockId)
         {
             throw new NotImplementedException();
         }

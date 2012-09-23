@@ -122,14 +122,13 @@ namespace FunctionalTests
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString))
             {
                 connection.Open();
-                const string commandText = "insert into SessionChanges(SessionId, Action, [Key], Value, DateCreated) values(@SessionId, 1, @Key, @Value, @Created)";
+                const string commandText = "insert into SessionChanges(SessionId, Action, [Key], Value, Block) values(@SessionId, 1, @Key, @Value, '')";
                 using (var command = new SqlCommand(commandText, connection))
                 {
                     // session change #1
                     command.Parameters.AddWithValue("@SessionId", 1);
                     command.Parameters.AddWithValue("@Key", "Title");
                     command.Parameters.AddWithValue("@Value", "My New Title 1");
-                    command.Parameters.AddWithValue("@Created", DateTime.Now);
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
 
@@ -137,7 +136,6 @@ namespace FunctionalTests
                     command.Parameters.AddWithValue("@SessionId", 2);
                     command.Parameters.AddWithValue("@Key", "Title");
                     command.Parameters.AddWithValue("@Value", "My New Title 2");
-                    command.Parameters.AddWithValue("@Created", DateTime.Now);
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
 
@@ -145,7 +143,6 @@ namespace FunctionalTests
                     command.Parameters.AddWithValue("@SessionId", 3);
                     command.Parameters.AddWithValue("@Key", "Title");
                     command.Parameters.AddWithValue("@Value", "My New Title 3");
-                    command.Parameters.AddWithValue("@Created", DateTime.Now);
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
 
@@ -153,7 +150,6 @@ namespace FunctionalTests
                     command.Parameters.AddWithValue("@SessionId", 4);
                     command.Parameters.AddWithValue("@Key", "Title");
                     command.Parameters.AddWithValue("@Value", "My New Title 4");
-                    command.Parameters.AddWithValue("@Created", DateTime.Now);
                     command.ExecuteNonQuery();
                 }
             }

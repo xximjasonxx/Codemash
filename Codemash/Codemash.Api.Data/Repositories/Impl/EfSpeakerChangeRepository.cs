@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Linq; 
 using Codemash.Api.Data.Entities;
 using Codemash.Server.Core.Extensions;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {
-    public class EfSpeakerChangeRepository : ISpeakerChangeRepository
+    public class EfSpeakerChangeRepository : RepositoryBase, ISpeakerChangeRepository
     {
         #region Implementation of IReadRepository<SpeakerChange,int>
 
@@ -68,10 +67,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         public void SaveRange(IEnumerable<SpeakerChange> entityList)
         {
+            var blockId = GetBlockId();
             using (var context = new CodemashContext())
             {
-                var dateCreated = DateTime.UtcNow;
-                entityList.ToList().Apply(sc => sc.DateCreated = dateCreated);
+                entityList.ToList().Apply(sc => sc.Block = blockId);
 
                 entityList.ToList().ForEach(sc => context.SpeakerChanges.Add(sc));
                 context.SaveChanges();

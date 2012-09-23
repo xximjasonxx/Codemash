@@ -13,7 +13,8 @@ namespace Codemash.Api.Data.Entities
         public int SpeakerId { get; set; }
 
         [Required]
-        public DateTime DateCreated { get; internal set; }
+        [StringLength(12)]
+        public string Block { get; internal set; }
 
         #region Implementation of IChange
 

@@ -91,25 +91,22 @@ namespace FunctionalTests
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString))
             {
                 connection.Open();
-                const string cmdText = "insert into SpeakerChanges(SpeakerId, DateCreated, Action, [Key], Value) values(@SpeakerId, @Created, 1, @Key, @Value)";
+                const string cmdText = "insert into SpeakerChanges(SpeakerId, Block, Action, [Key], Value) values(@SpeakerId, '', 1, @Key, @Value)";
                 using (var command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("@SpeakerId", 1);
-                    command.Parameters.AddWithValue("@Created", DateTime.Now);
                     command.Parameters.AddWithValue("@Key", "FirstName");
                     command.Parameters.AddWithValue("@Value", "Sam");
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
 
                     command.Parameters.AddWithValue("@SpeakerId", 2);
-                    command.Parameters.AddWithValue("@Created", DateTime.Now);
                     command.Parameters.AddWithValue("@Key", "FirstName");
                     command.Parameters.AddWithValue("@Value", "Sean");
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
 
                     command.Parameters.AddWithValue("@SpeakerId", 3);
-                    command.Parameters.AddWithValue("@Created", DateTime.Now);
                     command.Parameters.AddWithValue("@Key", "FirstName");
                     command.Parameters.AddWithValue("@Value", "John");
                     command.ExecuteNonQuery();

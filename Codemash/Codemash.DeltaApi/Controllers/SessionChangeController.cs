@@ -10,7 +10,7 @@ namespace Codemash.DeltaApi.Controllers
 {
     public class SessionChangeController : ApiController
     {
-        public IEnumerable<SessionChangeViewModel> Get()
+        public IEnumerable<SessionChangeViewModel> Get(string blockId)
         {
             throw new NotImplementedException();
         }

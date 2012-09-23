@@ -6,7 +6,7 @@ using Codemash.Server.Core.Extensions;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {
-    public class EfSessionChangeRepository : ISessionChangeRepository
+    public class EfSessionChangeRepository : RepositoryBase, ISessionChangeRepository
     {
         #region Implementation of IWriteRepository<SessionChange,int>
 
@@ -15,10 +15,10 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         public void SaveRange(IEnumerable<SessionChange> entityList)
         {
+            var blockId = GetBlockId();
             using (var context = new CodemashContext())
             {
-                var dateCreated = DateTime.UtcNow;
-                entityList.ToList().Apply(sc => sc.DateCreated = dateCreated);
+                entityList.ToList().Apply(sc => sc.Block = blockId);
 
                 entityList.ToList().ForEach(sc => context.SessionChanges.Add(sc));
                 context.SaveChanges();

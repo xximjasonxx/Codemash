@@ -47,9 +47,9 @@ namespace FunctionalTests
             repository.SaveRange(GetSessionChangeTestData());
 
             // assert
-            var timestamps = repository.GetAll().Select(sc => sc.DateCreated).Distinct();
-            Assert.AreNotEqual(0, timestamps.Count());
-            Assert.AreNotEqual(DateTime.MinValue, timestamps.First());
+            var blocks = repository.GetAll().Select(sc => sc.Block).Distinct();
+            Assert.AreNotEqual(0, blocks.Count());
+            Assert.AreNotEqual(DateTime.MinValue, blocks.First());
         }
 
         [TestCleanup]

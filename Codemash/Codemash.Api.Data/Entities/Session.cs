@@ -32,7 +32,6 @@ namespace Codemash.Api.Data.Entities
         public DateTime End { get; set; }
 
         [Comparable("Level")]
-        [Required]
         public Level LevelType
         {
             get { return (Level) this.Level; }
@@ -40,15 +39,13 @@ namespace Codemash.Api.Data.Entities
         }
 
         [Comparable("Track")]
-        [Required]
         public Track TrackType
         {
             get { return (Track) this.Track; }
             set { this.Track = (int) value; }
         }
 
-        [Comparable("Roonm")]
-        [Required]
+        [Comparable("Room")]
         public Room RoomType
         {
             get { return (Room) this.Room; }

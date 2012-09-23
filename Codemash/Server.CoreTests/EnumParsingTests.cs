@@ -73,5 +73,72 @@ namespace Server.CoreTests
             var str = "abc";
             Assert.AreEqual(Level.Unknown, str.AsLevel(Level.Unknown));
         }
+
+        [TestMethod]
+        public void test_that_given_a_level_enum_reference_with_no_alternative_name_specified_the_tostring_is_returned()
+        {
+            // arrange
+            var type = Level.Unknown;
+
+            // act
+            var value = type.AsDisplayString();
+
+            // assert
+            Assert.AreEqual(Level.Unknown.ToString(), value);
+        }
+
+        [TestMethod]
+        public void test_that_given_a_room_reference_with_no_alternative_name_the_tostring_value_is_returned()
+        {
+            // arrange
+            var type = Room.Unknown;
+
+            // act
+            var value = type.AsDisplayString();
+
+            // assert
+            Assert.AreEqual(Room.Unknown.ToString(), value);
+        }
+
+        [TestMethod]
+        public void test_that_given_a_room_reference_with_an_alternative_name_returns_that_string_value()
+        {
+            // arrange
+            var type = Room.CtrEFG;
+
+            // act
+            var value = type.AsDisplayString();
+
+            // assert
+            const string expected = "Conv. Ctr. E, F, G";
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void test_that_given_a_track_enum_reference_with_no_alternative_name_the_tostring_value_is_returned()
+        {
+            // arrange
+            var type = Track.Unknown;
+
+            // act
+            var value = type.ToString();
+
+            // assert
+            Assert.AreEqual(Track.Unknown.ToString(), value);
+        }
+
+        [TestMethod]
+        public void test_that_given_a_track_enum_reference_with_an_alternative_name_that_alternative_value_is_returned()
+        {
+            // arrange
+            var type = Track.MobileDevelopment;
+
+            // act
+            var value = type.AsDisplayString();
+
+            // assert
+            const string expected = "Mobile Development";
+            Assert.AreEqual(expected, value);
+        }
     }
 }

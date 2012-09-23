@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Codemash.Server.Core.Attributes;
+﻿using Codemash.Server.Core.Attributes;
 
 namespace Codemash.Api.Data
 {

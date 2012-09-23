@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Codemash.Server.Core.Extensions
 {
@@ -27,6 +24,16 @@ namespace Codemash.Server.Core.Extensions
         {
             DateTime dtValue;
             return DateTime.TryParse(str, out dtValue) ? dtValue : DateTime.MinValue;
+        }
+
+        /// <summary>
+        /// Return a string representation of a datetime object with both the date and time portions included in the string
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static string AsDateTimeDisplay(this DateTime dt)
+        {
+            return dt.ToString("MM/dd/yyyy hh:mmtt");
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Transactions;
+using System.Web.Http;
 using System.Web.Http.Controllers;
 using Codemash.Api.Data.Repositories;
 using Codemash.DeltaApi.Controllers;
@@ -54,6 +56,27 @@ namespace DeltaApi.Web.Tests.Integration
 
             // arrange
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        [TestCategory("Integration")]
+        [ExpectedException(typeof(HttpResponseException))]
+        public void test_that_if_given_an_invalid_primary_key_identifier_for_speaker_get_a_404_response_code_is_raised()
+        {
+            // arrange
+            var controller = (SpeakerController) _container.Get<IHttpController>("Speaker", new IParameter[0]);
+
+            // act
+            try
+            {
+                controller.Get(int.MaxValue);
+            }
+            catch (HttpResponseException responseException)
+            {
+                // assert
+                Assert.AreEqual(HttpStatusCode.NotFound, responseException.Response.StatusCode);
+                throw;
+            }
         }
 
         [TestCleanup]

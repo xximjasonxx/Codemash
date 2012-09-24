@@ -6,7 +6,7 @@ using Codemash.Server.Core.Extensions;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {
-    public class EfSessionChangeRepository : RepositoryBase, ISessionChangeRepository
+    public class EfSessionChangeRepository : ISessionChangeRepository
     {
         #region Implementation of IWriteRepository<SessionChange,int>
 
@@ -15,10 +15,14 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         public void SaveRange(IEnumerable<SessionChange> entityList)
         {
-            var blockId = GetBlockId();
+            int version = 1;
             using (var context = new CodemashContext())
             {
-                entityList.ToList().Apply(sc => sc.Block = blockId);
+                // determine the highest present version
+                if (context.SessionChanges.Any())
+                    version = context.SessionChanges.Max(sc => sc.Version) + 1;
+
+                entityList.ToList().Apply(sc => sc.Version = version);
 
                 entityList.ToList().ForEach(sc => context.SessionChanges.Add(sc));
                 context.SaveChanges();
@@ -73,8 +77,48 @@ namespace Codemash.Api.Data.Repositories.Impl
         {
             using (var context = new CodemashContext())
             {
-                return context.SessionChanges.Where(condition).ToList();
+                return GetAll(context, condition);
             }
+        }
+
+        /// <summary>
+        /// Private version of GetAll which can receive an external context - this allows other methods with existing contexts to share
+        /// this functionality
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        private static IList<SessionChange> GetAll(CodemashContext context, Func<SessionChange, bool> condition)
+        {
+            return context.SessionChanges.Where(condition).ToList();
+        }
+
+        /// <summary>
+        /// Return the SessionChanges as part of the latest version of changes
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<SessionChange> GetLatest()
+        {
+            using (var context = new CodemashContext())
+            {
+                // if no sessions exist, return an empty list
+                if (!context.SessionChanges.Any())
+                    return new List<SessionChange>();
+
+                // latest version is
+                var version = context.SessionChanges.Max(sc => sc.Version);
+                return GetAll(context, sc => sc.Version == version);
+            }
+        }
+
+        /// <summary>
+        /// Get all the changes for a particular version
+        /// </summary>
+        /// <param name="version">The version of changes to get</param>
+        /// <returns></returns>
+        public IEnumerable<SessionChange> GetAll(int version)
+        {
+            return GetAll(sc => sc.Version == version);
         }
 
         #endregion

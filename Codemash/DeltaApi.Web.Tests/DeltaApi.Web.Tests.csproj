@@ -66,6 +66,7 @@
     <Compile Include="Integration\SpeakerControllerIntegrationTests.cs" />
     <Compile Include="ParsingExtensionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionChangeControllerTests.cs" />
     <Compile Include="SessionControllerTests.cs" />
     <Compile Include="SpeakerControllerTests.cs" />
     <Compile Include="WebContainerTests.cs" />

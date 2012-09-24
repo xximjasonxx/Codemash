@@ -91,7 +91,7 @@ namespace FunctionalTests
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString))
             {
                 connection.Open();
-                const string cmdText = "insert into SpeakerChanges(SpeakerId, Block, Action, [Key], Value) values(@SpeakerId, '', 1, @Key, @Value)";
+                const string cmdText = "insert into SpeakerChanges(SpeakerId, Version, Action, [Key], Value) values(@SpeakerId, 1, 1, @Key, @Value)";
                 using (var command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("@SpeakerId", 1);

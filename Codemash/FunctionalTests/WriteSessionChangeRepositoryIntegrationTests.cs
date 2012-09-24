@@ -47,7 +47,7 @@ namespace FunctionalTests
             repository.SaveRange(GetSessionChangeTestData());
 
             // assert
-            var blocks = repository.GetAll().Select(sc => sc.Block).Distinct();
+            var blocks = repository.GetAll().Select(sc => sc.Version).Distinct();
             Assert.AreNotEqual(0, blocks.Count());
             Assert.AreNotEqual(DateTime.MinValue, blocks.First());
         }

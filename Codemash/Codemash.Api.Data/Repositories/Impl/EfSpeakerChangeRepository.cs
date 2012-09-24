@@ -6,7 +6,7 @@ using Codemash.Server.Core.Extensions;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {
-    public class EfSpeakerChangeRepository : RepositoryBase, ISpeakerChangeRepository
+    public class EfSpeakerChangeRepository : ISpeakerChangeRepository
     {
         #region Implementation of IReadRepository<SpeakerChange,int>
 
@@ -67,10 +67,12 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         public void SaveRange(IEnumerable<SpeakerChange> entityList)
         {
-            var blockId = GetBlockId();
+            int version = 1;
             using (var context = new CodemashContext())
             {
-                entityList.ToList().Apply(sc => sc.Block = blockId);
+                if (context.SessionChanges.Any())
+                    version = context.SessionChanges.Max(sc => sc.Version) + 1;
+                entityList.ToList().Apply(sc => sc.Version = version);
 
                 entityList.ToList().ForEach(sc => context.SpeakerChanges.Add(sc));
                 context.SaveChanges();

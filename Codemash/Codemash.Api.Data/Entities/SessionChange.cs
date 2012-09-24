@@ -30,8 +30,7 @@ namespace Codemash.Api.Data.Entities
         public string Value { get; set; }
 
         [Required]
-        [StringLength(12)]
-        public string Block { get; internal set; }
+        public int Version { get; set; }
 
         #region IChange Implementation
 

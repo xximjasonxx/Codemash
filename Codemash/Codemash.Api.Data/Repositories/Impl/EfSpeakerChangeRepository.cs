@@ -80,5 +80,35 @@ namespace Codemash.Api.Data.Repositories.Impl
         }
 
         #endregion
+
+        #region Implementation of ISpeakerChangeRepository
+
+        /// <summary>
+        /// Get the latest changeset for Speakers
+        /// </summary>
+        /// <returns></returns>
+        public IList<SpeakerChange> GetLatest()
+        {
+            using (var context = new CodemashContext())
+            {
+                if (!context.SpeakerChanges.Any())
+                    return new List<SpeakerChange>();
+
+                int maxVersion = context.SpeakerChanges.Max(sc => sc.Version);
+                return context.SpeakerChanges.Where(sc => sc.Version == maxVersion).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Get a changeset by version indicator
+        /// </summary>
+        /// <param name="version"></param>
+        /// <returns></returns>
+        public IList<SpeakerChange> GetAll(int version)
+        {
+            return GetAll(sc => sc.Version == version);
+        }
+
+        #endregion
     }
 }

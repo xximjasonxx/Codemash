@@ -16,3 +16,9 @@ TestResults
 *.ldf
 Codemash/TestResults/Codemash.TE.Tests.mdf
 Codemash/TestResults/Codemash.TE.Tests_log.ldf
+[Cc]sx
+Codemash/CodemashCloud/csx/Debug/roles/Codemash.Poller/approot/Codemash.Api.Data.dll
+Codemash/CodemashCloud/csx/Debug/roles/Codemash.Poller/approot/Codemash.Api.Data.pdb
+Codemash/CodemashCloud/csx/Debug/roles/Codemash.Poller/approot/Codemash.Poller.dll
+Codemash/CodemashCloud/csx/Debug/roles/Codemash.Poller/approot/Codemash.Poller.pdb
+Codemash/CodemashCloud/csx/Debug/ServiceDefinition.build.rd

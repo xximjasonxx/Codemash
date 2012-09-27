@@ -71,6 +71,12 @@ namespace Codemash.Api.Data.Repositories.Impl
             var masterList = masterSessionList.ToList();
             using (var context = new CodemashContext())
             {
+                // get all available speakers
+                var availabelSpeakers = context.Speakers.Select(sp => sp.SpeakerId).ToArray();
+
+                // filter the master list so that sessions which do not have a valid speaker are not included
+                masterList = masterList.Where(s => availabelSpeakers.Contains(s.SpeakerId)).ToList();
+
                 SaveChanges(context, masterList);
                 SaveRemovals(context, masterList);
 
@@ -85,7 +91,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         /// <param name="context"></param>
         /// <param name="sessions"></param>
-        private void SaveChanges(CodemashContext context, IEnumerable<Session> sessions)
+        private static void SaveChanges(CodemashContext context, IEnumerable<Session> sessions)
         {
             var existingSessions = context.Sessions.ToList();
             foreach (var session in sessions.ToList())
@@ -114,11 +120,14 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         /// <param name="context"></param>
         /// <param name="sessions"></param>
-        private void SaveRemovals(CodemashContext context, IEnumerable<Session> sessions)
+        private static void SaveRemovals(CodemashContext context, IList<Session> sessions)
         {
+            // first check if the session has been totally removed
             var existingSessions = context.Sessions.Select(s => s.SessionId);
             var masterSessions = sessions.Select(s => s.SessionId);
             var sessionsToRemove = existingSessions.Where(i => !masterSessions.Contains(i)).ToList();
+
+            // perform the mass update
             sessionsToRemove.ForEach(s => context.Sessions.Remove(context.Sessions.FirstOrDefault(se => se.SessionId == s)));
         }
     }

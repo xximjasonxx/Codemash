@@ -123,6 +123,33 @@ namespace FunctionalTests
             Assert.AreEqual(count, repository.GetAll().Count);
         }
 
+        [TestMethod]
+        [TestCategory("Integration")]
+        public void test_that_if_a_session_exists_with_an_unmatching_speaker_id_that_session_is_not_saved()
+        {
+            // arrange
+            var sessions = GetTestSessionList();
+            sessions.Add(new Session
+                             {
+                                 SessionId = 9999,
+                                 Title = "Some Title",
+                                 Abstract = "Some Abstract",
+                                 End = DateTime.Now,
+                                 Start = DateTime.Now,
+                                 LevelType = Level.Unknown,
+                                 RoomType = Room.Unknown,
+                                 TrackType = Track.Unknown,
+                                 SpeakerId = 9999
+                             });
+            var repository = new PollerContainer().Get<ISessionRepository>();
+
+            // act
+            repository.SaveRange(sessions);
+
+            // assert
+            Assert.IsNull(repository.Get(9999));
+        }
+
         [TestCleanup]
         public void Cleanup()
         {

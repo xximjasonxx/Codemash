@@ -50,21 +50,6 @@ namespace DeltaApi.Web.Tests.Integration
 
         [TestMethod]
         [TestCategory("Integration")]
-        public void test_that_given_a_repository_with_multiple_changeset_versions_calling_latest_will_return_a_non_empty_list_with_changesets_from_the_highest_version()
-        {
-            // arrange
-            var controller = (SessionChangeController)_container.Get<IHttpController>("SessionChange", new IParameter[0]);
-
-            // act
-            var result = controller.Latest();
-
-            // assert
-            Assert.AreNotEqual(0, result.Count());
-            Assert.AreEqual(1, result.Select(sc => sc.Version).Distinct().Count());
-        }
-
-        [TestMethod]
-        [TestCategory("Integration")]
         public void test_that_given_a_repository_with_multiple_changesets_calling_getall_for_a_particular_version_will_return_all_changesets_for_that_version_in_a_non_empty_list()
         {
             // arrange

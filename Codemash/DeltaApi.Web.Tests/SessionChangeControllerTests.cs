@@ -31,47 +31,34 @@ namespace DeltaApi.Web.Tests
         }
 
         [TestMethod]
-        public void test_that_if_changes_exist_the_get_call_will_return_all_changes()
+        public void test_that_get_returns_only_the_latest_changeset()
         {
             // arrange
+            var changes = new List<SessionChange>
+                               {
+                                   new SessionChange {ActionType = ChangeAction.Add, SessionId = 123, Version = 1},
+                                   new SessionChange
+                                       {
+                                           ActionType = ChangeAction.Modify,
+                                           SessionId = 124,
+                                           Key = "Title",
+                                           Value = "new Title",
+                                           Version = 1
+                                       },
+                                   new SessionChange {ActionType = ChangeAction.Delete, SessionId = 125, Version = 2},
+                               };
+
             var mock = new Mock<ISessionChangeRepository>();
-            mock.Setup(m => m.GetAll()).Returns(new List<SessionChange>
-                                                    {
-                                                        new SessionChange { ActionType = ChangeAction.Add, SessionId = 123 },
-                                                        new SessionChange { ActionType = ChangeAction.Modify, SessionId = 124, Key = "Title", Value = "new Title" },
-                                                        new SessionChange { ActionType = ChangeAction.Delete, SessionId = 125 },
-                                                    });
-            _container.Bind<ISessionChangeRepository>().ToConstant(mock.Object);
-
-            // act
-            var controller = (SessionChangeController)_container.Get<IHttpController>("SessionChange", new IParameter[0]);
-            var result = controller.Get();
-
-            // assert
-            Assert.AreNotEqual(0, result.Count());
-        }
-
-        [TestMethod]
-        public void test_that_if_given_a_repository_which_returns_multiple_versions_of_changesets_latest_will_return_the_latest_changeset()
-        {
-            // arrange
-            var mock = new Mock<ISessionChangeRepository>();
-            var sessionChanges = new List<SessionChange>
-                                     {
-                                         new SessionChange {Version = 1},
-                                         new SessionChange {Version = 1},
-                                         new SessionChange {Version = 2}
-                                     };
             mock.Setup(m => m.GetLatest()).Returns(() =>
                                                        {
-                                                           int version = sessionChanges.Max(sc => sc.Version);
-                                                           return sessionChanges.Where(sc => sc.Version == version).ToList();
+                                                           int latestVersion = changes.Max(s => s.Version);
+                                                           return changes.Where(sc => sc.Version == latestVersion).ToList();
                                                        });
             _container.Bind<ISessionChangeRepository>().ToConstant(mock.Object);
 
             // act
             var controller = (SessionChangeController)_container.Get<IHttpController>("SessionChange", new IParameter[0]);
-            var result = controller.Latest();
+            var result = controller.Get();
 
             // assert
             Assert.AreEqual(1, result.Count());

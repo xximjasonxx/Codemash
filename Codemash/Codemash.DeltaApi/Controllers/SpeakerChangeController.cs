@@ -15,17 +15,12 @@ namespace Codemash.DeltaApi.Controllers
 
         public IEnumerable<SpeakerChangeViewModel> Get()
         {
-            return SpeakerChangeRepository.GetAll().Select(CreateSpeakerChangeViewModel);
-        }
-
-        public IEnumerable<SpeakerChangeViewModel> Get(int version)
-        {
-            return SpeakerChangeRepository.GetAll(version).Select(CreateSpeakerChangeViewModel);
-        }
-
-        public IEnumerable<SpeakerChangeViewModel> Latest()
-        {
             return SpeakerChangeRepository.GetLatest().Select(CreateSpeakerChangeViewModel);
+        }
+
+        public IEnumerable<SpeakerChangeViewModel> Get(int id)
+        {
+            return SpeakerChangeRepository.GetAll(id).Select(CreateSpeakerChangeViewModel);
         }
 
         // private methods

@@ -45,22 +45,7 @@ namespace DeltaApi.Web.Tests.Integration
             var result = controller.Get();
 
             // assert
-            Assert.IsTrue(result.Count() >= 4);
-        }
-
-        [TestMethod]
-        [TestCategory("Integration")]
-        public void test_that_calling_latest_will_return_the_latest_changeset_in_a_non_empty_list()
-        {
-            // arrange
-            var controller = (SpeakerChangeController)_container.Get<IHttpController>("SpeakerChange", new IParameter[0]);
-
-            // act
-            var result = controller.Latest();
-
-            // assert
-            Assert.AreNotEqual(0, result.Count());
-            Assert.AreEqual(1, result.Select(sc => sc.Version).Distinct().Count());
+            Assert.IsTrue(result.Count() >= 1);
         }
 
         [TestMethod]

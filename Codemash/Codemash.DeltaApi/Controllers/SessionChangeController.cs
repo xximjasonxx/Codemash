@@ -19,17 +19,12 @@ namespace Codemash.DeltaApi.Controllers
 
         public IEnumerable<SessionChangeViewModel> Get()
         {
-            return SessionChangeRepository.GetAll().Select(CreateSessionChangeViewModel);
-        }
-
-        public IEnumerable<SessionChangeViewModel> Latest()
-        {
             return SessionChangeRepository.GetLatest().Select(CreateSessionChangeViewModel);
         }
 
-        public IEnumerable<SessionChangeViewModel> Get(int version)
+        public IEnumerable<SessionChangeViewModel> Get(int id)
         {
-            return SessionChangeRepository.GetAll(version).Select(CreateSessionChangeViewModel);
+            return SessionChangeRepository.GetAll(id).Select(CreateSessionChangeViewModel);
         }
 
         // private helper methods

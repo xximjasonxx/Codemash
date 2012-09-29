@@ -29,16 +29,22 @@ namespace DeltaApi.Web.Tests
         }
 
         [TestMethod]
-        public void test_that_given_a_repository_with_many_changesets_all_changesets_can_be_returned_with_general_get()
+        public void test_that_given_a_repository_with_many_changesets_the_latest_changeset_is_returned_by_get()
         {
             // arrange
+            var changes = new List<SpeakerChange>
+                              {
+                                  new SpeakerChange() { Version = 1 },
+                                  new SpeakerChange() { Version = 1 },
+                                  new SpeakerChange() { Version = 2 }
+                              };
             var mock = new Mock<ISpeakerChangeRepository>();
-            mock.Setup(m => m.GetAll()).Returns(new List<SpeakerChange>
+            mock.Setup(m => m.GetLatest()).Returns(() =>
                                                     {
-                                                        new SpeakerChange(),
-                                                        new SpeakerChange(),
-                                                        new SpeakerChange()
+                                                        int latestVersion = changes.Max(c => c.Version);
+                                                        return changes.Where(c => c.Version == latestVersion).ToList();
                                                     });
+
             _container.Bind<ISpeakerChangeRepository>().ToConstant(mock.Object);
 
             // act
@@ -53,7 +59,7 @@ namespace DeltaApi.Web.Tests
         public void test_that_given_a_changeset_the_call_to_get_will_return_view_model_data_representing_the_change()
         {
             var mock = new Mock<ISpeakerChangeRepository>();
-            mock.Setup(m => m.GetAll()).Returns(new List<SpeakerChange>
+            mock.Setup(m => m.GetLatest()).Returns(new List<SpeakerChange>
                                                     {
                                                         new SpeakerChange { ActionType = ChangeAction.Add, SpeakerId = 123 }
                                                     });
@@ -65,26 +71,6 @@ namespace DeltaApi.Web.Tests
 
             // assert
             Assert.AreEqual(123, result.SpeakerId);
-        }
-
-        [TestMethod]
-        public void test_that_calling_latest_with_a_non_empty_repository_changeset_a_non_empty_list_is_returned()
-        {
-            var mock = new Mock<ISpeakerChangeRepository>();
-            mock.Setup(m => m.GetLatest()).Returns(new List<SpeakerChange>
-                                                       {
-                                                           new SpeakerChange(),
-                                                           new SpeakerChange(),
-                                                           new SpeakerChange()
-                                                       });
-            _container.Bind<ISpeakerChangeRepository>().ToConstant(mock.Object);
-
-            // act
-            var controller = (SpeakerChangeController)_container.Get<IHttpController>("SpeakerChange", new IParameter[0]);
-            var result = controller.Latest();
-
-            // assert
-            Assert.AreNotEqual(0, result.Count());
         }
 
         [TestMethod]

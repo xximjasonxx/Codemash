@@ -3,7 +3,15 @@
   <Role name="Codemash.Poller">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=deltaapistorage;AccountKey=C+AE+020k6Jh4G4zZWqZNR86N47NN1RW4jKmel1uzFKYPHk9ye12SDcwpFC+JRdsZeeABw/PmFia44ArhJjwEQ==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="xximjasonxx" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEFug7U3y27KrQYw31VGY69EwDQYJKoZIhvcNAQEBBQAEggEAHg4fp3dtiYWl9wk02NREWCfTgC7J1fD3MfUgiS8lcoJhbWVN3qMlwF2eVsYeE7Y4DXANTpLFznn+xJ0LPxi0G4iuKGiH/3cFFBmoQOBy6FyjKPEc6xTzgG8ydCjLxF4enXps8OgO/c0DxYkhoWE6iNw9q16wj01wZhJTr9ilbyNT58rsNbPA1XtnfZwOp0aBtOM+aSMlOy8nbg1gGF0mBLF52vYMI1JAzaPxdlLvB+QvSQjwRfUmEqXmguKYiAcp1oM1GuNVZ2kqB3ZRxvwxyGRxbFdxrN0WxzJH2du6tP3g5b5Vtj3byPYwuQqqZKC/qAQhyTrrgoq1l+n68KGV+zAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECEwapYj0msSygBCTx6GTcqF0XR6oP9sj4Ftr" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2013-09-29T23:59:59.0000000-05:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
     </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="1E5037AC4662CBB25E15DDFF2DBF3E733FD6F64B" thumbprintAlgorithm="sha1" />
+    </Certificates>
   </Role>
 </ServiceConfiguration>

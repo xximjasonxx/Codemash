@@ -21,9 +21,9 @@ namespace Codemash.Client
     /// <summary>
     /// A page that displays a grouped collection of items.
     /// </summary>
-    public sealed partial class GroupedItemsPage : Codemash.Client.Common.LayoutAwarePage
+    public sealed partial class Main : Codemash.Client.Common.LayoutAwarePage
     {
-        public GroupedItemsPage()
+        public Main()
         {
             this.InitializeComponent();
         }
@@ -40,7 +40,8 @@ namespace Codemash.Client
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var sampleDataGroups = SampleDataSource.GetGroups((String)navigationParameter);
+            //var sampleDataGroups = SampleDataSource.GetGroups((String)navigationParameter);
+            var sampleDataGroups = SessionDataSource.GetGroups();
             this.DefaultViewModel["Groups"] = sampleDataGroups;
         }
 

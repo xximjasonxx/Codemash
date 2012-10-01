@@ -140,7 +140,7 @@ namespace Codemash.Client.Data
 
         private void ItemsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            // Provides a subset of the full items collection to bind to from a GroupedItemsPage
+            // Provides a subset of the full items collection to bind to from a Main
             // for two reasons: GridView will not virtualize large items collections, and it
             // improves the user experience when browsing through groups with large numbers of
             // items.
@@ -259,8 +259,8 @@ namespace Codemash.Client.Data
             String ITEM_CONTENT = String.Format("Item Content: {0}\n\n{0}\n\n{0}\n\n{0}\n\n{0}\n\n{0}\n\n{0}",
                         "Curabitur class aliquam vestibulum nam curae maecenas sed integer cras phasellus suspendisse quisque donec dis praesent accumsan bibendum pellentesque condimentum adipiscing etiam consequat vivamus dictumst aliquam duis convallis scelerisque est parturient ullamcorper aliquet fusce suspendisse nunc hac eleifend amet blandit facilisi condimentum commodo scelerisque faucibus aenean ullamcorper ante mauris dignissim consectetuer nullam lorem vestibulum habitant conubia elementum pellentesque morbi facilisis arcu sollicitudin diam cubilia aptent vestibulum auctor eget dapibus pellentesque inceptos leo egestas interdum nulla consectetuer suspendisse adipiscing pellentesque proin lobortis sollicitudin augue elit mus congue fermentum parturient fringilla euismod feugiat");
 
-            var group1 = new SampleDataGroup("Group-1",
-                    "Group Title: 1",
+            var group1 = new SampleDataGroup("Favorites1",
+                    "Favorites",
                     "Group Subtitle: 1",
                     "Assets/DarkGray.png",
                     "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante");
@@ -301,8 +301,8 @@ namespace Codemash.Client.Data
                     group1));
             this.AllGroups.Add(group1);
 
-            var group2 = new SampleDataGroup("Group-2",
-                    "Group Title: 2",
+            var group2 = new SampleDataGroup("Upcoming1",
+                    "Upcoming",
                     "Group Subtitle: 2",
                     "Assets/LightGray.png",
                     "Group Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor scelerisque lorem in vehicula. Aliquam tincidunt, lacus ut sagittis tristique, turpis massa volutpat augue, eu rutrum ligula ante a ante");
@@ -329,7 +329,7 @@ namespace Codemash.Client.Data
                     group2));
             this.AllGroups.Add(group2);
 
-            var group3 = new SampleDataGroup("Group-3",
+            /*var group3 = new SampleDataGroup("Group-3",
                     "Group Title: 3",
                     "Group Subtitle: 3",
                     "Assets/MediumGray.png",
@@ -530,7 +530,7 @@ namespace Codemash.Client.Data
                     "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
                     ITEM_CONTENT,
                     group6));
-            this.AllGroups.Add(group6);
+            this.AllGroups.Add(group6);*/
         }
     }
 }

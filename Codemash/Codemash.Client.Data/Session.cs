@@ -22,12 +22,26 @@ namespace Codemash.Client.Data
 
         public string RoomTimeDisplay
         {
-            get { return string.Format("{0} - {1}", Room, StartsAtDisplay); }
+            get
+            {
+                if (string.IsNullOrEmpty(Room) && StartsAt == DateTime.MinValue)
+                    return string.Empty;
+                
+                return string.Format("{0} - {1}", Room, StartsAtDisplay);
+            }
         }
 
         public string TrackLevelDisplay
         {
-            get { return string.Format("{0} - {1}", Track, Level); }
+            get
+            {
+                if (string.IsNullOrEmpty(Track) && string.IsNullOrEmpty(Level))
+                    return string.Empty;
+
+                return string.Format("{0} - {1}", Track, Level);
+            }
         }
+
+        public string Abstract { get; set; }
     }
 }

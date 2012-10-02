@@ -1,4 +1,5 @@
-﻿using Codemash.Client.Data;
+﻿using Codemash.Client.Common;
+using Codemash.Client.Data;
 
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,9 @@ namespace Codemash.Client
     /// A page that displays details for a single item within a group while allowing gestures to
     /// flip through other items belonging to the same group.
     /// </summary>
-    public sealed partial class ItemDetailPage : Codemash.Client.Common.LayoutAwarePage
+    public sealed partial class Details : Codemash.Client.Common.LayoutAwarePage
     {
-        public ItemDetailPage()
+        public Details()
         {
             this.InitializeComponent();
         }
@@ -47,10 +48,14 @@ namespace Codemash.Client
             }
 
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var item = SampleDataSource.GetItem((String)navigationParameter);
-            this.DefaultViewModel["Group"] = item.Group;
-            this.DefaultViewModel["Items"] = item.Group.Items;
-            this.flipView.SelectedItem = item;
+            var item = (Session) navigationParameter;
+            pageTitle.Text = item.Title;
+            tbSpeaker.Text = item.SpeakerName;
+            tbStarts.Text = item.StartsAtDisplay;
+            tbRoom.Text = item.Room;
+            tbTrack.Text = item.Track;
+            tbLevel.Text = item.Level;
+            tbAbstract.Text = item.Abstract;
         }
 
         /// <summary>
@@ -61,8 +66,8 @@ namespace Codemash.Client
         /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
-            var selectedItem = (SampleDataItem)this.flipView.SelectedItem;
-            pageState["SelectedItem"] = selectedItem.UniqueId;
+            //var selectedItem = (SampleDataItem)this.flipView.SelectedItem;
+            //pageState["SelectedItem"] = selectedItem.UniqueId;
         }
     }
 }

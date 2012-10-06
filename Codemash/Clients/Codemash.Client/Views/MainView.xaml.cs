@@ -4,14 +4,14 @@ using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Codemash.Client
+namespace Codemash.Client.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainView : Page
     {
-        public MainPage()
+        public MainView()
         {
             this.InitializeComponent();
 
@@ -44,10 +44,10 @@ namespace Codemash.Client
             theGridView.ItemsSource = sessionList;
         }
 
-        private void theGridView_ItemClick(object sender, ItemClickEventArgs e)
+        private void Session_ItemClick(object sender, ItemClickEventArgs e)
         {
             var session = (Session) e.ClickedItem;
-            
+            Frame.Navigate(typeof (SessionView), session);
         }
     }
 }

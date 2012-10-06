@@ -44,6 +44,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{9F013C79-A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codemash.Client", "Clients\Codemash.Client\Codemash.Client.csproj", "{A53EC4D7-426B-4DA6-92E2-00B725F068B3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{9DFC546D-D73D-48EF-A0B6-02BBB5CA8441}"
+	ProjectSection(SolutionItems) = preProject
+		Libs\Caliburn.Micro.dll = Libs\Caliburn.Micro.dll
+		Libs\Caliburn.Micro.Extensions.dll = Libs\Caliburn.Micro.Extensions.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

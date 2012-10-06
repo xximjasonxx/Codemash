@@ -43,5 +43,11 @@ namespace Codemash.Client
 
             theGridView.ItemsSource = sessionList;
         }
+
+        private void theGridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var session = (Session) e.ClickedItem;
+            
+        }
     }
 }

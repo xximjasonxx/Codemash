@@ -106,6 +106,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Session.cs" />
+    <Compile Include="Core\LayoutAwarePage.cs" />
+    <Compile Include="Core\SuspensionManager.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>

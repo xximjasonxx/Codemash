@@ -1,0 +1,47 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Solid Color Brushes -->
+    <SolidColorBrush x:Key="CodemashOrange" Color="#FFFB8102" />
+    <SolidColorBrush x:Key="CodemashLightOrange" Color="#FFFFAE00" />
+    <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#ffeeeeee" />
+    
+    <!-- Symbols -->
+    <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>
+    
+    <!-- Text Styles -->
+    <Style x:Key="PageTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="56"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="LineHeight" Value="40"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform X="-2" Y="8"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{StaticResource CodemashOrange}" />
+    </Style>
+
+    <Style x:Key="GroupTitle" TargetType="TextBlock">
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="Typography.StylisticSet20" Value="True"/>
+        <Setter Property="Typography.DiscretionaryLigatures" Value="True"/>
+        <Setter Property="Typography.CaseSensitiveForms" Value="True"/>
+        <Setter Property="FontSize" Value="26.667"/>
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="LineHeight" Value="30"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform X="-1" Y="6"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{StaticResource CodemashOrange}" />
+    </Style>
+    
+    <Style x:Key="NavigationText" TargetType="TextBlock" BasedOn="{StaticResource GroupTitle}">
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+</ResourceDictionary>

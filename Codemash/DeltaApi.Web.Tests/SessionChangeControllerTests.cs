@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 using System.Web.Http.Controllers;
 using Codemash.Api.Data;
 using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Repositories;
 using Codemash.DeltaApi.Controllers;
 using Codemash.DeltaApi.Modules;
-using DeltaApi.Web.Tests.Factory;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ninject;

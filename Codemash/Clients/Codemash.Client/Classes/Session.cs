@@ -13,5 +13,7 @@ namespace Codemash.Client.Classes
         public string Room { get; set; }
         public string Time { get; set; }
         public string Track { get; set; }
+        public string Level { get { return "Intermediate"; } }
+        public Speaker Speaker { get { return new Speaker(); } }
     }
 }

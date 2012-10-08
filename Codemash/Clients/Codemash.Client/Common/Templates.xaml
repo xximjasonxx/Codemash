@@ -3,10 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <DataTemplate x:Key="sessionItemTemplate">
-        <Border>
+        <Grid>
+            <Rectangle Fill="White" IsHitTestVisible="False" />
             <TextBlock Text="{Binding Display}" Foreground="Black"
-                       VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="22" />
-        </Border>
+                       VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="19" />
+        </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="sessionGroupItemTemplate">

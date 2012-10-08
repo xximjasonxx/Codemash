@@ -4,7 +4,6 @@
 
     <DataTemplate x:Key="sessionItemTemplate">
         <Grid>
-            <Rectangle Fill="White" IsHitTestVisible="False" />
             <TextBlock Text="{Binding Display}" Foreground="Black"
                        VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="19" />
         </Grid>

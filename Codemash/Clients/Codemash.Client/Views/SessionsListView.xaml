@@ -13,7 +13,7 @@
 
         <code:SessionItemTemplateSelector x:Name="templateSelector" />
     </Page.Resources>
-    
+
     <Border Padding="7" Background="{StaticResource ApplicationBackgroundBrush}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -31,7 +31,7 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}"
                     Style="{StaticResource CMBackButton}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center"
                     VerticalAlignment="Center"  Margin="0,18"/>
-            
+
             <!-- Page Title TextBlock -->
             <TextBlock Text="All Sessions" Style="{StaticResource PageTitle}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
                        VerticalAlignment="Center" Height="67" Margin="0,18" />
@@ -49,16 +49,10 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="GridViewItem">
-                                        <ContentPresenter>
-                                            <VisualStateManager.VisualStateGroups>
-                                                <VisualStateGroup x:Name="CommonStates">
-                                                    <VisualState x:Name="Normal"/>
-                                                    <VisualState x:Name="PointerOver" />
-                                                    <VisualState x:Name="Pressed" />
-                                                    <VisualState x:Name="Disabled" />
-                                                </VisualStateGroup>
-                                            </VisualStateManager.VisualStateGroups>
-                                        </ContentPresenter>
+                                        <Border>
+                                            <Rectangle x:Name="MouseOverRect" Opacity="0" Fill="Lime" />
+                                            <ContentPresenter />
+                                        </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Codemash.Client.Classes;
 using Codemash.Client.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -49,6 +50,21 @@ namespace Codemash.Client.Views
         {
             var session = (Session) e.ClickedItem;
             Frame.Navigate(typeof (SessionView), session);
+        }
+
+        private void AllSessions_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (SessionsListView), null);
+        }
+
+        private void SessionsByBlock_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (SessionsListView), null);
+        }
+
+        private void SessionsByTrack_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (SessionsListView), null);
         }
     }
 }

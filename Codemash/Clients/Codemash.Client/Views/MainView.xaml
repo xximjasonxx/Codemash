@@ -36,21 +36,21 @@
 
                     <Border Padding="10,30,0,0">
                         <StackPanel Orientation="Vertical">
-                            <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20">
+                            <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Click="AllSessions_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="All Sessions" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
                                     <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20">
+                            <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Click="SessionsByBlock_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="By Block" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
                                     <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20">
+                            <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Click="SessionsByTrack_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="By Track" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
                                     <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>

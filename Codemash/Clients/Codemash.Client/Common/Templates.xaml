@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DataTemplate x:Key="sessionItemTemplate">
+        <Border>
+            <TextBlock Text="{Binding Display}" Foreground="Black"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="22" />
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="sessionGroupItemTemplate">
+        <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,2" Padding="0,0,0,15">
+            <TextBlock Text="{Binding Display}" Style="{StaticResource GroupTitle}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        </Border>
+    </DataTemplate>
+
+</ResourceDictionary>

@@ -9,5 +9,6 @@ namespace Codemash.Client.Data.Repository
 {
     public interface ISessionRepository : IRepository<Session>
     {
+
     }
 }

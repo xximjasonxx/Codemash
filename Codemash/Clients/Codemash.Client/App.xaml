@@ -1,11 +1,12 @@
-﻿<Application
+﻿<caliburn:CaliburnApplication
     x:Class="Codemash.Client.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Codemash.Client">
+    xmlns:caliburn="using:Caliburn.Micro">
 
     <Application.Resources>
         <ResourceDictionary>
+            
             <ResourceDictionary.MergedDictionaries>
 
                 <!-- 
@@ -19,4 +20,4 @@
 
         </ResourceDictionary>
     </Application.Resources>
-</Application>
+</caliburn:CaliburnApplication>

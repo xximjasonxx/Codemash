@@ -111,10 +111,13 @@
     <Compile Include="Classes\SessionGroup.cs" />
     <Compile Include="Classes\SessionItemTemplateSelector.cs" />
     <Compile Include="Classes\Speaker.cs" />
-    <Compile Include="Container\ClientContainer.cs" />
     <Compile Include="Core\LayoutAwarePage.cs" />
     <Compile Include="Core\SuspensionManager.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SessionListViewModel.cs" />
+    <Compile Include="ViewModels\SessionViewModel.cs" />
+    <Compile Include="ViewModels\SpeakerViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -180,9 +183,21 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Ninject">
-      <HintPath>..\..\Libs\Ninject.dll</HintPath>
+    <Reference Include="Caliburn.Micro">
+      <HintPath>..\..\Libs\Caliburn.Micro.dll</HintPath>
     </Reference>
+    <Reference Include="Caliburn.Micro.Extensions">
+      <HintPath>..\..\Libs\Caliburn.Micro.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Windows.UI.Interactivity">
+      <HintPath>..\..\Libs\Windows.UI.Interactivity.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Codemash.Client.Data\Codemash.Client.Data.csproj">
+      <Project>{84e6c5b1-0c49-4034-bcc4-ee9dbfcdf0aa}</Project>
+      <Name>Codemash.Client.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

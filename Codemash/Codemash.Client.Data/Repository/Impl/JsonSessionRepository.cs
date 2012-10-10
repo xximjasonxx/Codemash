@@ -7,7 +7,7 @@ using Codemash.Client.Data.Entities;
 
 namespace Codemash.Client.Data.Repository.Impl
 {
-    internal class JsonSessionRepository : ISessionRepository
+    public class JsonSessionRepository : ISessionRepository
     {
     }
 }

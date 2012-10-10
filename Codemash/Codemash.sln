@@ -46,7 +46,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codemash.Client", "Clients\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{9DFC546D-D73D-48EF-A0B6-02BBB5CA8441}"
 	ProjectSection(SolutionItems) = preProject
-		Libs\Ninject.dll = Libs\Ninject.dll
+		Libs\Caliburn.Micro.dll = Libs\Caliburn.Micro.dll
+		Libs\Caliburn.Micro.Extensions.dll = Libs\Caliburn.Micro.Extensions.dll
+		Libs\Windows.UI.Interactivity.dll = Libs\Windows.UI.Interactivity.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codemash.Client.Data", "Codemash.Client.Data\Codemash.Client.Data.csproj", "{84E6C5B1-0C49-4034-BCC4-EE9DBFCDF0AA}"

@@ -46,7 +46,7 @@ namespace Codemash.Client.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="LayoutAwarePage"/> class.
         /// </summary>
-        public LayoutAwarePage()
+        protected LayoutAwarePage()
         {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled) return;
 

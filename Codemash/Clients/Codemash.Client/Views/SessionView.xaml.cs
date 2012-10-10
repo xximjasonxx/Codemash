@@ -16,18 +16,5 @@ namespace Codemash.Client.Views
         {
             this.InitializeComponent();
         }
-
-        protected override void LoadState(object navigationParameter, Dictionary<string, object> pageState)
-        {
-            DataContext = (Session) navigationParameter;
-        }
-
-        private void ViewSpeaker(object sender, RoutedEventArgs e)
-        {
-            var session = (Session) DataContext;
-            var speaker = session.Speaker;
-
-            Frame.Navigate(typeof (SpeakerView), speaker);
-        }
     }
 }

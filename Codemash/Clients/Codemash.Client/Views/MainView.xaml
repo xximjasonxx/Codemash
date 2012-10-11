@@ -17,7 +17,6 @@
                 <RowDefinition Height="103*"/>
                 <RowDefinition Height="44*"/>
                 <RowDefinition Height="539*"/>
-                <RowDefinition Height="68*"/>
             </Grid.RowDefinitions>
 
             <!-- Page Title TextBlock -->
@@ -68,7 +67,7 @@
             </Border>
 
             <!-- Grid View Block -->
-            <GridView x:Name="theGridView" SelectionMode="None" Grid.Column="2" Grid.Row="2" IsItemClickEnabled="True">
+            <GridView SelectionMode="None" Grid.Column="2" Grid.Row="2" IsItemClickEnabled="True" ItemsSource="{Binding UpcomingSessions}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <Border Padding="10" Width="300" Height="270" Background="{StaticResource CodemashOrange}">

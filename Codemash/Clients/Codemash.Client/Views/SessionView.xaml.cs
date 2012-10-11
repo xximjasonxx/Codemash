@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Codemash.Client.Classes;
 using Codemash.Client.Core;
 using Windows.UI.Xaml;
 

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Caliburn.Micro;
-using Codemash.Client.Classes;
 using Codemash.Client.Core;
 using Codemash.Client.Data.Repository;
 using Windows.UI.Xaml;

@@ -9,6 +9,14 @@ namespace Codemash.Client.Data.Repository
 {
     public interface IRepository<T> where T : EntityBase
     {
-        
+        /// <summary>
+        /// Load the repository with data
+        /// </summary>
+        void Load();
+
+        /// <summary>
+        /// Indicates Load has completed
+        /// </summary>
+        event EventHandler LoadCompleted;
     }
 }

@@ -5,13 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:code="using:Codemash.Client.Classes" mc:Ignorable="d">
+    mc:Ignorable="d">
 
     <Page.Resources>
         <CollectionViewSource x:Name="AllSessionsCollectionViewSource"
                               IsSourceGrouped="True" ItemsPath="Items" />
 
-        <code:SessionItemTemplateSelector x:Name="templateSelector" />
+        <!--<code:SessionItemTemplateSelector x:Name="templateSelector" />-->
     </Page.Resources>
 
     <Border Padding="7" Background="{StaticResource ApplicationBackgroundBrush}">

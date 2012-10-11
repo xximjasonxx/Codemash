@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using Codemash.Client.Classes;
 using Codemash.Client.Core;
+using Codemash.Client.Data.Entities;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -27,11 +27,9 @@ namespace Codemash.Client.Views
         public SessionsListView()
         {
             this.InitializeComponent();
-
-            LoadExampleData();
         }
 
-        private void LoadExampleData()
+        /*private void LoadExampleData()
         {
             theGridView.ItemsSource = new List<IListItem>
                                           {
@@ -66,7 +64,7 @@ namespace Codemash.Client.Views
                                               new Session {Title = "D Session 1"},
                                               new Session {Title = "D Session 2"}
                                           };
-        }
+        }*/
 
         private void SessionItem_Click(object sender, ItemClickEventArgs e)
         {

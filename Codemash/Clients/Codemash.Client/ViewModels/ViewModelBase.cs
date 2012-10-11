@@ -10,6 +10,10 @@ namespace Codemash.Client.ViewModels
     public class ViewModelBase : Screen
     {
         private readonly INavigationService _navigationService;
+        protected INavigationService NavigationService
+        {
+            get { return _navigationService; }
+        }
 
         public ViewModelBase(INavigationService navigationService)
         {

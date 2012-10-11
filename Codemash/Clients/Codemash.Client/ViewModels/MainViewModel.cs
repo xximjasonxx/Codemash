@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Caliburn.Micro;
+using Codemash.Client.Data.Entities;
 using Codemash.Client.Data.Repository;
 
 namespace Codemash.Client.ViewModels
@@ -12,10 +9,14 @@ namespace Codemash.Client.ViewModels
     {
         public ISessionRepository SessionRepository { get; set; }
 
-        public MainViewModel(INavigationService navigationService) : base(navigationService)
+        public MainViewModel(INavigationService navigationService, ISessionRepository sessionRepository)
+            : base(navigationService)
         {
-            
+            SessionRepository = sessionRepository;
         }
+
+        // attributes
+        public IList<Session> UpcomingSessions { get { return SessionRepository.GetUpcomingSessions(); } }
 
         // behaviors
         public void ShowAllSessions()

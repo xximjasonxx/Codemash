@@ -1,27 +1,44 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Caliburn.Micro;
+using Codemash.Client.Code;
 using Codemash.Client.Data.Entities;
 using Codemash.Client.Data.Repository;
+using Codemash.Client.Parameters;
 
 namespace Codemash.Client.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
         public ISessionRepository SessionRepository { get; set; }
+        public ISpeakerRepository SpeakerRepository { get; set; }
 
-        public MainViewModel(INavigationService navigationService, ISessionRepository sessionRepository)
+        public MainViewModel(INavigationService navigationService, ISessionRepository sessionRepository, ISpeakerRepository speakerRepository)
             : base(navigationService)
         {
             SessionRepository = sessionRepository;
+            SpeakerRepository = speakerRepository;
         }
 
         // attributes
-        public IList<Session> UpcomingSessions { get { return SessionRepository.GetUpcomingSessions(); } }
+        public IList<SessionTileView> UpcomingSessions
+        {
+            get
+            {
+                return SessionRepository.GetUpcomingSessions().Select(s => new SessionTileView
+                                                                               {
+                                                                                   Title = s.Title,
+                                                                                   SpeakerName = SpeakerRepository.Get(s.SpeakerId).FullName,
+                                                                                   Room = s.Room,
+                                                                                   Track = s.Track
+                                                                               }).ToList();
+            }
+        }
 
         // behaviors
         public void ShowAllSessions()
         {
-            return;
+            NavigationService.NavigateToViewModel<SessionsListViewModel>(new GroupingParameter(GroupingType.Alphabetical));
         }
 
         public void ShowFavorites()
@@ -31,12 +48,12 @@ namespace Codemash.Client.ViewModels
 
         public void ShowSesionsByBlock()
         {
-            return;
+            NavigationService.Navigate<SessionsListViewModel>(GroupingType.Block);
         }
 
         public void ShowSessionsByTrack()
         {
-            return;
+            NavigationService.Navigate<SessionsListViewModel>(GroupingType.Track);
         }
     }
 }

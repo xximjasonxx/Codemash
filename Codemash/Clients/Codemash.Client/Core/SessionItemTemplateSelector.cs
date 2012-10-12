@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Codemash.Client.Code;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Codemash.Client.Classes
+namespace Codemash.Client.Core
 {
     public class SessionItemTemplateSelector : DataTemplateSelector
     {

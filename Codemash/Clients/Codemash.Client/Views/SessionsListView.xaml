@@ -8,10 +8,7 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <CollectionViewSource x:Name="AllSessionsCollectionViewSource"
-                              IsSourceGrouped="True" ItemsPath="Items" />
-
-        <!--<code:SessionItemTemplateSelector x:Name="templateSelector" />-->
+        <app:SessionItemTemplateSelector x:Name="templateSelector" />
     </Page.Resources>
 
     <Border Padding="7" Background="{StaticResource ApplicationBackgroundBrush}">
@@ -38,8 +35,8 @@
 
             <!-- Grid View Block -->
             <Border Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="10,10,10,0" Padding="20,10" Background="White">
-                <GridView x:Name="theGridView" SelectionMode="None" IsItemClickEnabled="True" ItemTemplateSelector="{StaticResource templateSelector}"
-                        ItemsSource="{Binding Source={StaticResource AllSessionsCollectionViewSource}}" ItemClick="SessionItem_Click">
+                <GridView SelectionMode="None" IsItemClickEnabled="True" ItemTemplateSelector="{StaticResource templateSelector}"
+                        ItemsSource="{Binding ListSource}" ItemClick="SessionItem_Click">
                     <GridView.ItemContainerStyle>
                         <Style TargetType="GridViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />

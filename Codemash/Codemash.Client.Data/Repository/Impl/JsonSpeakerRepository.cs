@@ -45,6 +45,25 @@ namespace Codemash.Client.Data.Repository.Impl
 
         public event EventHandler LoadCompleted;
 
+        /// <summary>
+        /// Return an item from the repository by an ID value
+        /// </summary>
+        /// <param name="id">The ID value, should be unique</param>
+        /// <returns></returns>
+        public Speaker Get(int id)
+        {
+            return Repository.FirstOrDefault(s => s.SpeakerId == id);
+        }
+
+        /// <summary>
+        /// return a list of all items in the repository
+        /// </summary>
+        /// <returns></returns>
+        public IList<Speaker> GetAll()
+        {
+            return Repository;
+        }
+
         #endregion
     }
 }

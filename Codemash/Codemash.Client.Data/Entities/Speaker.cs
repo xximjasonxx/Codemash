@@ -14,7 +14,12 @@ namespace Codemash.Client.Data.Entities
         public string Company { get; internal set; }
         public string Twitter { get; internal set; }
         public string Biography { get; internal set; }
-        public string BlogUrl { get; set; }
-        public int SpeakerId { get; set; }
+        public string BlogUrl { get; internal set; }
+        public int SpeakerId { get; internal set; }
+
+        public string FullName
+        {
+            get { return string.Format("{0} {1}", FirstName, LastName); }
+        }
     }
 }

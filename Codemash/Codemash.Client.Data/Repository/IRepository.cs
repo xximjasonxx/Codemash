@@ -18,5 +18,18 @@ namespace Codemash.Client.Data.Repository
         /// Indicates Load has completed
         /// </summary>
         event EventHandler LoadCompleted;
+
+        /// <summary>
+        /// Return an item from the repository by an ID value
+        /// </summary>
+        /// <param name="id">The ID value, should be unique</param>
+        /// <returns></returns>
+        T Get(int id);
+
+        /// <summary>
+        /// return a list of all items in the repository
+        /// </summary>
+        /// <returns></returns>
+        IList<T> GetAll();
     }
 }

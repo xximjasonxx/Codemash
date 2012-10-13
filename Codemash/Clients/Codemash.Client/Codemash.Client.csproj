@@ -113,6 +113,11 @@
     <Compile Include="Core\LayoutAwarePage.cs" />
     <Compile Include="Core\SessionItemTemplateSelector.cs" />
     <Compile Include="Core\SuspensionManager.cs" />
+    <Compile Include="Grouping\AlphanumericSessionGrouper.cs" />
+    <Compile Include="Grouping\BlockSessionGrouper.cs" />
+    <Compile Include="Grouping\GroupSessionFactory.cs" />
+    <Compile Include="Grouping\IGroupSessions.cs" />
+    <Compile Include="Grouping\TrackSessionGrouper.cs" />
     <Compile Include="Parameters\GroupingParameter.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SessionsListViewModel.cs" />
@@ -203,6 +208,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Codemash.Client.Core\Codemash.Client.Core.csproj">
+      <Project>{cf7bbbd7-9a87-492e-a0b9-9d2066a35ae2}</Project>
+      <Name>Codemash.Client.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Codemash.Client.Data\Codemash.Client.Data.csproj">
       <Project>{84e6c5b1-0c49-4034-bcc4-ee9dbfcdf0aa}</Project>
       <Name>Codemash.Client.Data</Name>

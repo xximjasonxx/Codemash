@@ -46,14 +46,14 @@ namespace Codemash.Client.ViewModels
             return;
         }
 
-        public void ShowSesionsByBlock()
+        public void ShowSessionsByBlock()
         {
-            NavigationService.Navigate<SessionsListViewModel>(GroupingType.Block);
+            NavigationService.NavigateToViewModel<SessionsListViewModel>(new GroupingParameter(GroupingType.Block));
         }
 
         public void ShowSessionsByTrack()
         {
-            NavigationService.Navigate<SessionsListViewModel>(GroupingType.Track);
+            NavigationService.NavigateToViewModel<SessionsListViewModel>(new GroupingParameter(GroupingType.Track));
         }
     }
 }

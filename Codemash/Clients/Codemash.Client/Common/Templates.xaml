@@ -5,7 +5,7 @@
     <DataTemplate x:Key="sessionItemTemplate">
         <Grid>
             <TextBlock Text="{Binding Display}" Foreground="Black"
-                       VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="19" />
+                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="19" />
         </Grid>
     </DataTemplate>
 

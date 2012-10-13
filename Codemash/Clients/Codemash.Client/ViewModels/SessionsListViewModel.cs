@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using Caliburn.Micro;
 using Codemash.Client.Code;
 using Codemash.Client.Data.Repository;
+using Codemash.Client.Grouping;
 using Codemash.Client.Parameters;
 
 namespace Codemash.Client.ViewModels
@@ -27,9 +24,13 @@ namespace Codemash.Client.ViewModels
         }
 
         // attributes
-        public IObservableCollection<IListItem> ListSource
+        public ObservableCollection<IListItem> ListSource
         {
-            get { return null; }
+            get
+            {
+                var grouper = GroupSessionFactory.GetSessionGrouperInstance(SessionRepository.GetAll(), Parameter.GroupingType);
+                return new ObservableCollection<IListItem>(grouper.GetGroupedList());
+            }
         }
     }
 }

@@ -41,13 +41,11 @@
                         <Style TargetType="GridViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                             <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                            <Setter Property="Width" Value="300" />
-                            <Setter Property="Margin" Value="0,0,40,0" />
+                            <Setter Property="Margin" Value="5,5,40,30" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="GridViewItem">
-                                        <Border>
-                                            <!--<Rectangle x:Name="MouseOverRect" Opacity="0" Fill="Lime" />-->
+                                        <Border Width="300">
                                             <ContentPresenter />
                                         </Border>
                                     </ControlTemplate>

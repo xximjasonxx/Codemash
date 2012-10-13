@@ -3,6 +3,7 @@ using System.Linq;
 using Codemash.Client.Code;
 using Codemash.Client.Data.Entities;
 using Codemash.Client.Core;
+using Codemash.Client.DataModels;
 
 namespace Codemash.Client.Grouping
 {
@@ -28,7 +29,7 @@ namespace Codemash.Client.Grouping
             foreach (var kv in groupedSet.OrderBy(k => k.Key))
             {
                 combinedList.Add(new SessionListGroup {GroupTitle = kv.Key});
-                combinedList.AddRange(kv.Value.Select(s => new SessionListView {SessionTitle = s.Title}));
+                combinedList.AddRange(kv.Value.Select(s => new SessionListView {SessionTitle = s.Title, SessionId = s.SessionId}));
             }
 
             return combinedList;

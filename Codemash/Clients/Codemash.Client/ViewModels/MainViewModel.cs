@@ -4,7 +4,9 @@ using Caliburn.Micro;
 using Codemash.Client.Code;
 using Codemash.Client.Data.Entities;
 using Codemash.Client.Data.Repository;
+using Codemash.Client.DataModels;
 using Codemash.Client.Parameters;
+using Windows.UI.Xaml.Controls;
 
 namespace Codemash.Client.ViewModels
 {
@@ -27,6 +29,7 @@ namespace Codemash.Client.ViewModels
             {
                 return SessionRepository.GetUpcomingSessions().Select(s => new SessionTileView
                                                                                {
+                                                                                   SessionId = s.SessionId,
                                                                                    Title = s.Title,
                                                                                    SpeakerName = SpeakerRepository.Get(s.SpeakerId).FullName,
                                                                                    Room = s.Room,
@@ -54,6 +57,13 @@ namespace Codemash.Client.ViewModels
         public void ShowSessionsByTrack()
         {
             NavigationService.NavigateToViewModel<SessionsListViewModel>(new GroupingParameter(GroupingType.Track));
+        }
+
+        public void SessionClick(ItemClickEventArgs args)
+        {
+            var tileData = (SessionTileView) args.ClickedItem;
+            var session = SessionRepository.Get(tileData.SessionId);
+            NavigationService.NavigateToViewModel<SessionViewModel>(new SessionParameter(session));
         }
     }
 }

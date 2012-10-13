@@ -5,13 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Codemash.Client.Data.Entities;
 
-namespace Codemash.Client.Code
+namespace Codemash.Client.DataModels
 {
-    public class SessionTileView
+    public class SessionDetailView : Session
     {
-        public string Title { get; set; }
         public string SpeakerName { get; set; }
-        public string Track { get; set; }
-        public string Room { get; set; }
     }
 }

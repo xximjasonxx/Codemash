@@ -4,6 +4,7 @@ using Codemash.Client.Code;
 using Codemash.Client.Data.Repository;
 using Codemash.Client.Grouping;
 using Codemash.Client.Parameters;
+using Windows.UI.Xaml.Controls;
 
 namespace Codemash.Client.ViewModels
 {
@@ -30,6 +31,17 @@ namespace Codemash.Client.ViewModels
             {
                 var grouper = GroupSessionFactory.GetSessionGrouperInstance(SessionRepository.GetAll(), Parameter.GroupingType);
                 return new ObservableCollection<IListItem>(grouper.GetGroupedList());
+            }
+        }
+
+        // behaviors
+        public void SessionClick(ItemClickEventArgs args)
+        {
+            var listItem = (IListItem) args.ClickedItem;
+            if (listItem.Id > 0)
+            {
+                var session = SessionRepository.Get(listItem.Id);
+                NavigationService.NavigateToViewModel<SessionViewModel>(new SessionParameter(session));
             }
         }
     }

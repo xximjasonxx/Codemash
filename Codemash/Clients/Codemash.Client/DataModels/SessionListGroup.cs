@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Codemash.Client.Code;
 
-namespace Codemash.Client.Code
+namespace Codemash.Client.DataModels
 {
     public class SessionListGroup : IListItem
     {
@@ -13,6 +9,7 @@ namespace Codemash.Client.Code
         #region Implementation of IListItem
 
         public string Display { get { return GroupTitle; } }
+        public int Id { get { return 0; } }
         public ItemType ItemType { get { return ItemType.GroupHeading; } }
 
         #endregion

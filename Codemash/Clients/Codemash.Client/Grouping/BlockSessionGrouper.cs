@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Codemash.Client.Code;
 using Codemash.Client.Core;
 using Codemash.Client.Data.Entities;
+using Codemash.Client.DataModels;
 
 namespace Codemash.Client.Grouping
 {
@@ -39,7 +37,7 @@ namespace Codemash.Client.Grouping
             foreach (var kv in groupedSet)
             {
                 combinedList.Add(new SessionListGroup {GroupTitle = kv.Key});
-                combinedList.AddRange(kv.Value.Select(s => new SessionListView {SessionTitle = s.Title}));
+                combinedList.AddRange(kv.Value.Select(s => new SessionListView {SessionTitle = s.Title, SessionId = s.SessionId}));
             }
 
             return combinedList;

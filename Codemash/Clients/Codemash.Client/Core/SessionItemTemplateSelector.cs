@@ -1,4 +1,5 @@
 ﻿using Codemash.Client.Code;
+using Codemash.Client.DataModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

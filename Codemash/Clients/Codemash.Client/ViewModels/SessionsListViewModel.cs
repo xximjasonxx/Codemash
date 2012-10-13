@@ -2,6 +2,7 @@
 using Caliburn.Micro;
 using Codemash.Client.Code;
 using Codemash.Client.Data.Repository;
+using Codemash.Client.DataModels;
 using Codemash.Client.Grouping;
 using Codemash.Client.Parameters;
 using Windows.UI.Xaml.Controls;

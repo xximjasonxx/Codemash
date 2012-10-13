@@ -1,4 +1,6 @@
-﻿namespace Codemash.Client.Code
+﻿using Codemash.Client.Code;
+
+namespace Codemash.Client.DataModels
 {
     public interface IListItem
     {

@@ -1,4 +1,5 @@
-﻿using Codemash.Client.Data.Entities;
+﻿using Codemash.Client.Core;
+using Codemash.Client.Data.Entities;
 
 namespace Codemash.Client.DataModels
 {
@@ -11,6 +12,7 @@ namespace Codemash.Client.DataModels
             Room = session.Room;
             Track = session.Track;
             Level = session.Level;
+            Starts = session.Starts.AsBlockDisplay();
             SessionId = session.SessionId;
             SpeakerId = session.SpeakerId;
         }
@@ -20,6 +22,7 @@ namespace Codemash.Client.DataModels
         public string Room { get; set; }
         public string Track { get; set; }
         public string Level { get; set; }
+        public string Starts { get; set; }
         public int SessionId { get; set; }
         public int SpeakerId { get; set; }
         public string SpeakerName { get; set; }

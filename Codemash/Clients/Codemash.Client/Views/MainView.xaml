@@ -6,112 +6,110 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:app="using:Codemash.Client.Core"
     xmlns:i="using:Windows.UI.Interactivity" xmlns:cal="using:Caliburn.Micro" mc:Ignorable="d">
 
-    <Border Padding="7" Background="{StaticResource ApplicationBackgroundBrush}">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="121*"/>
-                <ColumnDefinition Width="221*"/>
-                <ColumnDefinition Width="1010*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="103*"/>
-                <RowDefinition Height="44*"/>
-                <RowDefinition Height="539*"/>
-            </Grid.RowDefinitions>
+    <Grid Background="{StaticResource ApplicationBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="97"/>
+            <ColumnDefinition Width="221*"/>
+            <ColumnDefinition Width="1010*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="103*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="539*"/>
+        </Grid.RowDefinitions>
 
-            <!-- Page Title TextBlock -->
-            <TextBlock Text="Codemash 2.0.1.3" Style="{StaticResource PageTitle}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
+        <!-- Page Title TextBlock -->
+        <TextBlock Text="Codemash 2.0.1.3" Style="{StaticResource PageTitle}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
                        VerticalAlignment="Center" Height="67" Margin="0,18" />
 
-            <!-- Group Headers -->
-            <TextBlock Text="Conference" Grid.Column="1" Grid.Row="1" Style="{StaticResource GroupTitle}" />
-            <TextBlock Text="Upcoming" Grid.Column="2" Grid.Row="1" Style="{StaticResource GroupTitle}" />
+        <!-- Group Headers -->
+        <TextBlock Text="Conference" Grid.Column="1" Grid.Row="1" Style="{StaticResource GroupTitle}" />
+        <TextBlock Text="Upcoming" Grid.Column="2" Grid.Row="1" Style="{StaticResource GroupTitle}" />
 
-            <!-- Conference Navigation Block -->
-            <Border Background="White" Padding="0" Grid.Column="1" Grid.Row="2" Margin="0,0,30,0" VerticalAlignment="Top">
-                <StackPanel VerticalAlignment="Top">
-                    <Image Stretch="Uniform" Source="/Assets/Background.png" HorizontalAlignment="Center" Margin="0,10,0,0" />
+        <!-- Conference Navigation Block -->
+        <Border Background="White" Padding="0" Grid.Column="1" Grid.Row="2" Margin="0,0,30,0" VerticalAlignment="Top">
+            <StackPanel VerticalAlignment="Top">
+                <Image Stretch="Uniform" Source="/Assets/Background.png" HorizontalAlignment="Center" Margin="0,10,0,0" />
 
-                    <Border Padding="10,30,0,0">
-                        <StackPanel Orientation="Vertical">
-                            <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Name="ShowAllSessions">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="All Sessions" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
-                                    <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>
-                                </StackPanel>
-                            </Button>
+                <Border Padding="10,30,0,0">
+                    <StackPanel Orientation="Vertical">
+                        <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Name="ShowAllSessions">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="All Sessions" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
+                                <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>
+                            </StackPanel>
+                        </Button>
 
-                            <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Name="ShowSessionsByBlock">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="By Block" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
-                                    <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>
-                                </StackPanel>
-                            </Button>
+                        <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Name="ShowSessionsByBlock">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="By Block" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
+                                <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>
+                            </StackPanel>
+                        </Button>
 
-                            <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Name="ShowSessionsByTrack">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="By Track" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
-                                    <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>
-                                </StackPanel>
-                            </Button>
+                        <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Name="ShowSessionsByTrack">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="By Track" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
+                                <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>
+                            </StackPanel>
+                        </Button>
 
-                            <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Name="ShowFavorites">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Favorites" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
-                                    <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
-            </Border>
+                        <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Name="ShowFavorites">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Favorites" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
+                                <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Border>
 
-            <!-- Grid View Block -->
-            <GridView SelectionMode="None" Grid.Column="2" Grid.Row="2" IsItemClickEnabled="True" ItemsSource="{Binding UpcomingSessions}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="ItemClick">
-                        <cal:ActionMessage MethodName="SessionClick">
-                            <cal:Parameter Value="$eventArgs" />
-                        </cal:ActionMessage>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <GridView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Padding="10" Width="300" Height="270" Background="{StaticResource CodemashOrange}">
-                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="7*"/>
-                                    <ColumnDefinition Width="3*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="140*"/>
-                                    <RowDefinition Height="37*"/>
-                                    <RowDefinition Height="61*"/>
-                                    <RowDefinition Height="42*"/>
-                                </Grid.RowDefinitions>
-    
-                                <!-- Session Title Textblock -->
-                                <TextBlock Text="{Binding Title}" Foreground="White" TextWrapping="Wrap" FontSize="30" Grid.Column="0" Grid.Row="0" FontFamily="Segoe UI" Grid.ColumnSpan="2" />
+        <!-- Grid View Block -->
+        <GridView SelectionMode="None" Grid.Column="2" Grid.Row="2" IsItemClickEnabled="True" ItemsSource="{Binding UpcomingSessions}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ItemClick">
+                    <cal:ActionMessage MethodName="SessionClick">
+                        <cal:Parameter Value="$eventArgs" />
+                    </cal:ActionMessage>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="10" Width="300" Height="270" Background="{StaticResource CodemashOrange}">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="140*"/>
+                                <RowDefinition Height="37*"/>
+                                <RowDefinition Height="61*"/>
+                                <RowDefinition Height="42*"/>
+                            </Grid.RowDefinitions>
 
-                                <!-- Session Speaker Textblock -->
-                                <TextBlock Text="{Binding SpeakerName}" Foreground="White" TextWrapping="NoWrap" FontSize="19" Grid.Column="0" Grid.Row="1" FontFamily="Segoe UI" Grid.ColumnSpan="2" />
+                            <!-- Session Title Textblock -->
+                            <TextBlock Text="{Binding Title}" Foreground="White" TextWrapping="Wrap" FontSize="30" Grid.Column="0" Grid.Row="0" FontFamily="Segoe UI" Grid.ColumnSpan="2" />
 
-                                <!-- Sesion Track Textblock -->
-                                <TextBlock Text="{Binding Track}" Foreground="White" TextWrapping="NoWrap" FontSize="24" Grid.Column="0" Grid.Row="2" FontFamily="Segoe UI" Grid.ColumnSpan="2" />
+                            <!-- Session Speaker Textblock -->
+                            <TextBlock Text="{Binding SpeakerName}" Foreground="White" TextWrapping="NoWrap" FontSize="19" Grid.Column="0" Grid.Row="1" FontFamily="Segoe UI" Grid.ColumnSpan="2" />
 
-                                <!-- Session Room TextBlock -->
-                                <TextBlock Text="{Binding Room}" Foreground="White" TextWrapping="NoWrap" FontSize="17" Grid.Column="0" Grid.Row="3" FontFamily="Segoe UI"
+                            <!-- Sesion Track Textblock -->
+                            <TextBlock Text="{Binding Track}" Foreground="White" TextWrapping="NoWrap" FontSize="24" Grid.Column="0" Grid.Row="2" FontFamily="Segoe UI" Grid.ColumnSpan="2" />
+
+                            <!-- Session Room TextBlock -->
+                            <TextBlock Text="{Binding Room}" Foreground="White" TextWrapping="NoWrap" FontSize="17" Grid.Column="0" Grid.Row="3" FontFamily="Segoe UI"
                                            HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VariableSizedWrapGrid />
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
-            </GridView>
-        </Grid>
-    </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VariableSizedWrapGrid />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+        </GridView>
+    </Grid>
 </Page>

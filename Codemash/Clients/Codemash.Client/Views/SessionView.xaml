@@ -6,70 +6,62 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:app="using:Codemash.Client.Core"
     mc:Ignorable="d">
 
-    <Border Padding="7" Background="{StaticResource ApplicationBackgroundBrush}">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="121*"/>
-                <ColumnDefinition Width="221*"/>
-                <ColumnDefinition Width="1010*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="103*"/>
-                <RowDefinition Height="44*"/>
-                <RowDefinition Height="539*"/>
-                <RowDefinition Height="68*"/>
-            </Grid.RowDefinitions>
+    <Grid Background="{StaticResource ApplicationBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="97"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="1069*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource CMBackButton}" Margin="36,0,0,36" />
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center">
+            <TextBlock Text="{Binding Session.Title}" IsHitTestVisible="false" Foreground="{StaticResource CodemashOrange}"
+                   Margin="0,0,0,0" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" />
+            
+            <TextBlock Text="{Binding Session.SpeakerName}" FontFamily="Segoe UI" FontSize="20" FontWeight="Normal" TextWrapping="NoWrap" TextTrimming="WordEllipsis"
+                       Foreground="{StaticResource CodemashOrange}" />
+        </StackPanel>
 
-            <!-- Back Button -->
-            <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}"
-                    Style="{StaticResource CMBackButton}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center"
-                    VerticalAlignment="Center"  Margin="0,18"/>
+        <!-- Additional Information Panel -->
+        <Border Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Padding="7,20,7,20">
+            <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
+                <TextBlock Text="Track" Margin="3,0,0,0" Foreground="Black" />
+                <TextBlock Text="{Binding Session.Track}" Margin="3,-7,10,20" Style="{StaticResource NavigationText}" />
 
-            <!-- Session Title Textblock -->
-            <TextBlock Text="{Binding Session.Title}" Style="{StaticResource PageTitle}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
-                       TextWrapping="NoWrap" />
+                <TextBlock Text="Starts" Margin="3,0,0,0" Foreground="Black" />
+                <TextBlock Text="{Binding Session.Starts}" Margin="3,-7,10,20" Style="{StaticResource NavigationText}" />
 
-            <!-- Additional Information Panel -->
-            <Border Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
-                    Padding="10,0,0,0">
-                <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
-                    <Rectangle HorizontalAlignment="Stretch" Height="30" Margin="20,0,30,50" Fill="{StaticResource CodemashOrange}" />
+                <TextBlock Text="Room" Margin="3,0,0,0" Foreground="Black" />
+                <Viewbox>
+                    <TextBlock Text="{Binding Session.Room}" Margin="3,-7,10,20" Style="{StaticResource NavigationText}" TextTrimming="None" TextWrapping="NoWrap" />
+                </Viewbox>
 
-                    <TextBlock Text="Track" Margin="3,0,0,0" Foreground="Black" />
-                    <TextBlock Text="{Binding Session.Track}" Margin="3,-7,10,20" Style="{StaticResource NavigationText}" />
+                <TextBlock Text="Level" Margin="3,0,0,0" Foreground="Black" />
+                <TextBlock Text="{Binding Session.Level}" Margin="3,-7,10,40" Style="{StaticResource NavigationText}" />
 
-                    <TextBlock Text="Starts" Margin="3,0,0,0" Foreground="Black" />
-                    <TextBlock Text="{Binding Session.Starts}" Margin="3,-7,10,20" Style="{StaticResource NavigationText}" />
+                <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Name="ViewSpeaker">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="View Speaker" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
+                        <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
 
-                    <TextBlock Text="Room" Margin="3,0,0,0" Foreground="Black" />
-                    <TextBlock Text="{Binding Session.Room}" Margin="3,-7,10,20" Style="{StaticResource NavigationText}" />
-
-                    <TextBlock Text="Level" Margin="3,0,0,0" Foreground="Black" />
-                    <TextBlock Text="{Binding Session.Level}" Margin="3,-7,10,40" Style="{StaticResource NavigationText}" />
-
-                    <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20" Name="ViewSpeaker">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="View Speaker" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
-                            <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,0,10" Style="{StaticResource NavigationText}"/>
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
-            </Border>
-
-            <!-- Speaker Name -->
-            <TextBlock Text="{Binding Session.SpeakerName}" Style="{StaticResource GroupTitle}" Grid.Column="2" Grid.Row="1"
-                       Margin="30,0,0,0" FontSize="30" VerticalAlignment="Center" />
-
-            <!-- Abstract -->
-            <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled"
-                          VerticalScrollBarVisibility="Auto" Margin="30,10,30,0" FlowDirection="LeftToRight" HorizontalScrollMode="Disabled"
-                          VerticalScrollMode="Auto" IsScrollInertiaEnabled="True" Grid.Column="2" Grid.Row="2">
-                <ScrollViewer.Content>
-                    <Border Padding="0,0,25,0">
-                        <TextBlock TextWrapping="Wrap" Style="{StaticResource CMNormalTextStyle}" Text="{Binding Session.Abstract}" />
-                    </Border>
-                </ScrollViewer.Content>
-            </ScrollViewer>
-        </Grid>
-    </Border>
+        <!-- Abstract -->
+        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto" Margin="7,7,7,7" FlowDirection="LeftToRight" HorizontalScrollMode="Disabled"
+                          VerticalScrollMode="Auto" IsScrollInertiaEnabled="True" Grid.Column="2" Grid.Row="1">
+            <ScrollViewer.Content>
+                <Border Padding="25,10,50,0">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Session.Abstract}"
+                               FontFamily="Segoe UI" FontWeight="Normal" FontSize="18" Foreground="Black" />
+                </Border>
+            </ScrollViewer.Content>
+        </ScrollViewer>
+    </Grid>
 </app:LayoutAwarePage>

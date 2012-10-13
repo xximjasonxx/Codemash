@@ -121,6 +121,7 @@
     <Compile Include="Grouping\TrackSessionGrouper.cs" />
     <Compile Include="Parameters\GroupingParameter.cs" />
     <Compile Include="Parameters\SessionParameter.cs" />
+    <Compile Include="Parameters\SpeakerParameter.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SessionsListViewModel.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />

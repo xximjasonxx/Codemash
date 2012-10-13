@@ -26,7 +26,7 @@
                     VerticalAlignment="Center"  Margin="0,18"/>
 
             <!-- Speaker Name Textblock -->
-            <TextBlock Text="{Binding FullName}" Style="{StaticResource PageTitle}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
+            <TextBlock Text="{Binding Speaker.FullName}" Style="{StaticResource PageTitle}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
                        TextWrapping="NoWrap" />
 
             <!-- Additional Information Panel -->
@@ -35,26 +35,26 @@
                 <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
                     <Rectangle HorizontalAlignment="Stretch" Height="30" Margin="20,0,30,20" Fill="{StaticResource CodemashOrange}" />
 
-                    <Image Source="{Binding PictureUrl}" Margin="20,10,20,30" Stretch="Uniform" />
+                    <Image Source="{Binding Speaker.PictureUrl}" Margin="20,10,20,30" Stretch="Uniform" />
 
                     <TextBlock Text="Twitter" Margin="3,0,0,0" Foreground="Black" />
-                    <TextBlock Text="{Binding Twitter}" Margin="3,-7,10,20" Style="{StaticResource NavigationText}" />
+                    <TextBlock Text="{Binding Speaker.Twitter}" Margin="3,-7,10,20" Style="{StaticResource NavigationText}" />
 
-                    <TextBlock Text="Email Address" Margin="3,0,0,0" Foreground="Black" />
+                    <!--<TextBlock Text="Email Address" Margin="3,0,0,0" Foreground="Black" />
                     <Viewbox Stretch="Uniform">
                         <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding EmailAddress}" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
+                                <TextBlock Text="{Binding Speaker.EmailAddress}" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
                                 <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,10,10" Style="{StaticResource NavigationText}"/>
                             </StackPanel>
                         </Button>
-                    </Viewbox>
+                    </Viewbox>-->
 
                     <TextBlock Text="Blog" Margin="3,0,0,0" Foreground="Black" />
                     <Viewbox Stretch="Uniform">
                         <Button Style="{StaticResource TextButtonStyle}" Margin="0,0,0,20">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding BlogUrl}" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
+                                <TextBlock Text="{Binding Speaker.BlogUrl}" Margin="3,-7,10,10" Style="{StaticResource NavigationText}" />
                                 <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-7,10,10" Style="{StaticResource NavigationText}"/>
                             </StackPanel>
                         </Button>
@@ -68,51 +68,7 @@
                           VerticalScrollMode="Auto" IsScrollInertiaEnabled="True" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2">
                 <ScrollViewer.Content>
                     <Border Padding="0,0,25,0">
-                        <TextBlock TextWrapping="Wrap" Style="{StaticResource CMNormalTextStyle}">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu leo ac lorem accumsan viverra. Suspendisse potenti. Cras a quam eu est fermentum rutrum. Pellentesque dignissim elit tristique dolor molestie eget auctor ipsum dapibus. Nullam accumsan tempus urna, at vestibulum sem vestibulum egestas. Proin ac dui risus, non viverra neque. Praesent laoreet est vel leo suscipit cursus. Nulla nec tempor ligula. Ut consequat sagittis nunc nec faucibus. Duis ornare ipsum sit amet velit venenatis hendrerit. Maecenas faucibus, sapien non pretium tempor, magna diam lobortis dolor, a interdum ante tortor eu sem. Aliquam pharetra ultrices consequat.
-                                <LineBreak />
-                                <LineBreak />
-                                Phasellus a lectus sem, non elementum libero. Fusce quam est, mattis id pellentesque a, porta a nibh. Donec sit amet diam elit. Integer at malesuada nunc. Nam blandit mi eget felis adipiscing eget tempor dolor euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at ipsum massa, nec accumsan mi. Nam egestas velit lacus.
-                                <LineBreak />
-                                <LineBreak />
-                                Nulla vehicula feugiat gravida. Mauris accumsan laoreet gravida. Mauris porta, dui non sagittis dictum, elit mauris convallis orci, a fringilla diam nisl at elit. In quam enim, consectetur a faucibus vel, auctor vel lorem. Aliquam interdum, libero sit amet posuere placerat, erat sapien tempus erat, sed suscipit nisl purus sit amet purus. Vestibulum vehicula, sapien et porttitor interdum, massa dolor facilisis quam, sit amet porta felis neque tristique ligula. Morbi commodo feugiat lorem, ut elementum est eleifend eu. Integer ac viverra magna. Proin vel enim a nibh ultricies condimentum. Nam cursus convallis neque, non condimentum ligula facilisis sit amet. Aenean pharetra laoreet diam. Proin nec ipsum ante, et auctor lectus. Praesent at odio augue, a rutrum enim. Suspendisse eget ipsum vel enim convallis sodales sed non lorem. Nam cursus laoreet justo laoreet ultricies.
-                                <LineBreak />
-                                <LineBreak />
-                                Nunc elementum, sapien ac vehicula eleifend, purus eros varius nisl, non commodo metus erat vitae felis. Aliquam erat volutpat. In ornare mauris velit. Morbi eget elit erat. Vivamus ullamcorper nisl non lacus iaculis lacinia pulvinar lorem blandit. Aenean et malesuada enim. Praesent lorem est, cursus quis venenatis ut, interdum in purus. Integer sollicitudin, ipsum sed facilisis egestas, eros augue volutpat nisl, non ultricies nisl felis et lacus. Etiam ut tortor ut nisi dictum convallis et viverra risus. Morbi scelerisque libero lacinia ante dictum at sodales nisl scelerisque. Ut vel tortor at velit dapibus suscipit. Morbi consectetur, nunc vitae tempus imperdiet, ante ligula lobortis neque, sit amet ultrices purus nunc eu ligula.
-                                <LineBreak />
-                                <LineBreak />
-                                Aenean condimentum tincidunt lectus, eget lobortis felis cursus sed. Sed sed purus porttitor massa ultricies egestas. Quisque a neque sed arcu iaculis imperdiet sed vitae enim. Mauris sed dui eu purus cursus pharetra id in libero. Integer ac justo eget mauris iaculis ultricies. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed ligula ligula, nec sodales lectus. Sed sit amet nisl ante, vitae feugiat ante. Sed molestie pharetra risus eget venenatis. Cras euismod aliquam nibh eget tristique. Praesent sodales risus nec odio scelerisque mollis. Vestibulum tempus ipsum sed mauris porttitor euismod.
-                                <LineBreak />
-                                <LineBreak />
-                                Praesent viverra odio id sem suscipit venenatis. Suspendisse at magna at lorem dapibus faucibus. Aliquam sem nisi, posuere in fermentum eget, ullamcorper vitae elit. Ut ac est massa, eu imperdiet enim. Pellentesque sollicitudin aliquam varius. Sed felis lectus, rhoncus eu bibendum at, laoreet at quam. Vivamus nec nunc nunc, vitae fermentum arcu. Fusce in nibh vel metus eleifend porta id vitae dolor. Pellentesque vitae lacinia justo. Sed congue dolor urna. Quisque et semper dui. Nam elementum luctus mauris a commodo. Ut eu ipsum et arcu iaculis accumsan ac sit amet lacus. Suspendisse sodales tellus vehicula ipsum molestie vestibulum. Ut tempor massa et purus euismod sit amet aliquam metus pharetra.
-                                <LineBreak />
-                                <LineBreak />
-                                Sed ac risus et metus scelerisque venenatis non non orci. Praesent lacinia mauris vel velit semper eget bibendum arcu sollicitudin. In nisi dui, sollicitudin eu placerat id, pretium sed nibh. Donec nunc velit, ultricies id elementum eget, fringilla vel est. Nam aliquet porttitor nibh, et gravida nisi accumsan eu. Aenean eget dolor sed nulla scelerisque hendrerit quis in lectus. Quisque eu mi arcu, nec congue mauris. Vivamus dignissim mollis facilisis. Quisque pretium cursus dui quis gravida. Nunc convallis est id quam gravida suscipit. Integer suscipit aliquam tincidunt. In posuere libero non tellus mollis vulputate. Donec sed ipsum vel elit aliquet tempor sed vitae neque.
-                                <LineBreak />
-                                <LineBreak />
-                                Sed et libero et dui rutrum semper. Mauris leo ante, suscipit eget laoreet porta, euismod eu dui. Pellentesque risus arcu, posuere et pellentesque quis, vulputate eget dolor. Vestibulum facilisis, nulla quis dictum vestibulum, quam tortor luctus purus, eget semper lacus nulla egestas urna. Nulla vehicula velit vulputate dui interdum dictum. Ut at dolor ante. Nulla ultricies ipsum volutpat purus eleifend sed adipiscing dolor fermentum. Maecenas eu est metus, ac facilisis libero. Sed accumsan tempus enim, eu malesuada diam mollis non. Fusce nec vestibulum nisi. Praesent ullamcorper quam vel enim congue ultrices venenatis nulla molestie. Morbi eros ipsum, varius quis suscipit vitae, porta vel mauris. Praesent fringilla libero a neque adipiscing imperdiet. Etiam et orci urna.
-                                <LineBreak />
-                                <LineBreak />
-                                Nam imperdiet iaculis arcu, porta aliquet velit porta non. Maecenas gravida porttitor nulla, in faucibus sapien ornare id. Sed nec purus mi, nec semper quam. Donec ultrices, dui et congue laoreet, elit dolor iaculis enim, at laoreet ipsum turpis sed tortor. Nulla varius molestie diam, quis mattis urna condimentum et. Aenean non dignissim sapien. Nulla nec est urna, eget semper velit. Praesent in consequat nulla. Praesent mi lorem, sollicitudin ut fermentum nec, imperdiet at nibh. Fusce mattis, risus vitae bibendum suscipit, augue lacus aliquam magna, et pulvinar neque mi ac lectus. Praesent tempor dictum diam ac gravida. Vivamus mauris quam, sollicitudin consectetur tempus eget, rhoncus et lorem. Vestibulum luctus, lectus eget imperdiet pulvinar, quam augue imperdiet dui, a tincidunt augue eros vel est. Sed ac lorem suscipit velit fermentum consectetur non quis ipsum. Vestibulum sodales pharetra mollis. Integer feugiat vulputate iaculis.
-                                <LineBreak />
-                                <LineBreak />
-                                Fusce congue, nisl ut ornare gravida, eros massa porttitor ante, eu imperdiet nisi turpis eu eros. Aliquam vestibulum leo nec lacus tristique nec fermentum augue mollis. Aliquam non scelerisque nisl. Vivamus porta lacus nisi. Praesent a dolor purus. Sed quis risus vestibulum metus consectetur iaculis eget a nisl. Nunc malesuada imperdiet ultricies. Vivamus iaculis lorem a mauris porta pulvinar. Mauris rhoncus varius leo non porta.
-                                <LineBreak />
-                                <LineBreak />
-                                Nunc porttitor metus sit amet lacus tempor feugiat. Sed ultrices sapien quis nibh malesuada suscipit. Pellentesque nec placerat arcu. Vivamus fringilla dapibus lectus sagittis malesuada. Donec at sapien odio. Maecenas blandit aliquam cursus. Suspendisse ut magna tellus. Maecenas eget ipsum lacus. Quisque viverra, risus in dictum rhoncus, sapien felis volutpat neque, a venenatis orci nulla ut est. Mauris dictum ornare felis nec adipiscing. Cras purus nibh, pellentesque eget feugiat a, posuere ut urna. Donec et leo leo. Fusce a enim at orci viverra volutpat. Sed non consectetur risus. Nulla vel libero vel mi luctus malesuada vitae nec felis. Integer dolor massa, porttitor faucibus mattis a, porttitor sed nulla.
-                                <LineBreak />
-                                <LineBreak />
-                                Proin in rhoncus mi. Proin pretium sagittis adipiscing. Aenean volutpat aliquam metus vehicula egestas. Integer vehicula iaculis sapien. Suspendisse condimentum tempus lectus ac placerat. Sed lacinia tortor ac nisl tincidunt accumsan. Duis est metus, auctor sit amet feugiat vel, rhoncus quis lorem.
-                                <LineBreak />
-                                <LineBreak />
-                                Etiam mi nulla, convallis eget vehicula at, varius non eros. Maecenas odio augue, posuere vel vulputate id, dignissim nec ipsum. Donec at vestibulum sapien. Integer imperdiet venenatis quam, eget venenatis arcu condimentum a. Maecenas vel nisl vitae nibh pulvinar adipiscing ullamcorper non turpis. Aenean ut mollis lectus. Nulla auctor enim rutrum sem commodo pulvinar. Maecenas ullamcorper venenatis nisi, aliquam posuere sem viverra ac. Fusce a elit purus.
-                                <LineBreak />
-                                <LineBreak />
-                                Nullam congue sapien at dolor facilisis et laoreet tellus rutrum. Fusce aliquet, justo a blandit porttitor, turpis justo pulvinar arcu, vel varius nisi arcu nec odio. Sed at elit lorem, lobortis mollis est. Proin posuere interdum tortor a convallis. Proin scelerisque mauris eget ligula vehicula eget suscipit ligula consequat. Quisque eget pulvinar elit. Donec lacinia lorem sit amet massa mattis vulputate. Vestibulum metus neque, dapibus quis egestas ac, varius vel mauris.
-                                <LineBreak />
-                                <LineBreak />
-                                Cras vulputate vulputate consectetur. Sed viverra mi ac augue ornare quis hendrerit enim lacinia. Integer sodales blandit lacus, non lobortis sem tempor eget. Phasellus hendrerit tempor massa, eu commodo tellus facilisis elementum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut convallis velit ut lorem posuere interdum. Aliquam eu lacus sit amet dolor consequat vulputate. Aliquam aliquet lectus ac ipsum pharetra vitae aliquam nunc congue. Etiam egestas consectetur est, eget egestas urna faucibus id. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse erat augue, congue eu lobortis at, vehicula sit amet turpis. Sed sit amet turpis nec massa scelerisque porta.
-                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" Style="{StaticResource CMNormalTextStyle}" Text="{Binding Speaker.Biography}" />
                     </Border>
                 </ScrollViewer.Content>
             </ScrollViewer>

@@ -34,7 +34,6 @@ namespace Codemash.Client.Data.Repository.Impl
                                                Room = new StringWrapper(ji["Room"]).ToString(),
                                                SpeakerId = new StringWrapper(ji["Speaker"]["SpeakerId"]).ToString().AsInt(),
                                                SessionId = new StringWrapper(ji["SessionId"]).ToString().AsInt(),
-                                               SpeakerName = ji["Speaker"]["FirstName"].ToString() + " " + ji["Speaker"]["LastName"].ToString(),
                                                Starts = ji["StartTime"].ToString().AsDateTime(true),
                                                Ends = ji["EndTime"].ToString().AsDateTime(true)
                                            }).ToList();

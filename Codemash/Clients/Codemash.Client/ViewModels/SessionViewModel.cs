@@ -16,12 +16,22 @@ namespace Codemash.Client.ViewModels
         }
 
         // Attributes
-        public SessionDetailView Session { get; set; }
+        public SessionDetailView Session
+        {
+            get
+            {
+                var detailView = new SessionDetailView(Parameter.Value);
+                detailView.SpeakerName = SpeakerRepository.Get(detailView.SpeakerId).FullName;
+
+                return detailView;
+            }
+        }
 
         // behaviors
         public void ViewSpeaker()
         {
-            return;
+            var speaker = SpeakerRepository.Get(Parameter.Value.SpeakerId);
+            NavigationService.NavigateToViewModel<SpeakerViewModel>(new SpeakerParameter(speaker));
         }
     }
 }

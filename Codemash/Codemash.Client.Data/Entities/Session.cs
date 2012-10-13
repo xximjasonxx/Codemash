@@ -17,7 +17,5 @@ namespace Codemash.Client.Data.Entities
         public string Room { get; internal set; }
         public int SpeakerId { get; internal set; }
         public string Track { get; internal set; }
-
-        public string SpeakerName { get; set; }
     }
 }

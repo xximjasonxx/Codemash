@@ -3,15 +3,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <DataTemplate x:Key="sessionItemTemplate">
-        <Grid>
-            <TextBlock Text="{Binding Display}" Foreground="Black"
-                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="19" />
+        <Grid Margin="5,0,40,10">
+            <TextBlock Text="{Binding Display}" Foreground="Black" TextWrapping="Wrap"
+                       TextTrimming="WordEllipsis" />
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="sessionGroupItemTemplate">
-        <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,2" Padding="0,0,0,15">
-            <TextBlock Text="{Binding Display}" Style="{StaticResource GroupTitle}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,2" Padding="0,0,0,15" Margin="0,0,0,7">
+            <TextBlock Text="{Binding Display}" Style="{StaticResource GroupTitle}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                       TextTrimming="WordEllipsis" />
         </Border>
     </DataTemplate>
 

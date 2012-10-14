@@ -47,6 +47,12 @@ namespace Codemash.Client.Data.Repository.Impl
         {
             string applicationPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
             _databasePath = Path.Combine(applicationPath, DATABASE_NAME);
+
+            // used to for debugging
+            using (var db = new SQLiteConnection(_databasePath))
+            {
+                db.DropTable<T>();
+            }
         }
 
         /// <summary>
@@ -71,8 +77,6 @@ namespace Codemash.Client.Data.Repository.Impl
 
             return 0;
         }
-
-        public event EventHandler LoadCompleted;
 
         private async Task<IList<T>> LoadFromWebServiceAsync()
         {

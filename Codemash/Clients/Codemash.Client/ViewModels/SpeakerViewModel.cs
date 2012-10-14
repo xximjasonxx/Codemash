@@ -10,6 +10,7 @@ namespace Codemash.Client.ViewModels
 
         public SpeakerViewModel(INavigationService navigationService) : base(navigationService)
         {
+
         }
 
         // attributes

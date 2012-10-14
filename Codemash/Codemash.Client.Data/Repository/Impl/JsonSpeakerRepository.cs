@@ -11,8 +11,6 @@ namespace Codemash.Client.Data.Repository.Impl
     {
         #region Implementation of IRepository<Speaker>
 
-        public event EventHandler LoadCompleted;
-
         protected override string DownloadUrl
         {
             get { return "http://dl.dropbox.com/u/13029365/DevLink2012_Speakers.json"; }
@@ -27,7 +25,7 @@ namespace Codemash.Client.Data.Repository.Impl
                            Biography = new StringWrapper(ji["Bio"]).ToString(),
                            BlogUrl = new StringWrapper(ji["Url"]).ToString(),
                            Company = new StringWrapper(ji["Company"]).ToString(),
-                           PictureUrl = new StringWrapper(ji["PictureUrl"]).ToString(),
+                           PictureUrl = new StringWrapper(ji["PictureURL"]).ToString(),
                            Twitter = new StringWrapper(ji["Twitter"]).ToString(),
                            SpeakerId = new StringWrapper(ji["SpeakerId"]).ToString().AsInt()
                        };

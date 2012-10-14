@@ -114,6 +114,11 @@
     <Compile Include="Core\LayoutAwarePage.cs" />
     <Compile Include="Core\SessionItemTemplateSelector.cs" />
     <Compile Include="Core\SuspensionManager.cs" />
+    <Compile Include="Parameters\SearchTextParameter.cs" />
+    <Compile Include="ViewModels\SearchResultsViewModel.cs" />
+    <Compile Include="Views\SearchResultsView.xaml.cs">
+      <DependentUpon>SearchResultsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Grouping\AlphanumericSessionGrouper.cs" />
     <Compile Include="Grouping\BlockSessionGrouper.cs" />
     <Compile Include="Grouping\GroupSessionFactory.cs" />
@@ -177,6 +182,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\SearchResultsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>

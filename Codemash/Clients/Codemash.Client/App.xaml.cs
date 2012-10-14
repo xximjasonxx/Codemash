@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Caliburn.Micro;
 using Codemash.Client.Data.Repository;
 using Codemash.Client.Data.Repository.Impl;
+using Codemash.Client.Parameters;
 using Codemash.Client.ViewModels;
 
 namespace Codemash.Client
@@ -47,6 +48,20 @@ namespace Codemash.Client
         protected override Type GetDefaultViewModel()
         {
             return typeof (SplashViewModel);
+        }
+
+        #endregion
+
+        #region Search
+
+        /// <summary>
+        /// Invoked when the application is activated to display search results.
+        /// </summary>
+        /// <param name="args">Details about the activation request.</param>
+        protected override void OnSearchActivated(Windows.ApplicationModel.Activation.SearchActivatedEventArgs args)
+        {
+            var navigationService = (INavigationService) _container.GetInstance(typeof (INavigationService), null);
+            navigationService.NavigateToViewModel<SearchResultsViewModel>(new SearchTextParameter(args.QueryText));
         }
 
         #endregion

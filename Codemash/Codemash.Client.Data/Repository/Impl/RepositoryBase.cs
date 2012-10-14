@@ -25,7 +25,7 @@ namespace Codemash.Client.Data.Repository.Impl
         /// <summary>
         /// Determine if a Table exists for this entity type
         /// </summary>
-        private bool TableExists
+        protected bool TableExists
         {
             get
             {
@@ -90,7 +90,7 @@ namespace Codemash.Client.Data.Repository.Impl
             }
         }
 
-        private void LoadRepositoryFromDatabase()
+        protected void LoadRepositoryFromDatabase()
         {
             using (var db = new SQLiteConnection(_databasePath))
             {

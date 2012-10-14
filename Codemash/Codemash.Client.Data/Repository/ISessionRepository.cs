@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Codemash.Client.Data.Entities;
 
@@ -14,5 +11,12 @@ namespace Codemash.Client.Data.Repository
         /// </summary>
         /// <returns></returns>
         IList<Session> GetUpcomingSessions();
+
+        /// <summary>
+        /// Search Session titles for those matching the given search term
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        IList<Session> SearchSessions(string value);
     }
 }

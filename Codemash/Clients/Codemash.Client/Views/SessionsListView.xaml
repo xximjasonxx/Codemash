@@ -13,7 +13,7 @@
 
     <Grid Background="{StaticResource ApplicationBackgroundBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="97"/>
+            <ColumnDefinition Width="Auto" MinWidth="100"/>
             <ColumnDefinition Width="221*"/>
             <ColumnDefinition Width="1010*"/>
         </Grid.ColumnDefinitions>

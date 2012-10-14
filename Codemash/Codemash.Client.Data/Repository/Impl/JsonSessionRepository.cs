@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Codemash.Client.Core;
+using Codemash.Client.Core.Ex;
 using Codemash.Client.Data.Entities;
 using Newtonsoft.Json.Linq;
 
@@ -40,6 +42,23 @@ namespace Codemash.Client.Data.Repository.Impl
         public IList<Session> GetUpcomingSessions()
         {
             return Repository.OrderBy(s => s.Title).Take(10).ToList();
+        }
+
+        /// <summary>
+        /// Search Session titles for those matching the given search term
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        public IList<Session> SearchSessions(string searchTerm)
+        {
+            if (!TableExists)
+                throw new BaseDataNotAvailableException();
+
+            if (Repository.Count == 0)
+                LoadRepositoryFromDatabase();
+
+            return Repository.Where(s => s.Title.ToLower().Contains(searchTerm.ToLower()))
+                .OrderBy(s => s.Title).ToList();
         }
 
         #endregion

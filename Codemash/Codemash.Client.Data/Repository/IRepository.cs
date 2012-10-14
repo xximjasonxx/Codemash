@@ -12,12 +12,7 @@ namespace Codemash.Client.Data.Repository
         /// <summary>
         /// Load the repository with data
         /// </summary>
-        void Load();
-
-        /// <summary>
-        /// Indicates Load has completed
-        /// </summary>
-        event EventHandler LoadCompleted;
+        Task<int> LoadAsync();
 
         /// <summary>
         /// Return an item from the repository by an ID value

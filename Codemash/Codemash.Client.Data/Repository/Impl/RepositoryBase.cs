@@ -49,10 +49,10 @@ namespace Codemash.Client.Data.Repository.Impl
             _databasePath = Path.Combine(applicationPath, DATABASE_NAME);
 
             // used to for debugging
-            using (var db = new SQLiteConnection(_databasePath))
-            {
-                db.DropTable<T>();
-            }
+            //using (var db = new SQLiteConnection(_databasePath))
+            //{
+            //    db.DropTable<T>();
+            //}
         }
 
         /// <summary>

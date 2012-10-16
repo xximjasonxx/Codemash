@@ -6,6 +6,7 @@
     <SolidColorBrush x:Key="CodemashOrange" Color="#FFFB8102" />
     <SolidColorBrush x:Key="CodemashLightOrange" Color="#FFFFAE00" />
     <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#ffeeeeee" />
+    <SolidColorBrush x:Key="TextGrayBrush" Color="#ff555555" />
     
     <!-- Symbols -->
     <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>
@@ -44,7 +45,7 @@
     </Style>
     
     <Style x:Key="NavigationText" TargetType="TextBlock" BasedOn="{StaticResource GroupTitle}">
-        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Foreground" Value="{StaticResource TextGrayBrush}" />
     </Style>
 
     <Style x:Key="CMNormalTextStyle" TargetType="TextBlock">
@@ -63,7 +64,7 @@
                 <TranslateTransform X="-1" Y="4"/>
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Foreground" Value="{StaticResource TextGrayBrush}" />
     </Style>
 
     <!-- Button Styles -->
@@ -173,10 +174,6 @@
 
     <!-- Item Container Styles -->
     <Style x:Key="GridViewItemBase" TargetType="GridViewItem">
-        <Setter Property="Width" Value="450" />
-        <Setter Property="Height" Value="70" />
-        <Setter Property="Margin" Value="7,7,40,7" />
-        <Setter Property="Padding" Value="5,7,5,7" />
     </Style>
     
     <Style x:Key="GroupHeaderItem" TargetType="GridViewItem" BasedOn="{StaticResource GridViewItemBase}">
@@ -198,21 +195,5 @@
     </Style>
 
     <Style x:Key="GroupItem" TargetType="GridViewItem">
-        <!--<Setter Property="Height" Value="200" />-->
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="GridViewItem">
-                    <ContentPresenter>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="PointerOver" />
-                                <VisualState x:Name="Pressed" />
-                                <VisualState x:Name="Disabled" />
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </ContentPresenter>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 </ResourceDictionary>

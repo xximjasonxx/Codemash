@@ -8,6 +8,7 @@ using Caliburn.Micro;
 using Codemash.Client.Core.Ex;
 using Codemash.Client.Data.Entities;
 using Codemash.Client.Data.Repository;
+using Codemash.Client.DataModels;
 using Codemash.Client.Parameters;
 
 namespace Codemash.Client.ViewModels
@@ -25,7 +26,7 @@ namespace Codemash.Client.ViewModels
 
         // attributes
         public string FormattedSearchTerm { get { return string.Format("'{0}'", Parameter.Value); } }
-        public ObservableCollection<Session> Results { get; set; }
+        public ObservableCollection<SessionListView> Results { get; set; }
         public string FormattedResultsCount
         {
             get { return Results == null ? "(0)" : string.Format("({0})", Results.Count); }
@@ -41,12 +42,16 @@ namespace Codemash.Client.ViewModels
         {
             try
             {
-                Results = new ObservableCollection<Session>(SessionRepository.SearchSessions(Parameter.Value));
+                Results = new ObservableCollection<SessionListView>(
+                    SessionRepository.SearchSessions(Parameter.Value).Select(s => new SessionListView
+                                                                                      {
+                                                                                          SessionTitle = s.Title
+                                                                                      }));
             }
             catch(BaseDataNotAvailableException)
             {
                 // there is not local data available to search, return an empty list
-                Results = new ObservableCollection<Session>();
+                Results = new ObservableCollection<SessionListView>();
             }
 
             NotifyResultsPropertyUpdated();

@@ -53,7 +53,7 @@
             <ScrollViewer.Content>
                 <Border Padding="25,10,50,0">
                     <TextBlock TextWrapping="Wrap" Text="{Binding Speaker.Biography}"
-                               FontFamily="Segoe UI" FontWeight="Normal" FontSize="18" Foreground="Black" />
+                               FontFamily="Segoe UI" FontWeight="Normal" FontSize="18" Foreground="{StaticResource TextGrayBrush}" />
                 </Border>
             </ScrollViewer.Content>
         </ScrollViewer>

@@ -12,6 +12,8 @@
     
     <Page.Resources>
         <cal:BooleanToVisibilityConverter x:Key="visibilityConverter" />
+        <app:SessionItemTemplateSelector x:Name="templateSelector" />
+        <app:SessionItemContainerStyleSelector x:Name="containerStyleSelector" />
     </Page.Resources>
 
     <Grid Background="{StaticResource ApplicationBackgroundBrush}">
@@ -40,15 +42,20 @@
                    Visibility="{Binding ShowNoResults, Converter={StaticResource visibilityConverter}}" />
 
         <GridView ItemsSource="{Binding Results}" IsItemClickEnabled="True" Grid.Row="1" Grid.Column="1"
-                  Visibility="{Binding ShowResultsGrid, Converter={StaticResource visibilityConverter}}">
-            <GridView.ItemTemplate>
-                <DataTemplate>
-                    <Border Width="300" Height="Auto" Margin="10,10,40,20" Padding="7">
-                        <TextBlock Text="{Binding Title}" Foreground="#888888" FontSize="26" TextWrapping="Wrap"
-                                   HorizontalAlignment="Stretch" VerticalAlignment="Top" FontFamily="Segoe UI" />
-                    </Border>
-                </DataTemplate>
-            </GridView.ItemTemplate>
+                  Visibility="{Binding ShowResultsGrid, Converter={StaticResource visibilityConverter}}"
+                  ItemTemplateSelector="{StaticResource templateSelector}" ItemContainerStyle="{StaticResource GroupItem}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ItemClick">
+                    <cal:ActionMessage MethodName="SessionClick">
+                        <cal:Parameter Value="$eventArgs" />
+                    </cal:ActionMessage>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VariableSizedWrapGrid />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
         </GridView>
     </Grid>
 </app:LayoutAwarePage>

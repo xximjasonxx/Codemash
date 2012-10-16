@@ -32,8 +32,8 @@
 
         <!-- Grid View Block -->
         <Border Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,10,10,0" Padding="20,10">
-            <GridView SelectionMode="None" IsItemClickEnabled="True" ItemTemplateSelector="{StaticResource templateSelector}"
-                      ItemsSource="{Binding ListSource}" ItemContainerStyleSelector="{StaticResource containerStyleSelector}">
+            <GridView SelectionMode="None" IsItemClickEnabled="True" ItemsSource="{Binding ListSource}"
+                      ItemTemplateSelector="{StaticResource templateSelector}" ItemContainerStyleSelector="{StaticResource containerStyleSelector}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="ItemClick">
                         <cal:ActionMessage MethodName="SessionClick">

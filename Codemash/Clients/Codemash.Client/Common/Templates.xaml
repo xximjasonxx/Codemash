@@ -3,16 +3,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <DataTemplate x:Key="sessionItemTemplate">
-        <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <TextBlock Text="{Binding Display}" TextWrapping="Wrap" FontFamily="Segoe UI" Foreground="#ff555555"
-                       FontSize="20" />
+        <Border Height="75" Width="350" Padding="5" Margin="0,0,30,0">
+            <TextBlock Text="{Binding Display}" Foreground="{StaticResource TextGrayBrush}" TextWrapping="Wrap" FontSize="22"
+                       FontFamily="Segoe UI" />
         </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="sessionGroupItemTemplate">
-        <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,2" Padding="7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <TextBlock Text="{Binding Display}" Style="{StaticResource GroupTitle}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                       TextTrimming="WordEllipsis" />
+        <Border Height="75" Width="350" Padding="5,5,5,1" Margin="0,0,30,0" BorderBrush="#dddddd" BorderThickness="0,0,0,2">
+            <TextBlock Text="{Binding Display}" Foreground="{StaticResource CodemashOrange}" TextWrapping="Wrap"
+                       VerticalAlignment="Bottom" FontSize="28" FontFamily="Segoe UI" />
         </Border>
     </DataTemplate>
 

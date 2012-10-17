@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codemash.Phone7.App", "Codemash.Phone7.App\Codemash.Phone7.App.csproj", "{D059BEA3-E7A2-4065-9357-45CDC2F389BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codemash.Phone7.Data", "Codemash.Phone7.Data\Codemash.Phone7.Data.csproj", "{B85F9B9E-A393-4ACE-81A7-CA1F213373A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B85F9B9E-A393-4ACE-81A7-CA1F213373A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B85F9B9E-A393-4ACE-81A7-CA1F213373A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B85F9B9E-A393-4ACE-81A7-CA1F213373A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B85F9B9E-A393-4ACE-81A7-CA1F213373A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

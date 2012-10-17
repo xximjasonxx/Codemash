@@ -11,12 +11,11 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 
-namespace Codemash.Phone7.App
+namespace Codemash.Phone7.App.Views
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class SplashView : PhoneApplicationPage
     {
-        // Constructor
-        public MainPage()
+        public SplashView()
         {
             InitializeComponent();
         }

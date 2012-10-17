@@ -7,13 +7,11 @@
 
     <!--Application Resources-->
     <Application.Resources>
+        <!-- Solid Color Brushes -->
+        <SolidColorBrush x:Key="CodemashOrange" Color="#FFFB8102" />
+        <SolidColorBrush x:Key="CodemashLightOrange" Color="#FFFFAE00" />
+        <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#ffeeeeee" />
+        <SolidColorBrush x:Key="TextGrayBrush" Color="#ff555555" />
     </Application.Resources>
-
-    <Application.ApplicationLifetimeObjects>
-        <!--Required object that handles lifetime events for the application-->
-        <shell:PhoneApplicationService 
-            Launching="Application_Launching" Closing="Application_Closing" 
-            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
-    </Application.ApplicationLifetimeObjects>
 
 </Application>

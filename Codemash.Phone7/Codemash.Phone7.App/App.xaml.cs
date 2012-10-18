@@ -8,6 +8,13 @@ namespace Codemash.Phone7.App
         {
             // Standard Silverlight initialization
             InitializeComponent();
+
+            this.UnhandledException += App_UnhandledException;
+        }
+
+        void App_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

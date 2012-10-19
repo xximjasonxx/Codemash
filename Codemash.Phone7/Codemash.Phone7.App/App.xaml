@@ -2,21 +2,51 @@
     x:Class="Codemash.Phone7.App.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:app="clr-namespace:Codemash.Phone7.App.Common">
+    xmlns:app="clr-namespace:Codemash.Phone7.App.Common" xmlns:s="clr-namespace:System;assembly=mscorlib">
 
     <!--Application Resources-->
     <Application.Resources>
-        <ResourceDictionary>
-            <app:CodemashBootstrapper x:Key="bootstrapper" />
-        </ResourceDictionary>
-        
+        <app:CodemashBootstrapper x:Key="bootstrapper" />
+
+        <s:String x:Key="ChevronGlyph">&#xE26B;</s:String>
+
         <!-- Solid Color Brushes -->
         <SolidColorBrush x:Key="CodemashOrange" Color="#FFFB8102" />
         <SolidColorBrush x:Key="CodemashLightOrange" Color="#FFFFAE00" />
         <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#ffeeeeee" />
         <SolidColorBrush x:Key="TextGrayBrush" Color="#ff555555" />
+        
+        <!-- Templates -->
+        <DataTemplate x:Key="MainViewPanoramaTitle">
+            <StackPanel Orientation="Horizontal" Height="170">
+                <Image Source="/Assets/codemash_logo.jpg" VerticalAlignment="Bottom" Height="95" />
+                <ContentPresenter Height="100" VerticalAlignment="Bottom">
+                    <Border VerticalAlignment="Center">
+                        <TextBlock Text="{Binding}" Foreground="{StaticResource CodemashOrange}" FontSize="86.667" VerticalAlignment="Center" Margin="0"
+                                   FontFamily="Segoe WP" />
+                    </Border>
+                </ContentPresenter>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MainViewPanoramaHeader">
+            <ContentPresenter>
+                <TextBlock Text="{Binding}" Foreground="{StaticResource CodemashLightOrange}"
+                                   FontSize="50" FontFamily="Segoe WP"/>
+            </ContentPresenter>
+        </DataTemplate>
+
+        <ControlTemplate TargetType="Button" x:Key="TextButtonTemplate">
+            <ContentPresenter>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Foreground="{StaticResource TextGrayBrush}"
+                                                   FontFamily="Segoe WP" FontSize="35"
+                                                   Text="{TemplateBinding Content}"/>
+                    <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol"
+                                                   Margin="10,0,0,0" FontSize="35" Foreground="{StaticResource TextGrayBrush}" />
+                </StackPanel>
+            </ContentPresenter>
+        </ControlTemplate>
     </Application.Resources>
 
 </Application>

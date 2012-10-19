@@ -1,0 +1,58 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Codemash.Phone7.App.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:cal="http://www.caliburnproject.org"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="800" d:DesignWidth="480">
+
+    <Grid Background="{StaticResource ApplicationBackgroundBrush}">
+        <controls:Panorama Title="Codemash 2.0.1.3" TitleTemplate="{StaticResource MainViewPanoramaTitle}"
+                           HeaderTemplate="{StaticResource MainViewPanoramaHeader}">
+            
+            <controls:PanoramaItem Header="upcoming">
+                <ListBox ItemsSource="{Binding UpcomingSessions}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <cal:ActionMessage MethodName="SelectionChanged">
+                                <cal:Parameter Value="$eventArgs" />
+                            </cal:ActionMessage>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="5,0,5,30">
+                                <Border.Background>
+                                    <SolidColorBrush x:Name="BorderBackgroundBrush" Color="Transparent" />
+                                </Border.Background>
+                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"
+                                           Foreground="{StaticResource TextGrayBrush}"
+                                           FontSize="40" FontFamily="Segoe WP" 
+                                           Text="{Binding Title}" />
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </controls:PanoramaItem>
+
+            <!--Panorama item two-->
+            <controls:PanoramaItem Header="all sessions">
+                <StackPanel Orientation="Vertical" Margin="40,0,0,0">
+                    <Button Content="by name" Margin="0,0,0,30" Template="{StaticResource TextButtonTemplate}"
+                            x:Name="AllByName" />
+                    <Button Content="by block" Margin="0,0,0,30" Template="{StaticResource TextButtonTemplate}"
+                            x:Name="AllByBlock "/>
+                    <Button Content="by tech" Margin="0,0,0,30" Template="{StaticResource TextButtonTemplate}"
+                            x:Name="AllByTech" />
+                </StackPanel>
+            </controls:PanoramaItem>
+        </controls:Panorama>
+    </Grid>
+
+    <!--Panorama-based applications should not show an ApplicationBar-->
+
+</phone:PhoneApplicationPage>

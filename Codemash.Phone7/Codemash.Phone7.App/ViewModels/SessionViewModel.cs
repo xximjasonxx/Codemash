@@ -1,24 +1,40 @@
-﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
+using Codemash.Phone7.App.DataModels;
 using Codemash.Phone7.Data.Entities;
+using Codemash.Phone7.Data.Repository;
+using Ninject;
 
 namespace Codemash.Phone7.App.ViewModels
 {
     public class SessionViewModel : ViewModelBase
     {
-        public Session IncomingSession { get; set; }
+        private SessionDetailView _sessionDetailView;
+
+        public int IncomingSession { get; set; }
+
+        [Inject]
+        public ISessionRepository SessionRepository { get; set; }
 
         public SessionViewModel(INavigationService navigationService) : base(navigationService)
         {
+        }
+
+        // attributes
+        public SessionDetailView Session
+        {
+            get
+            {
+                if (_sessionDetailView == null)
+                {
+                    var session = SessionRepository.Get(IncomingSession);
+                    _sessionDetailView = new SessionDetailView
+                                             {
+                                                 Title = session.Title
+                                             };
+                }
+
+                return _sessionDetailView;
+            }
         }
     }
 }

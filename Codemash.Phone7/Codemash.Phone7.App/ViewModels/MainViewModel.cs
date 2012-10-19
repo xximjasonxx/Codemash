@@ -15,9 +15,6 @@ namespace Codemash.Phone7.App.ViewModels
         [Inject]
         public ISessionRepository SessionRepository { get; set; }
 
-        [Inject]
-        public ISpeakerRepository SpeakerRepository { get; set; }
-
         public MainViewModel(INavigationService navigationService) : base(navigationService)
         {
             // you cannot go back from this page
@@ -44,8 +41,7 @@ namespace Codemash.Phone7.App.ViewModels
             var selectedSessionView = ev.AddedItems[0] as SessionListView;
             if (selectedSessionView != null)
             {
-                var session = SessionRepository.Get(selectedSessionView.SessionId);
-                NavigationService.UriFor<SessionViewModel>().WithParam(sv => sv.IncomingSession, session)
+                NavigationService.UriFor<SessionViewModel>().WithParam(sv => sv.IncomingSession, selectedSessionView.SessionId)
                     .Navigate();
             }
         }

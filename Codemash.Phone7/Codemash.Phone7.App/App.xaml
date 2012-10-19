@@ -36,6 +36,15 @@
             </ContentPresenter>
         </DataTemplate>
 
+        <DataTemplate x:Key="SessionDetailTitleTemplate">
+            <Border>
+                <ContentPresenter>
+                    <TextBlock Text="{Binding}" Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
+                                       FontSize="32" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="0,0,10,0" />
+                </ContentPresenter>
+            </Border>
+        </DataTemplate>
+
         <ControlTemplate TargetType="Button" x:Key="TextButtonTemplate">
             <ContentPresenter>
                 <StackPanel Orientation="Horizontal">

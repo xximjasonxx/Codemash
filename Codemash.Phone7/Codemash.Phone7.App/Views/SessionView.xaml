@@ -5,41 +5,39 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="False" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="800" d:DesignWidth="480">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <!--Pivot Control-->
-        <controls:Pivot Title="MY APPLICATION">
-            <!--Pivot item one-->
-            <controls:PivotItem Header="item1">
+    <Grid Background="{StaticResource ApplicationBackgroundBrush}">
+        <controls:Pivot Title="{Binding Session.Title}">
+            <controls:Pivot.TitleTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,20">
+                        <TextBlock Foreground="{StaticResource CodemashOrange}" Text="{Binding}"
+                                   FontFamily="Segoe WP" FontSize="35" TextWrapping="Wrap" />
+                    </Border>
+                </DataTemplate>
+            </controls:Pivot.TitleTemplate>
+
+            <controls:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Foreground="{StaticResource CodemashLightOrange}"
+                               FontFamily="Segoe WP" FontSize="32" />
+                </DataTemplate>
+            </controls:Pivot.HeaderTemplate>
+
+            <controls:PivotItem Header="details">
+                <TextBlock Text="{Binding Session.Title}" Foreground="{StaticResource CodemashOrange}" />
+            </controls:PivotItem>
+
+            <controls:PivotItem Header="abstract">
                 <Grid/>
             </controls:PivotItem>
 
-            <!--Pivot item two-->
-            <controls:PivotItem Header="item2">
+            <controls:PivotItem Header="speaker">
                 <Grid/>
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
 
-    <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="appbar_button1" IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton x:Name="appbar_button2" IconUri="/Images/appbar_button2.png" Text="Button 2"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem x:Name="menuItem1" Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem x:Name="menuItem2" Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
-    
 </phone:PhoneApplicationPage>

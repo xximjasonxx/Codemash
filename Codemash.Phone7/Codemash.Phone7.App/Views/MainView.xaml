@@ -43,11 +43,11 @@
             <controls:PanoramaItem Header="all sessions">
                 <StackPanel Orientation="Vertical" Margin="40,0,0,0">
                     <Button Content="by name" Margin="0,0,0,30" Template="{StaticResource TextButtonTemplate}"
-                            x:Name="AllByName" />
+                            Name="AllByName" />
                     <Button Content="by block" Margin="0,0,0,30" Template="{StaticResource TextButtonTemplate}"
-                            x:Name="AllByBlock "/>
+                            Name="AllByBlock" />
                     <Button Content="by tech" Margin="0,0,0,30" Template="{StaticResource TextButtonTemplate}"
-                            x:Name="AllByTech" />
+                            Name="AllByTech" />
                 </StackPanel>
             </controls:PanoramaItem>
         </controls:Panorama>

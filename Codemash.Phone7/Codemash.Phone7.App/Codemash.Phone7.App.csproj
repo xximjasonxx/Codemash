@@ -78,8 +78,10 @@
     <Compile Include="Common\CodemashContainer.cs" />
     <Compile Include="Common\Enum.cs" />
     <Compile Include="DataModels\IListItem.cs" />
+    <Compile Include="DataModels\SessionDetailView.cs" />
     <Compile Include="DataModels\SessionGroupHeadView.cs" />
     <Compile Include="DataModels\SessionListView.cs" />
+    <Compile Include="DataModels\SpeakerDetailView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />

@@ -1,18 +1,21 @@
-﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+﻿using Codemash.Phone7.Data.Common;
 
 namespace Codemash.Phone7.Data.Entities
 {
     public abstract class EntityBase
     {
+        internal EntityState EntityState { get; private set; }
+        internal bool IsDirty { get { return EntityState != EntityState.Clean; } }
+        internal abstract int PrimaryKey { get; }
 
+        protected EntityBase()
+        {
+            EntityState = EntityState.New;
+        }
+
+        internal void MarkAsClean()
+        {
+            EntityState = EntityState.Clean;
+        }
     }
 }

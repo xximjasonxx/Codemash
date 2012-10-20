@@ -50,6 +50,7 @@
     <Reference Include="RestSharp.WindowsPhone">
       <HintPath>..\packages\RestSharp.104.1\lib\sl4-wp71\RestSharp.WindowsPhone.dll</HintPath>
     </Reference>
+    <Reference Include="system.data.linq" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -58,6 +59,8 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Enum.cs" />
+    <Compile Include="Context\CodemashDataContext.cs" />
     <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="Entities\Session.cs" />
     <Compile Include="Entities\Speaker.cs" />

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Codemash.Phone7.Data.Common;
+using Codemash.Phone7.Data.Context;
 using Codemash.Phone7.Data.Entities;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -9,6 +11,8 @@ namespace Codemash.Phone7.Data.Repository.Impl
 {
     public abstract class RepositoryBase<T> where T : EntityBase
     {
+        private const string ConnectionString = @"isostore:/Codemash.sdf";
+
         private IList<T> _repository;
         protected IList<T> Repository
         {
@@ -17,12 +21,43 @@ namespace Codemash.Phone7.Data.Repository.Impl
 
         public event EventHandler LoadCompleted;
 
+        protected RepositoryBase()
+        {
+            // if the database does not exist, create it
+            using (var db = new CodemashDataContext(ConnectionString))
+            {
+                if (!db.DatabaseExists())
+                    db.CreateDatabase();
+            }
+        }
+
+        protected CodemashDataContext GetContext()
+        {
+            return new CodemashDataContext(ConnectionString);
+        }
+
         public void Load()
         {
-            var client = new RestClient();
-            var request = new RestRequest(DownloadUrl, Method.GET);
+            using (var db = new CodemashDataContext(ConnectionString))
+            {
+                _repository = db.GetTable<T>().ToList();
+                if (_repository.Count == 0)
+                {
+                    var client = new RestClient();
+                    var request = new RestRequest(DownloadUrl, Method.GET);
 
-            client.ExecuteAsync(request, LoadCompleteCallback);
+                    client.ExecuteAsync(request, LoadCompleteCallback);
+                }
+                else
+                {
+                    // make sure we reset the flag for all items coming from the database
+                    foreach (var item in _repository)
+                        item.MarkAsClean();
+
+                    if (LoadCompleted != null)
+                        LoadCompleted(this, new EventArgs());
+                }
+            }
         }
 
         private void LoadCompleteCallback(IRestResponse restResponse)
@@ -31,6 +66,7 @@ namespace Codemash.Phone7.Data.Repository.Impl
             var jsonArray = JArray.Parse(jsonString);
             _repository = (from ja in jsonArray.AsJEnumerable()
                            select CreateObject(ja)).ToList();
+            Save();
 
             if (LoadCompleted != null)
                 LoadCompleted(this, new EventArgs());
@@ -42,5 +78,6 @@ namespace Codemash.Phone7.Data.Repository.Impl
 
         // abstract methods
         protected abstract T CreateObject(JToken jToken);
+        public abstract void Save();
     }
 }

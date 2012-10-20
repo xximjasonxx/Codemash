@@ -26,6 +26,14 @@ namespace Codemash.Phone7.Data.Repository.Impl
                        };
         }
 
+        /// <summary>
+        /// Instructs the repository to Save all dirty records
+        /// </summary>
+        public override void Save()
+        {
+            //throw new System.NotImplementedException();
+        }
+
         #endregion
 
         #region Implementation of IRepository<Speaker>

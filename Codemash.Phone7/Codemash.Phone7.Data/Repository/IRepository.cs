@@ -21,5 +21,10 @@ namespace Codemash.Phone7.Data.Repository
         /// <param name="id"></param>
         /// <returns></returns>
         T Get(int id);
+
+        /// <summary>
+        /// Instructs the repository to Save all dirty records
+        /// </summary>
+        void Save();
     }
 }

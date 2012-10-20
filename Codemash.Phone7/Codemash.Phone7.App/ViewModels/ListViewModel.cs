@@ -41,7 +41,7 @@ namespace Codemash.Phone7.App.ViewModels
                                                                                             }).ToList()
                                                         }).ToList();
 
-                return result;
+                return result.OrderBy(r => r.Title);
             }
         }
 

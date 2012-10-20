@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Codemash.Phone7.Core;
 using Codemash.Phone7.Data.Entities;
 
@@ -15,8 +16,9 @@ namespace Codemash.Phone7.App.Grouping
         /// <returns></returns>
         public IDictionary<string, IList<Session>> Group(IList<Session> sessionList)
         {
+            Regex regex = new Regex(@"\w");
             var groupedSessions = (from s in sessionList
-                                   group s by s.Title.Substring(0, 1) into GroupedSessions
+                                   group s by regex.Matches(s.Title)[0].Value into GroupedSessions
                                    select new
                                    {
                                        Key = GroupedSessions.Key,
@@ -37,7 +39,9 @@ namespace Codemash.Phone7.App.Grouping
 
             var finalDictionary = dictionary.Where(kv => kv.Key.AsInt() == int.MinValue)
                 .ToDictionary(kv => kv.Key, kv => kv.Value);
-            finalDictionary.Add("#", sessionList);
+
+            if (sessionList.Count > 0)
+                finalDictionary.Add("#", sessionList);
 
             return finalDictionary;
         }

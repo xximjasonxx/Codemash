@@ -1,15 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Codemash.Phone7.Data.Entities;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -30,6 +21,7 @@ namespace Codemash.Phone7.Data.Repository.Impl
         {
             var client = new RestClient();
             var request = new RestRequest(DownloadUrl, Method.GET);
+
             client.ExecuteAsync(request, LoadCompleteCallback);
         }
 

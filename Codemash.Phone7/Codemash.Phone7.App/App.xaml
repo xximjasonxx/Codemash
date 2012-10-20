@@ -29,6 +29,18 @@
             </StackPanel>
         </DataTemplate>
 
+        <DataTemplate x:Key="SessionListItemTemplate">
+            <Border Margin="5,0,5,30">
+                <Border.Background>
+                    <SolidColorBrush x:Name="BorderBackgroundBrush" Color="Transparent" />
+                </Border.Background>
+                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"
+                                           Foreground="{StaticResource TextGrayBrush}"
+                                           FontSize="40" FontFamily="Segoe WP" 
+                                           Text="{Binding Title}" />
+            </Border>
+        </DataTemplate>
+
         <DataTemplate x:Key="MainViewPanoramaHeader">
             <ContentPresenter>
                 <TextBlock Text="{Binding}" Foreground="{StaticResource CodemashLightOrange}"
@@ -48,11 +60,8 @@
         <ControlTemplate TargetType="Button" x:Key="TextButtonTemplate">
             <ContentPresenter>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="{StaticResource TextGrayBrush}"
-                                                   FontFamily="Segoe WP" FontSize="35"
-                                                   Text="{TemplateBinding Content}"/>
-                    <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol"
-                                                   Margin="10,0,0,0" FontSize="35" Foreground="{StaticResource TextGrayBrush}" />
+                    <TextBlock Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe WP" FontSize="35"
+                               Text="{TemplateBinding Content}" TextDecorations="Underline" />
                 </StackPanel>
             </ContentPresenter>
         </ControlTemplate>

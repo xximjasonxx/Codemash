@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using Caliburn.Micro;
+using Codemash.Phone7.App.Common;
 using Codemash.Phone7.App.DataModels;
 using Codemash.Phone7.Data.Repository;
 using Ninject;
@@ -48,17 +49,20 @@ namespace Codemash.Phone7.App.ViewModels
 
         public void AllByName()
         {
-            
+            NavigationService.UriFor<ListViewModel>().WithParam(l => l.GroupingType, SessionGroupType.ByName)
+                .Navigate();
         }
 
         public void AllByBlock()
         {
-            
+            NavigationService.UriFor<ListViewModel>().WithParam(l => l.GroupingType, SessionGroupType.ByBlock)
+                .Navigate();
         }
 
         public void AllByTech()
         {
-            
+            NavigationService.UriFor<ListViewModel>().WithParam(l => l.GroupingType, SessionGroupType.ByTech)
+                .Navigate();
         }
     }
 }

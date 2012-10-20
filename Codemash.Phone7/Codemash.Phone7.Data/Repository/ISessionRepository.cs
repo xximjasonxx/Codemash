@@ -12,5 +12,11 @@ namespace Codemash.Phone7.Data.Repository
         /// Return the list of upcoming sessions from the repository
         /// </summary>
         IList<Session> GetUpcomingSessions();
+
+        /// <summary>
+        /// Return a listing of all of the sessions in the repository
+        /// </summary>
+        /// <returns></returns>
+        IList<Session> GetAllSessions();
     }
 }

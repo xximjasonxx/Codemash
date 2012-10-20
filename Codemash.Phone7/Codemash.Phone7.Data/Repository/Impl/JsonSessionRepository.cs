@@ -41,6 +41,15 @@ namespace Codemash.Phone7.Data.Repository.Impl
             return Repository.Take(10).ToList();
         }
 
+        /// <summary>
+        /// Return a listing of all of the sessions in the repository
+        /// </summary>
+        /// <returns></returns>
+        public IList<Session> GetAllSessions()
+        {
+            return Repository.OrderBy(s => s.Title).ToList();
+        }
+
         #endregion
 
         #region Implementation of IRepository<Session>

@@ -49,6 +49,7 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormattingExtensionMethods.cs" />
     <Compile Include="ParsingExtensionMethods.cs" />
     <Compile Include="StringWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

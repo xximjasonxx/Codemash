@@ -1,18 +1,17 @@
-﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+﻿
+using Codemash.Phone7.Data.Entities;
 
 namespace Codemash.Phone7.App.DataModels
 {
     public class SessionDetailView
     {
         public string Title { get; set; }
+        public string Technology { get; set; }
+        public string Starts { get; set; }
+        public string Difficulty { get; set; }
+        public string Room { get; set; }
+        public string Abstract { get; set; }
+
+        public Speaker Speaker { get; set; }
     }
 }

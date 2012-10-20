@@ -119,6 +119,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Codemash.Phone7.Core\Codemash.Phone7.Core.csproj">
+      <Project>{AC927FCB-6DAB-43BC-9A2F-97C5E7B62A28}</Project>
+      <Name>Codemash.Phone7.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Codemash.Phone7.Data\Codemash.Phone7.Data.csproj">
       <Project>{B85F9B9E-A393-4ACE-81A7-CA1F213373A4}</Project>
       <Name>Codemash.Phone7.Data</Name>

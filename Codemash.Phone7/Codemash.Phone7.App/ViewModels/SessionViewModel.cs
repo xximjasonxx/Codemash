@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Codemash.Phone7.App.DataModels;
+using Codemash.Phone7.Core;
 using Codemash.Phone7.Data.Entities;
 using Codemash.Phone7.Data.Repository;
 using Ninject;
@@ -15,6 +16,9 @@ namespace Codemash.Phone7.App.ViewModels
         [Inject]
         public ISessionRepository SessionRepository { get; set; }
 
+        [Inject]
+        public ISpeakerRepository SpeakerRepository { get; set; }
+
         public SessionViewModel(INavigationService navigationService) : base(navigationService)
         {
         }
@@ -29,7 +33,13 @@ namespace Codemash.Phone7.App.ViewModels
                     var session = SessionRepository.Get(IncomingSession);
                     _sessionDetailView = new SessionDetailView
                                              {
-                                                 Title = session.Title
+                                                 Title = session.Title,
+                                                 Technology = session.Technology,
+                                                 Starts = session.Starts.AsBlockDisplay(),
+                                                 Difficulty = session.Difficulty,
+                                                 Room = session.Room,
+                                                 Abstract = session.Abstract,
+                                                 Speaker = SpeakerRepository.Get(session.SpeakerId)
                                              };
                 }
 

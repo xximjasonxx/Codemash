@@ -27,15 +27,52 @@
             </controls:Pivot.HeaderTemplate>
 
             <controls:PivotItem Header="details">
-                <TextBlock Text="{Binding Session.Title}" Foreground="{StaticResource CodemashOrange}" />
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="TECHNOLOGY" Foreground="{StaticResource CodemashOrange}"
+                               FontSize="20" FontFamily="Segoe WP"/>
+                    <TextBlock Text="{Binding Session.Technology}" Foreground="{StaticResource TextGrayBrush}"
+                               FontSize="30" FontFamily="Segoe WP" Margin="0,0,0,20" />
+
+                    <TextBlock Text="STARTS" Foreground="{StaticResource CodemashOrange}"
+                               FontSize="20" FontFamily="Segoe WP"/>
+                    <TextBlock Text="{Binding Session.Starts}" Foreground="{StaticResource TextGrayBrush}"
+                               FontSize="30" FontFamily="Segoe WP" Margin="0,0,0,20" />
+
+                    <TextBlock Text="ROOM" Foreground="{StaticResource CodemashOrange}"
+                               FontSize="20" FontFamily="Segoe WP"/>
+                    <TextBlock Text="{Binding Session.Room}" Foreground="{StaticResource TextGrayBrush}"
+                               FontSize="30" FontFamily="Segoe WP" Margin="0,0,0,20" />
+
+                    <TextBlock Text="DIFFICULTY" Foreground="{StaticResource CodemashOrange}"
+                               FontSize="20" FontFamily="Segoe WP"/>
+                    <TextBlock Text="{Binding Session.Difficulty}" Foreground="{StaticResource TextGrayBrush}"
+                               FontSize="30" FontFamily="Segoe WP" Margin="0,0,0,20" />
+                </StackPanel>
             </controls:PivotItem>
 
             <controls:PivotItem Header="abstract">
-                <Grid/>
+                <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled"
+                              VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"
+                              Margin="7,0,25,10">
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                               Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe WP"
+                               FontSize="30" Text="{Binding Session.Abstract}" />
+                </ScrollViewer>
             </controls:PivotItem>
 
             <controls:PivotItem Header="speaker">
-                <Grid/>
+                <StackPanel Orientation="Vertical" Margin="7,0,0,0">
+                    <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
+                               FontSize="35" Text="{Binding Session.Speaker.Name}" />
+
+                    <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled"
+                              VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"
+                              Margin="0,0,25,10">
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                               Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe WP"
+                               FontSize="25" Text="{Binding Session.Speaker.Biography}" />
+                    </ScrollViewer>
+                </StackPanel>
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>

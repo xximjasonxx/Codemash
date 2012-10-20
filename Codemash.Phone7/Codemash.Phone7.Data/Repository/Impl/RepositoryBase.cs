@@ -29,7 +29,7 @@ namespace Codemash.Phone7.Data.Repository.Impl
         public void Load()
         {
             var client = new RestClient();
-            var request = new RestRequest("http://dl.dropbox.com/u/13029365/codemash_sessions.json", Method.GET);
+            var request = new RestRequest(DownloadUrl, Method.GET);
             client.ExecuteAsync(request, LoadCompleteCallback);
         }
 

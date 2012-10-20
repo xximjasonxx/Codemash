@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Codemash.Phone7.Data.Entities;
 
 namespace Codemash.Phone7.Data.Repository
@@ -18,5 +15,12 @@ namespace Codemash.Phone7.Data.Repository
         /// </summary>
         /// <returns></returns>
         IList<Session> GetAllSessions();
+
+        /// <summary>
+        /// Return sessions which contain the term
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        IList<Session> FindSessions(string searchTerm);
     }
 }

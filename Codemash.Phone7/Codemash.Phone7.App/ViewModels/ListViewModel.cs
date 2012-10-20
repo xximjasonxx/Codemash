@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Controls;
 using Caliburn.Micro;
@@ -67,12 +66,20 @@ namespace Codemash.Phone7.App.ViewModels
         // behaviors
         public void SelectionChanged(SelectionChangedEventArgs args)
         {
-            var listItem = args.AddedItems[0] as SessionListView;
-            if (listItem != null)
+            if (args.AddedItems.Count > 0)
             {
-                NavigationService.UriFor<SessionViewModel>().WithParam(s => s.IncomingSession, listItem.SessionId)
-                    .Navigate();
+                var listItem = args.AddedItems[0] as SessionListView;
+                if (listItem != null)
+                {
+                    NavigationService.UriFor<SessionViewModel>().WithParam(s => s.IncomingSession, listItem.SessionId)
+                        .Navigate();
+                }
             }
+        }
+
+        public void SearchSessions()
+        {
+            NavigationService.UriFor<SearchViewModel>().Navigate();
         }
     }
 }

@@ -9,7 +9,7 @@
     xmlns:cal="http://www.caliburnproject.org"
     xmlns:tk="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="False" tk:TiltEffect.IsTiltEnabled="true" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="800" d:DesignWidth="480">
+    shell:SystemTray.IsVisible="False" tk:TiltEffect.IsTiltEnabled="true" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="728" d:DesignWidth="480">
 
     <Grid Background="{StaticResource ApplicationBackgroundBrush}">
         <controls:Panorama Title="Codemash 2.0.1.3" TitleTemplate="{StaticResource MainViewPanoramaTitle}"
@@ -41,6 +41,13 @@
         </controls:Panorama>
     </Grid>
 
-    <!--Panorama-based applications should not show an ApplicationBar-->
-
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+            <shell:ApplicationBar.Buttons>
+                <cal:AppBarButton IconUri="/Assets/appbar.feature.search.rest.png"
+                                  Text="search"
+                                  Message="SearchSessions" />
+            </shell:ApplicationBar.Buttons>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

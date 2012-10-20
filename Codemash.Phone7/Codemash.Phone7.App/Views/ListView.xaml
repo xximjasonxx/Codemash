@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:cal="http://www.caliburnproject.org" SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="False" mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False" mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
     tk:TiltEffect.IsTiltEnabled="true">
 
     <Border Padding="7,0,7,0" Background="{StaticResource ApplicationBackgroundBrush}">
@@ -50,4 +50,13 @@
         </Grid>
     </Border>
 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+            <shell:ApplicationBar.Buttons>
+                <cal:AppBarButton IconUri="/Assets/appbar.feature.search.rest.png"
+                                  Text="search"
+                                  Message="SearchSessions" />
+            </shell:ApplicationBar.Buttons>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

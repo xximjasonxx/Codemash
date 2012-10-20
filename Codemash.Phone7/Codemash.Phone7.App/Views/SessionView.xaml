@@ -27,7 +27,7 @@
             </controls:Pivot.HeaderTemplate>
 
             <controls:PivotItem Header="details">
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical" Margin="10,0,0,0">
                     <TextBlock Text="TECHNOLOGY" Foreground="{StaticResource CodemashOrange}"
                                FontSize="20" FontFamily="Segoe WP"/>
                     <TextBlock Text="{Binding Session.Technology}" Foreground="{StaticResource TextGrayBrush}"
@@ -53,7 +53,7 @@
             <controls:PivotItem Header="abstract">
                 <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled"
                               VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"
-                              Margin="7,0,25,10">
+                              Margin="10,0,25,10">
                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Top"
                                Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe WP"
                                FontSize="30" Text="{Binding Session.Abstract}" />
@@ -61,7 +61,7 @@
             </controls:PivotItem>
 
             <controls:PivotItem Header="speaker">
-                <StackPanel Orientation="Vertical" Margin="7,0,0,0">
+                <StackPanel Orientation="Vertical" Margin="10,0,0,0">
                     <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
                                FontSize="35" Text="{Binding Session.Speaker.Name}" />
 

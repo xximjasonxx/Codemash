@@ -50,6 +50,16 @@ namespace Codemash.Phone7.Data.Repository.Impl
             return Repository.OrderBy(s => s.Title).ToList();
         }
 
+        /// <summary>
+        /// Return sessions which contain the term
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        public IList<Session> FindSessions(string searchTerm)
+        {
+            return Repository.Where(s => s.Title.ToLower().Contains(searchTerm.ToLower())).ToList();
+        }
+
         #endregion
 
         #region Implementation of IRepository<Session>

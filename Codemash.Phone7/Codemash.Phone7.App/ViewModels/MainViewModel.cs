@@ -39,11 +39,15 @@ namespace Codemash.Phone7.App.ViewModels
         // behaviors
         public void SelectionChanged(SelectionChangedEventArgs ev)
         {
-            var selectedSessionView = ev.AddedItems[0] as SessionListView;
-            if (selectedSessionView != null)
+            if (ev.AddedItems.Count > 0)
             {
-                NavigationService.UriFor<SessionViewModel>().WithParam(sv => sv.IncomingSession, selectedSessionView.SessionId)
-                    .Navigate();
+                var selectedSessionView = ev.AddedItems[0] as SessionListView;
+                if (selectedSessionView != null)
+                {
+                    NavigationService.UriFor<SessionViewModel>().WithParam(sv => sv.IncomingSession,
+                                                                           selectedSessionView.SessionId)
+                        .Navigate();
+                }
             }
         }
 
@@ -63,6 +67,11 @@ namespace Codemash.Phone7.App.ViewModels
         {
             NavigationService.UriFor<ListViewModel>().WithParam(l => l.GroupingType, SessionGroupType.ByTech)
                 .Navigate();
+        }
+
+        public void SearchSessions()
+        {
+            NavigationService.UriFor<SearchViewModel>().Navigate();
         }
     }
 }

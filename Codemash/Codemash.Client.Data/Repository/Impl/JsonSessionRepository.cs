@@ -67,22 +67,19 @@ namespace Codemash.Client.Data.Repository.Impl
 
         protected override string DownloadUrl
         {
-            get { return "http://dl.dropbox.com/u/13029365/DevLink2012_Sessions.json"; }
+            get { return "http://dl.dropbox.com/u/13029365/codemash_sessions.json"; }
         }
 
-        protected override Session CreateEntity(JToken ji)
+        protected override Session CreateEntity(JToken jToken)
         {
             return new Session
                        {
-                           Title = new StringWrapper(ji["Title"]).ToString(),
-                           Abstract = new StringWrapper(ji["Abstract"]).ToString(),
-                           Level = new StringWrapper(ji["Level"]).ToString(),
-                           Track = new StringWrapper(ji["Track"]).ToString(),
-                           Room = new StringWrapper(ji["Room"]).ToString(),
-                           SpeakerId = new StringWrapper(ji["Speaker"]["SpeakerId"]).ToString().AsInt(),
-                           SessionId = new StringWrapper(ji["SessionId"]).ToString().AsInt(),
-                           Starts = ji["StartTime"].ToString().AsDateTime(true),
-                           Ends = ji["EndTime"].ToString().AsDateTime(true)
+                           Abstract = new StringWrapper(jToken["Abstract"]).ToString(),
+                           Difficulty = new StringWrapper(jToken["Difficulty"]).ToString(),
+                           SessionId = new StringWrapper(jToken["Title"]).ToString().AsKey(),
+                           SpeakerId = new StringWrapper(jToken["SpeakerName"]).ToString().AsKey(),
+                           Technology = new StringWrapper(jToken["Technology"]).ToString(),
+                           Title = new StringWrapper(jToken["Title"]).ToString()
                        };
         }
 

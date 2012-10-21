@@ -94,8 +94,8 @@
                             <!-- Session Speaker Textblock -->
                             <TextBlock Text="{Binding SpeakerName}" Foreground="White" TextWrapping="NoWrap" FontSize="19" Grid.Column="0" Grid.Row="1" FontFamily="Segoe UI" Grid.ColumnSpan="2" />
 
-                            <!-- Sesion Track Textblock -->
-                            <TextBlock Text="{Binding Track}" Foreground="White" TextWrapping="NoWrap" FontSize="24" Grid.Column="0" Grid.Row="2" FontFamily="Segoe UI" Grid.ColumnSpan="2" />
+                            <!-- Sesion technology Textblock -->
+                            <TextBlock Text="{Binding Technology}" Foreground="White" TextWrapping="NoWrap" FontSize="24" Grid.Column="0" Grid.Row="2" FontFamily="Segoe UI" Grid.ColumnSpan="2" />
 
                             <!-- Session Room TextBlock -->
                             <TextBlock Text="{Binding Room}" Foreground="White" TextWrapping="NoWrap" FontSize="17" Grid.Column="0" Grid.Row="3" FontFamily="Segoe UI"

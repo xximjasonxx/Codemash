@@ -10,8 +10,8 @@ namespace Codemash.Client.DataModels
             Title = session.Title;
             Abstract = session.Abstract;
             Room = session.Room;
-            Track = session.Track;
-            Level = session.Level;
+            Technology = session.Technology;
+            Difficulty = session.Difficulty;
             Starts = session.Starts.AsBlockDisplay();
             SessionId = session.SessionId;
             SpeakerId = session.SpeakerId;
@@ -20,8 +20,8 @@ namespace Codemash.Client.DataModels
         public string Title { get; set; }
         public string Abstract { get; set; }
         public string Room { get; set; }
-        public string Track { get; set; }
-        public string Level { get; set; }
+        public string Technology { get; set; }
+        public string Difficulty { get; set; }
         public string Starts { get; set; }
         public int SessionId { get; set; }
         public int SpeakerId { get; set; }

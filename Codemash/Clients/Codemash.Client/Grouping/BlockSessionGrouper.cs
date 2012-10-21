@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Codemash.Client.Code;
 using Codemash.Client.Core;
 using Codemash.Client.Data.Entities;
@@ -24,13 +25,14 @@ namespace Codemash.Client.Grouping
         /// <returns></returns>
         public IList<IListItem> GetGroupedList()
         {
+            Regex regex = new Regex(@"\w");
             var groupedSet = (from s in _sessionList
                               orderby s.Starts
                               group s by s.Starts.AsBlockDisplay() into BlockSessions
                               select new
                                          {
                                             Key = BlockSessions.Key,
-                                            Value = BlockSessions.ToList()
+                                            Value = BlockSessions.OrderBy(s => regex.Matches(s.Title)[0].Value).ToList()
                                          }).ToDictionary(kv => kv.Key, kv => kv.Value.ToList());
 
             var combinedList = new List<IListItem>();

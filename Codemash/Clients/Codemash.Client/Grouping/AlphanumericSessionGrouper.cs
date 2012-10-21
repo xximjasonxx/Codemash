@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Codemash.Client.Code;
 using Codemash.Client.Data.Entities;
 using Codemash.Client.Core;
@@ -39,15 +40,17 @@ namespace Codemash.Client.Grouping
 
         private Dictionary<string, List<Session>> GetGroupedSet(IEnumerable<Session> sessionList)
         {
+            Regex regex = new Regex(@"\w");
             var groupedResult = (from s in sessionList
-                                 group s by s.Title.Substring(0, 1) into GroupedSessions
+                                 group s by regex.Matches(s.Title)[0].Value into GroupedSessions
                                  select new
                                             {
                                                 Key = GroupedSessions.Key,
                                                 Value = GroupedSessions
                                             });
 
-            var resultDictionary = groupedResult.ToDictionary(kv => kv.Key, kv => kv.Value.ToList());
+            var resultDictionary = groupedResult
+                .ToDictionary(kv => kv.Key, kv => kv.Value.OrderBy(s => regex.Matches(s.Title)[0].Value).ToList());
             return CondenseNumerics(resultDictionary);
         }
 
@@ -59,7 +62,9 @@ namespace Codemash.Client.Grouping
 
             var finalDictionary = dictionary.Where(kv => kv.Key.AsInt() == int.MinValue)
                 .ToDictionary(kv => kv.Key, kv => kv.Value);
-            finalDictionary.Add("#", sessionList);
+
+            if (sessionList.Count > 0)
+                finalDictionary.Add("#", sessionList);
 
             return finalDictionary;
         }

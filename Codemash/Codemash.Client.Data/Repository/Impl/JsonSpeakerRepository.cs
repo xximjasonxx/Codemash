@@ -13,21 +13,18 @@ namespace Codemash.Client.Data.Repository.Impl
 
         protected override string DownloadUrl
         {
-            get { return "http://dl.dropbox.com/u/13029365/DevLink2012_Speakers.json"; }
+            get { return "http://dl.dropbox.com/u/13029365/codemash_speakers.json"; }
         }
 
         protected override Speaker CreateEntity(JToken ji)
         {
             return new Speaker
                        {
-                           FirstName = new StringWrapper(ji["FirstName"]).ToString(),
-                           LastName = new StringWrapper(ji["LastName"]).ToString(),
-                           Biography = new StringWrapper(ji["Bio"]).ToString(),
-                           BlogUrl = new StringWrapper(ji["Url"]).ToString(),
-                           Company = new StringWrapper(ji["Company"]).ToString(),
-                           PictureUrl = new StringWrapper(ji["PictureURL"]).ToString(),
-                           Twitter = new StringWrapper(ji["Twitter"]).ToString(),
-                           SpeakerId = new StringWrapper(ji["SpeakerId"]).ToString().AsInt()
+                           Name = new StringWrapper(ji["Name"]).ToString(),
+                           Biography = new StringWrapper(ji["Biography"]).ToString(),
+                           BlogUrl = new StringWrapper(ji["BlogUrl"]).ToString(),
+                           Twitter = new StringWrapper(ji["TwitterHandle"]).ToString(),
+                           SpeakerId = new StringWrapper(ji["Name"]).ToString().AsKey()
                        };
         }
 

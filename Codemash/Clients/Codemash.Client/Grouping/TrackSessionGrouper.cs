@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Codemash.Client.Code;
 using Codemash.Client.Data.Entities;
@@ -26,14 +27,15 @@ namespace Codemash.Client.Grouping
         /// <returns></returns>
         public IList<IListItem> GetGroupedList()
         {
+            Regex regex = new Regex(@"\w");
             var groupedSet = (from s in _sessions
-                              orderby s.Track
-                              group s by s.Track
+                              orderby s.Technology
+                              group s by s.Technology
                               into TrackGrouping
                               select new
                                          {
                                              Key = TrackGrouping.Key,
-                                             Value = TrackGrouping
+                                             Value = TrackGrouping.OrderBy(s => regex.Matches(s.Title)[0].Value)
                                          }).ToDictionary(kv => kv.Key, kv => kv.Value.ToList());
 
             var combinedList = new List<IListItem>();

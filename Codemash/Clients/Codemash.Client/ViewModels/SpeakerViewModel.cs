@@ -25,7 +25,7 @@ namespace Codemash.Client.ViewModels
         // behaviors
         public void ViewBlog()
         {
-            var dialog = new Windows.UI.Popups.MessageDialog("Navigating to this URL will take you out of the App. Are you sure?", "Codemash 2.0.1.3");
+            var dialog = new MessageDialog("Navigating to this URL will take you out of the App. Are you sure?", "Codemash 2.0.1.3");
             dialog.Commands.Add(new UICommand("Yes", command =>
                                                          {
                                                              var url = Speaker.BlogUrl;

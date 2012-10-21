@@ -21,7 +21,7 @@ namespace Codemash.Client.ViewModels
             get
             {
                 var detailView = new SessionDetailView(Parameter.Value);
-                detailView.SpeakerName = SpeakerRepository.Get(detailView.SpeakerId).FullName;
+                detailView.SpeakerName = SpeakerRepository.Get(detailView.SpeakerId).Name;
 
                 return detailView;
             }

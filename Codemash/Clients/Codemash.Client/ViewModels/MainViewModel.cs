@@ -31,9 +31,9 @@ namespace Codemash.Client.ViewModels
                                                                                {
                                                                                    SessionId = s.SessionId,
                                                                                    Title = s.Title,
-                                                                                   SpeakerName = SpeakerRepository.Get(s.SpeakerId).FullName,
+                                                                                   SpeakerName = SpeakerRepository.Get(s.SpeakerId).Name,
                                                                                    Room = s.Room,
-                                                                                   Track = s.Track
+                                                                                   Technology = s.Technology
                                                                                }).ToList();
             }
         }

@@ -59,7 +59,6 @@
     </Style>
 
     <!-- TextBlock styles -->
-
     <Style x:Key="BasicTextStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource ApplicationForegroundThemeBrush}"/>
         <Setter Property="FontSize" Value="{StaticResource ControlContentThemeFontSize}"/>

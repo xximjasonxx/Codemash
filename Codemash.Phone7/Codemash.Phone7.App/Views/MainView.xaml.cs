@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 
 namespace Codemash.Phone7.App.Views
@@ -18,6 +9,15 @@ namespace Codemash.Phone7.App.Views
         public MainView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (e.NavigationMode != NavigationMode.Back)
+            {
+                MessageBox.Show("This is an alpha release. This app does not use the real Codemash REST API. Please submit UI feedback to imjason@gmail.com");
+            }
         }
     }
 }

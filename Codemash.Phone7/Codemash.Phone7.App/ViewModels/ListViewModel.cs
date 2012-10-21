@@ -43,7 +43,7 @@ namespace Codemash.Phone7.App.ViewModels
                                                                                             {
                                                                                                 Title = s.Title,
                                                                                                 SessionId = s.SessionId,
-                                                                                                Duration = s.Duration.AsDurationString()
+                                                                                                StartsAt = s.Starts.AsTimeDisplay()
                                                                                             }).ToList()
                                                         }).ToList();
 

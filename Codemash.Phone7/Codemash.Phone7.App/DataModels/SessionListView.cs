@@ -6,6 +6,6 @@ namespace Codemash.Phone7.App.DataModels
     {
         public int SessionId { get; set; }
         public string Title { get; set; }
-        public string Duration { get; set; }
+        public string StartsAt { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using Caliburn.Micro;
 using Codemash.Client.Code;
+using Codemash.Client.Core;
 using Codemash.Client.Data.Entities;
 using Codemash.Client.Data.Repository;
 using Codemash.Client.DataModels;
@@ -31,9 +32,9 @@ namespace Codemash.Client.ViewModels
                                                                                {
                                                                                    SessionId = s.SessionId,
                                                                                    Title = s.Title,
-                                                                                   SpeakerName = SpeakerRepository.Get(s.SpeakerId).Name,
                                                                                    Room = s.Room,
-                                                                                   Technology = s.Technology
+                                                                                   Technology = s.Technology,
+                                                                                   StartsAt = s.Starts.AsTimeDisplay()
                                                                                }).ToList();
             }
         }

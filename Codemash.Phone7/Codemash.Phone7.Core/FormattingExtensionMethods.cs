@@ -28,20 +28,9 @@ namespace Codemash.Phone7.Core
             return sb.ToString();
         }
 
-        public static string AsDurationString(this TimeSpan ts)
+        public static string AsTimeDisplay(this DateTime dt)
         {
-            StringBuilder sb = new StringBuilder();
-            if (ts.Days > 0)
-                sb.AppendFormat("{0}d ", ts.Days);
-
-            if (ts.Hours > 0)
-                sb.AppendFormat("{0}h ", ts.Hours);
-
-            if (ts.Minutes > 0)
-                sb.AppendFormat("{0}m ", ts.Minutes);
-
-            Regex regex = new Regex(@" $");
-            return "Duration: " + regex.Replace(sb.ToString(), string.Empty);
+            return dt.ToString("hh:mmt");
         }
 
         public static string AsFullDurationString(this TimeSpan ts)

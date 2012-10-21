@@ -36,7 +36,7 @@
                                FontSize="40" FontFamily="Segoe WP" Text="{Binding Title}" />
                     
                     <TextBlock HorizontalAlignment="Stretch" TextWrapping="NoWrap" Foreground="{StaticResource TextGrayBrush}"
-                               FontSize="20" FontFamily="Segoe WP" Text="{Binding Duration}" />
+                               FontSize="30" FontFamily="Segoe WP" Text="{Binding StartsAt}" />
                 </StackPanel>
             </Border>
         </DataTemplate>

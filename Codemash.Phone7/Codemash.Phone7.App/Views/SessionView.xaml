@@ -38,6 +38,11 @@
                     <TextBlock Text="{Binding Session.Starts}" Foreground="{StaticResource TextGrayBrush}"
                                FontSize="30" FontFamily="Segoe WP" Margin="0,0,0,20" />
 
+                    <TextBlock Text="DURATION" Foreground="{StaticResource CodemashOrange}"
+                               FontSize="20" FontFamily="Segoe WP"/>
+                    <TextBlock Text="{Binding Session.Duration}" Foreground="{StaticResource TextGrayBrush}"
+                               FontSize="30" FontFamily="Segoe WP" Margin="0,0,0,20" />
+
                     <TextBlock Text="ROOM" Foreground="{StaticResource CodemashOrange}"
                                FontSize="20" FontFamily="Segoe WP"/>
                     <TextBlock Text="{Binding Session.Room}" Foreground="{StaticResource TextGrayBrush}"
@@ -64,10 +69,15 @@
                 <StackPanel Orientation="Vertical" Margin="10,0,0,0">
                     <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
                                FontSize="35" Text="{Binding Session.Speaker.Name}" />
+                    
+                    <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
+                               FontSize="25" Text="{Binding Session.Speaker.Twitter}" />
+                    <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
+                               FontSize="25" Text="{Binding Session.Speaker.BlogUrl}" />
 
                     <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled"
                               VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"
-                              Margin="0,0,25,10">
+                              Margin="0,15,25,10">
                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Top"
                                Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe WP"
                                FontSize="25" Text="{Binding Session.Speaker.Biography}" />

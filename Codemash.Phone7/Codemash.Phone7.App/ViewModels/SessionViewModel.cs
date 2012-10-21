@@ -1,7 +1,6 @@
 ﻿using Caliburn.Micro;
 using Codemash.Phone7.App.DataModels;
 using Codemash.Phone7.Core;
-using Codemash.Phone7.Data.Entities;
 using Codemash.Phone7.Data.Repository;
 using Ninject;
 
@@ -36,6 +35,7 @@ namespace Codemash.Phone7.App.ViewModels
                                                  Title = session.Title,
                                                  Technology = session.Technology,
                                                  Starts = session.Starts.AsBlockDisplay(),
+                                                 Duration = session.Duration.AsFullDurationString(),
                                                  Difficulty = session.Difficulty,
                                                  Room = session.Room,
                                                  Abstract = session.Abstract,

@@ -27,11 +27,19 @@ namespace Codemash.Phone7.Data.Entities
         [Column(CanBeNull = false, DbType = "datetime")]
         public DateTime Starts { get { return DateTime.Now; } set { } }
 
+        [Column(CanBeNull = false, DbType = "datetime")]
+        public DateTime Ends { get { return DateTime.Now.AddHours(1); } set { } }
+
         [Column(IsPrimaryKey = true, CanBeNull = false, DbType = "int")]
         public int SessionId { get; set; }
 
         [Column(CanBeNull = false, DbType = "int")]
         public int SpeakerId { get; set; }
+
+        public TimeSpan Duration
+        {
+            get { return Ends - Starts; }
+        }
 
         #region Overrides of EntityBase
 

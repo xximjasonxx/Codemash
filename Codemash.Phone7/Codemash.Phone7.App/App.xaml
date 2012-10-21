@@ -31,13 +31,13 @@
 
         <DataTemplate x:Key="SessionListItemTemplate">
             <Border Margin="5,0,5,30">
-                <Border.Background>
-                    <SolidColorBrush x:Name="BorderBackgroundBrush" Color="Transparent" />
-                </Border.Background>
-                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"
-                                           Foreground="{StaticResource TextGrayBrush}"
-                                           FontSize="40" FontFamily="Segoe WP" 
-                                           Text="{Binding Title}" />
+                <StackPanel Orientation="Vertical">
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Foreground="{StaticResource TextGrayBrush}"
+                               FontSize="40" FontFamily="Segoe WP" Text="{Binding Title}" />
+                    
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="NoWrap" Foreground="{StaticResource TextGrayBrush}"
+                               FontSize="20" FontFamily="Segoe WP" Text="{Binding Duration}" />
+                </StackPanel>
             </Border>
         </DataTemplate>
 

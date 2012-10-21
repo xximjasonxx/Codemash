@@ -11,6 +11,7 @@ namespace Codemash.Phone7.App.DataModels
         public string Difficulty { get; set; }
         public string Room { get; set; }
         public string Abstract { get; set; }
+        public string Duration { get; set; }
 
         public Speaker Speaker { get; set; }
     }

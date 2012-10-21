@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using Codemash.Phone7.App.Common;
 using Codemash.Phone7.App.DataModels;
+using Codemash.Phone7.Core;
 using Codemash.Phone7.Data.Repository;
 using Ninject;
 
@@ -31,7 +30,8 @@ namespace Codemash.Phone7.App.ViewModels
                 return new ObservableCollection<SessionListView>(upcoming.Select(s => new SessionListView
                                                                                           {
                                                                                               SessionId = s.SessionId,
-                                                                                              Title = s.Title
+                                                                                              Title = s.Title,
+                                                                                              Duration = s.Duration.AsDurationString()
                                                                                           }));
             }
         }

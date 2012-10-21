@@ -7,6 +7,7 @@ using Caliburn.Micro;
 using Codemash.Phone7.App.Common;
 using Codemash.Phone7.App.DataModels;
 using Codemash.Phone7.App.Grouping;
+using Codemash.Phone7.Core;
 using Codemash.Phone7.Data.Repository;
 using Ninject;
 
@@ -41,7 +42,8 @@ namespace Codemash.Phone7.App.ViewModels
                                                             Items = d.Value.Select(s => new SessionListView
                                                                                             {
                                                                                                 Title = s.Title,
-                                                                                                SessionId = s.SessionId
+                                                                                                SessionId = s.SessionId,
+                                                                                                Duration = s.Duration.AsDurationString()
                                                                                             }).ToList()
                                                         }).ToList();
 

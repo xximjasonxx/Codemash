@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using Codemash.Phone7.App.Common;
@@ -19,6 +20,9 @@ namespace Codemash.Phone7.App.ViewModels
         // deps
         [Inject]
         public ISessionRepository SessionRepository { get; set; }
+
+        [Inject]
+        public ISettingsRepository SettingsRepository { get; set; }
 
         public ListViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -64,6 +68,16 @@ namespace Codemash.Phone7.App.ViewModels
         }
 
         // behaviors
+        public void PageLoaded()
+        {
+            if (!SettingsRepository.HasSeenListPage)
+            {
+                MessageBox.Show("Touch the Group Headers to quickly move through the whole list");
+                SettingsRepository.HasSeenListPage = true;
+                SettingsRepository.Save();
+            }
+        }
+
         public void SelectionChanged(SelectionChangedEventArgs args)
         {
             if (args.AddedItems.Count > 0)

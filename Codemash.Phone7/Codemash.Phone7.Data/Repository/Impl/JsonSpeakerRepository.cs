@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Codemash.Phone7.Core;
+using Codemash.Phone7.Data.Common;
 using Codemash.Phone7.Data.Entities;
 using Newtonsoft.Json.Linq;
 
@@ -29,9 +30,32 @@ namespace Codemash.Phone7.Data.Repository.Impl
         /// <summary>
         /// Instructs the repository to Save all dirty records
         /// </summary>
+        // TODO: Refactor this to share with Session Repository
         public override void Save()
         {
-            //throw new System.NotImplementedException();
+            if (Repository.Count(it => it.IsDirty) > 0)
+            {
+                using (var db = GetContext())
+                {
+                    foreach (var item in Repository.Where(it => it.IsDirty))
+                    {
+                        switch (item.EntityState)
+                        {
+                            case EntityState.New:
+                                db.Speakers.InsertOnSubmit(item);
+                                break;
+                            case EntityState.Removed:
+                                db.Speakers.DeleteOnSubmit(item);
+                                break;
+                            case EntityState.Modified:
+                                db.Speakers.Attach(item, true);
+                                break;
+                        }
+                    }
+
+                    db.SubmitChanges();
+                }
+            }
         }
 
         #endregion

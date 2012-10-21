@@ -26,6 +26,7 @@
     <Tokens>
       <PrimaryToken TokenID="Codemash.Phone7.AppToken" TaskName="_default">
         <TemplateType5>
+          <BackgroundImageURI IsRelative="true" IsResource="false">ApplicationTile.png</BackgroundImageURI>
           <Count>0</Count>
           <Title>Codemash 2.0.1.3</Title>
         </TemplateType5>

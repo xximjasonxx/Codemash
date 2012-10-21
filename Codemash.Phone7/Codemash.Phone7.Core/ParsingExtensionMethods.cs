@@ -23,5 +23,16 @@ namespace Codemash.Phone7.Core
             int intVal;
             return int.TryParse(str, out intVal) ? intVal : int.MinValue;
         }
+
+        /// <summary>
+        /// Convert a string to its boolean representation, return the default is the parse fails
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool AsBoolean(this string str, bool defaultValue)
+        {
+            bool boolVal;
+            return bool.TryParse(str, out boolVal) ? boolVal : defaultValue;
+        }
     }
 }

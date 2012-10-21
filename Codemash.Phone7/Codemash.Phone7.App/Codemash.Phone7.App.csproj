@@ -129,6 +129,9 @@
     <Content Include="ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ApplicationTile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\codemash_logo.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

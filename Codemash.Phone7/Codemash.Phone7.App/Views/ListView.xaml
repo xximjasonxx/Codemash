@@ -11,6 +11,11 @@
     xmlns:cal="http://www.caliburnproject.org" SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="False" mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
     tk:TiltEffect.IsTiltEnabled="true">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <cal:ActionMessage MethodName="PageLoaded" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Border Padding="7,0,7,0" Background="{StaticResource ApplicationBackgroundBrush}">
         <Grid>

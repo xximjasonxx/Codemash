@@ -3,7 +3,6 @@ using System.Linq;
 using Caliburn.Micro;
 using Codemash.Client.Code;
 using Codemash.Client.Core;
-using Codemash.Client.Data.Entities;
 using Codemash.Client.Data.Repository;
 using Codemash.Client.DataModels;
 using Codemash.Client.Parameters;
@@ -64,7 +63,7 @@ namespace Codemash.Client.ViewModels
         {
             var tileData = (SessionTileView) args.ClickedItem;
             var session = SessionRepository.Get(tileData.SessionId);
-            NavigationService.NavigateToViewModel<SessionViewModel>(new SessionParameter(session));
+            NavigationService.NavigateToViewModel<SessionDetailViewModel>(new SessionParameter(session));
         }
     }
 }

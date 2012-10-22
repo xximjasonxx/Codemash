@@ -139,6 +139,10 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style x:Key="CMGroupHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource GroupHeaderTextStyle}">
+        <Setter Property="FontSize" Value="32" />
+    </Style>
 
     <!-- Button styles -->
     

@@ -105,10 +105,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Code\BooleanToFontWeightConverter.cs" />
     <Compile Include="Code\Enum.cs" />
     <Compile Include="Core\SessionItemContainerStyleSelector.cs" />
     <Compile Include="DataModels\IListItem.cs" />
-    <Compile Include="DataModels\SessionDetailView.cs" />
+    <Compile Include="DataModels\SessionDetailModel.cs" />
     <Compile Include="DataModels\SessionListGroup.cs" />
     <Compile Include="DataModels\SessionListView.cs" />
     <Compile Include="DataModels\SessionTileView.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Core\SuspensionManager.cs" />
     <Compile Include="Parameters\SearchTextParameter.cs" />
     <Compile Include="ViewModels\SearchResultsViewModel.cs" />
+    <Compile Include="ViewModels\SessionDetailViewModel.cs" />
     <Compile Include="Views\SearchResultsView.xaml.cs">
       <DependentUpon>SearchResultsView.xaml</DependentUpon>
     </Compile>
@@ -130,7 +132,6 @@
     <Compile Include="Parameters\SpeakerParameter.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SessionsListViewModel.cs" />
-    <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\SpeakerViewModel.cs" />
     <Compile Include="ViewModels\SplashViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -138,14 +139,11 @@
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\SessionDetailView.xaml.cs">
+      <DependentUpon>SessionDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SessionsListView.xaml.cs">
       <DependentUpon>SessionsListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SessionView.xaml.cs">
-      <DependentUpon>SessionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SpeakerView.xaml.cs">
-      <DependentUpon>SpeakerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SplashView.xaml.cs">
       <DependentUpon>SplashView.xaml</DependentUpon>
@@ -192,15 +190,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\SessionDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SessionsListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SessionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SpeakerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

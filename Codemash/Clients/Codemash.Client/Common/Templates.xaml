@@ -10,7 +10,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="sessionGroupItemTemplate">
-        <Border Height="75" Width="350" Padding="5,5,5,1" Margin="0,0,30,0" BorderBrush="#dddddd" BorderThickness="0,0,0,2">
+        <Border Height="75" Width="350" Padding="0,5,5,1" Margin="0,0,30,0" BorderBrush="#dddddd" BorderThickness="0,0,0,2">
             <TextBlock Text="{Binding Display}" Foreground="{StaticResource CodemashOrange}" TextWrapping="Wrap"
                        VerticalAlignment="Bottom" FontSize="28" FontFamily="Segoe UI" />
         </Border>

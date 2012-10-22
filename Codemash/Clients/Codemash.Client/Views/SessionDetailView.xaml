@@ -1,0 +1,78 @@
+﻿<Page
+    x:Class="Codemash.Client.Views.SessionDetailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:app="using:Codemash.Client.Core"
+    xmlns:i="using:Windows.UI.Interactivity" xmlns:cal="using:Caliburn.Micro" xmlns:code="using:Codemash.Client.Code">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <cal:ActionMessage MethodName="PageLoaded" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <Page.Resources>
+        <cal:BooleanToVisibilityConverter x:Key="visibilityConverter" />
+        <code:BooleanToFontWeightConverter x:Key="fontWeightConverter" />
+    </Page.Resources>
+
+    <Grid Background="{StaticResource ApplicationBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="1010*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="67*"/>
+            <RowDefinition Height="591*"/>
+        </Grid.RowDefinitions>
+
+        <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
+            <Button x:Name="GoBack" Style="{StaticResource CMBackButton}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Border>
+
+        <TextBlock Text="{Binding Session.Title}" IsHitTestVisible="false" Foreground="{StaticResource CodemashOrange}"
+                   Margin="0,35" FontFamily="Segoe UI" FontSize="30" FontWeight="Bold" TextWrapping="Wrap"
+                   Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+            <Button Margin="0,0,30,0" FontWeight="{Binding SessionDetailsVisible, Converter={StaticResource fontWeightConverter}}" x:Name="ShowDetails">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Text="Details" Style="{StaticResource CMGroupHeaderTextStyle}" Foreground="{StaticResource CodemashOrange}"
+                                   FontWeight="{TemplateBinding FontWeight}" />
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button Margin="0,0,0,0" FontWeight="{Binding SpeakerDetailsVisible, Converter={StaticResource fontWeightConverter}}" x:Name="ShowSpeaker">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Text="Speaker" Style="{StaticResource CMGroupHeaderTextStyle}" Foreground="{StaticResource CodemashOrange}"
+                               FontWeight="{TemplateBinding FontWeight}"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+        
+        <Border Padding="0,0,20,20" Grid.Column="1" Grid.Row="2">
+            <Grid>
+                <!-- Session Details Grid -->
+                <Grid Background="White" Visibility="{Binding SessionDetailsVisible, Converter={StaticResource visibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="116*"/>
+                        <ColumnDefinition Width="293*"/>
+                    </Grid.ColumnDefinitions>
+
+                </Grid>
+
+                <!-- Speaker Details Grid -->
+                <Grid Background="Lime" Visibility="{Binding SpeakerDetailsVisible, Converter={StaticResource visibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="116*"/>
+                        <ColumnDefinition Width="293*"/>
+                    </Grid.ColumnDefinitions>
+
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

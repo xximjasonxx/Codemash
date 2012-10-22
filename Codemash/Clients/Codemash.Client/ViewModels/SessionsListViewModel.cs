@@ -39,10 +39,10 @@ namespace Codemash.Client.ViewModels
         public void SessionClick(ItemClickEventArgs args)
         {
             var listItem = (IListItem) args.ClickedItem;
-            if (listItem.Id > 0)
+            if (listItem.Id != 0)
             {
                 var session = SessionRepository.Get(listItem.Id);
-                NavigationService.NavigateToViewModel<SessionViewModel>(new SessionParameter(session));
+                NavigationService.NavigateToViewModel<SessionDetailViewModel>(new SessionParameter(session));
             }
         }
     }

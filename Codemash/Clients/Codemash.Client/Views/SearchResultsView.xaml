@@ -18,11 +18,11 @@
 
     <Grid Background="{StaticResource ApplicationBackgroundBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="100"/>
+            <ColumnDefinition Width="140"/>
             <ColumnDefinition Width="221*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="110"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -30,7 +30,7 @@
                 Style="{StaticResource CMBackButton}" Margin="36,0,0,36" />
         
         <StackPanel VerticalAlignment="Center" Grid.Column="1" Grid.Row="0">
-            <TextBlock Text="Codemash 2.0.1.3" Style="{StaticResource PageTitle}" Height="67" Margin="0,18" />
+            <TextBlock Text="Codemash 2.0.1.3" Style="{StaticResource PageTitle}" />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Results for" Margin="0,0,10,0" FontSize="22" Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe UI" />
                 <TextBlock Text="{Binding FormattedSearchTerm}" FontSize="22" Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe UI" />

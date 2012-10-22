@@ -22,7 +22,7 @@ namespace Codemash.Client.Data.Repository.Impl
                        {
                            Name = new StringWrapper(ji["Name"]).ToString(),
                            Biography = new StringWrapper(ji["Biography"]).ToString(),
-                           BlogUrl = new StringWrapper(ji["BlogUrl"]).ToString(),
+                           BlogUrl = new StringWrapper(ji["BlogURL"]).ToString(),
                            Twitter = new StringWrapper(ji["TwitterHandle"]).ToString(),
                            SpeakerId = new StringWrapper(ji["Name"]).ToString().AsKey()
                        };

@@ -8,6 +8,7 @@
     <SolidColorBrush x:Key="CodemashLightOrange" Color="#FFFFAE00" />
     <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#ffeeeeee" />
     <SolidColorBrush x:Key="TextGrayBrush" Color="#ff555555" />
+    <SolidColorBrush x:Key="LinkTextBrush" Color="#ff007ACC" />
     
     <!-- Symbols -->
     <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>

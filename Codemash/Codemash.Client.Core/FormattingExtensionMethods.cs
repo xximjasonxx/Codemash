@@ -15,16 +15,16 @@ namespace Codemash.Client.Core
         {
             StringBuilder sb = new StringBuilder();
             if (ts.Days > 0)
-                sb.AppendFormat("{0}d ", ts.Days);
+                sb.AppendFormat("{0} day{1} ", ts.Days, ts.Days == 1 ? string.Empty : "s");
 
             if (ts.Hours > 0)
-                sb.AppendFormat("{0}h ", ts.Hours);
+                sb.AppendFormat("{0} hour{1} ", ts.Hours, ts.Hours == 1 ? string.Empty : "s");
 
             if (ts.Minutes > 0)
-                sb.AppendFormat("{0}m ", ts.Minutes);
+                sb.AppendFormat("{0} minute{1} ", ts.Minutes, ts.Minutes == 1 ? string.Empty : "s");
 
             Regex regex = new Regex(@" $");
-            return "Duration: " + regex.Replace(sb.ToString(), string.Empty);
+            return regex.Replace(sb.ToString(), string.Empty);
         }
 
         public static string AsTimeDisplay(this DateTime dt)

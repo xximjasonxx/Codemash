@@ -1,7 +1,12 @@
 ﻿
+using System;
 using Caliburn.Micro;
+using Codemash.Client.Core;
+using Codemash.Client.Data.Repository;
 using Codemash.Client.DataModels;
 using Codemash.Client.Parameters;
+using Windows.System;
+using Windows.UI.Popups;
 
 namespace Codemash.Client.ViewModels
 {
@@ -10,8 +15,13 @@ namespace Codemash.Client.ViewModels
         // parameters
         public SessionParameter Parameter { get; set; }
 
-        public SessionDetailViewModel(INavigationService navigationService) : base(navigationService)
+        // depts
+        public ISpeakerRepository SpeakerRepository { get; set; }
+
+        public SessionDetailViewModel(INavigationService navigationService, ISpeakerRepository speakerRepository) : base(navigationService)
         {
+            SpeakerRepository = speakerRepository;
+
             SessionDetailsVisible = true;
             SpeakerDetailsVisible = false;
         }
@@ -20,17 +30,34 @@ namespace Codemash.Client.ViewModels
         public SessionDetailModel Session { get; set; }
         public bool SessionDetailsVisible { get; set; }
         public bool SpeakerDetailsVisible { get; set; }
+        public bool NotHasBlog { get; set; }
+        public bool HasBlog { get; set; }
 
         // behaviors
         public void PageLoaded()
         {
             var session = Parameter.Value;
+            var speaker = SpeakerRepository.Get(session.SpeakerId);
             Session = new SessionDetailModel
                           {
-                              Title = session.Title
+                              Title = session.Title,
+                              Technology = session.Technology,
+                              Difficulty = session.Difficulty,
+                              Duration = session.Duration.AsDurationString(),
+                              Room = session.Room,
+                              StartsAt = session.Starts.AsTimeDisplay(),
+                              Abstract = session.Abstract,
+                              Speaker = new SpeakerDetailModel
+                                            {
+                                                Biography = speaker.Biography,
+                                                BlogUrl = speaker.BlogUrl,
+                                                Name = speaker.Name,
+                                                Twitter = speaker.Twitter
+                                            }
                           };
 
             NotifySessionUpdated();
+            UpdateBlogVisibilityStatus();
         }
 
         public void ShowDetails()
@@ -48,6 +75,19 @@ namespace Codemash.Client.ViewModels
         }
 
         // methods
+        public void ShowBlog()
+        {
+            var dialog = new MessageDialog("Navigating to this URL will take you out of the App. Are you sure?", "Codemash 2.0.1.3");
+            dialog.Commands.Add(new UICommand("Yes", command =>
+                                                         {
+                                                             var url = Session.Speaker.BlogUrl;
+                                                             Launcher.LaunchUriAsync(new Uri(url, UriKind.Absolute));
+                                                         }));
+
+            dialog.Commands.Add(new UICommand("No"));
+            dialog.ShowAsync();
+        }
+
         private void NotifySessionUpdated()
         {
             NotifyOfPropertyChange("Session");
@@ -57,6 +97,15 @@ namespace Codemash.Client.ViewModels
         {
             NotifyOfPropertyChange("SessionDetailsVisible");
             NotifyOfPropertyChange("SpeakerDetailsVisible");
+        }
+
+        private void UpdateBlogVisibilityStatus()
+        {
+            NotHasBlog = string.IsNullOrEmpty(Session.Speaker.BlogUrl);
+            HasBlog = !string.IsNullOrEmpty(Session.Speaker.BlogUrl);
+
+            NotifyOfPropertyChange("NotHasBlog");
+            NotifyOfPropertyChange("HasBlog");
         }
     }
 }

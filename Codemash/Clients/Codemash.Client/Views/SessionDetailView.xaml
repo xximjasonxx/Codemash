@@ -55,22 +55,98 @@
         
         <Border Padding="0,0,20,20" Grid.Column="1" Grid.Row="2">
             <Grid>
-                <!-- Session Details Grid -->
-                <Grid Background="White" Visibility="{Binding SessionDetailsVisible, Converter={StaticResource visibilityConverter}}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="116*"/>
-                        <ColumnDefinition Width="293*"/>
-                    </Grid.ColumnDefinitions>
+                <!-- Session Details -->
+                <Border Padding="15,10,15,20" Background="White" Visibility="{Binding SessionDetailsVisible, Converter={StaticResource visibilityConverter}}">
+                    <Grid Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="293*"/>
+                        </Grid.ColumnDefinitions>
 
-                </Grid>
+                        <StackPanel Orientation="Vertical" Grid.Column="0" HorizontalAlignment="Stretch">
+                            <TextBlock Text="TECHNOLOGY" Foreground="{StaticResource CodemashOrange}"
+                                       FontSize="20" FontFamily="Segoe UI" HorizontalAlignment="Right" />
+                            <TextBlock Text="{Binding Session.Technology}" Foreground="{StaticResource TextGrayBrush}"
+                                       FontSize="30" FontFamily="Segoe UI" Margin="0,0,0,20" HorizontalAlignment="Right" />
+
+                            <TextBlock Text="ROOM" Foreground="{StaticResource CodemashOrange}"
+                                       FontSize="20" FontFamily="Segoe UI" HorizontalAlignment="Right" />
+                            <TextBlock Text="{Binding Session.Room}" Foreground="{StaticResource TextGrayBrush}"
+                                       FontSize="30" FontFamily="Segoe UI" Margin="0,0,0,20" HorizontalAlignment="Right" />
+
+                            <TextBlock Text="STARTS AT" Foreground="{StaticResource CodemashOrange}"
+                                       FontSize="20" FontFamily="Segoe UI" HorizontalAlignment="Right" />
+                            <TextBlock Text="{Binding Session.StartsAt}" Foreground="{StaticResource TextGrayBrush}"
+                                       FontSize="30" FontFamily="Segoe UI" Margin="0,0,0,20" HorizontalAlignment="Right" />
+
+                            <TextBlock Text="DURATION" Foreground="{StaticResource CodemashOrange}"
+                                       FontSize="20" FontFamily="Segoe UI" HorizontalAlignment="Right" />
+                            <TextBlock Text="{Binding Session.Duration}" Foreground="{StaticResource TextGrayBrush}"
+                                       FontSize="30" FontFamily="Segoe UI" Margin="0,0,0,20" HorizontalAlignment="Right" />
+
+                            <TextBlock Text="DIFFICULTY" Foreground="{StaticResource CodemashOrange}"
+                                       FontSize="20" FontFamily="Segoe UI" HorizontalAlignment="Right" />
+                            <TextBlock Text="{Binding Session.Difficulty}" Foreground="{StaticResource TextGrayBrush}"
+                                       FontSize="30" FontFamily="Segoe UI" Margin="0,0,0,20" HorizontalAlignment="Right" />
+                        </StackPanel>
+                        
+                        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden"
+                                      VerticalAlignment="Stretch">
+                            <Border Padding="10,10,25,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="800">
+                                <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" 
+                                           Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe UI"
+                                           FontSize="23" Text="{Binding Session.Abstract}" />
+                            </Border>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
 
                 <!-- Speaker Details Grid -->
-                <Grid Background="Lime" Visibility="{Binding SpeakerDetailsVisible, Converter={StaticResource visibilityConverter}}">
+                <Grid Background="White" Visibility="{Binding SpeakerDetailsVisible, Converter={StaticResource visibilityConverter}}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="116*"/>
+                        <ColumnDefinition Width="100*"/>
                         <ColumnDefinition Width="293*"/>
                     </Grid.ColumnDefinitions>
 
+                    <StackPanel Orientation="Vertical" Grid.Column="0" HorizontalAlignment="Stretch">
+                        <Border Padding="100,20,0,0" HorizontalAlignment="Right" Margin="0,0,0,10">
+                            <Image Source="{Binding Session.Speaker.PictureUrl}" Stretch="UniformToFill" HorizontalAlignment="Center" />
+                        </Border>
+
+                        <TextBlock Text="NAME" Foreground="{StaticResource CodemashOrange}"
+                                       FontSize="20" FontFamily="Segoe UI" HorizontalAlignment="Right" />
+                        <TextBlock Text="{Binding Session.Speaker.Name}" Foreground="{StaticResource TextGrayBrush}"
+                                   FontSize="30" FontFamily="Segoe UI" Margin="0,0,0,40" HorizontalAlignment="Right" />
+
+                        <TextBlock Text="TWITTER" Foreground="{StaticResource CodemashOrange}"
+                                       FontSize="20" FontFamily="Segoe UI" HorizontalAlignment="Right" />
+                        <TextBlock Text="{Binding Session.Speaker.Twitter}" Foreground="{StaticResource TextGrayBrush}"
+                                   FontSize="30" FontFamily="Segoe UI" Margin="0,0,0,20" HorizontalAlignment="Right" />
+
+                        <TextBlock Text="BLOG" Foreground="{StaticResource CodemashOrange}"
+                                       FontSize="20" FontFamily="Segoe UI" HorizontalAlignment="Right" />
+                        <TextBlock Text="No Blog" Foreground="{StaticResource TextGrayBrush}"
+                                   FontSize="30" FontFamily="Segoe UI" Margin="0,0,0,00" HorizontalAlignment="Right"
+                                   Visibility="{Binding NotHasBlog, Converter={StaticResource visibilityConverter}}" />
+                        <Button HorizontalAlignment="Right" Name="ShowBlog">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <TextBlock Text="{Binding Session.Speaker.BlogUrl}" Foreground="{StaticResource LinkTextBrush}"
+                                               FontSize="30" FontFamily="Segoe UI Light" Margin="0,0,0,00" FontWeight="Light"
+                                               Visibility="{Binding HasBlog, Converter={StaticResource visibilityConverter}}" />
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+
+                    <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden"
+                                      VerticalAlignment="Stretch">
+                        <Border Padding="10,10,25,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="800">
+                            <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" 
+                                       Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe UI"
+                                       FontSize="23" Text="{Binding Session.Speaker.Biography}" />
+                        </Border>
+                    </ScrollViewer>
                 </Grid>
             </Grid>
         </Border>

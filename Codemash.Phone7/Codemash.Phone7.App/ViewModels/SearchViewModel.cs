@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Caliburn.Micro;
@@ -27,19 +28,16 @@ namespace Codemash.Phone7.App.ViewModels
         public bool ShowNoResults { get; private set; }
 
         // beahviors
-        public void PerformSearch(KeyEventArgs args)
+        public void DoSearch()
         {
-            if (args.Key == Key.Enter && !string.IsNullOrEmpty(SearchTerm) && SearchTerm.Length > 1)
-            {
-                var results = SessionRepository.FindSessions(SearchTerm);
-                SearchResults = new ObservableCollection<SessionListView>(results.Select(s => new SessionListView
+            var results = SessionRepository.FindSessions(SearchTerm);
+            SearchResults = new ObservableCollection<SessionListView>(results.Select(s => new SessionListView
                                                                                                   {
                                                                                                       SessionId = s.SessionId,
                                                                                                       Title = s.Title
                                                                                                   }));
 
-                UpdateViewModel();
-            }
+            UpdateViewModel();
         }
 
         public void SelectionChanged(SelectionChangedEventArgs args)

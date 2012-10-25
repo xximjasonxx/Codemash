@@ -8,7 +8,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="False" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    xmlns:cal="http://www.caliburnproject.org" tk:TiltEffect.IsTiltEnabled="True" d:DesignHeight="800" d:DesignWidth="480">
+    xmlns:cal="http://www.caliburnproject.org" tk:TiltEffect.IsTiltEnabled="True" d:DesignHeight="728" d:DesignWidth="480">
     <phone:PhoneApplicationPage.Resources>
         <cal:BooleanToVisibilityConverter x:Key="visibilityConverter" />
     </phone:PhoneApplicationPage.Resources>
@@ -19,15 +19,7 @@
             <RowDefinition Height="737*" />
         </Grid.RowDefinitions>
 
-        <tk:PhoneTextBox Hint="enter search term" Grid.Row="0" Name="SearchTerm">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="KeyUp">
-                    <cal:ActionMessage MethodName="PerformSearch">
-                        <cal:Parameter Value="$eventArgs" />
-                    </cal:ActionMessage>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </tk:PhoneTextBox>
+        <tk:PhoneTextBox Hint="enter search term" Grid.Row="0" Name="SearchTerm" />
         
         <ListBox Grid.Row="1" ItemsSource="{Binding SearchResults}"
                  ItemTemplate="{StaticResource SessionListItemTemplate}"
@@ -48,4 +40,13 @@
                    Visibility="{Binding ShowNoResults, Converter={StaticResource visibilityConverter}}" />
     </Grid>
 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+            <shell:ApplicationBar.Buttons>
+                <cal:AppBarButton IconUri="/Assets/next_white.png"
+                                  Text="search"
+                                  Message="DoSearch" />
+            </shell:ApplicationBar.Buttons>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

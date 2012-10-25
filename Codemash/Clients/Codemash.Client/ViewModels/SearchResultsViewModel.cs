@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Caliburn.Micro;
 using Codemash.Client.Core.Ex;
-using Codemash.Client.Data.Entities;
 using Codemash.Client.Data.Repository;
 using Codemash.Client.DataModels;
 using Codemash.Client.Parameters;
+using Windows.UI.Xaml.Controls;
 
 namespace Codemash.Client.ViewModels
 {
@@ -25,12 +21,8 @@ namespace Codemash.Client.ViewModels
         }
 
         // attributes
-        public string FormattedSearchTerm { get { return string.Format("'{0}'", Parameter.Value); } }
+        public string SearchSummary { get { return string.Format("Search Results for '{0}'", Parameter.Value); } }
         public ObservableCollection<SessionListView> Results { get; set; }
-        public string FormattedResultsCount
-        {
-            get { return Results == null ? "(0)" : string.Format("({0})", Results.Count); }
-        }
         public bool ShowResultsGrid
         {
             get { return Results != null && Results.Count > 0; }
@@ -45,6 +37,7 @@ namespace Codemash.Client.ViewModels
                 Results = new ObservableCollection<SessionListView>(
                     SessionRepository.SearchSessions(Parameter.Value).Select(s => new SessionListView
                                                                                       {
+                                                                                          SessionId = s.SessionId,
                                                                                           SessionTitle = s.Title
                                                                                       }));
             }
@@ -55,6 +48,16 @@ namespace Codemash.Client.ViewModels
             }
 
             NotifyResultsPropertyUpdated();
+        }
+
+        public void SessionClick(ItemClickEventArgs args)
+        {
+            var item = args.ClickedItem as SessionListView;
+            if (item != null)
+            {
+                var session = SessionRepository.Get(item.SessionId);
+                NavigationService.NavigateToViewModel<SessionDetailViewModel>(new SessionParameter(session));
+            }
         }
 
         // methods

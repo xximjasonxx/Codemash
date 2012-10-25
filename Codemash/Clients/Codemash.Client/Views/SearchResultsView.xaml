@@ -12,38 +12,38 @@
     
     <Page.Resources>
         <cal:BooleanToVisibilityConverter x:Key="visibilityConverter" />
-        <app:SessionItemTemplateSelector x:Name="templateSelector" />
-        <app:SessionItemContainerStyleSelector x:Name="containerStyleSelector" />
     </Page.Resources>
 
     <Grid Background="{StaticResource ApplicationBackgroundBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140"/>
-            <ColumnDefinition Width="221*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="110"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="44*"/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}"
-                Style="{StaticResource CMBackButton}" Margin="36,0,0,36" />
-        
-        <StackPanel VerticalAlignment="Center" Grid.Column="1" Grid.Row="0">
-            <TextBlock Text="Codemash 2.0.1.3" Style="{StaticResource PageTitle}" />
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Results for" Margin="0,0,10,0" FontSize="22" Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe UI" />
-                <TextBlock Text="{Binding FormattedSearchTerm}" FontSize="22" Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe UI" />
-            </StackPanel>
-        </StackPanel>
-        
+        <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
+            <Button x:Name="GoBack" Style="{StaticResource CMBackButton}" VerticalAlignment="Center"
+                    HorizontalAlignment="Center" />
+        </Border>
+
+        <!-- Page Title TextBlock -->
+        <TextBlock Text="Codemash 2.0.1.3" Style="{StaticResource PageTitle}" Grid.Column="1" Grid.Row="0"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,19,0,17" Height="74" Width="1062" />
+
+        <TextBlock Text="{Binding SearchSummary}" Style="{StaticResource GroupTitle}" Grid.Column="1" Grid.Row="1"
+                   VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="32" />
+
         <TextBlock Text="No Results for this term" Foreground="Black" FontFamily="Segoe UI"
-                   FontSize="24" Grid.Row="1" Grid.Column="1" Margin="0,10,0,0"
+                   FontSize="24" Grid.Row="2" Grid.Column="1" Margin="0,10,0,0"
                    Visibility="{Binding ShowNoResults, Converter={StaticResource visibilityConverter}}" />
 
-        <GridView ItemsSource="{Binding Results}" IsItemClickEnabled="True" Grid.Row="1" Grid.Column="1"
+        <GridView ItemsSource="{Binding Results}" IsItemClickEnabled="True" Grid.Row="2" Grid.Column="1"
                   Visibility="{Binding ShowResultsGrid, Converter={StaticResource visibilityConverter}}"
-                  ItemTemplateSelector="{StaticResource templateSelector}" ItemContainerStyle="{StaticResource GroupItem}">
+                  ItemTemplate="{StaticResource sessionItemTemplate}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="ItemClick">
                     <cal:ActionMessage MethodName="SessionClick">

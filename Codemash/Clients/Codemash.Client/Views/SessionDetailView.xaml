@@ -20,8 +20,9 @@
             <ColumnDefinition Width="1010*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="110"/>
-            <RowDefinition Height="67*"/>
+            <RowDefinition Height="110" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="67"/>
             <RowDefinition Height="591*"/>
         </Grid.RowDefinitions>
 
@@ -30,10 +31,10 @@
         </Border>
 
         <TextBlock Text="{Binding Session.Title}" IsHitTestVisible="false" Foreground="{StaticResource CodemashOrange}"
-                   Margin="0,35" FontFamily="Segoe UI" FontSize="30" FontWeight="Bold" TextWrapping="Wrap"
-                   Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                   FontFamily="Segoe UI" FontSize="30" FontWeight="Bold" TextWrapping="Wrap"
+                   Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
             <Button Margin="0,0,30,0" FontWeight="{Binding SessionDetailsVisible, Converter={StaticResource fontWeightConverter}}" x:Name="ShowDetails">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
@@ -53,7 +54,7 @@
             </Button>
         </StackPanel>
         
-        <Border Padding="0,0,20,20" Grid.Column="1" Grid.Row="2">
+        <Border Padding="0,0,20,20" Grid.Column="1" Grid.Row="3">
             <Grid>
                 <!-- Session Details -->
                 <Border Padding="15,10,15,20" Background="White" Visibility="{Binding SessionDetailsVisible, Converter={StaticResource visibilityConverter}}">
@@ -131,7 +132,7 @@
                         <Button HorizontalAlignment="Right" Name="ShowBlog">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
-                                    <TextBlock Text="{Binding Session.Speaker.BlogUrl}" Foreground="{StaticResource LinkTextBrush}"
+                                    <TextBlock Text="View Blog" Foreground="{StaticResource LinkTextBrush}"
                                                FontSize="30" FontFamily="Segoe UI Light" Margin="0,0,0,00" FontWeight="Light"
                                                Visibility="{Binding HasBlog, Converter={StaticResource visibilityConverter}}" />
                                 </ControlTemplate>

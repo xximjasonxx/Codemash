@@ -1,4 +1,4 @@
-﻿<app:LayoutAwarePage
+﻿<Page
     x:Name="pageRoot"
     x:Class="Codemash.Client.Views.SearchResultsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -58,4 +58,4 @@
             </GridView.ItemsPanel>
         </GridView>
     </Grid>
-</app:LayoutAwarePage>
+</Page>

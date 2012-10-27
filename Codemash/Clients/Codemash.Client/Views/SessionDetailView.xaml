@@ -1,8 +1,9 @@
 ﻿<Page
     x:Class="Codemash.Client.Views.SessionDetailView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:app="using:Codemash.Client.Core"
-    xmlns:i="using:Windows.UI.Interactivity" xmlns:cal="using:Caliburn.Micro" xmlns:code="using:Codemash.Client.Code">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="using:Windows.UI.Interactivity" xmlns:cal="using:Caliburn.Micro"
+    xmlns:app="using:Codemash.Client.Core">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <cal:ActionMessage MethodName="PageLoaded" />
@@ -11,7 +12,7 @@
     
     <Page.Resources>
         <cal:BooleanToVisibilityConverter x:Key="visibilityConverter" />
-        <code:BooleanToFontWeightConverter x:Key="fontWeightConverter" />
+        <app:BooleanToFontWeightConverter x:Key="fontWeightConverter" />
     </Page.Resources>
 
     <Grid Background="{StaticResource ApplicationBackgroundBrush}">
@@ -152,4 +153,29 @@
             </Grid>
         </Border>
     </Grid>
+    
+    <Page.BottomAppBar>
+        <AppBar Padding="10" Background="{StaticResource CodemashOrange}">
+            <StackPanel Orientation="Horizontal">
+                <Button>
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Assets/appbar.map.png" Stretch="Uniform" VerticalAlignment="Center" Width="30" />
+                            <TextBlock Text="View Map" Foreground="White" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button.Content>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <ContentPresenter />
+                        </ControlTemplate>
+                    </Button.Template>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <cal:ActionMessage MethodName="ViewMap" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+        </AppBar>
+    </Page.BottomAppBar>
 </Page>

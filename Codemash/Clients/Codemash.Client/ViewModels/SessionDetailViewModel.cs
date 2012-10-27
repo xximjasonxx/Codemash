@@ -74,6 +74,11 @@ namespace Codemash.Client.ViewModels
             NotifyDetailsVisibleUpdated();
         }
 
+        public void ViewMap()
+        {
+            NavigationService.NavigateToViewModel<MapViewModel>();
+        }
+
         // methods
         public void ShowBlog()
         {

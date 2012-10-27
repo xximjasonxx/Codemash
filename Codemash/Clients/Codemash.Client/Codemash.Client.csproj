@@ -105,7 +105,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Code\BooleanToFontWeightConverter.cs" />
+    <Compile Include="Core\BooleanToFontWeightConverter.cs" />
     <Compile Include="Code\Enum.cs" />
     <Compile Include="Core\SessionItemContainerStyleSelector.cs" />
     <Compile Include="DataModels\IListItem.cs" />
@@ -113,13 +113,15 @@
     <Compile Include="DataModels\SessionListGroup.cs" />
     <Compile Include="DataModels\SessionListView.cs" />
     <Compile Include="DataModels\SessionTileView.cs" />
-    <Compile Include="Core\LayoutAwarePage.cs" />
     <Compile Include="Core\SessionItemTemplateSelector.cs" />
-    <Compile Include="Core\SuspensionManager.cs" />
     <Compile Include="DataModels\SpeakerDetailModel.cs" />
     <Compile Include="Parameters\SearchTextParameter.cs" />
+    <Compile Include="ViewModels\MapViewModel.cs" />
     <Compile Include="ViewModels\SearchResultsViewModel.cs" />
     <Compile Include="ViewModels\SessionDetailViewModel.cs" />
+    <Compile Include="Views\MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SearchResultsView.xaml.cs">
       <DependentUpon>SearchResultsView.xaml</DependentUpon>
     </Compile>
@@ -155,7 +157,9 @@
     <None Include="Codemash.Client_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\appbar.map.png" />
     <Content Include="Assets\Background.png" />
+    <Content Include="Assets\ConventionCenterFinal.png" />
     <Content Include="Assets\gear.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
@@ -180,6 +184,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\MapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchResultsView.xaml">
       <SubType>Designer</SubType>

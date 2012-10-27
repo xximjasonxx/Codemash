@@ -2,7 +2,7 @@
 using Windows.UI.Text;
 using Windows.UI.Xaml.Data;
 
-namespace Codemash.Client.Code
+namespace Codemash.Client.Core
 {
     public class BooleanToFontWeightConverter : IValueConverter
     {

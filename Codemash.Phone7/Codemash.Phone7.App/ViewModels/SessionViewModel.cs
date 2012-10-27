@@ -46,5 +46,11 @@ namespace Codemash.Phone7.App.ViewModels
                 return _sessionDetailView;
             }
         }
+
+        // behaviors
+        public void ShowMap()
+        {
+            NavigationService.UriFor<MapViewModel>().Navigate();
+        }
     }
 }

@@ -38,12 +38,18 @@
                 </tk:LongListSelector.GroupHeaderTemplate>
                 <tk:LongListSelector.GroupItemTemplate>
                     <DataTemplate>
-                        <Border Background="{StaticResource CodemashOrange}" Margin="6" MinWidth="99" Height="99">
+                        <Border Background="{StaticResource CodemashOrange}" Margin="6" MinWidth="99" Height="99"
+                                Padding="7">
                             <TextBlock Text="{Binding Title}" FontSize="40" Foreground="White"
                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </DataTemplate>
                 </tk:LongListSelector.GroupItemTemplate>
+                <tk:LongListSelector.GroupItemsPanel>
+                    <ItemsPanelTemplate>
+                        <tk:WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </tk:LongListSelector.GroupItemsPanel>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <cal:ActionMessage MethodName="SelectionChanged">

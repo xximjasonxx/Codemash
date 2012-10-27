@@ -70,27 +70,37 @@
 
             <controls:PivotItem Header="speaker">
                 <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="213" />
+                        <ColumnDefinition Width="233" />
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="161" />
                         <RowDefinition Height="538*" />
                     </Grid.RowDefinitions>
-                    
-                    <StackPanel Orientation="Vertical" Grid.Row="0">
-                        <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
-                               FontSize="35" Text="{Binding Session.Speaker.Name}" />
 
-                        <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
-                               FontSize="25" Text="{Binding Session.Speaker.Twitter}" />
-                        <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
-                               FontSize="25" Text="{Binding Session.Speaker.BlogUrl}" />
-                    </StackPanel>
+                    <Image Source="{Binding Session.Speaker.PictureUrl}" Stretch="UniformToFill"
+                           Grid.Column="0" Grid.Row="0" />
+                    
+                    <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
+                               FontSize="35" Text="{Binding Session.Speaker.Name}" TextWrapping="Wrap"
+                               Grid.Row="0" Grid.Column="1" Margin="7,5,7,0" />
 
                     <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled"
                               VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"
-                              Margin="0,0,0,20" Grid.Row="1">
-                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                              Margin="5,7,0,5" Grid.Row="1" Grid.ColumnSpan="2">
+                        
+                        <StackPanel Orientation="Vertical" Grid.ColumnSpan="2">
+                            <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
+                               FontSize="25" Text="{Binding Session.Speaker.Twitter}" />
+                            <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
+                               FontSize="25" Text="{Binding Session.Speaker.BlogUrl}" />
+
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Top"
                                Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe WP"
                                FontSize="25" Text="{Binding Session.Speaker.Biography}" />
+                        </StackPanel>
+
                     </ScrollViewer>
                 </Grid>
             </controls:PivotItem>

@@ -1,6 +1,4 @@
 ﻿
-using Codemash.Phone7.Data.Entities;
-
 namespace Codemash.Phone7.App.DataModels
 {
     public class SessionDetailView
@@ -13,6 +11,6 @@ namespace Codemash.Phone7.App.DataModels
         public string Abstract { get; set; }
         public string Duration { get; set; }
 
-        public Speaker Speaker { get; set; }
+        public SpeakerDetailView Speaker { get; set; }
     }
 }

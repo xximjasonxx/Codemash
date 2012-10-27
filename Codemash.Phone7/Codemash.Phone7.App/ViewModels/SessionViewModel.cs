@@ -39,7 +39,7 @@ namespace Codemash.Phone7.App.ViewModels
                                                  Difficulty = session.Difficulty,
                                                  Room = session.Room,
                                                  Abstract = session.Abstract,
-                                                 Speaker = SpeakerRepository.Get(session.SpeakerId)
+                                                 Speaker = new SpeakerDetailView(SpeakerRepository.Get(session.SpeakerId))
                                              };
                 }
 

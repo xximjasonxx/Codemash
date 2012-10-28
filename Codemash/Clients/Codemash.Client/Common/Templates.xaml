@@ -3,20 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Data Templates -->
-    <DataTemplate x:Key="sessionItemTemplate">
-        <Border Height="75" Width="350" Padding="5" Margin="0,0,30,0">
-            <TextBlock Text="{Binding Display}" Foreground="{StaticResource TextGrayBrush}" TextWrapping="Wrap" FontSize="22"
-                       FontFamily="Segoe UI" />
-        </Border>
-    </DataTemplate>
-
-    <DataTemplate x:Key="sessionGroupItemTemplate">
-        <Border Height="75" Width="350" Padding="0,5,5,1" Margin="0,0,30,0" BorderBrush="#dddddd" BorderThickness="0,0,0,2">
-            <TextBlock Text="{Binding Display}" Foreground="{StaticResource CodemashOrange}" TextWrapping="Wrap"
-                       VerticalAlignment="Bottom" FontSize="28" FontFamily="Segoe UI" />
-        </Border>
-    </DataTemplate>
-
     <DataTemplate x:Key="UpcomingSessionItemTemplate">
         <Border Padding="10,5,10,5" Width="300" Height="260" Background="{StaticResource CodemashOrange}">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -58,6 +44,25 @@
             <TextBlock Text="{Binding StartsAt}" Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe UI" FontSize="16" />
             <TextBlock Text="{Binding Room}" Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe UI" FontSize="16" />
         </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SessionItemTemplate">
+        <Border Margin="0,0,0,10">
+            <TextBlock Text="{Binding Title}" Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe UI" FontSize="20"
+                                   TextWrapping="Wrap" />
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SessionItemTileTemplate">
+        <Border Padding="10" Width="300" Height="150" Background="{StaticResource CodemashOrange}">
+            <TextBlock Text="{Binding Title}" Foreground="White" TextWrapping="Wrap" FontSize="22" FontFamily="Segoe UI" />
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="GroupItemTemplate">
+        <Border Height="200" Width="300" Background="{StaticResource CodemashOrange}" Padding="10,5">
+            <TextBlock Text="{Binding Group.Title}" Foreground="White" TextWrapping="Wrap" FontSize="25" FontFamily="Segoe UI" />
+        </Border>
     </DataTemplate>
 
     <!-- Button Templates -->

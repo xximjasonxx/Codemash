@@ -26,40 +26,20 @@
 
         <!-- Snapped View -->
         <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Source={StaticResource SessionList}}" SelectionMode="None"
-                  IsItemClickEnabled="True" Margin="10,7,5,5" Visibility="Collapsed" x:Name="SnappedListView">
+                  IsItemClickEnabled="True" Margin="10,7,5,5" Visibility="Collapsed" x:Name="SnappedListView"
+                  ItemTemplate="{StaticResource SessionItemTemplate}">
             <ListView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Title}" Style="{StaticResource GroupTitle}" Margin="3,0,0,0" />
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                </GroupStyle>
+                <GroupStyle HeaderTemplate="{StaticResource GroupHeaderTemplate}" />
             </ListView.GroupStyle>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border Margin="0,0,0,10">
-                        <TextBlock Text="{Binding Title}" Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe UI" FontSize="20"
-                                   TextWrapping="Wrap" />
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
         </ListView>
         
         <!-- Filled or Full View -->
         <SemanticZoom Grid.Column="0" Grid.Row="1" x:Name="FullGridView">
             <SemanticZoom.ZoomedInView>
                 <GridView SelectionMode="None" IsItemClickEnabled="True" Margin="20,7,5,5"
-                  ItemsSource="{Binding Source={StaticResource SessionList}}">
+                  ItemsSource="{Binding Source={StaticResource SessionList}}" ItemTemplate="{StaticResource SessionItemTileTemplate}">
                     <GridView.GroupStyle>
-                        <GroupStyle>
-                            <GroupStyle.HeaderTemplate>
-                                <DataTemplate>
-                                    <Border Padding="5">
-                                        <TextBlock Text="{Binding Title}" Style="{StaticResource GroupTitle}" />
-                                    </Border>
-                                </DataTemplate>
-                            </GroupStyle.HeaderTemplate>
+                        <GroupStyle HeaderTemplate="{StaticResource GroupHeaderTemplate}">
                             <GroupStyle.Panel>
                                 <ItemsPanelTemplate>
                                     <VariableSizedWrapGrid Orientation="Vertical" Margin="0,0,80,0"/>
@@ -67,13 +47,6 @@
                             </GroupStyle.Panel>
                         </GroupStyle>
                     </GridView.GroupStyle>
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Border Padding="10" Width="300" Height="150" Background="{StaticResource CodemashOrange}">
-                                <TextBlock Text="{Binding Title}" Foreground="White" TextWrapping="Wrap" FontSize="22" FontFamily="Segoe UI" />
-                            </Border>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal" />
@@ -89,14 +62,8 @@
                 </GridView>
             </SemanticZoom.ZoomedInView>
             <SemanticZoom.ZoomedOutView>
-                <GridView SelectionMode="None" IsItemClickEnabled="True" Margin="20,7,5,5" x:Name="GroupList">
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Border Height="200" Width="300" Background="{StaticResource CodemashOrange}" Padding="10,5">
-                                <TextBlock Text="{Binding Group.Title}" Foreground="White" TextWrapping="Wrap" FontSize="25" FontFamily="Segoe UI" />
-                            </Border>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
+                <GridView SelectionMode="None" IsItemClickEnabled="True" Margin="20,7,5,5" x:Name="GroupList"
+                          ItemTemplate="{StaticResource GroupItemTemplate}">
                 </GridView>
             </SemanticZoom.ZoomedOutView>
         </SemanticZoom>

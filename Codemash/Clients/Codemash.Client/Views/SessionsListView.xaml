@@ -31,6 +31,13 @@
             <ListView.GroupStyle>
                 <GroupStyle HeaderTemplate="{StaticResource GroupHeaderTemplate}" />
             </ListView.GroupStyle>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ItemClick">
+                    <cal:ActionMessage MethodName="SessionClick">
+                        <cal:Parameter Value="$eventArgs" />
+                    </cal:ActionMessage>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListView>
         
         <!-- Filled or Full View -->

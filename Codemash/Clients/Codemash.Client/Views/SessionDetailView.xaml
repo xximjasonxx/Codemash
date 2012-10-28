@@ -65,32 +65,8 @@
             </Border>
             
             <!-- Action Options -->
-            <Button Content="View Map" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="15" VerticalAlignment="Bottom">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Padding="5" BorderBrush="White" BorderThickness="2" x:Name="ButtonBorder">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="/Assets/appbar.map.png" Height="40" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left"
-                                       Margin="0,0,7,0" />
-                                <TextBlock Text="{TemplateBinding Content}" FontFamily="Segoe UI" FontSize="15" Foreground="White" VerticalAlignment="Center"
-                                           Margin="0,0,7,0" />
-                            </StackPanel>
-                            
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal" />
-                                    <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBorder" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CodemashLightOrange}"/>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
+            <Button Content="View Map" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="15" VerticalAlignment="Bottom"
+                    Template="{StaticResource AppBarButtonTemplate}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <cal:ActionMessage MethodName="ViewMap" />

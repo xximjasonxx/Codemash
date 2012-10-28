@@ -23,17 +23,10 @@ namespace Codemash.Client.Grouping
         /// Returns the group list as dictated by the underlying implementation
         /// </summary>
         /// <returns></returns>
-        public IList<IListItem> GetGroupedList()
+        public IList<SessionGroup> GetGroupedList()
         {
             var groupedSet = GetGroupedSet(_sessionList);
-            var combinedList = new List<IListItem>();
-            foreach (var kv in groupedSet.OrderBy(k => k.Key))
-            {
-                combinedList.Add(new SessionListGroup {GroupTitle = kv.Key});
-                combinedList.AddRange(kv.Value.Select(s => new SessionListView {SessionTitle = s.Title, SessionId = s.SessionId}));
-            }
-
-            return combinedList;
+            return groupedSet.Select(kv => new SessionGroup(kv.Key, kv.Value)).OrderBy(sg => sg.Title).ToList();
         }
 
         #endregion

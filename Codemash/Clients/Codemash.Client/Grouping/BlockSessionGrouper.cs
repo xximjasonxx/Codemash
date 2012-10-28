@@ -23,7 +23,7 @@ namespace Codemash.Client.Grouping
         /// Returns the group list as dictated by the underlying implementation
         /// </summary>
         /// <returns></returns>
-        public IList<IListItem> GetGroupedList()
+        public IList<SessionGroup> GetGroupedList()
         {
             Regex regex = new Regex(@"\w");
             var groupedSet = (from s in _sessionList
@@ -34,15 +34,7 @@ namespace Codemash.Client.Grouping
                                             Key = BlockSessions.Key,
                                             Value = BlockSessions.OrderBy(s => regex.Matches(s.Title)[0].Value).ToList()
                                          }).ToDictionary(kv => kv.Key, kv => kv.Value.ToList());
-
-            var combinedList = new List<IListItem>();
-            foreach (var kv in groupedSet)
-            {
-                combinedList.Add(new SessionListGroup {GroupTitle = kv.Key});
-                combinedList.AddRange(kv.Value.Select(s => new SessionListView {SessionTitle = s.Title, SessionId = s.SessionId}));
-            }
-
-            return combinedList;
+            return groupedSet.Select(kv => new SessionGroup(kv.Key, kv.Value)).ToList();
         }
 
         #endregion

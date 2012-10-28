@@ -14,6 +14,6 @@ namespace Codemash.Client.Grouping
         /// Returns the group list as dictated by the underlying implementation
         /// </summary>
         /// <returns></returns>
-        IList<IListItem> GetGroupedList();
+        IList<SessionGroup> GetGroupedList();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using Caliburn.Micro;
 using Codemash.Client.Code;
 using Codemash.Client.Data.Repository;
@@ -26,12 +27,30 @@ namespace Codemash.Client.ViewModels
         }
 
         // attributes
-        public ObservableCollection<IListItem> ListSource
+        public ObservableCollection<SessionGroup> ListSource
         {
             get
             {
                 var grouper = GroupSessionFactory.GetSessionGrouperInstance(SessionRepository.GetAll(), Parameter.GroupingType);
-                return new ObservableCollection<IListItem>(grouper.GetGroupedList());
+                return new ObservableCollection<SessionGroup>(grouper.GetGroupedList());
+            }
+        }
+
+        public string PageTitle
+        {
+            get
+            {
+                switch (Parameter.GroupingType)
+                {
+                    case GroupingType.Alphabetical:
+                        return "All Sessions by Name";
+                    case GroupingType.Block:
+                        return "All Sessions by Block";
+                    case GroupingType.Track:
+                        return "All Sessions by Tech";
+                }
+
+                throw new InvalidOperationException("Could not determine Grouping Type");
             }
         }
 

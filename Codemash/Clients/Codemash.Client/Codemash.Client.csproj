@@ -108,17 +108,11 @@
     <Compile Include="Code\ParsingExtensionMethods.cs" />
     <Compile Include="Components\IAppService.cs" />
     <Compile Include="Components\Impl\CodemashApplicationService.cs" />
-    <Compile Include="Core\BooleanToFontWeightConverter.cs" />
     <Compile Include="Code\Enum.cs" />
     <Compile Include="Core\LayoutAwarePage.cs" />
-    <Compile Include="Core\SessionItemContainerStyleSelector.cs" />
-    <Compile Include="DataModels\IListItem.cs" />
     <Compile Include="DataModels\SessionDetailModel.cs" />
     <Compile Include="DataModels\SessionGroup.cs" />
-    <Compile Include="DataModels\SessionListGroup.cs" />
-    <Compile Include="DataModels\SessionListView.cs" />
-    <Compile Include="DataModels\SessionTileView.cs" />
-    <Compile Include="Core\SessionItemTemplateSelector.cs" />
+    <Compile Include="DataModels\SessionView.cs" />
     <Compile Include="DataModels\SpeakerDetailModel.cs" />
     <Compile Include="Parameters\SearchTextParameter.cs" />
     <Compile Include="ViewModels\MapViewModel.cs" />
@@ -176,6 +170,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\WhiteLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

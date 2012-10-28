@@ -22,56 +22,52 @@ namespace Codemash.Client.ViewModels
         {
             SpeakerRepository = speakerRepository;
 
-            SessionDetailsVisible = true;
-            SpeakerDetailsVisible = false;
+            CanShowAbstract = false;
+            CanShowSpeaker = true;
         }
 
         // attributes
-        public SessionDetailModel Session { get; set; }
-        public bool SessionDetailsVisible { get; set; }
-        public bool SpeakerDetailsVisible { get; set; }
-        public bool NotHasBlog { get; set; }
-        public bool HasBlog { get; set; }
+        public SessionDetailModel Session
+        {
+            get
+            {
+                var session = Parameter.Value;
+                var speaker = SpeakerRepository.Get(session.SpeakerId);
+                return new SessionDetailModel
+                {
+                    Title = session.Title,
+                    Technology = session.Technology,
+                    Difficulty = session.Difficulty,
+                    Duration = session.Duration.AsDurationString(),
+                    Room = session.Room,
+                    StartsAt = session.Starts.AsTimeDisplay(),
+                    Abstract = session.Abstract,
+                    Speaker = new SpeakerDetailModel
+                    {
+                        Biography = speaker.Biography,
+                        BlogUrl = speaker.BlogUrl,
+                        Name = speaker.Name,
+                        Twitter = speaker.Twitter
+                    }
+                };
+            }
+        }
+        public bool CanShowAbstract { get; private set; }
+        public bool CanShowSpeaker { get; private set; }
 
         // behaviors
-        public void PageLoaded()
+        public void ShowAbstract()
         {
-            var session = Parameter.Value;
-            var speaker = SpeakerRepository.Get(session.SpeakerId);
-            Session = new SessionDetailModel
-                          {
-                              Title = session.Title,
-                              Technology = session.Technology,
-                              Difficulty = session.Difficulty,
-                              Duration = session.Duration.AsDurationString(),
-                              Room = session.Room,
-                              StartsAt = session.Starts.AsTimeDisplay(),
-                              Abstract = session.Abstract,
-                              Speaker = new SpeakerDetailModel
-                                            {
-                                                Biography = speaker.Biography,
-                                                BlogUrl = speaker.BlogUrl,
-                                                Name = speaker.Name,
-                                                Twitter = speaker.Twitter
-                                            }
-                          };
-
-            NotifySessionUpdated();
-            UpdateBlogVisibilityStatus();
-        }
-
-        public void ShowDetails()
-        {
-            SpeakerDetailsVisible = false;
-            SessionDetailsVisible = true;
-            NotifyDetailsVisibleUpdated();
+            CanShowAbstract = false;
+            CanShowSpeaker = true;
+            NotifyContentDisplayChanged();
         }
 
         public void ShowSpeaker()
         {
-            SpeakerDetailsVisible = true;
-            SessionDetailsVisible = false;
-            NotifyDetailsVisibleUpdated();
+            CanShowAbstract = true;
+            CanShowSpeaker = false;
+            NotifyContentDisplayChanged();
         }
 
         public void ViewMap()
@@ -93,24 +89,10 @@ namespace Codemash.Client.ViewModels
             dialog.ShowAsync();
         }
 
-        private void NotifySessionUpdated()
+        private void NotifyContentDisplayChanged()
         {
-            NotifyOfPropertyChange("Session");
-        }
-
-        private void NotifyDetailsVisibleUpdated()
-        {
-            NotifyOfPropertyChange("SessionDetailsVisible");
-            NotifyOfPropertyChange("SpeakerDetailsVisible");
-        }
-
-        private void UpdateBlogVisibilityStatus()
-        {
-            NotHasBlog = string.IsNullOrEmpty(Session.Speaker.BlogUrl);
-            HasBlog = !string.IsNullOrEmpty(Session.Speaker.BlogUrl);
-
-            NotifyOfPropertyChange("NotHasBlog");
-            NotifyOfPropertyChange("HasBlog");
+            NotifyOfPropertyChange("CanShowAbstract");
+            NotifyOfPropertyChange("CanShowSpeaker");
         }
     }
 }

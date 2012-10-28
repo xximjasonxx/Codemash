@@ -22,7 +22,7 @@ namespace Codemash.Client.ViewModels
 
         // attributes
         public string SearchSummary { get { return string.Format("Search Results for '{0}'", Parameter.Value); } }
-        public ObservableCollection<SessionListView> Results { get; set; }
+        public ObservableCollection<SessionView> Results { get; set; }
         public bool ShowResultsGrid
         {
             get { return Results != null && Results.Count > 0; }
@@ -34,17 +34,17 @@ namespace Codemash.Client.ViewModels
         {
             try
             {
-                Results = new ObservableCollection<SessionListView>(
-                    SessionRepository.SearchSessions(Parameter.Value).Select(s => new SessionListView
+                Results = new ObservableCollection<SessionView>(
+                    SessionRepository.SearchSessions(Parameter.Value).Select(s => new SessionView
                                                                                       {
                                                                                           SessionId = s.SessionId,
-                                                                                          SessionTitle = s.Title
+                                                                                          Title = s.Title
                                                                                       }));
             }
             catch(BaseDataNotAvailableException)
             {
                 // there is not local data available to search, return an empty list
-                Results = new ObservableCollection<SessionListView>();
+                Results = new ObservableCollection<SessionView>();
             }
 
             NotifyResultsPropertyUpdated();
@@ -52,7 +52,7 @@ namespace Codemash.Client.ViewModels
 
         public void SessionClick(ItemClickEventArgs args)
         {
-            var item = args.ClickedItem as SessionListView;
+            var item = args.ClickedItem as SessionView;
             if (item != null)
             {
                 var session = SessionRepository.Get(item.SessionId);

@@ -11,12 +11,12 @@ namespace Codemash.Client.DataModels
     public class SessionGroup
     {
         public string Title { get; private set; }
-        public IList<SessionTileView> Items { get; private set; }
+        public IList<SessionView> Items { get; private set; }
 
         public SessionGroup(string title, IEnumerable<Session> sessions)
         {
             Title = title;
-            Items = sessions.Select(s => new SessionTileView
+            Items = sessions.Select(s => new SessionView
                                              {
                                                  Room = s.Room,
                                                  SessionId = s.SessionId,

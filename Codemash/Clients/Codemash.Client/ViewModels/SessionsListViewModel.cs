@@ -57,10 +57,10 @@ namespace Codemash.Client.ViewModels
         // behaviors
         public void SessionClick(ItemClickEventArgs args)
         {
-            var listItem = (IListItem) args.ClickedItem;
-            if (listItem.Id != 0)
+            var listItem = (SessionView) args.ClickedItem;
+            if (listItem.SessionId != 0)
             {
-                var session = SessionRepository.Get(listItem.Id);
+                var session = SessionRepository.Get(listItem.SessionId);
                 NavigationService.NavigateToViewModel<SessionDetailViewModel>(new SessionParameter(session));
             }
         }

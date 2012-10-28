@@ -53,7 +53,7 @@ namespace Codemash.Client.ViewModels
 
         public void SessionClick(ItemClickEventArgs args)
         {
-            var tileData = (SessionTileView) args.ClickedItem;
+            var tileData = (SessionView) args.ClickedItem;
             var session = SessionRepository.Get(tileData.SessionId);
             NavigationService.NavigateToViewModel<SessionDetailViewModel>(new SessionParameter(session));
         }

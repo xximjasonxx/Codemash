@@ -1,6 +1,6 @@
 ﻿namespace Codemash.Client.DataModels
 {
-    public class SessionTileView
+    public class SessionView
     {
         public int SessionId { get; set; }
         public string Title { get; set; }

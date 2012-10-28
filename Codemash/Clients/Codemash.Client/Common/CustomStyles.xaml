@@ -26,6 +26,11 @@
         <Setter Property="Foreground" Value="{StaticResource CodemashOrange}" />
     </Style>
     
+    <Style x:Key="DetailPageTitle" TargetType="TextBlock" BasedOn="{StaticResource PageTitle}">
+        <Setter Property="FontSize" Value="35" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    
     <Style x:Key="SnappedPageTitle" TargetType="TextBlock" BasedOn="{StaticResource PageTitle}">
         <Setter Property="FontSize" Value="35" />
     </Style>
@@ -76,7 +81,6 @@
         <Setter Property="MinWidth" Value="0"/>
         <Setter Property="Width" Value="48"/>
         <Setter Property="Height" Value="48"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="FontSize" Value="56"/>

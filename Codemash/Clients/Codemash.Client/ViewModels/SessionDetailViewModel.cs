@@ -40,7 +40,7 @@ namespace Codemash.Client.ViewModels
                     Difficulty = session.Difficulty,
                     Duration = session.Duration.AsDurationString(),
                     Room = session.Room,
-                    StartsAt = session.Starts.AsTimeDisplay(),
+                    StartsAt = session.Starts.AsDateTimeDisplay(),
                     Abstract = session.Abstract,
                     Speaker = new SpeakerDetailModel
                     {

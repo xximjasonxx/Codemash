@@ -1,49 +1,58 @@
-﻿<Page
+﻿<app:LayoutAwarePage
     x:Name="pageRoot"
     x:Class="Codemash.Client.Views.SearchResultsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:app="using:Codemash.Client.Core"
-    xmlns:i="using:Windows.UI.Interactivity" xmlns:cal="using:Caliburn.Micro">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <cal:ActionMessage MethodName="PageLoaded" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="using:Windows.UI.Interactivity" xmlns:cal="using:Caliburn.Micro" xmlns:app="using:Codemash.Client.Core">
     
     <Page.Resources>
         <cal:BooleanToVisibilityConverter x:Key="visibilityConverter" />
     </Page.Resources>
 
     <Grid Background="{StaticResource ApplicationBackgroundBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="140"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="110"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="44*"/>
+            <RowDefinition Height="110" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
-            <Button x:Name="GoBack" Style="{StaticResource CMBackButton}" VerticalAlignment="Center"
-                    HorizontalAlignment="Center" />
-        </Border>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="GoBack" Style="{StaticResource CMBackButton}" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding SearchTitle}" Grid.Column="1" IsHitTestVisible="false" Style="{StaticResource SnappedPageTitle}"
+                       VerticalAlignment="Center" x:Name="PageTitle" />
+        </Grid>
+        
+        <TextBlock Text="No results for Search" Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe UI" FontSize="18"
+                   Visibility="{Binding HasNoResults, Converter={StaticResource visibilityConverter}}" Grid.Column="0" Grid.Row="1"
+                   x:Name="NoResultsText" />
 
-        <!-- Page Title TextBlock -->
-        <TextBlock Text="Codemash 2.0.1.3" Style="{StaticResource PageTitle}" Grid.Column="1" Grid.Row="0"
-                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,19,0,17" Height="74" Width="1062" />
-
-        <TextBlock Text="{Binding SearchSummary}" Style="{StaticResource GroupTitle}" Grid.Column="1" Grid.Row="1"
-                   VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="32" />
-
-        <TextBlock Text="No Results for this term" Foreground="Black" FontFamily="Segoe UI"
-                   FontSize="24" Grid.Row="2" Grid.Column="1" Margin="0,10,0,0"
-                   Visibility="{Binding ShowNoResults, Converter={StaticResource visibilityConverter}}" />
-
-        <GridView ItemsSource="{Binding Results}" IsItemClickEnabled="True" Grid.Row="2" Grid.Column="1"
-                  Visibility="{Binding ShowResultsGrid, Converter={StaticResource visibilityConverter}}"
-                  ItemTemplate="{StaticResource sessionItemTemplate}">
+        <!-- Snapped View -->
+        <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Results}" SelectionMode="None"
+                  IsItemClickEnabled="True" Margin="10,7,5,5" x:Name="SnappedListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,10">
+                        <TextBlock Text="{Binding Title}" Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe UI" FontSize="20"
+                                   TextWrapping="Wrap" />
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <!-- Grid View -->
+        <GridView SelectionMode="None" Grid.Column="0" Grid.Row="1" IsItemClickEnabled="True" Margin="20,7,5,5"
+                  ItemsSource="{Binding Results}" x:Name="FullGridView">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="10" Width="300" Height="150" Background="{StaticResource CodemashOrange}">
+                        <!-- Session Title Textblock -->
+                        <TextBlock Text="{Binding Title}" Foreground="White" TextWrapping="Wrap" FontSize="22" FontFamily="Segoe UI" />
+                    </Border>
+                </DataTemplate>
+            </GridView.ItemTemplate>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="ItemClick">
                     <cal:ActionMessage MethodName="SessionClick">
@@ -51,11 +60,6 @@
                     </cal:ActionMessage>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VariableSizedWrapGrid />
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
         </GridView>
     </Grid>
-</Page>
+</app:LayoutAwarePage>

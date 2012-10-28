@@ -26,7 +26,7 @@
 
         <!-- Snapped View -->
         <Border Grid.RowSpan="2" Background="{StaticResource CodemashOrange}" HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch" Visibility="Collapsed">
+                VerticalAlignment="Stretch" Visibility="Collapsed" x:Name="SnappedBorder">
             
             <Image Source="/Assets/WhiteLogo.png" VerticalAlignment="Center" HorizontalAlignment="Center"
                    Height="200" Stretch="Uniform" />
@@ -34,7 +34,7 @@
         </Border>
         
         <!-- Full or Filled View -->
-        <Grid Grid.Row="1" Margin="100,0,0,40">
+        <Grid Grid.Row="1" Margin="100,0,0,40" x:Name="FullFilledGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="162*"/>
                 <RowDefinition Height="157*"/>
@@ -65,14 +65,15 @@
             </Border>
             
             <!-- Action Options -->
-            <Button Content="View Map" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="15">
+            <Button Content="View Map" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="15" VerticalAlignment="Bottom">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Padding="5" BorderBrush="White" BorderThickness="2" x:Name="ButtonBorder">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Assets/appbar.map.png" Height="40" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left"
                                        Margin="0,0,7,0" />
-                                <TextBlock Text="{TemplateBinding Content}" FontFamily="Segoe UI" FontSize="15" Foreground="White" VerticalAlignment="Center" />
+                                <TextBlock Text="{TemplateBinding Content}" FontFamily="Segoe UI" FontSize="15" Foreground="White" VerticalAlignment="Center"
+                                           Margin="0,0,7,0" />
                             </StackPanel>
                             
                             <VisualStateManager.VisualStateGroups>

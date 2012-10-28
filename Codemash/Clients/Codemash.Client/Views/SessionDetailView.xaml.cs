@@ -18,9 +18,13 @@ namespace Codemash.Client.Views
 
         protected override void HandleLayoutChange(Code.DisplayModeType displayType)
         {
+            SnappedBorder.Visibility = Visibility.Collapsed;
+            FullFilledGrid.Visibility = Visibility.Visible;
+
             if (displayType == DisplayModeType.Snapped)
             {
-                
+                SnappedBorder.Visibility = Visibility.Visible;
+                FullFilledGrid.Visibility = Visibility.Collapsed;
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Caliburn.Micro;
+using Codemash.Client.Components;
 using Codemash.Client.Core.Ex;
 using Codemash.Client.Data.Repository;
 using Codemash.Client.DataModels;
@@ -14,42 +15,30 @@ namespace Codemash.Client.ViewModels
         public SearchTextParameter Parameter { get; set; }
         public ISessionRepository SessionRepository { get; set; }
 
-        public SearchResultsViewModel(INavigationService navigationService, ISessionRepository sessionRepository)
-            : base(navigationService)
+        public SearchResultsViewModel(INavigationService navigationService, ISessionRepository sessionRepository, IAppService appService)
+            : base(navigationService, appService.CanGoBack)
         {
             SessionRepository = sessionRepository;
         }
 
         // attributes
-        public string SearchSummary { get { return string.Format("Search Results for '{0}'", Parameter.Value); } }
-        public ObservableCollection<SessionView> Results { get; set; }
-        public bool ShowResultsGrid
+        public string SearchTitle { get { return string.Format("Search Results for '{0}'", Parameter.Value); } }
+        public ObservableCollection<SessionView> Results
         {
-            get { return Results != null && Results.Count > 0; }
-        }
-        public bool ShowNoResults { get { return !ShowResultsGrid; } }
-
-        // behaviors
-        public void PageLoaded()
-        {
-            try
+            get
             {
-                Results = new ObservableCollection<SessionView>(
+                return new ObservableCollection<SessionView>(
                     SessionRepository.SearchSessions(Parameter.Value).Select(s => new SessionView
                                                                                       {
                                                                                           SessionId = s.SessionId,
                                                                                           Title = s.Title
                                                                                       }));
             }
-            catch(BaseDataNotAvailableException)
-            {
-                // there is not local data available to search, return an empty list
-                Results = new ObservableCollection<SessionView>();
-            }
-
-            NotifyResultsPropertyUpdated();
         }
 
+        public bool HasNoResults { get { return Results.Count == 0; } }
+
+        // behaviors
         public void SessionClick(ItemClickEventArgs args)
         {
             var item = args.ClickedItem as SessionView;
@@ -58,16 +47,6 @@ namespace Codemash.Client.ViewModels
                 var session = SessionRepository.Get(item.SessionId);
                 NavigationService.NavigateToViewModel<SessionDetailViewModel>(new SessionParameter(session));
             }
-        }
-
-        // methods
-        private void NotifyResultsPropertyUpdated()
-        {
-            NotifyOfPropertyChange("Results");
-            NotifyOfPropertyChange("FormattedResultsCount");
-
-            NotifyOfPropertyChange("ShowResultsGrid");
-            NotifyOfPropertyChange("ShowNoResults");
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Caliburn.Micro;
+using Codemash.Client.Components;
+using Codemash.Client.Components.Impl;
 using Codemash.Client.Data.Repository;
 using Codemash.Client.Data.Repository.Impl;
 using Codemash.Client.Parameters;
@@ -27,6 +29,9 @@ namespace Codemash.Client
             // repositories
             _container.RegisterSingleton(typeof(ISessionRepository), null, typeof(JsonSessionRepository));
             _container.RegisterSingleton(typeof(ISpeakerRepository), null, typeof(JsonSpeakerRepository));
+
+            // custom support components
+            _container.RegisterInstance(typeof(IAppService), null, new CodemashApplicationService(RootFrame));
         }
 
         protected override object GetInstance(Type service, string key)

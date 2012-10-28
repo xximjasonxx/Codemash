@@ -11,8 +11,8 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid Background="{StaticResource CodemashOrange}">
-        <Image Source="/Assets/SplashScreen.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None" />
+    <Grid Background="#ffFF7F00">
+        <Image Source="/Assets/SplashScreen2.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None" />
         <ProgressBar VerticalAlignment="Top" HorizontalAlignment="Stretch" IsIndeterminate="True" Height="30" />
     </Grid>
 </Page>

@@ -105,11 +105,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Code\ParsingExtensionMethods.cs" />
+    <Compile Include="Components\IAppService.cs" />
+    <Compile Include="Components\Impl\CodemashApplicationService.cs" />
     <Compile Include="Core\BooleanToFontWeightConverter.cs" />
     <Compile Include="Code\Enum.cs" />
+    <Compile Include="Core\LayoutAwarePage.cs" />
     <Compile Include="Core\SessionItemContainerStyleSelector.cs" />
     <Compile Include="DataModels\IListItem.cs" />
     <Compile Include="DataModels\SessionDetailModel.cs" />
+    <Compile Include="DataModels\SessionGroup.cs" />
     <Compile Include="DataModels\SessionListGroup.cs" />
     <Compile Include="DataModels\SessionListView.cs" />
     <Compile Include="DataModels\SessionTileView.cs" />
@@ -157,6 +162,9 @@
     <None Include="Codemash.Client_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\appbar.list.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\appbar.map.png" />
     <Content Include="Assets\Background.png" />
     <Content Include="Assets\ConventionCenterFinal.png" />
@@ -164,6 +172,9 @@
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
+    <Content Include="Assets\SplashScreen2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\StoreLogo.png" />
   </ItemGroup>
   <ItemGroup>

@@ -1,18 +1,28 @@
 ﻿using Caliburn.Micro;
+using Codemash.Client.Components;
 
 namespace Codemash.Client.ViewModels
 {
     public class ViewModelBase : Screen
     {
         private readonly INavigationService _navigationService;
+        private readonly IAppService _appService;
+
         protected INavigationService NavigationService
         {
             get { return _navigationService; }
         }
 
-        public ViewModelBase(INavigationService navigationService)
+        protected ViewModelBase(INavigationService navigationService, bool canGoBack)
         {
             _navigationService = navigationService;
+            _canGoBack = canGoBack;
+        }
+
+        protected ViewModelBase(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+            _canGoBack = true;
         }
 
         public void GoBack()
@@ -20,9 +30,10 @@ namespace Codemash.Client.ViewModels
             _navigationService.GoBack();
         }
 
-        public bool CanGoBack
+        private readonly bool _canGoBack = false;
+        public bool BackIsVisible
         {
-            get { return _navigationService.CanGoBack; }
+            get { return _canGoBack; }
         }
     }
 }

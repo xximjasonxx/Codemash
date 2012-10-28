@@ -12,4 +12,11 @@
         Track,
         Block
     }
+
+    public enum DisplayModeType
+    {
+        Full,
+        Filled,
+        Snapped
+    }
 }

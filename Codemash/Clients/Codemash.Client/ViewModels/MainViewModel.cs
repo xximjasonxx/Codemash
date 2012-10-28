@@ -2,6 +2,7 @@
 using System.Linq;
 using Caliburn.Micro;
 using Codemash.Client.Code;
+using Codemash.Client.Components;
 using Codemash.Client.Core;
 using Codemash.Client.Data.Repository;
 using Codemash.Client.DataModels;
@@ -15,26 +16,22 @@ namespace Codemash.Client.ViewModels
         public ISessionRepository SessionRepository { get; set; }
         public ISpeakerRepository SpeakerRepository { get; set; }
 
-        public MainViewModel(INavigationService navigationService, ISessionRepository sessionRepository, ISpeakerRepository speakerRepository)
-            : base(navigationService)
+        public MainViewModel(INavigationService navigationService, ISessionRepository sessionRepository, ISpeakerRepository speakerRepository, IAppService appService)
+            : base(navigationService, false)
         {
             SessionRepository = sessionRepository;
             SpeakerRepository = speakerRepository;
         }
 
         // attributes
-        public IList<SessionTileView> UpcomingSessions
+        public IList<SessionGroup> UpcomingSessions
         {
             get
             {
-                return SessionRepository.GetUpcomingSessions().Select(s => new SessionTileView
-                                                                               {
-                                                                                   SessionId = s.SessionId,
-                                                                                   Title = s.Title,
-                                                                                   Room = s.Room,
-                                                                                   Technology = s.Technology,
-                                                                                   StartsAt = s.Starts.AsTimeDisplay()
-                                                                               }).ToList();
+                var grouping = new List<SessionGroup>();
+                grouping.Add(new SessionGroup("Upcoming", SessionRepository.GetUpcomingSessions()));
+
+                return grouping;
             }
         }
 
@@ -42,11 +39,6 @@ namespace Codemash.Client.ViewModels
         public void ShowAllSessions()
         {
             NavigationService.NavigateToViewModel<SessionsListViewModel>(new GroupingParameter(GroupingType.Alphabetical));
-        }
-
-        public void ShowFavorites()
-        {
-            return;
         }
 
         public void ShowSessionsByBlock()

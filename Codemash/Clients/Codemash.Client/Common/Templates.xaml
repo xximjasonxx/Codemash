@@ -15,5 +15,31 @@
                        VerticalAlignment="Bottom" FontSize="28" FontFamily="Segoe UI" />
         </Border>
     </DataTemplate>
+    
+    <!-- Button Templates -->
+    <ControlTemplate TargetType="Button" x:Name="AppBarButtonTemplate">
+        <Border Height="50" Padding="5" BorderBrush="White" BorderThickness="2" x:Name="ButtonPanel">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                <Image Source="/Assets/appbar.list.png" Stretch="Fill" VerticalAlignment="Center" />
+                <TextBlock FontFamily="Segoe UI" FontSize="15" Foreground="White" Text="{TemplateBinding Content}"
+                                               VerticalAlignment="Center" />
+            </StackPanel>
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="PointerOver" />
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonPanel" Storyboard.TargetProperty="Background">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CodemashLightOrange}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled" />
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Border>
+    </ControlTemplate>
 
 </ResourceDictionary>

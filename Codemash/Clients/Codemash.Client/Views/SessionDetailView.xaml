@@ -47,20 +47,20 @@
             <Border Grid.Row="0" Grid.RowSpan="2" Background="{StaticResource CodemashOrange}" HorizontalAlignment="Stretch"
                     VerticalAlignment="Top" Margin="0,20,0,0" Height="600" Padding="15">
                 <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
-                    <TextBlock Text="TECHNOLOGY" Foreground="White" FontSize="15" FontFamily="Segoe UI" />
-                    <TextBlock Text="{Binding Session.Technology}" FontSize="20" FontFamily="Segoue UI" Foreground="White" Margin="0,0,0,20" />
+                    <TextBlock Text="TECHNOLOGY" Style="{StaticResource ItemHeaderText}" />
+                    <TextBlock Text="{Binding Session.Technology}" Style="{StaticResource ItemValueText}" Margin="0,0,0,20" />
 
-                    <TextBlock Text="STARTS AT" Foreground="White" FontSize="15" FontFamily="Segoe UI" />
-                    <TextBlock Text="{Binding Session.StartsAt}" FontSize="20" FontFamily="Segoue UI" Foreground="White" Margin="0,0,0,20" />
+                    <TextBlock Text="STARTS AT" Style="{StaticResource ItemHeaderText}" />
+                    <TextBlock Text="{Binding Session.StartsAt}" Style="{StaticResource ItemValueText}" Margin="0,0,0,20" />
 
-                    <TextBlock Text="SPEAKER" Foreground="White" FontSize="15" FontFamily="Segoe UI" />
-                    <TextBlock Text="{Binding Session.Speaker.Name}" FontSize="20" FontFamily="Segoue UI" Foreground="White" Margin="0,0,0,20" />
+                    <TextBlock Text="SPEAKER" Style="{StaticResource ItemHeaderText}" />
+                    <TextBlock Text="{Binding Session.Speaker.Name}" Style="{StaticResource ItemValueText}" Margin="0,0,0,20" />
 
-                    <TextBlock Text="ROOM" Foreground="White" FontSize="15" FontFamily="Segoe UI" />
-                    <TextBlock Text="{Binding Session.Room}" FontSize="20" FontFamily="Segoue UI" Foreground="White" Margin="0,0,0,20" />
+                    <TextBlock Text="ROOM" Style="{StaticResource ItemHeaderText}" />
+                    <TextBlock Text="{Binding Session.Room}" FontSize="20" Style="{StaticResource ItemValueText}" Margin="0,0,0,20" />
 
-                    <TextBlock Text="DIFFICULTY" Foreground="White" FontSize="15" FontFamily="Segoe UI" />
-                    <TextBlock Text="{Binding Session.Difficulty}" FontSize="20" FontFamily="Segoue UI" Foreground="White" />
+                    <TextBlock Text="DIFFICULTY" Style="{StaticResource ItemHeaderText}" />
+                    <TextBlock Text="{Binding Session.Difficulty}" Style="{StaticResource ItemValueText}" />
                 </StackPanel>
             </Border>
             
@@ -115,8 +115,7 @@
                 <!-- Abstract -->
                 <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Padding="0,0,20,0"
                               Visibility="{Binding CanShowSpeaker, Converter={StaticResource visibilityConverter}}">
-                    <TextBlock Text="{Binding Session.Abstract}" Foreground="{StaticResource TextGrayBrush}" FontSize="20" FontFamily="Segoe UI"
-                               TextWrapping="Wrap" />
+                    <TextBlock Text="{Binding Session.Abstract}" Style="{StaticResource GrayText}" TextWrapping="Wrap" />
                 </ScrollViewer>
                 
                 <!-- Speaker -->
@@ -136,21 +135,18 @@
                                HorizontalAlignment="Right" />
                         
                         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,0,0,0">
-                            <TextBlock Text="NAME" Foreground="{StaticResource CodemashOrange}" FontSize="15" FontFamily="Segoe UI" />
-                            <TextBlock Text="{Binding Session.Speaker.Name}" FontSize="20" FontFamily="Segoue UI"
-                                       Foreground="{StaticResource TextGrayBrush}" Margin="0,0,0,20" />
+                            <TextBlock Text="NAME" Style="{StaticResource ItemHeaderTextOrange}" />
+                            <TextBlock Text="{Binding Session.Speaker.Name}" Style="{StaticResource ItemValueTextGray}" Margin="0,0,0,20" />
 
-                            <TextBlock Text="TWITTER" Foreground="{StaticResource CodemashOrange}" FontSize="15" FontFamily="Segoe UI" />
-                            <TextBlock Text="{Binding Session.Speaker.Twitter}" FontSize="20" FontFamily="Segoue UI"
-                                       Foreground="{StaticResource TextGrayBrush}" Margin="0,0,0,20" />
+                            <TextBlock Text="TWITTER" Style="{StaticResource ItemHeaderTextOrange}" />
+                            <TextBlock Text="{Binding Session.Speaker.Twitter}" Style="{StaticResource ItemValueTextGray}" Margin="0,0,0,20" />
 
-                            <TextBlock Text="BLOG" Foreground="{StaticResource CodemashOrange}" FontSize="15" FontFamily="Segoe UI" />
-                            <TextBlock Text="{Binding Session.Speaker.BlogUrl}" FontSize="20" FontFamily="Segoue UI"
-                                       Foreground="{StaticResource TextGrayBrush}" Margin="0,0,0,20" />
+                            <TextBlock Text="BLOG" Style="{StaticResource ItemHeaderTextOrange}" />
+                            <TextBlock Text="{Binding Session.Speaker.BlogUrl}" Style="{StaticResource ItemValueTextGray}" Margin="0,0,0,20" />
                         </StackPanel>
 
-                        <TextBlock Text="{Binding Session.Speaker.Biography}" Foreground="{StaticResource TextGrayBrush}" FontSize="20"
-                                   FontFamily="Segoe UI" TextWrapping="Wrap" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,20,0,0" />
+                        <TextBlock Text="{Binding Session.Speaker.Biography}" Style="{StaticResource GrayText}" TextWrapping="Wrap" Grid.Row="1"
+                                   Grid.ColumnSpan="2" Margin="0,20,0,0" />
                     </Grid>
                 </ScrollViewer>
             </Grid>

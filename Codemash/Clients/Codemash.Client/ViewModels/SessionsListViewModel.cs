@@ -34,7 +34,7 @@ namespace Codemash.Client.ViewModels
                 var grouper = GroupSessionFactory.GetSessionGrouperInstance(SessionRepository.GetAll(), Parameter.GroupingType);
                 return new ObservableCollection<SessionGroup>(grouper.GetGroupedList());
             }
-        }
+        } 
 
         public string PageTitle
         {

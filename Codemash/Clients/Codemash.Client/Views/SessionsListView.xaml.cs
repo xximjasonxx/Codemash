@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Linq;
 using Codemash.Client.Code;
 using Codemash.Client.Core;
 using Windows.UI.Xaml;
@@ -13,6 +15,12 @@ namespace Codemash.Client.Views
         public SessionsListView()
         {
             this.InitializeComponent();
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            GroupList.ItemsSource = SessionList.View.CollectionGroups.ToList();
         }
 
         protected override void HandleLayoutChange(Code.DisplayModeType displayType)

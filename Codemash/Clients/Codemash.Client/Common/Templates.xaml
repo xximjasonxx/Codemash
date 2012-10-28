@@ -2,6 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!-- Data Templates -->
     <DataTemplate x:Key="sessionItemTemplate">
         <Border Height="75" Width="350" Padding="5" Margin="0,0,30,0">
             <TextBlock Text="{Binding Display}" Foreground="{StaticResource TextGrayBrush}" TextWrapping="Wrap" FontSize="22"
@@ -15,14 +16,57 @@
                        VerticalAlignment="Bottom" FontSize="28" FontFamily="Segoe UI" />
         </Border>
     </DataTemplate>
-    
+
+    <DataTemplate x:Key="UpcomingSessionItemTemplate">
+        <Border Padding="10,5,10,5" Width="300" Height="260" Background="{StaticResource CodemashOrange}">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <!-- Session Title Textblock -->
+                <TextBlock Text="{Binding Title}" Foreground="White" TextWrapping="Wrap" FontSize="21" Grid.Column="0" Grid.Row="0" FontFamily="Segoe UI" Grid.ColumnSpan="2" />
+
+                <!-- Sesion technology Textblock -->
+                <TextBlock Text="{Binding Technology}" Foreground="White" TextWrapping="NoWrap" FontSize="19" Grid.Column="0" Grid.Row="1" FontFamily="Segoe UI" Grid.ColumnSpan="2" />
+
+                <!-- Start Time -->
+                <TextBlock Text="{Binding StartsAt}" Foreground="White" TextWrapping="NoWrap" FontSize="18" Grid.Column="0" Grid.Row="2" FontFamily="Segoe UI" Grid.ColumnSpan="2" />
+
+                <!-- Session Room TextBlock -->
+                <TextBlock Text="{Binding Room}" Foreground="White" TextWrapping="NoWrap" FontSize="17" Grid.Column="0" Grid.Row="3" FontFamily="Segoe UI"
+                                       HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="GroupHeaderTemplate">
+        <Border Padding="5">
+            <TextBlock Text="{Binding Title}" Style="{StaticResource GroupTitle}" />
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="UpcomingSessionListItemTemplate">
+        <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+            <TextBlock Text="{Binding Title}" Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe UI" FontSize="18"
+                                   TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Technology}" Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe UI" FontSize="16" />
+            <TextBlock Text="{Binding StartsAt}" Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe UI" FontSize="16" />
+            <TextBlock Text="{Binding Room}" Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe UI" FontSize="16" />
+        </StackPanel>
+    </DataTemplate>
+
     <!-- Button Templates -->
     <ControlTemplate TargetType="Button" x:Name="AppBarButtonTemplate">
         <Border Height="50" Padding="5" BorderBrush="White" BorderThickness="2" x:Name="ButtonPanel">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
                 <Image Source="/Assets/appbar.list.png" Stretch="Fill" VerticalAlignment="Center" />
                 <TextBlock FontFamily="Segoe UI" FontSize="15" Foreground="White" Text="{TemplateBinding Content}"
-                                               VerticalAlignment="Center" />
+                                               VerticalAlignment="Center" Margin="0,0,7,0" />
             </StackPanel>
 
             <VisualStateManager.VisualStateGroups>

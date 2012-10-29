@@ -31,7 +31,7 @@
                                  Background="Transparent" IsFlatList="False">
                 <tk:LongListSelector.GroupHeaderTemplate>
                     <DataTemplate>
-                        <Border Background="{StaticResource CodemashOrange}" Margin="6">
+                        <Border Background="{StaticResource CodemashOrange}" Margin="2,6" Padding="7,2">
                             <TextBlock Text="{Binding Title}" FontSize="40" Foreground="White"/>
                         </Border>
                     </DataTemplate>

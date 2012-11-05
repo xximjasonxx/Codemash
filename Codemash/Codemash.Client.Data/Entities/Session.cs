@@ -10,8 +10,8 @@ namespace Codemash.Client.Data.Entities
 
         public string Title { get; internal set; }
         public string Abstract { get; internal set; }
-        public DateTime Starts { get { return DateTime.Now; } set { } }
-        public DateTime Ends { get { return DateTime.Now.AddHours(1); } set { } }
+        public DateTime Starts { get; set; }
+        public DateTime Ends { get { return Starts.AddHours(1); } set { } }
 
         public string Difficulty { get; internal set; }
         public string Room { get { return "Indigo"; } set { } }

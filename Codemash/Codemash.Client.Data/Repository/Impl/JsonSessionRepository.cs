@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Codemash.Client.Core;
@@ -41,7 +42,16 @@ namespace Codemash.Client.Data.Repository.Impl
         /// <returns></returns>
         public IList<Session> GetUpcomingSessions()
         {
-            return Repository.OrderBy(s => s.Title).Take(10).ToList();
+            var grouping = from session in Repository
+                           group session by session.Starts into GroupSessions
+                           select new
+                                      {
+                                          GroupSessions.Key,
+                                          Sessions = GroupSessions
+                                      };
+
+            var upcomingGroup = grouping.FirstOrDefault(g => g.Key >= DateTime.Now);
+            return upcomingGroup.Sessions.OrderBy(s => s.Title).ToList();
         }
 
         /// <summary>
@@ -79,7 +89,8 @@ namespace Codemash.Client.Data.Repository.Impl
                            SessionId = new StringWrapper(jToken["Title"]).ToString().AsKey(),
                            SpeakerId = new StringWrapper(jToken["SpeakerName"]).ToString().AsKey(),
                            Technology = new StringWrapper(jToken["Technology"]).ToString(),
-                           Title = new StringWrapper(jToken["Title"]).ToString()
+                           Title = new StringWrapper(jToken["Title"]).ToString(),
+                           Starts = new StringWrapper(jToken["Start"]).ToString().AsDateTime(true)
                        };
         }
 

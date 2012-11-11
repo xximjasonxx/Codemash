@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Caliburn.Micro;
+using Codemash.Client.Code;
 using Codemash.Client.Components;
 using Codemash.Client.Components.Impl;
 using Codemash.Client.Data.Repository;
@@ -10,6 +11,8 @@ using Codemash.Client.ViewModels;
 using Codemash.Client.Views;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Search;
+using Windows.UI.ApplicationSettings;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -61,16 +64,27 @@ namespace Codemash.Client
             DisplayRootView<SplashView>();
         }
 
-        #region Search
+        #region Contracts
 
         protected override void OnWindowCreated(Windows.UI.Xaml.WindowCreatedEventArgs args)
         {
             // get the search pane
             var searchPane = SearchPane.GetForCurrentView();
 
+            // get the settings pane
+            var settingsPane = SettingsPane.GetForCurrentView();
+
             // assign the events
             searchPane.ShowOnKeyboardInput = true;
             searchPane.QuerySubmitted += searchPane_QuerySubmitted;
+            settingsPane.CommandsRequested += settingsPane_CommandsRequested;
+        }
+
+        void settingsPane_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        {
+            UICommandInvokedHandler handler = OnSettingsPaneCommand;
+            SettingsCommand privacyCommand = new SettingsCommand(Settings.Privacy, "Privacy Policy", handler);
+            args.Request.ApplicationCommands.Add(privacyCommand);
         }
 
         private void searchPane_QuerySubmitted(SearchPane sender, SearchPaneQuerySubmittedEventArgs args)
@@ -79,6 +93,13 @@ namespace Codemash.Client
             navService.NavigateToViewModel<SearchResultsViewModel>(new SearchTextParameter(args.QueryText));
 
             Window.Current.Activate();
+        }
+
+        private void OnSettingsPaneCommand(IUICommand command)
+        {
+            var cmd = (Settings) command.Id;
+            var navService = (INavigationService)_container.GetInstance(typeof(INavigationService), null);
+            navService.Navigate<PrivacyView>();
         }
 
         /// <summary>

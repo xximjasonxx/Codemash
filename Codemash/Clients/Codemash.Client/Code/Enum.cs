@@ -1,9 +1,8 @@
 ﻿namespace Codemash.Client.Code
 {
-    public enum ItemType
+    public enum Settings
     {
-        GroupHeading,
-        ListItem
+        Privacy
     }
 
     public enum GroupingType

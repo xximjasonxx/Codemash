@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="Codemash.Client.Views.PrivacyView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="GoBack" Style="{StaticResource CMBackButton}" VerticalAlignment="Center" Margin="36,0,36,0" />
+
+        <TextBlock Text="Privacy Policy" Grid.Column="1" IsHitTestVisible="false" Style="{StaticResource PageTitle}"
+                   VerticalAlignment="Center" Margin="20,0,0,7"  Grid.Row="0" />
+
+        <TextBlock Style="{StaticResource GrayText}" Grid.Row="1" Margin="20,0,20,0" TextWrapping="Wrap" Grid.Column="1">
+            <TextBlock.Text>
+                This application utilizes your internet connection to download all sessions for the Codemash 2013 conference. These sessions
+                are saved locally using a local database to provide quick access. Your network connection is also used to handle push
+                notification which will notify of session starts and session changes during the course of the conference.  This application
+                stores only a device Id for use in Push Notification, it does not share or make available this Id.
+            </TextBlock.Text>
+        </TextBlock>
+
+    </Grid>
+</Page>

@@ -18,8 +18,6 @@ namespace Codemash.Client.ViewModels
         public SearchResultsViewModel(INavigationService navigationService, ISessionRepository sessionRepository, IAppService appService)
             : base(navigationService, appService.CanGoBack)
         {
-            var dialog = new MessageDialog("Hello", "Codemash 2.0.1.3");
-            dialog.ShowAsync();
             SessionRepository = sessionRepository;
         }
 

@@ -75,24 +75,34 @@ namespace Codemash.Client.ViewModels
             NavigationService.NavigateToViewModel<MapViewModel>();
         }
 
-        // methods
-        public void ShowBlog()
+        public void GoBlog()
         {
-            var dialog = new MessageDialog("Navigating to this URL will take you out of the App. Are you sure?", "Codemash 2.0.1.3");
-            dialog.Commands.Add(new UICommand("Yes", command =>
-                                                         {
-                                                             var url = Session.Speaker.BlogUrl;
-                                                             Launcher.LaunchUriAsync(new Uri(url, UriKind.Absolute));
-                                                         }));
-
-            dialog.Commands.Add(new UICommand("No"));
-            dialog.ShowAsync();
+            if (Session.Speaker.HasBlog)
+            {
+                string url = Session.Speaker.BlogUrl;
+                NavigateToUrl(url);
+            }
         }
 
+        public void GoTwitter()
+        {
+            if (Session.Speaker.HasTwitter)
+            {
+                string url = string.Format("http://www.twitter.com/{0}", Session.Speaker.Twitter);
+                NavigateToUrl(url);
+            }
+        }
+
+        // methods
         private void NotifyContentDisplayChanged()
         {
             NotifyOfPropertyChange("CanShowAbstract");
             NotifyOfPropertyChange("CanShowSpeaker");
+        }
+
+        private void NavigateToUrl(string url)
+        {
+            Launcher.LaunchUriAsync(new Uri(url, UriKind.Absolute));
         }
     }
 }

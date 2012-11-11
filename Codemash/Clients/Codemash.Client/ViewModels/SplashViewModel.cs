@@ -1,8 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Caliburn.Micro;
 using Codemash.Client.Data.Repository;
-using Windows.UI.Xaml;
 
 namespace Codemash.Client.ViewModels
 {

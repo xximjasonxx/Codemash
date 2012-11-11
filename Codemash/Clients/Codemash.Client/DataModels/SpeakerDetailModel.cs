@@ -8,8 +8,8 @@ namespace Codemash.Client.DataModels
         {
             get
             {
-                if (string.IsNullOrEmpty(Twitter))
-                    return string.Empty;
+                if (!HasTwitter)
+                    return "/Assets/NoImage.jpg";
 
                 Regex regex = new Regex(@"^@");
                 string twitterUser = regex.Replace(Twitter, string.Empty);
@@ -24,17 +24,40 @@ namespace Codemash.Client.DataModels
         {
             get
             {
-                if (string.IsNullOrEmpty(_twitter))
-                    return "No Twitter";
+                if (NotHasTwitter)
+                    return string.Empty;
 
                 if (!_twitter.StartsWith("@"))
                     _twitter = "@" + _twitter;
                 return _twitter;
             }
-            set { _twitter = value; }
+            set
+            {
+                _twitter = value;
+                HasTwitter = !string.IsNullOrEmpty(value);
+            }
         }
 
-        public string BlogUrl { get; set; }
+        public bool HasTwitter { get; private set; }
+        public bool NotHasTwitter { get { return !HasTwitter; } }
+
+        private string _blogUrl;
+        public string BlogUrl
+        {
+            get
+            {
+                return NotHasBlog ? string.Empty : _blogUrl;
+            }
+            set
+            {
+                _blogUrl = value;
+                HasBlog = !string.IsNullOrEmpty(value);
+            }
+        }
+
+        public bool HasBlog { get; private set; }
+        public bool NotHasBlog { get { return !HasBlog; } }
+
         public string Biography { get; set; }
     }
 }

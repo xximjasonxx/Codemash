@@ -107,7 +107,7 @@
                             <RowDefinition Height="20*"/>
                         </Grid.RowDefinitions>
 
-                        <Image Source="{Binding Session.Speaker.PictureUrl}" Stretch="UniformToFill" Grid.Column="0" Grid.Row="0"
+                        <Image Source="{Binding Session.Speaker.PictureUrl}" Stretch="Fill" Grid.Column="0" Grid.Row="0"
                                HorizontalAlignment="Right" />
                         
                         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,0,0,0">
@@ -115,10 +115,18 @@
                             <TextBlock Text="{Binding Session.Speaker.Name}" Style="{StaticResource ItemValueTextGray}" Margin="0,0,0,20" />
 
                             <TextBlock Text="TWITTER" Style="{StaticResource ItemHeaderTextOrange}" />
-                            <TextBlock Text="{Binding Session.Speaker.Twitter}" Style="{StaticResource ItemValueTextGray}" Margin="0,0,0,20" />
+                            <Button Content="{Binding Session.Speaker.Twitter}" Margin="0,0,0,20" Name="GoTwitter"
+                                    Template="{StaticResource SessionDetailLinkButton}"
+                                    Visibility="{Binding Session.Speaker.HasTwitter, Converter={StaticResource visibilityConverter}}" />
+                            <TextBlock Text="No Twitter" Style="{StaticResource ItemValueTextGray}" Margin="0,0,0,20"
+                                       Visibility="{Binding Session.Speaker.NotHasTwitter, Converter={StaticResource visibilityConverter}}"/>
 
                             <TextBlock Text="BLOG" Style="{StaticResource ItemHeaderTextOrange}" />
-                            <TextBlock Text="{Binding Session.Speaker.BlogUrl}" Style="{StaticResource ItemValueTextGray}" Margin="0,0,0,20" />
+                            <Button Content="{Binding Session.Speaker.BlogUrl}" Margin="0,0,0,20" Name="GoBlog"
+                                    Template="{StaticResource SessionDetailLinkButton}"
+                                    Visibility="{Binding Session.Speaker.HasBlog, Converter={StaticResource visibilityConverter}}"/>
+                            <TextBlock Text="No Blog" Style="{StaticResource ItemValueTextGray}" Margin="0,0,0,20"
+                                       Visibility="{Binding Session.Speaker.NotHasBlog, Converter={StaticResource visibilityConverter}}"/>
                         </StackPanel>
 
                         <TextBlock Text="{Binding Session.Speaker.Biography}" Style="{StaticResource GrayText}" TextWrapping="Wrap" Grid.Row="1"

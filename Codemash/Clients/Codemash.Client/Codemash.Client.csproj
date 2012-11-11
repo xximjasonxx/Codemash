@@ -166,6 +166,9 @@
     <Content Include="Assets\Background.png" />
     <Content Include="Assets\ConventionCenterFinal.png" />
     <Content Include="Assets\gear.png" />
+    <Content Include="Assets\LargeLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />

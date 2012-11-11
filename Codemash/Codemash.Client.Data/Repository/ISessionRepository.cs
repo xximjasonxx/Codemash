@@ -18,5 +18,10 @@ namespace Codemash.Client.Data.Repository
         /// <param name="value"></param>
         /// <returns></returns>
         IList<Session> SearchSessions(string value);
+
+        /// <summary>
+        /// Gets whether this is the first load of the application
+        /// </summary>
+        bool IsFirstLoad { get; }
     }
 }

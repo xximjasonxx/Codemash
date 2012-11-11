@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Codemash.Client.App">
-      <VisualElements DisplayName="Codemash 2.0.1.3" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Session Manager for Codemasn 2.0.1.3 conference" ForegroundText="light" BackgroundColor="#FB8102" ToastCapable="true">
+      <VisualElements DisplayName="Codemash" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Session Manager for Codemasn 2.0.1.3 conference" ForegroundText="light" BackgroundColor="#FB8102" ToastCapable="true">
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#FF7F00" />
         <InitialRotationPreference>

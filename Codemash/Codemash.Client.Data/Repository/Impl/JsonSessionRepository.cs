@@ -69,6 +69,11 @@ namespace Codemash.Client.Data.Repository.Impl
                 .OrderBy(s => s.Title).ToList();
         }
 
+        /// <summary>
+        /// Gets whether this is the first load of the application
+        /// </summary>
+        public bool IsFirstLoad { get { return !TableExists; } }
+
         #endregion
 
         #region Overrides of RepositoryBase<Session>

@@ -2,10 +2,10 @@
 using System.Linq;
 using Caliburn.Micro;
 using Codemash.Client.Components;
-using Codemash.Client.Core.Ex;
 using Codemash.Client.Data.Repository;
 using Codemash.Client.DataModels;
 using Codemash.Client.Parameters;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 
 namespace Codemash.Client.ViewModels
@@ -18,6 +18,8 @@ namespace Codemash.Client.ViewModels
         public SearchResultsViewModel(INavigationService navigationService, ISessionRepository sessionRepository, IAppService appService)
             : base(navigationService, appService.CanGoBack)
         {
+            var dialog = new MessageDialog("Hello", "Codemash 2.0.1.3");
+            dialog.ShowAsync();
             SessionRepository = sessionRepository;
         }
 

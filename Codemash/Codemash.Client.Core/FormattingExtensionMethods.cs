@@ -29,7 +29,7 @@ namespace Codemash.Client.Core
 
         public static string AsTimeDisplay(this DateTime dt)
         {
-            return dt.ToString("h:mmt").ToLower();
+            return dt.ToString("ddd") + " " + dt.ToString("h:mmt").ToLower();
         }
 
         public static string AsDateTimeDisplay(this DateTime dt)

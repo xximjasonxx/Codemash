@@ -60,5 +60,8 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'ARM Deploy' ">
     <OutputPath>bin\ARM Deploy\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Client Deploy' ">
+    <OutputPath>bin\Client Deploy\</OutputPath>
+  </PropertyGroup>
   <Import Project="$(CloudExtensionsDir)Microsoft.WindowsAzure.targets" />
 </Project>

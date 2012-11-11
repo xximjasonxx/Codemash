@@ -5,11 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:i="using:Windows.UI.Interactivity"
     xmlns:cal="using:Caliburn.Micro" mc:Ignorable="d">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <cal:ActionMessage MethodName="PageLoaded" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
 
     <Grid Background="#ffFF7F00">
         <Image Source="/Assets/SplashScreen2.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None" />

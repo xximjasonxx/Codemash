@@ -42,16 +42,14 @@ namespace Codemash.Client.Data.Repository.Impl
         /// <returns></returns>
         public IList<Session> GetUpcomingSessions()
         {
-            var grouping = from session in Repository
-                           group session by session.Starts into GroupSessions
-                           select new
-                                      {
-                                          GroupSessions.Key,
-                                          Sessions = GroupSessions
-                                      };
+            var blocks = Repository.Select(s => s.Starts).Distinct().ToList();
+            if (blocks.Count(d => d >= DateTime.Now) == 0)
+            {
+                return new List<Session>();
+            }
 
-            var upcomingGroup = grouping.FirstOrDefault(g => g.Key >= DateTime.Now);
-            return upcomingGroup.Sessions.OrderBy(s => s.Title).ToList();
+            var upcomingBlock = blocks.OrderBy(d => d).FirstOrDefault(d => d >= DateTime.Now);
+            return Repository.Where(s => s.Starts == upcomingBlock).OrderBy(s => s.Title).ToList();
         }
 
         /// <summary>

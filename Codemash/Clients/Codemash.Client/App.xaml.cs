@@ -7,7 +7,11 @@ using Codemash.Client.Data.Repository;
 using Codemash.Client.Data.Repository.Impl;
 using Codemash.Client.Parameters;
 using Codemash.Client.ViewModels;
+using Codemash.Client.Views;
+using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Search;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Codemash.Client
 {
@@ -23,15 +27,12 @@ namespace Codemash.Client
         protected override void Configure()
         {
             base.Configure();
-            _container = new WinRTContainer(RootFrame);
+            _container = new WinRTContainer();
             _container.RegisterWinRTServices();
 
             // repositories
             _container.RegisterSingleton(typeof(ISessionRepository), null, typeof(JsonSessionRepository));
             _container.RegisterSingleton(typeof(ISpeakerRepository), null, typeof(JsonSpeakerRepository));
-
-            // custom support components
-            _container.RegisterInstance(typeof(IAppService), null, new CodemashApplicationService(RootFrame));
         }
 
         protected override object GetInstance(Type service, string key)
@@ -49,14 +50,16 @@ namespace Codemash.Client
             _container.BuildUp(instance);
         }
 
-        #region Overrides of CaliburnApplication
-
-        protected override Type GetDefaultViewModel()
+        protected override void PrepareViewFirst(Frame rootFrame)
         {
-            return typeof (SplashViewModel);
+            _container.RegisterNavigationService(rootFrame);
+            _container.RegisterInstance(typeof(IAppService), null, new CodemashApplicationService(rootFrame));
         }
 
-        #endregion
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        {
+            DisplayRootView<SplashView>();
+        }
 
         #region Search
 
@@ -68,34 +71,23 @@ namespace Codemash.Client
             // assign the events
             searchPane.ShowOnKeyboardInput = true;
             searchPane.QuerySubmitted += searchPane_QuerySubmitted;
-            searchPane.SuggestionsRequested += searchPane_SuggestionsRequested;
-            searchPane.ResultSuggestionChosen += searchPane_ResultSuggestionChosen;
-        }
-
-        private void searchPane_ResultSuggestionChosen(SearchPane sender, SearchPaneResultSuggestionChosenEventArgs args)
-        {
-            
-        }
-
-        private void searchPane_SuggestionsRequested(SearchPane sender, SearchPaneSuggestionsRequestedEventArgs args)
-        {
-            
         }
 
         private void searchPane_QuerySubmitted(SearchPane sender, SearchPaneQuerySubmittedEventArgs args)
         {
             var navService = (INavigationService) _container.GetInstance(typeof (INavigationService), null);
             navService.NavigateToViewModel<SearchResultsViewModel>(new SearchTextParameter(args.QueryText));
+
+            Window.Current.Activate();
         }
 
         /// <summary>
         /// Invoked when the application is activated to display search results.
         /// </summary>
         /// <param name="args">Details about the activation request.</param>
-        protected override void OnSearchActivated(Windows.ApplicationModel.Activation.SearchActivatedEventArgs args)
+        protected override void OnSearchActivated(SearchActivatedEventArgs args)
         {
-            var navService = (INavigationService) _container.GetInstance(typeof (INavigationService), null);
-            navService.NavigateToViewModel<SearchResultsViewModel>(new SearchTextParameter(args.QueryText));
+            DisplayRootView<SearchResultsView>(new SearchTextParameter(args.QueryText));
         }
 
         #endregion

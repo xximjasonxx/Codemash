@@ -18,8 +18,7 @@ namespace Codemash.Client.ViewModels
             SpeakerRepository = speakerRepository;
         }
 
-        // behaviors
-        public async void PageLoaded()
+        protected async override void OnViewReady(object view)
         {
             // do the multi load
             await LoadRepositoriesAsync();

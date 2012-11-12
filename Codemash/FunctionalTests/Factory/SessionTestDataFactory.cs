@@ -26,16 +26,14 @@ namespace FunctionalTests.Factory
 
         public static void CreateStandardSpeaker(SqlConnection connection)
         {
-            const string cmdText = "insert into Speakers(SpeakerId, Biography, Twitter, EmailAddress, BlogUrl, FirstName, LastName, Company) values(1, @Bio, @Twitter, @Email, @Blog, @FirstName, @LastName, @Company)";
+            const string cmdText = "insert into Speakers(SpeakerId, Biography, Twitter, EmailAddress, BlogUrl, Name) values(1, @Bio, @Twitter, @Email, @Blog, @Name)";
             using (var command = new SqlCommand(cmdText, connection))
             {
                 command.Parameters.AddWithValue("@Bio", "This is a Biography");
                 command.Parameters.AddWithValue("@Twitter", string.Empty);
                 command.Parameters.AddWithValue("@Email", "test@example.com");
                 command.Parameters.AddWithValue("@Blog", string.Empty);
-                command.Parameters.AddWithValue("@FirstName", "FirstName");
-                command.Parameters.AddWithValue("@LastName", "LastName");
-                command.Parameters.AddWithValue("@Company", "Some Company");
+                command.Parameters.AddWithValue("@Name", "Name");
                 command.ExecuteNonQuery();
             }
         }

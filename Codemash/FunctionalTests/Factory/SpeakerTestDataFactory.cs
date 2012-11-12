@@ -11,7 +11,7 @@ namespace FunctionalTests.Factory
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString))
             {
                 connection.Open();
-                const string cmdText = "insert into Speakers(SpeakerId, Biography, Twitter, EmailAddress, BlogUrl, FirstName, LastName, Company) values(@SpeakerId, @Bio, @Twitter, @Email, @Blog, @FirstName, @LastName, @Company)";
+                const string cmdText = "insert into Speakers(SpeakerId, Biography, Twitter, EmailAddress, BlogUrl, Name) values(@SpeakerId, @Bio, @Twitter, @Email, @Blog, @Name)";
                 using (var command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("@SpeakerId", 1);
@@ -19,9 +19,7 @@ namespace FunctionalTests.Factory
                     command.Parameters.AddWithValue("@Twitter", string.Empty);
                     command.Parameters.AddWithValue("@Email", "test@example.com");
                     command.Parameters.AddWithValue("@Blog", string.Empty);
-                    command.Parameters.AddWithValue("@FirstName", "Troy");
-                    command.Parameters.AddWithValue("@LastName", "Smith");
-                    command.Parameters.AddWithValue("@Company", string.Empty);
+                    command.Parameters.AddWithValue("@Name", "Troy Smith");
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
 
@@ -30,9 +28,7 @@ namespace FunctionalTests.Factory
                     command.Parameters.AddWithValue("@Twitter", string.Empty);
                     command.Parameters.AddWithValue("@Email", "test@example.com");
                     command.Parameters.AddWithValue("@Blog", string.Empty);
-                    command.Parameters.AddWithValue("@FirstName", "Jake");
-                    command.Parameters.AddWithValue("@LastName", "Smith");
-                    command.Parameters.AddWithValue("@Company", string.Empty);
+                    command.Parameters.AddWithValue("@Name", "Jake Smith");
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
 
@@ -41,9 +37,7 @@ namespace FunctionalTests.Factory
                     command.Parameters.AddWithValue("@Twitter", string.Empty);
                     command.Parameters.AddWithValue("@Email", "test@example.com");
                     command.Parameters.AddWithValue("@Blog", string.Empty);
-                    command.Parameters.AddWithValue("@FirstName", "Sam");
-                    command.Parameters.AddWithValue("@LastName", "Jones");
-                    command.Parameters.AddWithValue("@Company", string.Empty);
+                    command.Parameters.AddWithValue("@Name", "Sam Jones");
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
                 }

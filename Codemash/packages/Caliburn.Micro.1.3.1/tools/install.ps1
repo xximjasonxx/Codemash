@@ -1,4 +1,4 @@
-param($rootPath, $toolsPath, $package, $project)
+﻿param($rootPath, $toolsPath, $package, $project)
 
 function get-content-path($contentRoot) {
 	$moniker = $project.Properties.Item("TargetFrameworkMoniker").Value
@@ -18,7 +18,7 @@ $defaultNamespace = $project.Properties.Item("DefaultNamespace").Value
 
 ls $contentSource | foreach-object { 
 	$content = [System.IO.File]::ReadAllText($_.FullName)
-	$content = $content.Replace('$safeprojectname$', $defaultNamespace)
+	$content = $content.Replace('Codemash.Client', $defaultNamespace)
 	$content | out-file -Encoding UTF8 $_.FullName
 	$project.ProjectItems.AddFromFileCopy($_.FullName)
 }

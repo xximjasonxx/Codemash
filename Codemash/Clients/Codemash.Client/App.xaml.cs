@@ -30,6 +30,8 @@ namespace Codemash.Client
         protected override void Configure()
         {
             base.Configure();
+
+            // create the container
             _container = new WinRTContainer();
             _container.RegisterWinRTServices();
 
@@ -66,7 +68,7 @@ namespace Codemash.Client
 
         #region Contracts
 
-        protected override void OnWindowCreated(Windows.UI.Xaml.WindowCreatedEventArgs args)
+        protected override void OnWindowCreated(WindowCreatedEventArgs args)
         {
             // get the search pane
             var searchPane = SearchPane.GetForCurrentView();
@@ -90,7 +92,7 @@ namespace Codemash.Client
         private void searchPane_QuerySubmitted(SearchPane sender, SearchPaneQuerySubmittedEventArgs args)
         {
             var navService = (INavigationService) _container.GetInstance(typeof (INavigationService), null);
-            navService.NavigateToViewModel<SearchResultsViewModel>(new SearchTextParameter(args.QueryText));
+            navService.Navigate<SearchResultsViewModel>(new SearchTextParameter(args.QueryText));
 
             Window.Current.Activate();
         }
@@ -99,7 +101,7 @@ namespace Codemash.Client
         {
             var cmd = (Settings) command.Id;
             var navService = (INavigationService)_container.GetInstance(typeof(INavigationService), null);
-            navService.Navigate<PrivacyView>();
+            navService.Navigate<PrivacyViewModel>();
         }
 
         /// <summary>
@@ -112,5 +114,15 @@ namespace Codemash.Client
         }
 
         #endregion
+
+        protected override void OnSuspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
+        {
+            base.OnSuspending(sender, e);
+        }
+
+        protected override void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            base.OnUnhandledException(sender, e);
+        }
     }
 }

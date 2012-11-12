@@ -9,7 +9,7 @@ namespace Codemash.DeltaApi.Models
     {
         public string Action { get; set; }
 
-        public int SessionId { get; set; }
+        public long SessionId { get; set; }
 
         public int Version { get; set; }
 

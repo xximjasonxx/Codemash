@@ -27,6 +27,8 @@ namespace Codemash.Api.Data.Repositories.Impl
 
             // session
             modelBuilder.Entity<Session>().Property(s => s.Abstract).HasColumnType("text");
+            modelBuilder.Entity<Session>().Property(s => s.Start).HasColumnType("datetime2");
+            modelBuilder.Entity<Session>().Property(s => s.End).HasColumnType("datetime2");
 
             // speaker
             modelBuilder.Entity<Speaker>().Property(s => s.Biography).HasColumnType("text");

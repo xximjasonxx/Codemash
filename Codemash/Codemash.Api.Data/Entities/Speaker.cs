@@ -1,5 +1,4 @@
 ﻿
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Codemash.Api.Data.Entities.Interfaces;
@@ -11,7 +10,7 @@ namespace Codemash.Api.Data.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int SpeakerId { get; set; }
+        public long SpeakerId { get; set; }
 
         [Comparable, Required]
         public string Biography { get; set; }
@@ -39,7 +38,7 @@ namespace Codemash.Api.Data.Entities
 
         #region Implementation of IHasIdentifier
 
-        public int ID { get { return SpeakerId; } }
+        public long ID { get { return SpeakerId; } }
 
         #endregion
     }

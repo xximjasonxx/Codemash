@@ -11,7 +11,7 @@ namespace Codemash.Api.Data.Entities
         public int SessionChangeId { get; set; }
 
         [Required]
-        public int SessionId { get; set; }
+        public long SessionId { get; set; }
 
         [Required]
         public ChangeAction ActionType
@@ -34,7 +34,7 @@ namespace Codemash.Api.Data.Entities
 
         #region IChange Implementation
 
-        public int ChangeEntityId { set { SessionId = value; } }
+        public long ChangeEntityId { set { SessionId = value; } }
 
         #endregion
     }

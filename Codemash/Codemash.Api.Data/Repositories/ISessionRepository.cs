@@ -3,7 +3,7 @@ using Codemash.Api.Data.Entities;
 
 namespace Codemash.Api.Data.Repositories
 {
-    public interface ISessionRepository : IReadRepository<Session, int>, IWriteRepository<Session, int>
+    public interface ISessionRepository : IReadRepository<Session, long>, IWriteRepository<Session, long>
     {
     }
 }

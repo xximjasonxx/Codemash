@@ -2,6 +2,6 @@
 {
     public interface IHasIdentifier
     {
-        int ID { get; }
+        long ID { get; }
     }
 }

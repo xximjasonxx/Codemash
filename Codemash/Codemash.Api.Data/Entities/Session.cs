@@ -10,11 +10,11 @@ namespace Codemash.Api.Data.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int SessionId { get; set; }
+        public long SessionId { get; set; }
 
         [Comparable]
         [Required]
-        public int SpeakerId { get; set; }
+        public long SpeakerId { get; set; }
 
         [ForeignKey("SpeakerId")]
         public Speaker Speaker { get; set; }
@@ -28,7 +28,7 @@ namespace Codemash.Api.Data.Entities
         [Comparable, Required]
         public DateTime Start { get; set; }
 
-        [Comparable]
+        [Comparable, Required]
         public DateTime End { get; set; }
 
         [Comparable("Level")]
@@ -70,7 +70,7 @@ namespace Codemash.Api.Data.Entities
 
         #region Implementation of IHasIdentifier
 
-        public int ID { get { return SessionId; } }
+        public long ID { get { return SessionId; } }
 
         #endregion
     }

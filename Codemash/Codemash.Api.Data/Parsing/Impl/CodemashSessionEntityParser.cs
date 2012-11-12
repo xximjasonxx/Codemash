@@ -29,7 +29,7 @@ namespace Codemash.Api.Data.Parsing.Impl
         public Session Parse(string contents)
         {
             JObject jToken = JObject.Parse(contents);
-            return new Session
+            var session = new Session
                        {
                            Abstract = new StringWrapper(jToken["Abstract"]).ToString(),
                            LevelType = new StringWrapper(jToken["Difficulty"]).ToString().AsLevel(Level.Unknown),
@@ -41,6 +41,8 @@ namespace Codemash.Api.Data.Parsing.Impl
                            Start = new StringWrapper(jToken["Start"]).ToString().AsDateTime(true),
                            End = new StringWrapper(jToken["End"]).ToString().AsDateTime(true)
                        };
+
+            return session;
         }
 
         #endregion

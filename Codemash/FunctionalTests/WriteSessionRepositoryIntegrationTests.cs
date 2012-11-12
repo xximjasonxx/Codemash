@@ -62,7 +62,7 @@ namespace FunctionalTests
             // add test data
             repository.SaveRange(sessions);
             sessions = repository.GetAll();
-            int sessionId = sessions[0].SessionId;
+            long sessionId = sessions[0].SessionId;
             
             // precondition
             Assert.AreNotEqual(0, sessionId);

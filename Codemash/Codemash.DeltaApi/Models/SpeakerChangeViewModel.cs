@@ -7,7 +7,7 @@ namespace Codemash.DeltaApi.Models
 {
     public class SpeakerChangeViewModel
     {
-        public int SpeakerId { get; set; }
+        public long SpeakerId { get; set; }
 
         public string Action { get; set; }
 

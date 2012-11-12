@@ -14,7 +14,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Session Get(int id)
+        public Session Get(long id)
         {
             return Get(s => s.SessionId == id);
         }

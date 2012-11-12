@@ -12,9 +12,9 @@ namespace Codemash.DeltaApi.Models
 
         public string Room { get; set; }
 
-        public int SessionId { get; set; }
+        public long SessionId { get; set; }
 
-        public int SpeakerId { get; set; }
+        public long SpeakerId { get; set; }
 
         public string Start { get; set; }
 

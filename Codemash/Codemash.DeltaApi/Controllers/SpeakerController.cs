@@ -19,7 +19,7 @@ namespace Codemash.DeltaApi.Controllers
             return SpeakerRepository.GetAll().Select(CreateSpeakerViewModel);
         }
 
-        public SpeakerViewModel Get(int id)
+        public SpeakerViewModel Get(long id)
         {
             var result = SpeakerRepository.Get(id);
             if (result == null)

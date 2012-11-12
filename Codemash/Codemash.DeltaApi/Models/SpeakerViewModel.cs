@@ -16,7 +16,7 @@ namespace Codemash.DeltaApi.Models
 
         public string Name { get; set; }
 
-        public int SpeakerId { get; set; }
+        public long SpeakerId { get; set; }
 
         public string Twitter { get; set; }
     }

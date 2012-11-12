@@ -101,7 +101,7 @@ namespace Codemash.Api.Data.Extensions
         /// <param name="differences">The differences between the entities stored as key/value pairs</param>
         /// <param name="id">The id which has changed</param>
         /// <returns></returns>
-        private static IEnumerable<TChange> CreateDifferencesList<TChange>(IEnumerable<KeyValuePair<string, string>> differences, int id) where TChange : IChange, new()
+        private static IEnumerable<TChange> CreateDifferencesList<TChange>(IEnumerable<KeyValuePair<string, string>> differences, long id) where TChange : IChange, new()
         {
             return differences.Select(kv => new TChange
             {

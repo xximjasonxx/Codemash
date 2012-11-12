@@ -10,14 +10,14 @@ namespace Codemash.Api.Data.Entities
         public int SpeakerChangeId { get; set; }
 
         [Required]
-        public int SpeakerId { get; set; }
+        public long SpeakerId { get; set; }
 
         [Required]
         public int Version { get; set; }
 
         #region Implementation of IChange
 
-        public int ChangeEntityId { set { SpeakerId = value; } }
+        public long ChangeEntityId { set { SpeakerId = value; } }
 
         [Required]
         public ChangeAction ActionType

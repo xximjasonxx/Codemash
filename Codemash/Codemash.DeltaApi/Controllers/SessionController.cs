@@ -22,7 +22,7 @@ namespace Codemash.DeltaApi.Controllers
             return SessionRepository.GetAll().Select(CreateSessionViewModel);
         }
 
-        public SessionViewModel Get(int id)
+        public SessionViewModel Get(long id)
         {
             var result = SessionRepository.Get(id);
             if (result == null)

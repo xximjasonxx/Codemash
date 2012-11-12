@@ -63,7 +63,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Speaker Get(int id)
+        public Speaker Get(long id)
         {
             return Get(sp => sp.SpeakerId == id);
         }

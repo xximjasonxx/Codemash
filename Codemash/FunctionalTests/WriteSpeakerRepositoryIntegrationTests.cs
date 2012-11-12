@@ -51,13 +51,13 @@ namespace FunctionalTests
 
             // act
             speakers = repository.GetAll();
-            speakers[0].FirstName = "Kerry";
+            speakers[0].Name = "Kerry";
             repository.SaveRange(speakers);
 
             // assert
             speakers = repository.GetAll();
             Assert.AreEqual(orginalSpeakerCount, speakers.Count);
-            Assert.AreEqual("Kerry", speakers[0].FirstName);
+            Assert.AreEqual("Kerry", speakers[0].Name);
         }
 
         [TestMethod]
@@ -119,24 +119,21 @@ namespace FunctionalTests
                                    SpeakerId = 1,
                                    Biography = "Biography 1",
                                    EmailAddress = "test@example.com",
-                                   FirstName = "Sam",
-                                   LastName = "Jones"
+                                   Name = "Sam Jones"
                                },
                            new Speaker
                                {
                                    SpeakerId = 2,
                                    Biography = "Biography 2",
                                    EmailAddress = "test@example.com",
-                                   FirstName = "Sam",
-                                   LastName = "Jones"
+                                   Name = "Sam Jones"
                                },
                            new Speaker
                                {
                                    SpeakerId = 3,
                                    Biography = "Biography 3",
                                    EmailAddress = "test@example.com",
-                                   FirstName = "Sam",
-                                   LastName = "Jones"
+                                   Name = "Sam Jones"
                                }
                        };
         }

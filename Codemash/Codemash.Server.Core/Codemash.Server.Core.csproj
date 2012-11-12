@@ -70,6 +70,7 @@
     <Compile Include="Extensions\ListManipulationExtensions.cs" />
     <Compile Include="Extensions\PrimitiveParsingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

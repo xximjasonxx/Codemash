@@ -15,32 +15,32 @@ namespace Server.CoreTests
         [TestMethod]
         public void test_that_parsing_a_valid_track_enum_string_with_no_spaces_returns_a_correct_enum()
         {
-            var str = "Keynote";
-            var enumParser = new TrackParse();
-            Assert.AreEqual(Track.Keynote, enumParser.Parse(str, Track.Unknown));
+            var str = ".NET";
+            var enumParser = new TrackEnumParse();
+            Assert.AreEqual(Track.dotNET, enumParser.Parse(str, Track.Unknown));
         }
 
         [TestMethod]
         public void test_that_parsing_an_invalid_track_enum_string_returns_the_default_enum_value()
         {
             var str = "xxx";
-            var enumParser = new TrackParse();
+            var enumParser = new TrackEnumParse();
             Assert.AreEqual(Track.Unknown, enumParser.Parse(str, Track.Unknown));
         }
 
         [TestMethod]
         public void test_that_parsing_an_valid_track_name_with_spaces_returns_the_correct_enum()
         {
-            var str = "Platforms and Tools";
-            var enumParser = new TrackParse();
-            Assert.AreEqual(Track.PlatformsTools, enumParser.Parse(str, Track.Unknown));
+            var str = "Design/UX";
+            var enumParser = new TrackEnumParse();
+            Assert.AreEqual(Track.DesignUX, enumParser.Parse(str, Track.Unknown));
         }
 
         [TestMethod]
         public void test_that_parsing_a_valid_room_enum_string_with_no_spaces_returns_a_correct_enum()
         {
             var str = "Unknown";
-            var enumParser = new RoomParse();
+            var enumParser = new RoomEnumParse();
             Assert.AreEqual(Room.Unknown, enumParser.Parse(str, Room.Unknown));
         }
 
@@ -48,16 +48,16 @@ namespace Server.CoreTests
         public void test_that_parsing_an_invalid_room_enum_string_returns_the_default_enum_value()
         {
             var str = "xxx";
-            var enumParser = new RoomParse();
+            var enumParser = new RoomEnumParse();
             Assert.AreEqual(Room.Unknown, enumParser.Parse(str, Room.Unknown));
         }
 
         [TestMethod]
         public void test_that_parsing_an_valid_room_name_with_spaces_returns_the_correct_enum()
         {
-            var str = "Conv. Ctr. E, F, G";
-            var enumParser = new RoomParse();
-            Assert.AreEqual(Room.CtrEFG, enumParser.Parse(str, Room.Unknown));
+            var str = "Indigo Bay";
+            var enumParser = new RoomEnumParse();
+            Assert.AreEqual(Room.IndigoBay, enumParser.Parse(str, Room.Unknown));
         }
 
         [TestMethod]
@@ -101,20 +101,6 @@ namespace Server.CoreTests
         }
 
         [TestMethod]
-        public void test_that_given_a_room_reference_with_an_alternative_name_returns_that_string_value()
-        {
-            // arrange
-            var type = Room.CtrEFG;
-
-            // act
-            var value = type.AsDisplayString();
-
-            // assert
-            const string expected = "Conv. Ctr. E, F, G";
-            Assert.AreEqual(expected, value);
-        }
-
-        [TestMethod]
         public void test_that_given_a_track_enum_reference_with_no_alternative_name_the_tostring_value_is_returned()
         {
             // arrange
@@ -131,13 +117,13 @@ namespace Server.CoreTests
         public void test_that_given_a_track_enum_reference_with_an_alternative_name_that_alternative_value_is_returned()
         {
             // arrange
-            var type = Track.MobileDevelopment;
+            var type = Track.GameDevelopment;
 
             // act
             var value = type.AsDisplayString();
 
             // assert
-            const string expected = "Mobile Development";
+            const string expected = "Game Development";
             Assert.AreEqual(expected, value);
         }
     }

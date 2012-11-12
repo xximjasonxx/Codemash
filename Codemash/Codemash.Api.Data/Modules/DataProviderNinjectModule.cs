@@ -13,7 +13,7 @@ namespace Codemash.Api.Data.Modules
         /// </summary>
         public override void Load()
         {
-            Bind<IMasterDataProvider>().To<DevLinkMasterDataProvider>().InSingletonScope();
+            Bind<IMasterDataProvider>().To<CodemashMasterDataProvider>().InSingletonScope();
         }
 
         #endregion

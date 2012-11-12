@@ -35,10 +35,8 @@ namespace Codemash.DeltaApi.Controllers
                        {
                            Biography = speaker.Biography,
                            BlogUrl = speaker.BlogUrl,
-                           Company = speaker.Company,
                            EmailAddress = speaker.EmailAddress,
-                           FirstName = speaker.FirstName,
-                           LastName = speaker.LastName,
+                           Name = speaker.Name,
                            SpeakerId = speaker.SpeakerId,
                            Twitter = speaker.Twitter
                        };

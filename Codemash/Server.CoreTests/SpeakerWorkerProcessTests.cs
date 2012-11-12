@@ -19,15 +19,15 @@ namespace Server.CoreTests
         {
             _theKernel = new StandardKernel();
             _theKernel.Bind<IProcess>().To<SpeakerWorkerProcess>();
-            _theKernel.Bind<ISpeakerChangeRepository>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetStandardSpeakerChangeRepositoryMock()).InSingletonScope();
+            _theKernel.Bind<ISpeakerChangeRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetStandardSpeakerChangeRepositoryMock()).InSingletonScope();
         }
 
         [TestMethod]
         public void test_when_no_changes_are_detected_between_master_and_local_no_differences_recorded_for_saving()
         {
             // arrange
-            _theKernel.Bind<IMasterDataProvider>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetMasterProviderWithGetSpeakersMocked());
-            _theKernel.Bind<ISpeakerRepository>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetSpeakerRepositoryWithGetAllMockedToReturnStandardSpeakers());
+            _theKernel.Bind<IMasterDataProvider>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetMasterProviderWithGetSpeakersMocked());
+            _theKernel.Bind<ISpeakerRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetSpeakerRepositoryWithGetAllMockedToReturnStandardSpeakers());
 
             // act
             var process = _theKernel.Get<IProcess>();
@@ -42,8 +42,8 @@ namespace Server.CoreTests
         public void test_when_changes_exist_between_master_and_local_differences_are_recorded_in_speaker_change_repository()
         {
             // arrange
-            _theKernel.Bind<IMasterDataProvider>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetMasterProviderWithRandomlyAlteredSpeaker());
-            _theKernel.Bind<ISpeakerRepository>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetSpeakerRepositoryWithGetAllMockedToReturnStandardSpeakers());
+            _theKernel.Bind<IMasterDataProvider>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetMasterProviderWithRandomlyAlteredSpeaker());
+            _theKernel.Bind<ISpeakerRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetSpeakerRepositoryWithGetAllMockedToReturnStandardSpeakers());
 
             // act
             var process = _theKernel.Get<IProcess>();
@@ -58,8 +58,8 @@ namespace Server.CoreTests
         public void test_when_a_session_exists_in_master_and_not_in_local_that_differences_should_be_recorded()
         {
             // arrange
-            _theKernel.Bind<IMasterDataProvider>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetMasterProviderWithGetSpeakersMocked());
-            _theKernel.Bind<ISpeakerRepository>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetSpeakerRepositoryWithSpeakerRemovedMock());
+            _theKernel.Bind<IMasterDataProvider>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetMasterProviderWithGetSpeakersMocked());
+            _theKernel.Bind<ISpeakerRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetSpeakerRepositoryWithSpeakerRemovedMock());
 
             // act
             var process = _theKernel.Get<IProcess>();
@@ -74,8 +74,8 @@ namespace Server.CoreTests
         public void test_when_a_session_is_removed_from_master_that_a_delete_difference_is_recorded()
         {
             // arrange
-            _theKernel.Bind<IMasterDataProvider>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetMasterProviderWithOneLessSpeakerMocked());
-            _theKernel.Bind<ISpeakerRepository>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetSpeakerRepositoryWithGetAllMockedToReturnStandardSpeakers());
+            _theKernel.Bind<IMasterDataProvider>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetMasterProviderWithOneLessSpeakerMocked());
+            _theKernel.Bind<ISpeakerRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetSpeakerRepositoryWithGetAllMockedToReturnStandardSpeakers());
 
             // act
             var process = _theKernel.Get<IProcess>();
@@ -90,8 +90,8 @@ namespace Server.CoreTests
         public void test_that_in_the_case_that_no_speakers_are_stored_locally_no_differences_should_be_recorded_for_the_operation_execution()
         {
             // arrange;
-            _theKernel.Bind<IMasterDataProvider>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetMasterProviderWithGetSpeakersMocked());
-            _theKernel.Bind<ISpeakerRepository>().ToConstant(MoqSpeakerWorkerProcessTestFactory.GetEmptySpeakerRepository()).InSingletonScope();
+            _theKernel.Bind<IMasterDataProvider>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetMasterProviderWithGetSpeakersMocked());
+            _theKernel.Bind<ISpeakerRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetEmptySpeakerRepository()).InSingletonScope();
 
             // act
             var process = _theKernel.Get<IProcess>();

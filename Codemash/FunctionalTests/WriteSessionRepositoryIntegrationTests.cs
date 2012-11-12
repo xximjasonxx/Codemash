@@ -168,7 +168,7 @@ namespace FunctionalTests
                                    Abstract = "Abstract",
                                    End = DateTime.Now.AddHours(1),
                                    LevelType = Level.General,
-                                   RoomType = Room.CtrEFG,
+                                   RoomType = Room.IndigoBay,
                                    SpeakerId = _speakerId,
                                    Start = DateTime.Now
                                },
@@ -179,7 +179,7 @@ namespace FunctionalTests
                                    Abstract = "Abstract",
                                    End = DateTime.Now.AddHours(1),
                                    LevelType = Level.General,
-                                   RoomType = Room.CtrEFG,
+                                   RoomType = Room.IndigoBay,
                                    SpeakerId = _speakerId,
                                    Start = DateTime.Now
                                },
@@ -190,7 +190,7 @@ namespace FunctionalTests
                                    Abstract = "Abstract",
                                    End = DateTime.Now.AddHours(1),
                                    LevelType = Level.General,
-                                   RoomType = Room.CtrEFG,
+                                   RoomType = Room.IndigoBay,
                                    SpeakerId = _speakerId,
                                    Start = DateTime.Now
                                }

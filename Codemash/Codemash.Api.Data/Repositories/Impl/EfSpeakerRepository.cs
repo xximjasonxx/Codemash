@@ -38,10 +38,8 @@ namespace Codemash.Api.Data.Repositories.Impl
 
                 result.Biography = entity.Biography;
                 result.BlogUrl = entity.BlogUrl;
-                result.Company = entity.Company;
                 result.EmailAddress = entity.EmailAddress;
-                result.FirstName = entity.FirstName;
-                result.LastName = entity.LastName;
+                result.Name = entity.Name;
             }
         }
 

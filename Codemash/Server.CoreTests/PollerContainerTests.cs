@@ -1,4 +1,6 @@
-﻿using Codemash.Api.Data.Provider;
+﻿using Codemash.Api.Data.Parsing;
+using Codemash.Api.Data.Parsing.Impl;
+using Codemash.Api.Data.Provider;
 using Codemash.Api.Data.Repositories;
 using Codemash.Poller.Container;
 using Codemash.Poller.Process;
@@ -59,6 +61,18 @@ namespace Server.CoreTests
         public void test_poller_container_can_properly_resolve_speaker_change_repository()
         {
             Assert.IsNotNull(TheContainer.TryGet<ISpeakerChangeRepository>());
+        }
+
+        [TestMethod]
+        public void test_container_resolves_reference_to_Session_entity_parser()
+        {
+            Assert.IsInstanceOfType(TheContainer.Get<ISessionEntityParser>(), typeof(CodemashSessionEntityParser));
+        }
+
+        [TestMethod]
+        public void test_container_resolves_reference_to_Speaker_entity_parser()
+        {
+            Assert.IsInstanceOfType(TheContainer.Get<ISpeakerEntityParser>(), typeof(CodemashSpeakerEntityParser));
         }
     }
 }

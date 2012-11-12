@@ -6,7 +6,7 @@ using Codemash.Server.Core.Attributes;
 
 namespace Codemash.Api.Data.Parsing.Impl
 {
-    public class TrackParse : ParseBase<Track>
+    public class TrackEnumParse : EnumParseBase<Track>
     {
         #region Implementation of IParse<Track>
 

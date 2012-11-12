@@ -14,10 +14,10 @@ namespace Codemash.Api.Data.Provider.Impl
     public class DevLinkMasterDataProvider : IMasterDataProvider
     {
         [Inject]
-        public RoomParse RoomParser { get; set; }
+        public RoomEnumParse RoomEnumParser { get; set; }
 
         [Inject]
-        public TrackParse TrackParser { get; set; }
+        public TrackEnumParse TrackEnumParser { get; set; }
 
         #region Implementation of IMasterDataProvider
 
@@ -38,8 +38,8 @@ namespace Codemash.Api.Data.Provider.Impl
                             Title = it["Title"].ToString(),
                             Abstract = it["Abstract"].ToString(),
                             LevelType = it["Level"].ToString().AsLevel(Level.Unknown),
-                            TrackType = TrackParser.Parse(it["Track"].ToString(), Track.Unknown),
-                            RoomType = RoomParser.Parse(it["Room"].ToString(), Room.Unknown),
+                            TrackType = TrackEnumParser.Parse(it["Track"].ToString(), Track.Unknown),
+                            RoomType = RoomEnumParser.Parse(it["Room"].ToString(), Room.Unknown),
                             Start = it["StartTime"].ToString().AsDateTime(),
                             End = it["EndTime"].ToString().AsDateTime(),
                             SpeakerId = it["Speaker"]["SpeakerId"].ToString().AsInt()

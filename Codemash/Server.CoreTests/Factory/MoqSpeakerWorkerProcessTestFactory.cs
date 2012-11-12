@@ -5,26 +5,35 @@ using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Provider;
 using Codemash.Api.Data.Repositories;
 using Moq;
+using Ninject;
+using Server.CoreTests.Containers;
 
 namespace Server.CoreTests.Factory
 {
-    public static class MoqSpeakerWorkerProcessTestFactory
+    public class MoqSpeakerWorkerProcessTestFactory
     {
-        public static IMasterDataProvider GetMasterProviderWithGetSpeakersMocked()
+        private TestDataFactory _dataFactory;
+
+        public MoqSpeakerWorkerProcessTestFactory()
         {
-            var speakerList = MoqSpeakerDataFactory.GetSpeakersFromFile();
+            _dataFactory = new TestContainer().Get<TestDataFactory>();
+        }
+
+        public IMasterDataProvider GetMasterProviderWithGetSpeakersMocked()
+        {
+            var speakerList = _dataFactory.GetSpeakers();
             var mockedProvider = new Mock<IMasterDataProvider>();
             mockedProvider.Setup(m => m.GetAllSpeakers()).Returns(speakerList);
 
             return mockedProvider.Object;
         }
 
-        public static IMasterDataProvider GetMasterProviderWithRandomlyAlteredSpeaker()
+        public IMasterDataProvider GetMasterProviderWithRandomlyAlteredSpeaker()
         {
-            var speakerList = MoqSpeakerDataFactory.GetSpeakersFromFile();
+            var speakerList = _dataFactory.GetSpeakers();
             var rand = new Random(DateTime.Now.Second);
             var next = rand.Next(0, speakerList.Count - 1);
-            speakerList[next].FirstName = "My Updated First Name";
+            speakerList[next].Name = "My Updated First Name";
 
             var mockedProvider = new Mock<IMasterDataProvider>();
             mockedProvider.Setup(m => m.GetAllSpeakers()).Returns(speakerList);
@@ -32,9 +41,9 @@ namespace Server.CoreTests.Factory
             return mockedProvider.Object;
         }
 
-        public static IMasterDataProvider GetMasterProviderWithOneLessSpeakerMocked()
+        public IMasterDataProvider GetMasterProviderWithOneLessSpeakerMocked()
         {
-            var speakerList = MoqSpeakerDataFactory.GetSpeakersFromFile();
+            var speakerList = _dataFactory.GetSpeakers();
             speakerList.RemoveAt(0);
 
             var mockedProvider = new Mock<IMasterDataProvider>();
@@ -43,18 +52,18 @@ namespace Server.CoreTests.Factory
             return mockedProvider.Object;
         }
 
-        public static ISpeakerRepository GetSpeakerRepositoryWithGetAllMockedToReturnStandardSpeakers()
+        public ISpeakerRepository GetSpeakerRepositoryWithGetAllMockedToReturnStandardSpeakers()
         {
-            var speakerList = MoqSpeakerDataFactory.GetSpeakersFromFile();
+            var speakerList = _dataFactory.GetSpeakers();
             var mockedProvider = new Mock<ISpeakerRepository>();
             mockedProvider.Setup(m => m.GetAll()).Returns(speakerList);
 
             return mockedProvider.Object;
         }
 
-        public static ISpeakerRepository GetSpeakerRepositoryWithSpeakerRemovedMock()
+        public ISpeakerRepository GetSpeakerRepositoryWithSpeakerRemovedMock()
         {
-            var speakerList = MoqSpeakerDataFactory.GetSpeakersFromFile();
+            var speakerList = _dataFactory.GetSpeakers();
             speakerList.RemoveAt(0);
             
             var mock = new Mock<ISpeakerRepository>();
@@ -63,9 +72,9 @@ namespace Server.CoreTests.Factory
             return mock.Object;
         }
 
-        private static IList<SpeakerChange> _speakerChangeRepository; 
+        private IList<SpeakerChange> _speakerChangeRepository; 
 
-        public static ISpeakerChangeRepository GetStandardSpeakerChangeRepositoryMock()
+        public ISpeakerChangeRepository GetStandardSpeakerChangeRepositoryMock()
         {
             _speakerChangeRepository = null;
             var mock = new Mock<ISpeakerChangeRepository>();
@@ -89,9 +98,9 @@ namespace Server.CoreTests.Factory
             return mock.Object;
         }
 
-        private static IList<Speaker> _speakerRepository;
+        private IList<Speaker> _speakerRepository;
 
-        public static ISpeakerRepository GetEmptySpeakerRepository()
+        public ISpeakerRepository GetEmptySpeakerRepository()
         {
             var mock = new Mock<ISpeakerRepository>();
             _speakerRepository = new List<Speaker>();

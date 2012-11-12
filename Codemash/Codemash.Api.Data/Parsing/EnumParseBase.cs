@@ -5,11 +5,11 @@ using Codemash.Server.Core.Attributes;
 
 namespace Codemash.Api.Data.Parsing
 {
-    public abstract class ParseBase<T>
+    public abstract class EnumParseBase<T>
     {
         private readonly IDictionary<string, T> _lookupDictionary;
         
-        protected ParseBase()
+        protected EnumParseBase()
         {
             // instantiate the underlying member
             _lookupDictionary = new Dictionary<string, T>();

@@ -1,7 +1,7 @@
 ﻿
 namespace Codemash.Api.Data.Parsing.Impl
 {
-    public class RoomParse : ParseBase<Room>
+    public class RoomEnumParse : EnumParseBase<Room>
     {
         #region Implementation of IParse<Room>
 

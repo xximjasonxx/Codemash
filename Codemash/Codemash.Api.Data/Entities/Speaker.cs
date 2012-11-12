@@ -26,15 +26,7 @@ namespace Codemash.Api.Data.Entities
         public string BlogUrl { get; set; }
 
         [Comparable, Required, StringLength(100)]
-        public string FirstName { get; set; }
-
-        [Comparable, Required, StringLength(100)]
-        public string LastName { get; set; }
-
-        [Comparable, StringLength(100)]
-        public string Company { get; set; }
-
-        public ICollection<Session> Sessions { get; set; }
+        public string Name { get; set; }
 
         public Speaker()
         {
@@ -42,9 +34,7 @@ namespace Codemash.Api.Data.Entities
             Twitter = string.Empty;
             EmailAddress = string.Empty;
             BlogUrl = string.Empty;
-            FirstName = string.Empty;
-            LastName = string.Empty;
-            Company = string.Empty;
+            Name = string.Empty;
         }
 
         #region Implementation of IHasIdentifier

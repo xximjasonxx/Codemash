@@ -85,12 +85,12 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CompareExtensionMethodTests.cs" />
+    <Compile Include="Containers\TestContainer.cs" />
     <Compile Include="EntityExtensionTests.cs" />
     <Compile Include="EnumParsingTests.cs" />
     <Compile Include="Factory\MoqSessionWorkerProcessTestFactory.cs" />
-    <Compile Include="Factory\MoqSessionCompareTestFactory.cs" />
-    <Compile Include="Factory\MoqSpeakerDataFactory.cs" />
     <Compile Include="Factory\MoqSpeakerWorkerProcessTestFactory.cs" />
+    <Compile Include="Factory\TestDataFactory.cs" />
     <Compile Include="ListManipulationsTests.cs" />
     <Compile Include="PrimitiveParsingExtensionsTests.cs" />
     <Compile Include="PollerContainerTests.cs" />

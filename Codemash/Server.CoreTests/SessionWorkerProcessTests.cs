@@ -43,9 +43,9 @@ namespace Server.CoreTests
         public void test_that_in_the_scenario_where_there_are_no_difference_between_master_and_local_the_sessionchange_repository_should_remain_empty()
         {
             var kernel = new StandardKernel();
-            kernel.Bind<ISessionRepository>().ToConstant(MoqSessionWorkerProcessTestFactory.GetStandardSessionRepository());
-            kernel.Bind<IMasterDataProvider>().ToConstant(MoqSessionWorkerProcessTestFactory.GetStandardMasterDataProvider());
-            kernel.Bind<ISessionChangeRepository>().ToConstant(MoqSessionWorkerProcessTestFactory.GetSessionChangeRepository()).InSingletonScope();
+            kernel.Bind<ISessionRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetStandardSessionRepository());
+            kernel.Bind<IMasterDataProvider>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetStandardMasterDataProvider());
+            kernel.Bind<ISessionChangeRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetSessionChangeRepository()).InSingletonScope();
 
             var process = kernel.Get<SessionWorkerProcess>();
             process.Execute();
@@ -58,9 +58,9 @@ namespace Server.CoreTests
         public void test_that_in_the_scenario_where_there_are_differences_between_the_sessions_in_master_and_local_session_sessionchange_repository_should_not_be_empty()
         {
             var kernel = new StandardKernel();
-            kernel.Bind<ISessionRepository>().ToConstant(MoqSessionWorkerProcessTestFactory.GetNonStandardSessionRepository());
-            kernel.Bind<IMasterDataProvider>().ToConstant(MoqSessionWorkerProcessTestFactory.GetStandardMasterDataProvider());
-            kernel.Bind<ISessionChangeRepository>().ToConstant(MoqSessionWorkerProcessTestFactory.GetSessionChangeRepository()).InSingletonScope();
+            kernel.Bind<ISessionRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetNonStandardSessionRepository());
+            kernel.Bind<IMasterDataProvider>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetStandardMasterDataProvider());
+            kernel.Bind<ISessionChangeRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetSessionChangeRepository()).InSingletonScope();
 
             var process = kernel.Get<SessionWorkerProcess>();
             process.Execute();
@@ -73,8 +73,8 @@ namespace Server.CoreTests
         public void test_that_if_a_session_exists_in_master_it_is_added_to_the_local_source()
         {
             var kernel = new StandardKernel();
-            kernel.Bind<ISessionRepository>().ToConstant(MoqSessionWorkerProcessTestFactory.GetOneLessSessionRepository()).InSingletonScope();
-            kernel.Bind<IMasterDataProvider>().ToConstant(MoqSessionWorkerProcessTestFactory.GetStandardMasterDataProvider());
+            kernel.Bind<ISessionRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetOneLessSessionRepository()).InSingletonScope();
+            kernel.Bind<IMasterDataProvider>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetStandardMasterDataProvider());
             kernel.Bind<ISessionChangeRepository>().ToConstant(new Mock<ISessionChangeRepository>().Object);
 
             var process = kernel.Get<SessionWorkerProcess>();
@@ -89,8 +89,8 @@ namespace Server.CoreTests
         public void test_that_if_a_session_does_not_exist_in_the_master_it_is_removed_from_the_local_repository()
         {
             var kernel = new StandardKernel();
-            kernel.Bind<ISessionRepository>().ToConstant(MoqSessionWorkerProcessTestFactory.GetSessionRepositoryWithAddApplyRange()).InSingletonScope();
-            kernel.Bind<IMasterDataProvider>().ToConstant(MoqSessionWorkerProcessTestFactory.GetOneLessMasterDataProvider());
+            kernel.Bind<ISessionRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetSessionRepositoryWithAddApplyRange()).InSingletonScope();
+            kernel.Bind<IMasterDataProvider>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetOneLessMasterDataProvider());
             kernel.Bind<ISessionChangeRepository>().ToConstant(new Mock<ISessionChangeRepository>().Object);
 
             var process = kernel.Get<SessionWorkerProcess>();
@@ -106,9 +106,9 @@ namespace Server.CoreTests
         {
             // arrange
             var kernel = new StandardKernel();
-            kernel.Bind<IMasterDataProvider>().ToConstant(MoqSessionWorkerProcessTestFactory.GetStandardMasterDataProvider());
-            kernel.Bind<ISessionRepository>().ToConstant(MoqSessionWorkerProcessTestFactory.GetEmptySessionRepository()).InSingletonScope();
-            kernel.Bind<ISessionChangeRepository>().ToConstant(MoqSessionWorkerProcessTestFactory.GetSessionChangeRepository()).InSingletonScope();
+            kernel.Bind<IMasterDataProvider>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetStandardMasterDataProvider());
+            kernel.Bind<ISessionRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetEmptySessionRepository()).InSingletonScope();
+            kernel.Bind<ISessionChangeRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetSessionChangeRepository()).InSingletonScope();
 
             // act
             var process = kernel.Get<SessionWorkerProcess>();

@@ -43,7 +43,7 @@ namespace FunctionalTests
             var repository = new PollerContainer().Get<ISpeakerRepository>();
 
             // act
-            var list = repository.GetAll(sp => sp.FirstName != string.Empty);
+            var list = repository.GetAll(sp => sp.Name != string.Empty);
 
             // assert
             Assert.AreNotEqual(0, list.Count);
@@ -86,7 +86,7 @@ namespace FunctionalTests
             var repository = new PollerContainer().Get<ISpeakerRepository>();
 
             // act
-            var speaker = repository.Get(sp => sp.FirstName != string.Empty);
+            var speaker = repository.Get(sp => sp.Name != string.Empty);
 
             // assert
             Assert.IsNotNull(speaker);
@@ -100,7 +100,7 @@ namespace FunctionalTests
             var repository = new PollerContainer().Get<ISpeakerRepository>();
 
             // act
-            var speaker = repository.Get(sp => sp.FirstName == null);
+            var speaker = repository.Get(sp => sp.Name == null);
 
             // assert
             Assert.IsNull(speaker);

@@ -1,4 +1,5 @@
-﻿using Codemash.Api.Data.Parsing.Impl;
+﻿using Codemash.Api.Data.Parsing;
+using Codemash.Api.Data.Parsing.Impl;
 using Ninject.Modules;
 
 namespace Codemash.Api.Data.Modules
@@ -12,8 +13,11 @@ namespace Codemash.Api.Data.Modules
         /// </summary>
         public override void Load()
         {
-            Bind<RoomParse>().ToSelf().InSingletonScope();
-            Bind<TrackParse>().ToSelf().InSingletonScope();
+            Bind<RoomEnumParse>().ToSelf().InSingletonScope();
+            Bind<TrackEnumParse>().ToSelf().InSingletonScope();
+
+            Bind<ISessionEntityParser>().To<CodemashSessionEntityParser>().InSingletonScope();
+            Bind<ISpeakerEntityParser>().To<CodemashSpeakerEntityParser>().InSingletonScope();
         }
 
         #endregion

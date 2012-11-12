@@ -38,24 +38,24 @@ namespace Codemash.Client.ViewModels
         // behaviors
         public void ShowAllSessions()
         {
-            NavigationService.NavigateToViewModel<SessionsListViewModel>(new GroupingParameter(GroupingType.Alphabetical));
+            NavigationService.Navigate<SessionsListViewModel>(new GroupingParameter(GroupingType.Alphabetical));
         }
 
         public void ShowSessionsByBlock()
         {
-            NavigationService.NavigateToViewModel<SessionsListViewModel>(new GroupingParameter(GroupingType.Block));
+            NavigationService.Navigate<SessionsListViewModel>(new GroupingParameter(GroupingType.Block));
         }
 
         public void ShowSessionsByTrack()
         {
-            NavigationService.NavigateToViewModel<SessionsListViewModel>(new GroupingParameter(GroupingType.Track));
+            NavigationService.Navigate<SessionsListViewModel>(new GroupingParameter(GroupingType.Track));
         }
 
         public void SessionClick(ItemClickEventArgs args)
         {
             var tileData = (SessionView) args.ClickedItem;
             var session = SessionRepository.Get(tileData.SessionId);
-            NavigationService.NavigateToViewModel<SessionDetailViewModel>(new SessionParameter(session));
+            NavigationService.Navigate<SessionDetailViewModel>(new SessionParameter(session));
         }
     }
 }

@@ -20,8 +20,8 @@ namespace DeltaApi.Web.Tests.Factory
                 {
                     var jsonString = reader.ReadToEnd();
                     var jsonArray = JArray.Parse(jsonString);
-                    var trackParser = new TrackParse();
-                    var roomParser = new RoomParse();
+                    var trackParser = new TrackEnumParse();
+                    var roomParser = new RoomEnumParse();
 
                     return (from it in jsonArray.AsJEnumerable()
                             select new Session

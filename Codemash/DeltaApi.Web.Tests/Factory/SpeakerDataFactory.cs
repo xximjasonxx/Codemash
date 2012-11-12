@@ -21,11 +21,9 @@ namespace DeltaApi.Web.Tests.Factory
                         select new Speaker
                         {
                             SpeakerId = sp["SpeakerId"].ToString().AsInt(),
-                            FirstName = sp["FirstName"].ToString(),
-                            LastName = sp["LastName"].ToString(),
+                            Name = sp["FirstName"].ToString(),
                             Biography = sp["Bio"].ToString(),
                             BlogUrl = sp["Url"].ToString(),
-                            Company = sp["Company"].ToString(),
                             EmailAddress = string.Empty,
                             Twitter = sp["Twitter"].ToString()
                         }).Where(sp => sp.Biography != string.Empty).ToList();

@@ -7,6 +7,8 @@ using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Extensions;
 using Codemash.Api.Data.Parsing.Impl;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ninject;
+using Server.CoreTests.Containers;
 using Server.CoreTests.Factory;
 
 namespace Server.CoreTests
@@ -14,10 +16,18 @@ namespace Server.CoreTests
     [TestClass]
     public class CompareExtensionMethodTests
     {
+        private TestDataFactory _dataFactory;
+
+        [TestInitialize]
+        public void Init()
+        {
+            _dataFactory = new TestContainer().Get<TestDataFactory>();
+        }
+
         [TestMethod]
         public void test_when_comparing_two_sessions_whose_values_are_identical_an_empty_dictionary_is_returned()
         {
-            var session = MoqSessionCompareTestFactory.GetStandardSessionList().First();
+            var session = _dataFactory.GetSessions().First();
             var result = session.CompareTo(session);
 
             Assert.AreNotEqual(null, result);
@@ -27,8 +37,8 @@ namespace Server.CoreTests
         [TestMethod]
         public void test_when_comparing_sessions_which_are_different_a_non_empty_dictionary_is_returned()
         {
-            var session1 = MoqSessionCompareTestFactory.GetStandardSessionList().First();
-            var session2 = MoqSessionCompareTestFactory.GetStandardSessionList().First();
+            var session1 = _dataFactory.GetSessions().First();
+            var session2 = _dataFactory.GetSessions().First();
             session2.Title = "Programming Style";
             var result = session2.CompareTo(session1);
 
@@ -39,8 +49,8 @@ namespace Server.CoreTests
         [TestMethod]
         public void test_when_comparing_session_with_different_start_times_the_value_is_properly_translated()
         {
-            var session1 = MoqSessionCompareTestFactory.GetStandardSessionList().First();
-            var session2 = MoqSessionCompareTestFactory.GetStandardSessionList().First();
+            var session1 = _dataFactory.GetSessions().First();
+            var session2 = _dataFactory.GetSessions().First();
             session2.Start = session2.Start.AddHours(1);
 
             var result = session1.CompareTo(session2);
@@ -51,11 +61,11 @@ namespace Server.CoreTests
         [TestMethod]
         public void test_when_comparing_sessions_with_track_differences_the_value_returned_is_correct()
         {
-            var session1 = MoqSessionCompareTestFactory.GetStandardSessionList().First();
-            var session2 = MoqSessionCompareTestFactory.GetStandardSessionList().First();
-            session2.TrackType = Track.ProfessionalDevelopment;
+            var session1 = _dataFactory.GetSessions().First();
+            var session2 = _dataFactory.GetSessions().First();
+            session2.TrackType = Track.Unknown;
 
-            var trackParser = new TrackParse();
+            var trackParser = new TrackEnumParse();
             var result = session1.CompareTo(session2);
             Assert.AreEqual(true, result.ContainsKey("Track"));
             Assert.AreEqual(session1.TrackType, trackParser.Parse(result["Track"], Track.Unknown));
@@ -65,8 +75,8 @@ namespace Server.CoreTests
         public void test_when_comparing_sessions_with_multiple_property_differences_dictionary_has_equivalent_count()
         {
             // test for two differences
-            var session1 = MoqSessionCompareTestFactory.GetStandardSessionList().First();
-            var session2 = MoqSessionCompareTestFactory.GetStandardSessionList().First();
+            var session1 = _dataFactory.GetSessions().First();
+            var session2 = _dataFactory.GetSessions().First();
 
             session2.Title = "This is a Test";
             session2.Start = session1.Start.AddDays(-1);

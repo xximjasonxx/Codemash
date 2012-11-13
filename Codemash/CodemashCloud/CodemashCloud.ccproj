@@ -63,5 +63,11 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Client Deploy' ">
     <OutputPath>bin\Client Deploy\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Web Build' ">
+    <OutputPath>bin\Web Build\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Cloud Server' ">
+    <OutputPath>bin\Cloud Server\</OutputPath>
+  </PropertyGroup>
   <Import Project="$(CloudExtensionsDir)Microsoft.WindowsAzure.targets" />
 </Project>

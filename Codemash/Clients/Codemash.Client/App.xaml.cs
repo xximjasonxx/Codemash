@@ -7,7 +7,6 @@ using Codemash.Client.Components.Impl;
 using Codemash.Client.Data.Repository;
 using Codemash.Client.Data.Repository.Impl;
 using Codemash.Client.Parameters;
-using Codemash.Client.ViewModels;
 using Codemash.Client.Views;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Search;
@@ -66,6 +65,23 @@ namespace Codemash.Client
             DisplayRootView<SplashView>();
         }
 
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            if (args.Kind == ActivationKind.Launch)
+            {
+                OnLaunched((LaunchActivatedEventArgs) args);
+                return;
+            }
+
+            if (args.Kind == ActivationKind.Search)
+            {
+                OnSearchActivated((SearchActivatedEventArgs) args);
+                return;
+            }
+
+            base.OnActivated(args);
+        }
+
         #region Contracts
 
         protected override void OnWindowCreated(WindowCreatedEventArgs args)
@@ -78,18 +94,18 @@ namespace Codemash.Client
 
             // assign the events
             searchPane.ShowOnKeyboardInput = true;
-            searchPane.QuerySubmitted += searchPane_QuerySubmitted;
-            settingsPane.CommandsRequested += settingsPane_CommandsRequested;
+            searchPane.QuerySubmitted += SearchPane_QuerySubmitted;
+            settingsPane.CommandsRequested += SettingsPane_CommandsRequested;
         }
 
-        void settingsPane_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        void SettingsPane_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
         {
             UICommandInvokedHandler handler = OnSettingsPaneCommand;
             SettingsCommand privacyCommand = new SettingsCommand(Settings.Privacy, "Privacy Policy", handler);
             args.Request.ApplicationCommands.Add(privacyCommand);
         }
 
-        private void searchPane_QuerySubmitted(SearchPane sender, SearchPaneQuerySubmittedEventArgs args)
+        private void SearchPane_QuerySubmitted(SearchPane sender, SearchPaneQuerySubmittedEventArgs args)
         {
             var navService = (INavigationService) _container.GetInstance(typeof (INavigationService), null);
             navService.Navigate(typeof(SearchResultsView), new SearchTextParameter(args.QueryText));

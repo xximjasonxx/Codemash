@@ -55,11 +55,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codemash.Client.Core", "Cod
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Phone", "Phone", "{3E677B4A-F535-4DF0-B4B7-1801363059F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codemash.Phone7.Core", "Clients\Codemash.Phone7.Core\Codemash.Phone7.Core.csproj", "{AC927FCB-6DAB-43BC-9A2F-97C5E7B62A28}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codemash.Phone7.Data", "Clients\Codemash.Phone7.Data\Codemash.Phone7.Data.csproj", "{B85F9B9E-A393-4ACE-81A7-CA1F213373A4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codemash.Phone7.App", "Clients\Codemash.Phone7.App\Codemash.Phone7.App.csproj", "{D059BEA3-E7A2-4065-9357-45CDC2F389BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

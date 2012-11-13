@@ -23,7 +23,7 @@ namespace Server.CoreTests.Factory
                 var jsonString = reader.ReadToEnd();
                 var array = JArray.Parse(jsonString);
 
-                return (from it in array.AsJEnumerable()
+                return (from it in array.AsEnumerable()
                         select SessionEntityParser.Parse(it.ToString())).ToList();
             }
         }
@@ -35,7 +35,7 @@ namespace Server.CoreTests.Factory
                 var jsonString = reader.ReadToEnd();
                 var jsonArray = JArray.Parse(jsonString);
 
-                return (from sp in jsonArray.AsJEnumerable()
+                return (from sp in jsonArray.AsEnumerable()
                         select SpeakerEntityParser.Parse(sp.ToString())).Where(sp => sp.Biography != string.Empty).ToList();
             }
         }

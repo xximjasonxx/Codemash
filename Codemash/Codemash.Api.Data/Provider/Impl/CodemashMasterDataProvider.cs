@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
 using Codemash.Api.Data.Entities;
-using Codemash.Api.Data.Extensions;
 using Codemash.Api.Data.Parsing;
-using Codemash.Api.Data.Parsing.Impl;
-using Codemash.Server.Core;
-using Codemash.Server.Core.Extensions;
 using Newtonsoft.Json.Linq;
 using Ninject;
 
@@ -34,7 +28,7 @@ namespace Codemash.Api.Data.Provider.Impl
             var jsonString = client.DownloadString(downloadUrl);
             var jsonArray = JArray.Parse(jsonString);
 
-            return (from it in jsonArray.AsJEnumerable()
+            return (from it in jsonArray.AsEnumerable()
                     select SessionEntityParser.Parse(it.ToString())).ToList();
         }
 
@@ -48,7 +42,7 @@ namespace Codemash.Api.Data.Provider.Impl
             var jsonString = client.DownloadString(downloadUrl);
             var jsonArray = JArray.Parse(jsonString);
 
-            return (from it in jsonArray.AsJEnumerable()
+            return (from it in jsonArray.AsEnumerable()
                     select SpeakerEntityParser.Parse(it.ToString())).ToList();
         }
 

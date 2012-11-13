@@ -12,7 +12,7 @@ namespace Codemash.Phone.Data.Repository.Impl
 
         protected override string DownloadUrl
         {
-            get { return "http://dl.dropbox.com/u/13029365/codemash_speakers.json"; }
+            get { return "http://codemashdelta.azurewebsites.net/api/Speaker"; }
         }
 
         protected override Speaker CreateObject(JToken jToken)

@@ -611,7 +611,6 @@ Global
 		{B8A8C8AA-5E89-4AD2-A529-B0AAB3128D65}.ARM Deploy|x64.ActiveCfg = Release|Any CPU
 		{B8A8C8AA-5E89-4AD2-A529-B0AAB3128D65}.ARM Deploy|x86.ActiveCfg = Release|Any CPU
 		{B8A8C8AA-5E89-4AD2-A529-B0AAB3128D65}.Client Deploy|Any CPU.ActiveCfg = Release|Any CPU
-		{B8A8C8AA-5E89-4AD2-A529-B0AAB3128D65}.Client Deploy|Any CPU.Build.0 = Release|Any CPU
 		{B8A8C8AA-5E89-4AD2-A529-B0AAB3128D65}.Client Deploy|ARM.ActiveCfg = Release|Any CPU
 		{B8A8C8AA-5E89-4AD2-A529-B0AAB3128D65}.Client Deploy|x64.ActiveCfg = Release|Any CPU
 		{B8A8C8AA-5E89-4AD2-A529-B0AAB3128D65}.Client Deploy|x86.ActiveCfg = Release|Any CPU
@@ -656,8 +655,6 @@ Global
 		{96F26054-8E92-4DA9-9C73-E0BCEE91ECAB}.ARM Deploy|x86.Build.0 = Release|x86
 		{96F26054-8E92-4DA9-9C73-E0BCEE91ECAB}.ARM Deploy|x86.Deploy.0 = Release|x86
 		{96F26054-8E92-4DA9-9C73-E0BCEE91ECAB}.Client Deploy|Any CPU.ActiveCfg = Release|Any CPU
-		{96F26054-8E92-4DA9-9C73-E0BCEE91ECAB}.Client Deploy|Any CPU.Build.0 = Release|Any CPU
-		{96F26054-8E92-4DA9-9C73-E0BCEE91ECAB}.Client Deploy|Any CPU.Deploy.0 = Release|Any CPU
 		{96F26054-8E92-4DA9-9C73-E0BCEE91ECAB}.Client Deploy|ARM.ActiveCfg = Release|ARM
 		{96F26054-8E92-4DA9-9C73-E0BCEE91ECAB}.Client Deploy|ARM.Build.0 = Release|ARM
 		{96F26054-8E92-4DA9-9C73-E0BCEE91ECAB}.Client Deploy|ARM.Deploy.0 = Release|ARM
@@ -727,7 +724,6 @@ Global
 		{87B49B5A-E0EA-4EAB-94D5-AC4F6877804B}.ARM Deploy|x64.ActiveCfg = Release|Any CPU
 		{87B49B5A-E0EA-4EAB-94D5-AC4F6877804B}.ARM Deploy|x86.ActiveCfg = Release|Any CPU
 		{87B49B5A-E0EA-4EAB-94D5-AC4F6877804B}.Client Deploy|Any CPU.ActiveCfg = Release|Any CPU
-		{87B49B5A-E0EA-4EAB-94D5-AC4F6877804B}.Client Deploy|Any CPU.Build.0 = Release|Any CPU
 		{87B49B5A-E0EA-4EAB-94D5-AC4F6877804B}.Client Deploy|ARM.ActiveCfg = Release|Any CPU
 		{87B49B5A-E0EA-4EAB-94D5-AC4F6877804B}.Client Deploy|x64.ActiveCfg = Release|Any CPU
 		{87B49B5A-E0EA-4EAB-94D5-AC4F6877804B}.Client Deploy|x86.ActiveCfg = Release|Any CPU
@@ -768,8 +764,6 @@ Global
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.ARM Deploy|x64.ActiveCfg = Release|Any CPU
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.ARM Deploy|x86.ActiveCfg = Release|Any CPU
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.Client Deploy|Any CPU.ActiveCfg = Release|Any CPU
-		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.Client Deploy|Any CPU.Build.0 = Release|Any CPU
-		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.Client Deploy|Any CPU.Deploy.0 = Release|Any CPU
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.Client Deploy|ARM.ActiveCfg = Release|Any CPU
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.Client Deploy|x64.ActiveCfg = Release|Any CPU
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.Client Deploy|x86.ActiveCfg = Release|Any CPU

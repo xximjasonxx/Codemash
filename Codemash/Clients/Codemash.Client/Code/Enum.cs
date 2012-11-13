@@ -9,7 +9,8 @@
     {
         Alphabetical,
         Track,
-        Block
+        Block,
+        Room
     }
 
     public enum DisplayModeType

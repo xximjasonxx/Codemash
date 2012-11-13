@@ -29,7 +29,7 @@ namespace Codemash.Client.ViewModels
             await LoadRepositoriesAsync();
             
             // navigate
-            NavigationService.NavigateToViewModel<MainViewModel>();
+            NavigationService.Navigate(typeof(Views.MainView));
         }
 
         // attributes

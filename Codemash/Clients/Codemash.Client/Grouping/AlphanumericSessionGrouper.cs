@@ -10,22 +10,15 @@ namespace Codemash.Client.Grouping
 {
     public class AlphanumericSessionGrouper : IGroupSessions
     {
-        private readonly IList<Session> _sessionList; 
-
-        public AlphanumericSessionGrouper(IList<Session> sessionList)
-        {
-            _sessionList = sessionList;
-        }
-
         #region Implementation of IGroupSessions
 
         /// <summary>
         /// Returns the group list as dictated by the underlying implementation
         /// </summary>
         /// <returns></returns>
-        public IList<SessionGroup> GetGroupedList()
+        public IList<SessionGroup> GetGroupedSessions(IEnumerable<Session> sessionList)
         {
-            var groupedSet = GetGroupedSet(_sessionList);
+            var groupedSet = GetGroupedSet(sessionList);
             return groupedSet.Select(kv => new SessionGroup(kv.Key, kv.Value)).OrderBy(sg => sg.Title).ToList();
         }
 

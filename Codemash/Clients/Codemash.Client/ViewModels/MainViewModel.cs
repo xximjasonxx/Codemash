@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Caliburn.Micro;
 using Codemash.Client.Code;
 using Codemash.Client.Components;
-using Codemash.Client.Core;
 using Codemash.Client.Data.Repository;
 using Codemash.Client.DataModels;
 using Codemash.Client.Parameters;
@@ -38,24 +36,29 @@ namespace Codemash.Client.ViewModels
         // behaviors
         public void ShowAllSessions()
         {
-            NavigationService.Navigate<SessionsListViewModel>(new GroupingParameter(GroupingType.Alphabetical));
+            NavigationService.Navigate(typeof(Views.SessionsListView), new GroupingParameter(GroupingType.Alphabetical));
         }
 
         public void ShowSessionsByBlock()
         {
-            NavigationService.Navigate<SessionsListViewModel>(new GroupingParameter(GroupingType.Block));
+            NavigationService.Navigate(typeof(Views.SessionsListView), new GroupingParameter(GroupingType.Block));
         }
 
         public void ShowSessionsByTrack()
         {
-            NavigationService.Navigate<SessionsListViewModel>(new GroupingParameter(GroupingType.Track));
+            NavigationService.Navigate(typeof(Views.SessionsListView), new GroupingParameter(GroupingType.Track));
+        }
+
+        public void ShowSessionsByRoom()
+        {
+            NavigationService.Navigate(typeof (Views.SessionsListView), new GroupingParameter(GroupingType.Room));
         }
 
         public void SessionClick(ItemClickEventArgs args)
         {
             var tileData = (SessionView) args.ClickedItem;
             var session = SessionRepository.Get(tileData.SessionId);
-            NavigationService.Navigate<SessionDetailViewModel>(new SessionParameter(session));
+            NavigationService.Navigate(typeof(Views.SessionDetailView), new SessionParameter(session));
         }
     }
 }

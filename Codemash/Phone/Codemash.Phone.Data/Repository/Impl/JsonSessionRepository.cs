@@ -13,7 +13,7 @@ namespace Codemash.Phone.Data.Repository.Impl
 
         protected override string DownloadUrl
         {
-            get { return "http://dl.dropbox.com/u/13029365/codemash_sessions.json"; }
+            get { return "http://codemashdelta.azurewebsites.net/api/Session"; }
         }
 
         protected override Session CreateObject(JToken jToken)

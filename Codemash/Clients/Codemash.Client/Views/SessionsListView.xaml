@@ -75,4 +75,39 @@
             </SemanticZoom.ZoomedOutView>
         </SemanticZoom>
     </Grid>
+
+    <app:LayoutAwarePage.TopAppBar>
+        <AppBar Background="{StaticResource CodemashOrange}" x:Name="AppBar">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="All Sessions" Margin="5,0,10,0" Template="{StaticResource AppBarButtonTemplate}" Click="DismissAppBar">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <cal:ActionMessage MethodName="ShowAllSessions" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Content="By Block" Margin="0,0,10,0" Template="{StaticResource AppBarButtonTemplate}" Click="DismissAppBar">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <cal:ActionMessage MethodName="ShowSessionsByBlock" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Content="By Technology" Margin="0,0,10,0" Template="{StaticResource AppBarButtonTemplate}" Click="DismissAppBar">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <cal:ActionMessage MethodName="ShowSessionsByTrack" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Content="By Room" Margin="10,0,10,0" Template="{StaticResource AppBarButtonTemplate}" Click="DismissAppBar">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <cal:ActionMessage MethodName="ShowSessionsByRoom" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+        </AppBar>
+    </app:LayoutAwarePage.TopAppBar>
 </app:LayoutAwarePage>

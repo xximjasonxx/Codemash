@@ -80,10 +80,17 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
-                <Button Content="By Technology" Template="{StaticResource AppBarButtonTemplate}">
+                <Button Content="By Technology" Margin="0,0,10,0" Template="{StaticResource AppBarButtonTemplate}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <cal:ActionMessage MethodName="ShowSessionsByTrack" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Content="By Room" Margin="10,0,10,0" Template="{StaticResource AppBarButtonTemplate}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <cal:ActionMessage MethodName="ShowSessionsByRoom" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>

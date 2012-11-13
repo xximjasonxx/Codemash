@@ -80,7 +80,7 @@ namespace Codemash.Client.Data.Repository.Impl
 
         protected override string DownloadUrl
         {
-            get { return "http://dl.dropbox.com/u/13029365/codemash_sessions.json"; }
+            get { return "http://codemashdelta.azurewebsites.net/api/Session"; }
         }
 
         protected override Session CreateEntity(JToken jToken)
@@ -88,12 +88,14 @@ namespace Codemash.Client.Data.Repository.Impl
             return new Session
                        {
                            Abstract = new StringWrapper(jToken["Abstract"]).ToString(),
-                           Difficulty = new StringWrapper(jToken["Difficulty"]).ToString(),
-                           SessionId = new StringWrapper(jToken["Title"]).ToString().AsKey(),
-                           SpeakerId = new StringWrapper(jToken["SpeakerName"]).ToString().AsKey(),
-                           Technology = new StringWrapper(jToken["Technology"]).ToString(),
+                           Difficulty = new StringWrapper(jToken["Level"]).ToString(),
+                           SessionId = new StringWrapper(jToken["SessionId"]).ToString().AsInt(),
+                           SpeakerId = new StringWrapper(jToken["SpeakerId"]).ToString().AsInt(),
+                           Room = new StringWrapper(jToken["Room"]).ToString(),
+                           Technology = new StringWrapper(jToken["Track"]).ToString(),
                            Title = new StringWrapper(jToken["Title"]).ToString(),
-                           Starts = new StringWrapper(jToken["Start"]).ToString().AsDateTime(true)
+                           Starts = new StringWrapper(jToken["Start"]).ToString().AsDateTime(),
+                           Ends = new StringWrapper(jToken["End"]).ToString().AsDateTime()
                        };
         }
 

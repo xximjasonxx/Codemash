@@ -42,5 +42,10 @@ namespace Codemash.Client.Views
                 PageTitle.TextWrapping = TextWrapping.Wrap;
             }
         }
+
+        private void DismissAppBar(object sender, RoutedEventArgs e)
+        {
+            AppBar.IsOpen = false;
+        }
     }
 }

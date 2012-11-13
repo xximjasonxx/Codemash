@@ -116,6 +116,7 @@
     <Compile Include="DataModels\SessionGroup.cs" />
     <Compile Include="DataModels\SessionView.cs" />
     <Compile Include="DataModels\SpeakerDetailModel.cs" />
+    <Compile Include="Grouping\RoomSessionGrouper.cs" />
     <Compile Include="Parameters\SearchTextParameter.cs" />
     <Compile Include="ViewModels\MapViewModel.cs" />
     <Compile Include="ViewModels\PrivacyViewModel.cs" />

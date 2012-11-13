@@ -72,7 +72,7 @@ namespace Codemash.Client.ViewModels
 
         public void ViewMap()
         {
-            NavigationService.NavigateToViewModel<MapViewModel>();
+            NavigationService.Navigate(typeof(Views.MapView));
         }
 
         public void GoBlog()

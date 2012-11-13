@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Codemash.Client.Code;
 using Codemash.Client.Core;
 using Codemash.Client.Data.Entities;
 using Codemash.Client.DataModels;
@@ -10,23 +9,16 @@ namespace Codemash.Client.Grouping
 {
     public class BlockSessionGrouper : IGroupSessions
     {
-        private readonly IList<Session> _sessionList;
-
-        public BlockSessionGrouper(IList<Session> sessionList)
-        {
-            _sessionList = sessionList;
-        }
-
         #region Implementation of IGroupSessions
 
         /// <summary>
         /// Returns the group list as dictated by the underlying implementation
         /// </summary>
         /// <returns></returns>
-        public IList<SessionGroup> GetGroupedList()
+        public IList<SessionGroup> GetGroupedSessions(IEnumerable<Session> sessionList)
         {
             Regex regex = new Regex(@"\w");
-            var groupedSet = (from s in _sessionList
+            var groupedSet = (from s in sessionList
                               orderby s.Starts
                               group s by s.Starts.AsBlockDisplay() into BlockSessions
                               select new

@@ -31,8 +31,8 @@ namespace Codemash.Client.ViewModels
         {
             get
             {
-                var grouper = GroupSessionFactory.GetSessionGrouperInstance(SessionRepository.GetAll(), Parameter.GroupingType);
-                return new ObservableCollection<SessionGroup>(grouper.GetGroupedList());
+                var grouper = GroupSessionFactory.GetSessionGrouperInstance(Parameter.GroupingType);
+                return new ObservableCollection<SessionGroup>(grouper.GetGroupedSessions(SessionRepository.GetAll()));
             }
         } 
 
@@ -48,6 +48,8 @@ namespace Codemash.Client.ViewModels
                         return "All Sessions by Block";
                     case GroupingType.Track:
                         return "All Sessions by Tech";
+                    case GroupingType.Room:
+                        return "All Sessions by Room";
                 }
 
                 throw new InvalidOperationException("Could not determine Grouping Type");
@@ -61,8 +63,48 @@ namespace Codemash.Client.ViewModels
             if (listItem.SessionId != 0)
             {
                 var session = SessionRepository.Get(listItem.SessionId);
-                NavigationService.NavigateToViewModel<SessionDetailViewModel>(new SessionParameter(session));
+                NavigationService.Navigate(typeof(Views.SessionDetailView), new SessionParameter(session));
             }
+        }
+
+        public void ShowAllSessions()
+        {
+            if (Parameter.GroupingType != GroupingType.Alphabetical)
+            {
+                UpdateListing(GroupingType.Alphabetical);
+            }
+        }
+
+        public void ShowSessionsByBlock()
+        {
+            if (Parameter.GroupingType != GroupingType.Block)
+            {
+                UpdateListing(GroupingType.Block);
+            }
+        }
+
+        public void ShowSessionsByTrack()
+        {
+            if (Parameter.GroupingType != GroupingType.Track)
+            {
+                UpdateListing(GroupingType.Track);
+            }
+        }
+
+        public void ShowSessionsByRoom()
+        {
+            if (Parameter.GroupingType != GroupingType.Room)
+            {
+                UpdateListing(GroupingType.Room);
+            }
+        }
+
+        // methods
+        private void UpdateListing(GroupingType groupingType)
+        {
+            Parameter = new GroupingParameter(groupingType);
+            NotifyOfPropertyChange("PageTitle");
+            NotifyOfPropertyChange("ListSource");
         }
     }
 }

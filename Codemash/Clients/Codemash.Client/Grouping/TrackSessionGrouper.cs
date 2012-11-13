@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Codemash.Client.Code;
 using Codemash.Client.Data.Entities;
 using Codemash.Client.DataModels;
 
@@ -12,23 +8,16 @@ namespace Codemash.Client.Grouping
 {
     public class TrackSessionGrouper : IGroupSessions
     {
-        private readonly IList<Session> _sessions; 
-
-        public TrackSessionGrouper(IList<Session> sessionList)
-        {
-            _sessions = sessionList;
-        }
-
         #region Implementation of IGroupSessions
 
         /// <summary>
         /// Returns the group list as dictated by the underlying implementation
         /// </summary>
         /// <returns></returns>
-        public IList<SessionGroup> GetGroupedList()
+        public IList<SessionGroup> GetGroupedSessions(IEnumerable<Session> sessionList)
         {
             Regex regex = new Regex(@"\w");
-            var groupedSet = (from s in _sessions
+            var groupedSet = (from s in sessionList
                               orderby s.Technology
                               group s by s.Technology
                               into TrackGrouping

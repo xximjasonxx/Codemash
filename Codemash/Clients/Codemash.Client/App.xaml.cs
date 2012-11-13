@@ -92,7 +92,7 @@ namespace Codemash.Client
         private void searchPane_QuerySubmitted(SearchPane sender, SearchPaneQuerySubmittedEventArgs args)
         {
             var navService = (INavigationService) _container.GetInstance(typeof (INavigationService), null);
-            navService.Navigate<SearchResultsViewModel>(new SearchTextParameter(args.QueryText));
+            navService.Navigate(typeof(SearchResultsView), new SearchTextParameter(args.QueryText));
 
             Window.Current.Activate();
         }
@@ -101,7 +101,7 @@ namespace Codemash.Client
         {
             var cmd = (Settings) command.Id;
             var navService = (INavigationService)_container.GetInstance(typeof(INavigationService), null);
-            navService.Navigate<PrivacyViewModel>();
+            navService.Navigate(typeof (PrivacyView));
         }
 
         /// <summary>
@@ -114,15 +114,5 @@ namespace Codemash.Client
         }
 
         #endregion
-
-        protected override void OnSuspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
-        {
-            base.OnSuspending(sender, e);
-        }
-
-        protected override void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            base.OnUnhandledException(sender, e);
-        }
     }
 }

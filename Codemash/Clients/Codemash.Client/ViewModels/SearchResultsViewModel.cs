@@ -45,7 +45,7 @@ namespace Codemash.Client.ViewModels
             if (item != null)
             {
                 var session = SessionRepository.Get(item.SessionId);
-                NavigationService.NavigateToViewModel<SessionDetailViewModel>(new SessionParameter(session));
+                NavigationService.Navigate(typeof(Views.SessionDetailView), new SessionParameter(session));
             }
         }
     }

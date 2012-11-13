@@ -13,7 +13,7 @@ namespace Codemash.Client.Data.Repository.Impl
 
         protected override string DownloadUrl
         {
-            get { return "http://dl.dropbox.com/u/13029365/codemash_speakers.json"; }
+            get { return "http://codemashdelta.azurewebsites.net/api/Speaker"; }
         }
 
         protected override Speaker CreateEntity(JToken ji)
@@ -22,9 +22,9 @@ namespace Codemash.Client.Data.Repository.Impl
                        {
                            Name = new StringWrapper(ji["Name"]).ToString(),
                            Biography = new StringWrapper(ji["Biography"]).ToString(),
-                           BlogUrl = new StringWrapper(ji["BlogURL"]).ToString(),
-                           Twitter = new StringWrapper(ji["TwitterHandle"]).ToString(),
-                           SpeakerId = new StringWrapper(ji["Name"]).ToString().AsKey()
+                           BlogUrl = new StringWrapper(ji["BlogUrl"]).ToString(),
+                           Twitter = new StringWrapper(ji["Twitter"]).ToString(),
+                           SpeakerId = new StringWrapper(ji["SpeakerId"]).ToString().AsInt()
                        };
         }
 

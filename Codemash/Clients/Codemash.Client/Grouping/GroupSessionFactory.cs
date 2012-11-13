@@ -1,22 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using Codemash.Client.Code;
-using Codemash.Client.Data.Entities;
 
 namespace Codemash.Client.Grouping
 {
     public static class GroupSessionFactory
     {
-        public static IGroupSessions GetSessionGrouperInstance(IList<Session> sessionList, GroupingType groupingType)
+        public static IGroupSessions GetSessionGrouperInstance(GroupingType groupingType)
         {
             switch (groupingType)
             {
                 case GroupingType.Alphabetical:
-                    return new AlphanumericSessionGrouper(sessionList);
+                    return new AlphanumericSessionGrouper();
                 case GroupingType.Track:
-                    return new TrackSessionGrouper(sessionList);
+                    return new TrackSessionGrouper();
                 case GroupingType.Block:
-                    return new BlockSessionGrouper(sessionList);
+                    return new BlockSessionGrouper();
+                case GroupingType.Room:
+                    return new RoomSessionGrouper();
                 default:
                     throw new InvalidOperationException("Invalid Grouping Type");
             }

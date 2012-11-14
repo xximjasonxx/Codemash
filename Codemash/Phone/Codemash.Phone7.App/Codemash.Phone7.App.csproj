@@ -111,19 +111,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\CodemashBootstrapper.cs" />
-    <Compile Include="Common\CodemashContainer.cs" />
-    <Compile Include="Common\Enum.cs" />
-    <Compile Include="DataModels\SessionDetailView.cs" />
-    <Compile Include="DataModels\SessionGroup.cs" />
-    <Compile Include="DataModels\SessionListView.cs" />
-    <Compile Include="DataModels\SpeakerDetailView.cs" />
-    <Compile Include="Grouping\ByBlockGroup.cs" />
-    <Compile Include="Grouping\ByNameGroup.cs" />
-    <Compile Include="Grouping\ByRoomGroup.cs" />
-    <Compile Include="Grouping\ByTechGroup.cs" />
-    <Compile Include="Grouping\GroupingFactory.cs" />
-    <Compile Include="Grouping\IGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -200,6 +187,10 @@
     <ProjectReference Include="..\Codemash.Phone.Data\Codemash.Phone.Data.csproj">
       <Project>{B8A8C8AA-5E89-4AD2-A529-B0AAB3128D65}</Project>
       <Name>Codemash.Phone.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Codemash.Phone.Shared\Codemash.Phone.Shared.csproj">
+      <Project>{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}</Project>
+      <Name>Codemash.Phone.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

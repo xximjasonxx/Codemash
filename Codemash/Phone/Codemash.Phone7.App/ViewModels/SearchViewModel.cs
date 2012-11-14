@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Caliburn.Micro;
 using Codemash.Phone.Data.Repository;
-using Codemash.Phone7.App.DataModels;
+using Codemash.Phone.Shared.DataModels;
 using Ninject;
 
 namespace Codemash.Phone7.App.ViewModels

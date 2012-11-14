@@ -2,11 +2,12 @@
     x:Class="Codemash.Phone7.App.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:app="clr-namespace:Codemash.Phone7.App.Common" xmlns:s="clr-namespace:System;assembly=mscorlib">
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:shared="clr-namespace:Codemash.Phone.Shared.Common;assembly=Codemash.Phone.Shared">
 
     <!--Application Resources-->
     <Application.Resources>
-        <app:CodemashBootstrapper x:Key="bootstrapper" />
+        <shared:CodemashBootstrapper x:Key="bootstrapper" />
 
         <s:String x:Key="ChevronGlyph">&#xE26B;</s:String>
 

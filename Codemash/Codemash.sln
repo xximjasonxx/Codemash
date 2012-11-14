@@ -63,6 +63,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codemash.Phone.Core", "Phon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codemash.Phone7.App", "Phone\Codemash.Phone7.App\Codemash.Phone7.App.csproj", "{D059BEA3-E7A2-4065-9357-45CDC2F389BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codemash.Phone.Shared", "Phone\Codemash.Phone.Shared\Codemash.Phone.Shared.csproj", "{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		ARM Deploy|Any CPU = ARM Deploy|Any CPU
@@ -883,6 +885,51 @@ Global
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.Web Build|ARM.ActiveCfg = Release|Any CPU
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.Web Build|x64.ActiveCfg = Release|Any CPU
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD}.Web Build|x86.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.ARM Deploy|Any CPU.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.ARM Deploy|Any CPU.Build.0 = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.ARM Deploy|ARM.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.ARM Deploy|x64.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.ARM Deploy|x86.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Client Deploy|Any CPU.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Client Deploy|Any CPU.Build.0 = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Client Deploy|ARM.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Client Deploy|x64.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Client Deploy|x86.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Cloud Server Package|Any CPU.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Cloud Server Package|Any CPU.Build.0 = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Cloud Server Package|ARM.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Cloud Server Package|x64.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Cloud Server Package|x86.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Cloud Server|Any CPU.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Cloud Server|Any CPU.Build.0 = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Cloud Server|ARM.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Cloud Server|x64.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Cloud Server|x86.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Phone 7 Build|Any CPU.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Phone 7 Build|Any CPU.Build.0 = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Phone 7 Build|ARM.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Phone 7 Build|x64.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Phone 7 Build|x86.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Phone 8 Build|Any CPU.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Phone 8 Build|Any CPU.Build.0 = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Phone 8 Build|ARM.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Phone 8 Build|x64.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Phone 8 Build|x86.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Release|ARM.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Release|x64.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Release|x86.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Web Build|Any CPU.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Web Build|Any CPU.Build.0 = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Web Build|ARM.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Web Build|x64.ActiveCfg = Release|Any CPU
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE}.Web Build|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -906,5 +953,6 @@ Global
 		{96F26054-8E92-4DA9-9C73-E0BCEE91ECAB} = {3E677B4A-F535-4DF0-B4B7-1801363059F6}
 		{87B49B5A-E0EA-4EAB-94D5-AC4F6877804B} = {3E677B4A-F535-4DF0-B4B7-1801363059F6}
 		{D059BEA3-E7A2-4065-9357-45CDC2F389BD} = {3E677B4A-F535-4DF0-B4B7-1801363059F6}
+		{15815D68-E50F-49C1-8AB5-AF65DAA75CAE} = {3E677B4A-F535-4DF0-B4B7-1801363059F6}
 	EndGlobalSection
 EndGlobal

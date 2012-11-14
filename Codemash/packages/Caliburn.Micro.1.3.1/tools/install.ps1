@@ -18,9 +18,10 @@ $defaultNamespace = $project.Properties.Item("DefaultNamespace").Value
 
 ls $contentSource | foreach-object { 
 	$content = [System.IO.File]::ReadAllText($_.FullName)
-	$content = $content.Replace('Codemash.Client', $defaultNamespace)
+	$content = $content.Replace('Codemash.Phone8.App', $defaultNamespace)
 	$content | out-file -Encoding UTF8 $_.FullName
 	$project.ProjectItems.AddFromFileCopy($_.FullName)
 }
 
 $project.DTE.ItemOperations.Navigate('http://caliburnmicro.codeplex.com/wikipage?title=Nuget')
+

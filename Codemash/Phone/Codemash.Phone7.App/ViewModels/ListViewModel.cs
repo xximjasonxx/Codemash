@@ -6,9 +6,9 @@ using System.Windows.Controls;
 using Caliburn.Micro;
 using Codemash.Phone.Core;
 using Codemash.Phone.Data.Repository;
-using Codemash.Phone7.App.Common;
-using Codemash.Phone7.App.DataModels;
-using Codemash.Phone7.App.Grouping;
+using Codemash.Phone.Shared.Common;
+using Codemash.Phone.Shared.DataModels;
+using Codemash.Phone.Shared.Grouping;
 using Ninject;
 
 namespace Codemash.Phone7.App.ViewModels

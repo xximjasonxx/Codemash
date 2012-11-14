@@ -18,14 +18,16 @@ namespace Codemash.Client.Data.Repository.Impl
 
         protected override Speaker CreateEntity(JToken ji)
         {
-            return new Speaker
-                       {
-                           Name = new StringWrapper(ji["Name"]).ToString(),
-                           Biography = new StringWrapper(ji["Biography"]).ToString(),
-                           BlogUrl = new StringWrapper(ji["BlogUrl"]).ToString(),
-                           Twitter = new StringWrapper(ji["Twitter"]).ToString(),
-                           SpeakerId = new StringWrapper(ji["SpeakerId"]).ToString().AsInt()
-                       };
+            var speaker = new Speaker
+                              {
+                                  Name = new StringWrapper(ji["Name"]).ToString(),
+                                  Biography = new StringWrapper(ji["Biography"]).ToString(),
+                                  BlogUrl = new StringWrapper(ji["BlogUrl"]).ToString(),
+                                  Twitter = new StringWrapper(ji["Twitter"]).ToString(),
+                                  SpeakerId = new StringWrapper(ji["SpeakerId"]).ToString().AsInt()
+                              };
+
+            return speaker;
         }
 
         /// <summary>

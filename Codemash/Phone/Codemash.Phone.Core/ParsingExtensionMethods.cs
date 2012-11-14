@@ -6,16 +6,6 @@ namespace Codemash.Phone.Core
     public static class ParsingExtensionMethods
     {
         /// <summary>
-        /// Takes a string and parses it a unique key value
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        public static int AsKey(this string str)
-        {
-            return str.GetHashCode();
-        }
-
-        /// <summary>
         /// Convert a string to its int representation, return MinValue if the parse fails
         /// </summary>
         /// <param name="str"></param>
@@ -45,7 +35,13 @@ namespace Codemash.Phone.Core
         public static DateTime AsDateTime(this string str)
         {
             DateTime dtVal;
-            return DateTime.TryParse(str, out dtVal) ? dtVal : DateTime.MinValue;
+            if (!DateTime.TryParse(str, out dtVal) || dtVal == DateTime.MinValue)
+                return DateTime.MinValue;
+
+            dtVal = DateTime.SpecifyKind(DateTime.Parse(str), DateTimeKind.Utc);
+
+            // account for GMT Offset (EST -5)
+            return dtVal.ToLocalTime();
         }
     }
 }

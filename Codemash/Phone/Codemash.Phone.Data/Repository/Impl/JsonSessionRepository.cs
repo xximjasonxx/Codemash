@@ -23,8 +23,8 @@ namespace Codemash.Phone.Data.Repository.Impl
                               {
                                   Abstract = new StringWrapper(jToken["Abstract"]).ToString(),
                                   Difficulty = new StringWrapper(jToken["Level"]).ToString(),
-                                  SessionId = new StringWrapper(jToken["Title"]).ToString().AsKey(),
-                                  SpeakerId = new StringWrapper(jToken["SpeakerName"]).ToString().AsKey(),
+                                  SessionId = new StringWrapper(jToken["SessionId"]).ToString().AsInt(),
+                                  SpeakerId = new StringWrapper(jToken["SpeakerId"]).ToString().AsInt(),
                                   Technology = new StringWrapper(jToken["Track"]).ToString(),
                                   Title = new StringWrapper(jToken["Title"]).ToString(),
                                   Starts = new StringWrapper(jToken["Start"]).ToString(),

@@ -17,14 +17,16 @@ namespace Codemash.Phone.Data.Repository.Impl
 
         protected override Speaker CreateObject(JToken jToken)
         {
-            return new Speaker
-                       {
-                           Biography = new StringWrapper(jToken["Biography"]).ToString(),
-                           BlogUrl = new StringWrapper(jToken["BlogUrl"]).ToString(),
-                           Name = new StringWrapper(jToken["Name"]).ToString(),
-                           Twitter = new StringWrapper(jToken["Twitter"]).ToString(),
-                           SpeakerId = new StringWrapper(jToken["SpeakerId"]).ToString().AsInt()
-                       };
+            var speaker = new Speaker
+                              {
+                                  Biography = new StringWrapper(jToken["Biography"]).ToString(),
+                                  BlogUrl = new StringWrapper(jToken["BlogUrl"]).ToString(),
+                                  Name = new StringWrapper(jToken["Name"]).ToString(),
+                                  Twitter = new StringWrapper(jToken["Twitter"]).ToString(),
+                                  SpeakerId = new StringWrapper(jToken["SpeakerId"]).ToString().AsInt()
+                              };
+
+            return speaker;
         }
 
         /// <summary>

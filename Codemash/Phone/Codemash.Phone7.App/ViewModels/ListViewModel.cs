@@ -63,6 +63,8 @@ namespace Codemash.Phone7.App.ViewModels
                         return "by block";
                     case SessionGroupType.ByName:
                         return "by name";
+                    case SessionGroupType.ByRoom:
+                        return "by room";
                 }
 
                 throw new InvalidOperationException("Unable to determine grouping type");

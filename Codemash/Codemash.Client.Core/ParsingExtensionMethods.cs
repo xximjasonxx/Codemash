@@ -13,7 +13,13 @@ namespace Codemash.Client.Core
         public static DateTime AsDateTime(this string str)
         {
             DateTime dtVal;
-            return DateTime.TryParse(str, out dtVal) ? dtVal : DateTime.MinValue;
+            if (!DateTime.TryParse(str, out dtVal) || dtVal == DateTime.MinValue)
+                return DateTime.MinValue;
+
+            dtVal = DateTime.SpecifyKind(DateTime.Parse(str), DateTimeKind.Utc);
+
+            // account for GMT Offset (EST -5)
+            return dtVal.ToLocalTime();
         }
     }
 }

@@ -31,10 +31,5 @@ namespace Codemash.Client.Core
         {
             return dt.ToString("ddd") + " " + dt.ToString("h:mmt").ToLower();
         }
-
-        public static string AsDateTimeDisplay(this DateTime dt)
-        {
-            return dt.ToString("M/d") + " " + dt.AsTimeDisplay();
-        }
     }
 }

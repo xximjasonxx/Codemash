@@ -85,18 +85,20 @@ namespace Codemash.Client.Data.Repository.Impl
 
         protected override Session CreateEntity(JToken jToken)
         {
-            return new Session
-                       {
-                           Abstract = new StringWrapper(jToken["Abstract"]).ToString(),
-                           Difficulty = new StringWrapper(jToken["Level"]).ToString(),
-                           SessionId = new StringWrapper(jToken["SessionId"]).ToString().AsInt(),
-                           SpeakerId = new StringWrapper(jToken["SpeakerId"]).ToString().AsInt(),
-                           Room = new StringWrapper(jToken["Room"]).ToString(),
-                           Technology = new StringWrapper(jToken["Track"]).ToString(),
-                           Title = new StringWrapper(jToken["Title"]).ToString(),
-                           Starts = new StringWrapper(jToken["Start"]).ToString().AsDateTime(),
-                           Ends = new StringWrapper(jToken["End"]).ToString().AsDateTime()
-                       };
+            var session = new Session
+                              {
+                                  Abstract = new StringWrapper(jToken["Abstract"]).ToString(),
+                                  Difficulty = new StringWrapper(jToken["Level"]).ToString(),
+                                  SessionId = new StringWrapper(jToken["SessionId"]).ToString().AsInt(),
+                                  SpeakerId = new StringWrapper(jToken["SpeakerId"]).ToString().AsInt(),
+                                  Room = new StringWrapper(jToken["Room"]).ToString(),
+                                  Technology = new StringWrapper(jToken["Track"]).ToString(),
+                                  Title = new StringWrapper(jToken["Title"]).ToString(),
+                                  Starts = new StringWrapper(jToken["Start"]).ToString().AsDateTime(),
+                                  Ends = new StringWrapper(jToken["End"]).ToString().AsDateTime()
+                              };
+
+            return session;
         }
 
         #endregion

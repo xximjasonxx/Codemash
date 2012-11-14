@@ -53,6 +53,9 @@
                     <TextBlock Text="STARTS AT" Style="{StaticResource ItemHeaderText}" />
                     <TextBlock Text="{Binding Session.StartsAt}" Style="{StaticResource ItemValueText}" Margin="0,0,0,20" />
 
+                    <TextBlock Text="DURATION" Style="{StaticResource ItemHeaderText}" />
+                    <TextBlock Text="{Binding Session.Duration}" Style="{StaticResource ItemValueText}" Margin="0,0,0,20" />
+
                     <TextBlock Text="SPEAKER" Style="{StaticResource ItemHeaderText}" />
                     <TextBlock Text="{Binding Session.Speaker.Name}" Style="{StaticResource ItemValueText}" Margin="0,0,0,20" />
 

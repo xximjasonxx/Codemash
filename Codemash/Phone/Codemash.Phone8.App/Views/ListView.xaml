@@ -26,15 +26,42 @@
 
             <TextBlock Text="{Binding PageTitle}" Foreground="{StaticResource CodemashOrange}"
                    FontFamily="Segoe WP" FontSize="45" Grid.Row="0" />
-            <phone:LongListSelector Grid.Row="1" ItemsSource="{Binding SessionList}" ItemTemplate="{StaticResource SessionListItemTemplate}"
-                                 Background="Transparent" IsGroupingEnabled="True" LayoutMode="List">
-                <phone:LongListSelector.ListHeaderTemplate>
+            <phone:LongListSelector Grid.Row="1" ItemsSource="{Binding SessionList}"
+                                 Background="Transparent" IsGroupingEnabled="True">
+                <phone:LongListSelector.GroupHeaderTemplate>
                     <DataTemplate>
-                        <Border Background="{StaticResource CodemashOrange}" Margin="2,6" Padding="7,2">
-                            <TextBlock Text="{Binding Title}" FontSize="40" Foreground="White"/>
-                        </Border>
+                        <TextBlock Foreground="Red" Text="{Binding Title}" />
                     </DataTemplate>
-                </phone:LongListSelector.ListHeaderTemplate>
+                </phone:LongListSelector.GroupHeaderTemplate>
+
+                <phone:LongListSelector.JumpListStyle>
+                    <Style TargetType="phone:LongListSelector">
+                        <Setter Property="ItemTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <Border Background="Red"
+                                                Margin="6" tk:TiltEffect.IsTiltEnabled="True">
+                                        <TextBlock Text="{Binding Title}" 
+                                                            FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                                            FontSize="48"
+                                                            Margin="12,0,0,0"
+                                                            Foreground="White" 
+                                                            VerticalAlignment="Bottom"/>
+                                    </Border>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="GridCellSize" Value="111,111"/>
+                        <Setter Property="Margin" Value="12,6,0,0"/>
+                    </Style>
+                </phone:LongListSelector.JumpListStyle>
+
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Foreground="Black" Text="{Binding Title}" />
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+                
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <cal:ActionMessage MethodName="SelectionChanged">

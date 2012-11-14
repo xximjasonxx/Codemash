@@ -36,16 +36,12 @@ namespace Codemash.Phone8.App.ViewModels
             {
                 var grouper = GroupingFactory.GetGroupInstance(GroupingType);
                 var dictionary = grouper.Group(SessionRepository.GetAllSessions());
-                var result = dictionary.Select(d => new SessionGroup
-                                                        {
-                                                            Title = d.Key,
-                                                            Items = d.Value.Select(s => new SessionListView
+                var result = dictionary.Select(d => new SessionGroup(d.Key, d.Value.Select(s => new SessionListView
                                                                                             {
                                                                                                 Title = s.Title,
                                                                                                 SessionId = s.SessionId,
                                                                                                 StartsAt = s.Starts.AsDateTime().AsTimeDisplay()
-                                                                                            }).ToList()
-                                                        }).ToList();
+                                                                                            }).ToList())).ToList();
 
                 return result.OrderBy(r => r.Title);
             }

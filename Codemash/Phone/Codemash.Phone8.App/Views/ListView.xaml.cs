@@ -2,9 +2,9 @@
 
 namespace Codemash.Phone8.App.Views
 {
-    public partial class SplashView : PhoneApplicationPage
+    public partial class ListView : PhoneApplicationPage
     {
-        public SplashView()
+        public ListView()
         {
             InitializeComponent();
         }

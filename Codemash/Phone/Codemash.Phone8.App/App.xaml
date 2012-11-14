@@ -6,6 +6,64 @@
 
     <Application.Resources>
         <shared:CodemashBootstrapper x:Key="bootstrapper" />
+
+        <s:String x:Key="ChevronGlyph">&#xE26B;</s:String>
+
+        <!-- Solid Color Brushes -->
+        <SolidColorBrush x:Key="CodemashOrange" Color="#FFFB8102" />
+        <SolidColorBrush x:Key="CodemashLightOrange" Color="#FFFFAE00" />
+        <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#ffeeeeee" />
+        <SolidColorBrush x:Key="TextGrayBrush" Color="#ff555555" />
+
+        <!-- Templates -->
+        <DataTemplate x:Key="MainViewPanoramaTitle">
+            <StackPanel Orientation="Horizontal" Height="170">
+                <Image Source="/Assets/codemash_logo.jpg" VerticalAlignment="Bottom" Height="95" />
+                <ContentPresenter Height="100" VerticalAlignment="Bottom">
+                    <Border VerticalAlignment="Center">
+                        <TextBlock Text="{Binding}" Foreground="{StaticResource CodemashOrange}" FontSize="86.667" VerticalAlignment="Center" Margin="0"
+                                   FontFamily="Segoe WP" />
+                    </Border>
+                </ContentPresenter>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SessionListItemTemplate">
+            <Border Margin="5,0,5,30">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Foreground="{StaticResource TextGrayBrush}"
+                               FontSize="40" FontFamily="Segoe WP" Text="{Binding Title}" />
+
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="NoWrap" Foreground="{StaticResource TextGrayBrush}"
+                               FontSize="30" FontFamily="Segoe WP" Text="{Binding StartsAt}" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MainViewPanoramaHeader">
+            <ContentPresenter>
+                <TextBlock Text="{Binding}" Foreground="{StaticResource CodemashLightOrange}"
+                                   FontSize="50" FontFamily="Segoe WP"/>
+            </ContentPresenter>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SessionDetailTitleTemplate">
+            <Border>
+                <ContentPresenter>
+                    <TextBlock Text="{Binding}" Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP"
+                                       FontSize="32" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="0,0,10,0" />
+                </ContentPresenter>
+            </Border>
+        </DataTemplate>
+
+        <ControlTemplate TargetType="Button" x:Key="TextButtonTemplate">
+            <ContentPresenter>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe WP" FontSize="35"
+                               Text="{TemplateBinding Content}" TextDecorations="Underline" />
+                </StackPanel>
+            </ContentPresenter>
+        </ControlTemplate>
     </Application.Resources>
 
 </Application>

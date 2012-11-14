@@ -9,6 +9,7 @@ using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.Common;
 using Codemash.Phone.Shared.DataModels;
 using Codemash.Phone.Shared.Grouping;
+using Microsoft.Phone.Controls;
 using Ninject;
 
 namespace Codemash.Phone8.App.ViewModels
@@ -30,7 +31,7 @@ namespace Codemash.Phone8.App.ViewModels
         }
 
         // attributes
-        public IEnumerable<SessionGroup> SessionList
+        public IList<SessionGroup> SessionList
         {
             get
             {
@@ -43,9 +44,13 @@ namespace Codemash.Phone8.App.ViewModels
                                                                                                 StartsAt = s.Starts.AsDateTime().AsTimeDisplay()
                                                                                             }).ToList())).ToList();
 
-                return result.OrderBy(r => r.Title);
+                var finalList = result.OrderBy(r => r.Key).ToList();
+                return finalList;
             }
         }
+
+        public bool ShowList { get { return GroupingType != SessionGroupType.ByName; } }
+        public bool ShowGrid { get { return GroupingType == SessionGroupType.ByName; } }
 
         public string PageTitle
         {

@@ -32,7 +32,7 @@
                 <tk:LongListSelector.GroupHeaderTemplate>
                     <DataTemplate>
                         <Border Background="{StaticResource CodemashOrange}" Margin="2,6" Padding="7,2">
-                            <TextBlock Text="{Binding Title}" FontSize="40" Foreground="White"/>
+                            <TextBlock Text="{Binding Key}" FontSize="40" Foreground="White"/>
                         </Border>
                     </DataTemplate>
                 </tk:LongListSelector.GroupHeaderTemplate>
@@ -40,7 +40,7 @@
                     <DataTemplate>
                         <Border Background="{StaticResource CodemashOrange}" Margin="6" MinWidth="99" Height="99"
                                 Padding="7">
-                            <TextBlock Text="{Binding Title}" FontSize="40" Foreground="White"
+                            <TextBlock Text="{Binding Key}" FontSize="40" Foreground="White"
                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </DataTemplate>

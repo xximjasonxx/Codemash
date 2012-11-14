@@ -43,7 +43,7 @@ namespace Codemash.Phone7.App.ViewModels
                                                                                                 StartsAt = s.Starts.AsDateTime().AsTimeDisplay()
                                                                                             }))).ToList();
 
-                return result.OrderBy(r => r.Title);
+                return result.OrderBy(r => r.Key);
             }
         }
 

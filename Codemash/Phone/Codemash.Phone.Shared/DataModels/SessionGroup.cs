@@ -5,11 +5,11 @@ namespace Codemash.Phone.Shared.DataModels
 {
     public class SessionGroup : List<SessionListView>
     {
-        public string Title { get; private set; }
+        public string Key { get; private set; }
 
         public SessionGroup(string title, IEnumerable<SessionListView> items)
         {
-            Title = title;
+            Key = title;
             AddRange(items);
         }
     }

@@ -17,6 +17,10 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
+    <phone:PhoneApplicationPage.Resources>
+        <cal:BooleanToVisibilityConverter x:Key="visibilityConverter" />
+    </phone:PhoneApplicationPage.Resources>
+
     <Border Padding="7,0,7,0" Background="{StaticResource ApplicationBackgroundBrush}">
         <Grid>
             <Grid.RowDefinitions>
@@ -26,49 +30,67 @@
 
             <TextBlock Text="{Binding PageTitle}" Foreground="{StaticResource CodemashOrange}"
                    FontFamily="Segoe WP" FontSize="45" Grid.Row="0" />
-            <phone:LongListSelector Grid.Row="1" ItemsSource="{Binding SessionList}"
-                                 Background="Transparent" IsGroupingEnabled="True">
+
+            <!-- Used when we want to show the JumpList as a Grid -->
+            <phone:LongListSelector Grid.Row="1"
+                Visibility="{Binding ShowGrid, Converter={StaticResource visibilityConverter}}"
+                IsGroupingEnabled="true" HideEmptyGroups="true"
+                ItemsSource="{Binding SessionList}" Background="Transparent"
+                ItemTemplate="{StaticResource SessionListItemTemplate}">
                 <phone:LongListSelector.GroupHeaderTemplate>
                     <DataTemplate>
-                        <TextBlock Foreground="Red" Text="{Binding Title}" />
+                        <Border Background="{StaticResource CodemashOrange}" Margin="2,6" Padding="7,2">
+                            <TextBlock Text="{Binding Key}" FontSize="40" Foreground="White"/>
+                        </Border>
                     </DataTemplate>
                 </phone:LongListSelector.GroupHeaderTemplate>
-
                 <phone:LongListSelector.JumpListStyle>
                     <Style TargetType="phone:LongListSelector">
                         <Setter Property="ItemTemplate">
                             <Setter.Value>
                                 <DataTemplate>
-                                    <Border Background="Red"
-                                                Margin="6" tk:TiltEffect.IsTiltEnabled="True">
-                                        <TextBlock Text="{Binding Title}" 
-                                                            FontFamily="{StaticResource PhoneFontFamilySemiBold}"
-                                                            FontSize="48"
-                                                            Margin="12,0,0,0"
-                                                            Foreground="White" 
-                                                            VerticalAlignment="Bottom"/>
+                                    <Border Background="{StaticResource CodemashOrange}" Margin="6" Padding="7">
+                                        <TextBlock Text="{Binding Key}" FontSize="40" Foreground="White"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                 </DataTemplate>
                             </Setter.Value>
                         </Setter>
-                        <Setter Property="GridCellSize" Value="111,111"/>
-                        <Setter Property="Margin" Value="12,6,0,0"/>
+                        <Setter Property="LayoutMode" Value="Grid" />
+                        <Setter Property="GridCellSize" Value="99,99"/>
                     </Style>
                 </phone:LongListSelector.JumpListStyle>
+            </phone:LongListSelector>
 
-                <phone:LongListSelector.ItemTemplate>
+            <!-- Used when we want to show the JumpList as a List -->
+            <phone:LongListSelector Grid.Row="1"
+                Visibility="{Binding ShowList, Converter={StaticResource visibilityConverter}}"
+                IsGroupingEnabled="true" HideEmptyGroups="true"
+                ItemsSource="{Binding SessionList}" Background="Transparent"
+                ItemTemplate="{StaticResource SessionListItemTemplate}">
+                <phone:LongListSelector.GroupHeaderTemplate>
                     <DataTemplate>
-                        <TextBlock Foreground="Black" Text="{Binding Title}" />
+                        <Border Background="{StaticResource CodemashOrange}" Margin="2,6" Padding="7,2">
+                            <TextBlock Text="{Binding Key}" FontSize="40" Foreground="White"/>
+                        </Border>
                     </DataTemplate>
-                </phone:LongListSelector.ItemTemplate>
-                
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <cal:ActionMessage MethodName="SelectionChanged">
-                            <cal:Parameter Value="$eventArgs" />
-                        </cal:ActionMessage>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
+                </phone:LongListSelector.GroupHeaderTemplate>
+                <phone:LongListSelector.JumpListStyle>
+                    <Style TargetType="phone:LongListSelector">
+                        <Setter Property="ItemTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <Border Background="{StaticResource CodemashOrange}" Margin="6" Padding="7">
+                                        <TextBlock Text="{Binding Key}" FontSize="35" Foreground="White"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="LayoutMode" Value="List" />
+                        <Setter Property="GridCellSize" Value="110,140"/>
+                    </Style>
+                </phone:LongListSelector.JumpListStyle>
             </phone:LongListSelector>
         </Grid>
     </Border>

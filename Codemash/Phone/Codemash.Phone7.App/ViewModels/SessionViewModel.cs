@@ -34,7 +34,7 @@ namespace Codemash.Phone7.App.ViewModels
                                              {
                                                  Title = session.Title,
                                                  Technology = session.Technology,
-                                                 Starts = session.Starts.AsBlockDisplay(),
+                                                 Starts = session.Starts.AsDateTime().AsBlockDisplay(),
                                                  Duration = session.Duration.AsFullDurationString(),
                                                  Difficulty = session.Difficulty,
                                                  Room = session.Room,

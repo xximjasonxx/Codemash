@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Linq.Mapping;
+using Codemash.Phone.Core;
 
 namespace Codemash.Phone.Data.Entities
 {
@@ -19,16 +20,13 @@ namespace Codemash.Phone.Data.Entities
         public string Technology { get; set; }
 
         [Column(CanBeNull = false)]
-        public string EventType { get; set; }
+        public string Room { get; set; }
 
         [Column(CanBeNull = false)]
-        public string Room { get { return "Indigo"; } set { } }
+        public string Starts { get; set; }
 
-        [Column(CanBeNull = false, DbType = "datetime")]
-        public DateTime Starts { get { return DateTime.Now; } set { } }
-
-        [Column(CanBeNull = false, DbType = "datetime")]
-        public DateTime Ends { get { return DateTime.Now.AddHours(1); } set { } }
+        [Column(CanBeNull = false)]
+        public string Ends { get; set; }
 
         [Column(IsPrimaryKey = true, CanBeNull = false, DbType = "int")]
         public int SessionId { get; set; }
@@ -38,7 +36,7 @@ namespace Codemash.Phone.Data.Entities
 
         public TimeSpan Duration
         {
-            get { return Ends - Starts; }
+            get { return Ends.AsDateTime() - Starts.AsDateTime(); }
         }
 
         #region Overrides of EntityBase

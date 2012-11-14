@@ -15,6 +15,8 @@ namespace Codemash.Phone7.App.Grouping
                     return new ByBlockGroup();
                 case SessionGroupType.ByName:
                     return new ByNameGroup();
+                case SessionGroupType.ByRoom:
+                    return new ByRoomGroup();
             }
 
             throw new InvalidOperationException("Unable to determine grouping type");

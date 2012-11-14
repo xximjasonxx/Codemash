@@ -20,10 +20,10 @@ namespace Codemash.Phone.Data.Repository.Impl
             return new Speaker
                        {
                            Biography = new StringWrapper(jToken["Biography"]).ToString(),
-                           BlogUrl = new StringWrapper(jToken["BlogURL"]).ToString(),
+                           BlogUrl = new StringWrapper(jToken["BlogUrl"]).ToString(),
                            Name = new StringWrapper(jToken["Name"]).ToString(),
-                           Twitter = new StringWrapper(jToken["TwitterHandle"]).ToString(),
-                           SpeakerId = new StringWrapper(jToken["SpeakerURI"]).ToString().AsKey()
+                           Twitter = new StringWrapper(jToken["Twitter"]).ToString(),
+                           SpeakerId = new StringWrapper(jToken["SpeakerId"]).ToString().AsInt()
                        };
         }
 

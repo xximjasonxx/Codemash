@@ -38,8 +38,8 @@ namespace Codemash.Api.Data.Parsing.Impl
                            TrackType = TrackParser.Parse(new StringWrapper(jToken["Technology"]).ToString(), Track.Unknown),
                            RoomType = RoomParser.Parse(new StringWrapper(jToken["Room"]).ToString(), Room.Unknown),
                            Title = new StringWrapper(jToken["Title"]).ToString(),
-                           Start = new StringWrapper(jToken["Start"]).ToString().AsDateTime(true),
-                           End = new StringWrapper(jToken["End"]).ToString().AsDateTime(true)
+                           Start = new StringWrapper(jToken["Start"]).ToString().AsDateTime(),
+                           End = new StringWrapper(jToken["End"]).ToString().AsDateTime()
                        };
 
             return session;

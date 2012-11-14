@@ -75,5 +75,8 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Phone 8 Build' ">
     <OutputPath>bin\Phone 8 Build\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Cloud Server Package' ">
+    <OutputPath>bin\Cloud Server Package\</OutputPath>
+  </PropertyGroup>
   <Import Project="$(CloudExtensionsDir)Microsoft.WindowsAzure.targets" />
 </Project>

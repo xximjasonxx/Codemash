@@ -17,10 +17,10 @@ namespace Codemash.Phone7.App.Grouping
         public IDictionary<string, IList<Session>> Group(IList<Session> sessionList)
         {
             var groupedSessions = (from s in sessionList
-                                   group s by s.Starts.AsBlockDisplay() into GroupedSessions
+                                   group s by s.Starts.AsDateTime().AsBlockDisplay() into GroupedSessions
                                    select new
                                               {
-                                                  Key = GroupedSessions.Key,
+                                                  GroupedSessions.Key,
                                                   Value = GroupedSessions
                                               }).ToList();
 

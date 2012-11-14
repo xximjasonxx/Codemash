@@ -36,6 +36,8 @@
                             Name="AllByBlock" />
                     <Button Content="by tech" Margin="0,0,0,30" Template="{StaticResource TextButtonTemplate}"
                             Name="AllByTech" />
+                    <Button Content="by room" Margin="0,0,0,30" Template="{StaticResource TextButtonTemplate}"
+                            Name="AllByRoom" />
                 </StackPanel>
             </controls:PanoramaItem>
         </controls:Panorama>

@@ -20,18 +20,13 @@ namespace Codemash.Server.Core.Extensions
         /// </summary>
         /// <param name="str">The string to be parsed to a DateTime instance</param>
         /// <returns>A parsed DateTime instance</returns>
-        public static DateTime AsDateTime(this string str, bool isZulu = false)
+        public static DateTime AsDateTime(this string str)
         {
             DateTime dtVal;
             if (!DateTime.TryParse(str, out dtVal))
                 return DateTime.MinValue;
-
-            if (isZulu)
-            {
-                dtVal = DateTime.SpecifyKind(DateTime.Parse(str), DateTimeKind.Utc).ToLocalTime();
-            }
-
-            return dtVal;
+            
+            return DateTime.SpecifyKind(DateTime.Parse(str), DateTimeKind.Utc);
         }
 
         /// <summary>

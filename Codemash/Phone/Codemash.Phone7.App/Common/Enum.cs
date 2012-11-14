@@ -11,6 +11,7 @@ namespace Codemash.Phone7.App.Common
     {
         ByBlock,
         ByName,
-        ByTech
+        ByTech,
+        ByRoom
     }
 }

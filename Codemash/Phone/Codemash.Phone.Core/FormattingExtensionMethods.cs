@@ -30,7 +30,7 @@ namespace Codemash.Phone.Core
 
         public static string AsTimeDisplay(this DateTime dt)
         {
-            return dt.ToString("h:mmt").ToLower();
+            return dt.ToString("ddd") + " " + dt.ToString("h:mmt").ToLower();
         }
 
         public static string AsFullDurationString(this TimeSpan ts)

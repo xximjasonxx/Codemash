@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Codemash.Phone.Core
 {
     public static class ParsingExtensionMethods
@@ -33,6 +35,17 @@ namespace Codemash.Phone.Core
         {
             bool boolVal;
             return bool.TryParse(str, out boolVal) ? boolVal : defaultValue;
+        }
+
+        /// <summary>
+        /// Convert a string to its DateTime representation or the Minimum Allowable Value
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static DateTime AsDateTime(this string str)
+        {
+            DateTime dtVal;
+            return DateTime.TryParse(str, out dtVal) ? dtVal : DateTime.MinValue;
         }
     }
 }

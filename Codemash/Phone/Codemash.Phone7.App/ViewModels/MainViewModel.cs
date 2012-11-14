@@ -31,7 +31,7 @@ namespace Codemash.Phone7.App.ViewModels
                                                                                           {
                                                                                               SessionId = s.SessionId,
                                                                                               Title = s.Title,
-                                                                                              StartsAt = s.Starts.AsTimeDisplay()
+                                                                                              StartsAt = s.Starts.AsDateTime().AsTimeDisplay()
                                                                                           }));
             }
         }
@@ -66,6 +66,12 @@ namespace Codemash.Phone7.App.ViewModels
         public void AllByTech()
         {
             NavigationService.UriFor<ListViewModel>().WithParam(l => l.GroupingType, SessionGroupType.ByTech)
+                .Navigate();
+        }
+
+        public void AllByRoom()
+        {
+            NavigationService.UriFor<ListViewModel>().WithParam(l => l.GroupingType, SessionGroupType.ByRoom)
                 .Navigate();
         }
 

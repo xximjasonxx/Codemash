@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Codemash.Phone.Core;
 using Codemash.Phone.Data.Common;
@@ -18,16 +19,20 @@ namespace Codemash.Phone.Data.Repository.Impl
 
         protected override Session CreateObject(JToken jToken)
         {
-            return new Session()
-                       {
-                           Abstract = new StringWrapper(jToken["Abstract"]).ToString(),
-                           Difficulty = new StringWrapper(jToken["Difficulty"]).ToString(),
-                           EventType = new StringWrapper(jToken["EventType"]).ToString(),
-                           SessionId = new StringWrapper(jToken["URI"]).ToString().AsKey(),
-                           SpeakerId = new StringWrapper(jToken["SpeakerURI"]).ToString().AsKey(),
-                           Technology = new StringWrapper(jToken["Technology"]).ToString(),
-                           Title = new StringWrapper(jToken["Title"]).ToString()
-                       };
+            var session = new Session()
+                              {
+                                  Abstract = new StringWrapper(jToken["Abstract"]).ToString(),
+                                  Difficulty = new StringWrapper(jToken["Level"]).ToString(),
+                                  SessionId = new StringWrapper(jToken["Title"]).ToString().AsKey(),
+                                  SpeakerId = new StringWrapper(jToken["SpeakerName"]).ToString().AsKey(),
+                                  Technology = new StringWrapper(jToken["Track"]).ToString(),
+                                  Title = new StringWrapper(jToken["Title"]).ToString(),
+                                  Starts = new StringWrapper(jToken["Start"]).ToString(),
+                                  Ends = new StringWrapper(jToken["End"]).ToString(),
+                                  Room = new StringWrapper(jToken["Room"]).ToString()
+                              };
+
+            return session;
         }
 
         /// <summary>
@@ -37,6 +42,16 @@ namespace Codemash.Phone.Data.Repository.Impl
         {
             if (Repository.Count(it => it.IsDirty) > 0)
             {
+                // debug
+                var bad = (from s in Repository
+                           group s by s.SessionId
+                           into Groups
+                           select new
+                                      {
+                                          Groups.Key,
+                                          Count = Groups.Count()
+                                      }).Where(g => g.Count > 1).ToList();
+
                 using (var db = GetContext())
                 {
                     foreach (var item in Repository.Where(it => it.IsDirty))
@@ -69,7 +84,14 @@ namespace Codemash.Phone.Data.Repository.Impl
         /// </summary>
         public IList<Session> GetUpcomingSessions()
         {
-            return Repository.Take(10).ToList();
+            var blocks = Repository.Select(s => s.Starts.AsDateTime()).Distinct().ToList();
+            if (blocks.Count(d => d >= DateTime.Now) == 0)
+            {
+                return new List<Session>();
+            }
+
+            var upcomingBlock = blocks.OrderBy(d => d).FirstOrDefault(d => d >= DateTime.Now);
+            return Repository.Where(s => s.Starts.AsDateTime() == upcomingBlock).OrderBy(s => s.Title).ToList();
         }
 
         /// <summary>

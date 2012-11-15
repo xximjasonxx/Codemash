@@ -26,7 +26,7 @@ namespace Server.CoreTests
             var masterSessionList = _dataFactory.GetSessions();
             var localSessionList = _dataFactory.GetSessions();
 
-            var changesList = masterSessionList.Compare<Session, SessionChange>(localSessionList);
+            var changesList = masterSessionList.Compare(localSessionList);
             Assert.AreNotEqual(null, changesList);
             Assert.AreEqual(0, changesList.Count);
         }
@@ -41,7 +41,7 @@ namespace Server.CoreTests
             // modify the title
             session.Title = "This is a Test";
 
-            var changesList = masterList.Compare<Session, SessionChange>(childList);
+            var changesList = masterList.Compare(childList);
             Assert.AreNotEqual(0, changesList.Count);
         }
 
@@ -56,7 +56,7 @@ namespace Server.CoreTests
             childList[1].Abstract = "I am a new abstract";
             childList[1].Start = childList[1].Start.AddHours(1);
 
-            var differences = masterList.Compare<Session, SessionChange>(childList);
+            var differences = masterList.Compare(childList);
             Assert.AreEqual(4, differences.Count);
         }
 
@@ -69,7 +69,7 @@ namespace Server.CoreTests
             // remove the first session
             masterList.RemoveAt(0);
 
-            var differences = masterList.Compare<Session, SessionChange>(localList);
+            var differences = masterList.Compare(localList);
             Assert.AreNotEqual(0, differences.Count);
         }
 
@@ -82,7 +82,7 @@ namespace Server.CoreTests
             // remove the first session from local
             localList.RemoveAt(0);
 
-            var differences = masterList.Compare<Session, SessionChange>(localList);
+            var differences = masterList.Compare(localList);
             Assert.AreNotEqual(0, differences.Count);
         }
     }

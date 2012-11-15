@@ -11,8 +11,8 @@ namespace Codemash.Poller.Container
         public PollerContainer()
         {
             // bind the worker process
-            Bind<IProcess>().To<SessionWorkerProcess>().InSingletonScope().Named("Session");
-            Bind<IProcess>().To<SpeakerWorkerProcess>().InSingletonScope().Named("Speaker");
+            Bind<ISynchronize>().To<SessionSynchronize>().InSingletonScope().Named("Session");
+            Bind<ISynchronize>().To<SpeakerSynchronize>().InSingletonScope().Named("Speaker");
 
             // define all external modules
             var dataProviderModule = new DataProviderNinjectModule();

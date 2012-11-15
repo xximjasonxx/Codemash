@@ -135,11 +135,10 @@
     <Compile Include="MasterDataProviderFunctionalTests.cs" />
     <Compile Include="ModelInitializationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadSessionChangeRepositoryIntegrationTests.cs" />
+    <Compile Include="ReadChangesRepositoryIntegrationTests.cs" />
     <Compile Include="ReadSessionRepositoryIntegrationTests.cs" />
-    <Compile Include="ReadSpeakerChangeRepositoryIntegrationTests.cs" />
     <Compile Include="ReadSpeakerRepositoryIntegrationTests.cs" />
-    <Compile Include="WriteSessionChangeRepositoryIntegrationTests.cs" />
+    <Compile Include="WriteChangeRepositoryIntegrationTests.cs" />
     <Compile Include="WriteSessionRepositoryIntegrationTests.cs" />
     <Compile Include="WriteSpeakerRepositoryIntegrationTests.cs" />
   </ItemGroup>

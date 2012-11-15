@@ -6,31 +6,8 @@ using Codemash.Server.Core.Extensions;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {
-    public class EfSessionChangeRepository : ISessionChangeRepository
+    public class EfChangeRepository : IChangeRepository
     {
-        #region Implementation of IWriteRepository<SessionChange,int>
-
-        /// <summary>
-        /// Commit all changes in the repository
-        /// </summary>
-        public void SaveRange(IEnumerable<SessionChange> entityList)
-        {
-            int version = 1;
-            using (var context = new CodemashContext())
-            {
-                // determine the highest present version
-                if (context.SessionChanges.Any())
-                    version = context.SessionChanges.Max(sc => sc.Version) + 1;
-
-                entityList.ToList().Apply(sc => sc.Version = version);
-
-                entityList.ToList().ForEach(sc => context.SessionChanges.Add(sc));
-                context.SaveChanges();
-            }
-        }
-
-        #endregion
-
         #region Implementation of IReadRepository<SessionChange,int>
 
         /// <summary>
@@ -38,9 +15,9 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public SessionChange Get(int id)
+        public Change Get(int id)
         {
-            return Get(sc => sc.SessionChangeId == id);
+            return Get(sc => sc.ChangeId == id);
         }
 
         /// <summary>
@@ -48,11 +25,11 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         /// <param name="condition">The condition passed as a lambda predicate</param>
         /// <returns></returns>
-        public SessionChange Get(Func<SessionChange, bool> condition)
+        public Change Get(Func<Change, bool> condition)
         {
             using (var context = new CodemashContext())
             {
-                return context.SessionChanges.FirstOrDefault(condition);
+                return context.Changes.FirstOrDefault(condition);
             }
         }
 
@@ -60,11 +37,11 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// Return all items in the Repository
         /// </summary>
         /// <returns></returns>
-        public IList<SessionChange> GetAll()
+        public IList<Change> GetAll()
         {
             using (var context = new CodemashContext())
             {
-                return context.SessionChanges.ToList();
+                return context.Changes.ToList();
             }
         }
 
@@ -73,7 +50,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         /// <param name="condition">A condition passed as a lambda predicate</param>
         /// <returns></returns>
-        public IList<SessionChange> GetAll(Func<SessionChange, bool> condition)
+        public IList<Change> GetAll(Func<Change, bool> condition)
         {
             using (var context = new CodemashContext())
             {
@@ -88,26 +65,26 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <param name="context"></param>
         /// <param name="condition"></param>
         /// <returns></returns>
-        private static IList<SessionChange> GetAll(CodemashContext context, Func<SessionChange, bool> condition)
+        private static IList<Change> GetAll(CodemashContext context, Func<Change, bool> condition)
         {
-            return context.SessionChanges.Where(condition).ToList();
+            return context.Changes.Where(condition).ToList();
         }
 
         /// <summary>
         /// Return the SessionChanges as part of the latest version of changes
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<SessionChange> GetLatest()
+        public IEnumerable<Change> GetLatest()
         {
             using (var context = new CodemashContext())
             {
                 // if no sessions exist, return an empty list
-                if (!context.SessionChanges.Any())
-                    return new List<SessionChange>();
+                if (!context.Changes.Any())
+                    return new List<Change>();
 
                 // latest version is
-                var version = context.SessionChanges.Max(sc => sc.Version);
-                return GetAll(context, sc => sc.Version == version);
+                var version = context.Changes.Max(sc => sc.Changeset);
+                return GetAll(context, sc => sc.Changeset == version);
             }
         }
 
@@ -116,9 +93,35 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// </summary>
         /// <param name="version">The version of changes to get</param>
         /// <returns></returns>
-        public IEnumerable<SessionChange> GetAll(int version)
+        public IEnumerable<Change> GetAll(int version)
         {
-            return GetAll(sc => sc.Version == version);
+            return GetAll(sc => sc.Changeset == version);
+        }
+
+        #endregion
+
+        #region Implementation of IWriteRepository<Change,int>
+
+        /// <summary>
+        /// Commit all changes in the repository
+        /// </summary>
+        public void SaveRange(IEnumerable<Change> entityList)
+        {
+            // establish the changeset number
+            int changeset = 1;
+            using (var context = new CodemashContext())
+            {
+                if (context.Changes.Any())
+                    changeset = context.Changes.Max(c => c.Changeset) + 1;
+
+                foreach (var change in entityList)
+                {
+                    change.Changeset = changeset;
+                    context.Changes.Add(change);
+                }
+
+                context.SaveChanges();
+            }
         }
 
         #endregion

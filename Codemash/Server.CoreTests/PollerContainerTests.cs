@@ -42,25 +42,25 @@ namespace Server.CoreTests
         [TestMethod]
         public void test_poller_container_can_retrieve_instance_of_poller_worker_process()
         {
-            Assert.AreNotEqual(null, TheContainer.TryGet<SessionWorkerProcess>());
+            Assert.AreNotEqual(null, TheContainer.TryGet<SessionSynchronize>());
         }
 
         [TestMethod]
         public void test_poller_container_properly_resolves_the_session_worker_process()
         {
-            Assert.IsInstanceOfType(TheContainer.Get<IProcess>("Session", new IParameter[0]), typeof(SessionWorkerProcess));
+            Assert.IsInstanceOfType(TheContainer.Get<ISynchronize>("Session", new IParameter[0]), typeof(SessionSynchronize));
         }
 
         [TestMethod]
         public void test_poller_container_properly_resolves_the_speaker_worker_process()
         {
-            Assert.IsInstanceOfType(TheContainer.Get<IProcess>("Speaker", new IParameter[0]), typeof(SpeakerWorkerProcess));
+            Assert.IsInstanceOfType(TheContainer.Get<ISynchronize>("Speaker", new IParameter[0]), typeof(SpeakerSynchronize));
         }
 
         [TestMethod]
         public void test_poller_container_can_properly_resolve_speaker_change_repository()
         {
-            Assert.IsNotNull(TheContainer.TryGet<ISpeakerChangeRepository>());
+            Assert.IsNotNull(TheContainer.TryGet<IChangeRepository>());
         }
 
         [TestMethod]

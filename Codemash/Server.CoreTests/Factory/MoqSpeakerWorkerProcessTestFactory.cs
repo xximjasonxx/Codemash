@@ -72,25 +72,25 @@ namespace Server.CoreTests.Factory
             return mock.Object;
         }
 
-        private IList<SpeakerChange> _speakerChangeRepository; 
+        private IList<Change> _speakerChangeRepository; 
 
-        public ISpeakerChangeRepository GetStandardSpeakerChangeRepositoryMock()
+        public IChangeRepository GetStandardSpeakerChangeRepositoryMock()
         {
             _speakerChangeRepository = null;
-            var mock = new Mock<ISpeakerChangeRepository>();
+            var mock = new Mock<IChangeRepository>();
             mock.Setup(m => m.GetAll()).Returns(() =>
                                                     {
                                                         if (_speakerChangeRepository == null)
-                                                            _speakerChangeRepository = new List<SpeakerChange>();
+                                                            _speakerChangeRepository = new List<Change>();
 
                                                         return _speakerChangeRepository;
                                                     });
 
-            mock.Setup(m => m.SaveRange(It.IsAny<IEnumerable<SpeakerChange>>())).Callback(
-                (IEnumerable<SpeakerChange> changes) =>
+            mock.Setup(m => m.SaveRange(It.IsAny<IEnumerable<Change>>())).Callback(
+                (IEnumerable<Change> changes) =>
                     {
                         if (_speakerChangeRepository == null)
-                            _speakerChangeRepository = new List<SpeakerChange>();
+                            _speakerChangeRepository = new List<Change>();
 
                         changes.ToList().ForEach(c => _speakerChangeRepository.Add(c));
                     });

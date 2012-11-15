@@ -13,10 +13,9 @@ namespace Codemash.Api.Data.Modules
         /// </summary>
         public override void Load()
         {
-            Bind<ISessionRepository>().To<EfSessionRepository>().InThreadScope();
-            Bind<ISpeakerRepository>().To<EfSpeakerRepository>().InThreadScope();
-            Bind<ISessionChangeRepository>().To<EfSessionChangeRepository>().InThreadScope();
-            Bind<ISpeakerChangeRepository>().To<EfSpeakerChangeRepository>().InThreadScope();
+            Bind<ISessionRepository>().To<EfSessionRepository>().InSingletonScope();
+            Bind<ISpeakerRepository>().To<EfSpeakerRepository>().InSingletonScope();
+            Bind<IChangeRepository>().To<EfChangeRepository>().InSingletonScope();
         }
 
         #endregion

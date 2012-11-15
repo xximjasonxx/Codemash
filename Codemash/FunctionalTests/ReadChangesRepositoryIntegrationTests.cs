@@ -11,7 +11,7 @@ using Ninject;
 namespace FunctionalTests
 {
     [TestClass]
-    public class ReadSessionChangeRepositoryIntegrationTests
+    public class ReadChangesRepositoryIntegrationTests
     {
         private TransactionScope _transactionScope;
 
@@ -28,7 +28,7 @@ namespace FunctionalTests
         public void test_that_sessionchange_instances_can_be_extracted_enmasse_from_the_database()
         {
             // arrange
-            var repository = new PollerContainer().Get<ISessionChangeRepository>();
+            var repository = new PollerContainer().Get<IChangeRepository>();
 
             // act
             var changes = repository.GetAll();
@@ -42,10 +42,10 @@ namespace FunctionalTests
         public void test_that_given_a_matching_condition_applicable_sessionchange_instances_can_be_extracted()
         {
             // arrange
-            var repository = new PollerContainer().Get<ISessionChangeRepository>();
+            var repository = new PollerContainer().Get<IChangeRepository>();
 
             // act
-            var list = repository.GetAll(sc => sc.SessionId == 1);
+            var list = repository.GetAll(sc => sc.EntityId == 1);
 
             // assert
             Assert.AreEqual(1, list.Count);
@@ -56,15 +56,15 @@ namespace FunctionalTests
         public void test_that_given_a_valid_primary_key_value_get_returns_a_non_null_sessionchange_instance()
         {
             // arrange
-            var repository = new PollerContainer().Get<ISessionChangeRepository>();
+            var repository = new PollerContainer().Get<IChangeRepository>();
 
             // act
-            var lastSessionChangeId = GetLastSessionChangeId();
+            var lastSessionChangeId = GetLastChangeId();
             var sessionChange = repository.Get(lastSessionChangeId);
 
             // assert
             Assert.IsNotNull(sessionChange);
-            Assert.AreEqual(lastSessionChangeId, sessionChange.SessionChangeId);
+            Assert.AreEqual(lastSessionChangeId, sessionChange.ChangeId);
         }
 
         [TestMethod]
@@ -72,7 +72,7 @@ namespace FunctionalTests
         public void test_that_given_an_invalid_primary_key_value_get_returns_a_null_session_change_instance()
         {
             // arrange
-            var repository = new PollerContainer().Get<ISessionChangeRepository>();
+            var repository = new PollerContainer().Get<IChangeRepository>();
 
             // act
             var sessionChange = repository.Get(int.MaxValue);
@@ -86,14 +86,14 @@ namespace FunctionalTests
         public void test_that_given_a_matching_condition_get_returns_a_non_null_instance_of_sessionchange()
         {
             // arrange
-            var repository = new PollerContainer().Get<ISessionChangeRepository>();
+            var repository = new PollerContainer().Get<IChangeRepository>();
 
             // act
-            var sessionChange = repository.Get(sc => sc.Key == "Title" && sc.SessionId == 1);
+            var sessionChange = repository.Get(sc => sc.Key == "Title" && sc.EntityId == 1);
 
             // assert
             Assert.IsNotNull(sessionChange);
-            Assert.AreEqual(1, sessionChange.SessionId);
+            Assert.AreEqual(1, sessionChange.EntityId);
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace FunctionalTests
         public void test_that_given_a_non_matching_condition_get_returns_a_null_instance_of_sessionchange()
         {
             // arrange
-            var repository = new PollerContainer().Get<ISessionChangeRepository>();
+            var repository = new PollerContainer().Get<IChangeRepository>();
 
             // act
             var sessionChange = repository.Get(sc => sc.Key == null);
@@ -122,7 +122,7 @@ namespace FunctionalTests
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString))
             {
                 connection.Open();
-                const string commandText = "insert into SessionChanges(SessionId, Action, [Key], Value, Version) values(@SessionId, 1, @Key, @Value, 1)";
+                const string commandText = "insert into Changes(Changeset, EntityId, EntityType, Action, [Key], Value) values(1, @SessionId, 'Session', 1, @Key, @Value)";
                 using (var command = new SqlCommand(commandText, connection))
                 {
                     // session change #1
@@ -155,12 +155,12 @@ namespace FunctionalTests
             }
         }
 
-        private int GetLastSessionChangeId()
+        private int GetLastChangeId()
         {
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString))
             {
                 connection.Open();
-                const string cmdText = "select max(sessionchangeid) from sessionchanges";
+                const string cmdText = "select max(changeid) from changes";
                 using (var command = new SqlCommand(cmdText, connection))
                 {
                     return command.ExecuteScalar().ToString().AsInt();

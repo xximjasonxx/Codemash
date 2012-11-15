@@ -12,7 +12,7 @@ using Ninject;
 namespace FunctionalTests
 {
     [TestClass]
-    public class WriteSessionChangeRepositoryIntegrationTests
+    public class WriteChangeRepositoryIntegrationTests
     {
         private TransactionScope _transactionScope;
 
@@ -27,10 +27,10 @@ namespace FunctionalTests
         public void test_that_saving_a_range_of_sessionchange_instances_allows_those_instances_to_be_retrievable()
         {
             // arrange
-            var repository = new PollerContainer().Get<ISessionChangeRepository>();
+            var repository = new PollerContainer().Get<IChangeRepository>();
 
             // act
-            repository.SaveRange(GetSessionChangeTestData());
+            repository.SaveRange(GetChangeTestData());
 
             // assert
             Assert.AreNotEqual(0, repository.GetAll().Count);
@@ -41,13 +41,13 @@ namespace FunctionalTests
         public void test_that_saving_a_range_produces_one_distinct_timestamp_for_creation_grouping()
         {
             // arrange
-            var repository = new PollerContainer().Get<ISessionChangeRepository>();
+            var repository = new PollerContainer().Get<IChangeRepository>();
 
             // act
-            repository.SaveRange(GetSessionChangeTestData());
+            repository.SaveRange(GetChangeTestData());
 
             // assert
-            var blocks = repository.GetAll().Select(sc => sc.Version).Distinct();
+            var blocks = repository.GetAll().Select(sc => sc.Changeset).Distinct();
             Assert.AreNotEqual(0, blocks.Count());
             Assert.AreNotEqual(DateTime.MinValue, blocks.First());
         }
@@ -59,14 +59,14 @@ namespace FunctionalTests
         }
 
         // private helper methods
-        private IEnumerable<SessionChange> GetSessionChangeTestData()
+        private IEnumerable<Change> GetChangeTestData()
         {
-            return new List<SessionChange>
+            return new List<Change>
                        {
-                           new SessionChange { ActionType = ChangeAction.Modify, SessionId = 1, Key = "Title", Value = "My New Title 1"},
-                           new SessionChange { ActionType = ChangeAction.Modify, SessionId = 2, Key = "Title", Value = "My New Title 2"},
-                           new SessionChange { ActionType = ChangeAction.Modify, SessionId = 3, Key = "Title", Value = "My New Title 3"},
-                           new SessionChange { ActionType = ChangeAction.Modify, SessionId = 4, Key = "Title", Value = "My New Title 4"}
+                           new Change { Action = ChangeAction.Modify.ToString(), EntityId = 1, Key = "Title", Value = "My New Title 1", EntityType = "Session" },
+                           new Change { Action = ChangeAction.Modify.ToString(), EntityId = 2, Key = "Title", Value = "My New Title 2", EntityType = "Session" },
+                           new Change { Action = ChangeAction.Modify.ToString(), EntityId = 3, Key = "Title", Value = "My New Title 3", EntityType = "Speaker" },
+                           new Change { Action = ChangeAction.Modify.ToString(), EntityId = 4, Key = "Title", Value = "My New Title 4", EntityType = "Session" }
                        };
         }
     }

@@ -12,31 +12,30 @@ namespace Codemash.Api.Data.Extensions
         /// Compare two list of entities and return their differences for storage
         /// </summary>
         /// <typeparam name="T">The type of entities being compared</typeparam>
-        /// <typeparam name="TChange">The type of change entities being returned which record all changes</typeparam>
         /// <param name="masterList">The list of the master data - the latest copy</param>
         /// <param name="localList">The list of the current data - this is what is current, not the latest</param>
         /// <returns></returns>
-        public static IList<TChange> Compare<T, TChange>(this IEnumerable<T> masterList, IList<T> localList) where T : EntityBase, IHasIdentifier, new() where TChange : class, IChange, new()
+        public static IList<Change> Compare<T>(this IList<T> masterList, IList<T> localList) where T : EntityBase, IHasIdentifier, new()
         {
-            var differences = new List<TChange>();
+            var differences = new List<Change>();
 
             // find items which were modified
-            differences.AddRange(masterList.FindModifiedDifferencesWith<T, TChange>(localList));
+            differences.AddRange(masterList.FindModifiedDifferencesWith(localList));
 
             // find items which were removed
-            differences.AddRange(masterList.FindRemovedDifferencesWith<T, TChange>(localList));
+            differences.AddRange(masterList.FindRemovedDifferencesWith(localList));
 
             // find items which were added
-            differences.AddRange(masterList.FindAddedDifferencesWith<T, TChange>(localList));
+            differences.AddRange(masterList.FindAddedDifferencesWith(localList));
 
             return differences;
         }
 
         #region Change Detection methods
 
-        private static IList<TChange> FindModifiedDifferencesWith<T, TChange>(this IEnumerable<T> masterList, IList<T> localList) where T : EntityBase, IHasIdentifier where TChange : IChange, new()
+        private static IEnumerable<Change> FindModifiedDifferencesWith<T>(this IEnumerable<T> masterList, IList<T> localList) where T : EntityBase, IHasIdentifier
         {
-            var changes = new List<TChange>();
+            var changes = new List<Change>();
             foreach (var master in masterList)
             {
                 // attempt to find the master session locally
@@ -47,7 +46,7 @@ namespace Codemash.Api.Data.Extensions
                     if (differences.Count > 0)
                     {
                         // add things
-                        changes.AddRange(CreateDifferencesList<TChange>(differences, local.ID));
+                        changes.AddRange(CreateDifferencesList<T>(differences, local.ID));
                     }
                 }
             }
@@ -55,36 +54,37 @@ namespace Codemash.Api.Data.Extensions
             return changes;
         }
 
-        private static IList<TChange> FindRemovedDifferencesWith<T, TChange>(this IEnumerable<T> masterList, IEnumerable<T> localList) where T : IHasIdentifier where TChange : IChange, new()
+        private static IEnumerable<Change> FindRemovedDifferencesWith<T>(this IEnumerable<T> masterList, IEnumerable<T> localList) where T : IHasIdentifier
         {
             var masterIds = masterList.Select(s => s.ID).ToArray();
             var localIds = localList.Select(s => s.ID).ToArray();
 
             // determine which sessions are to be removed
             var removals = localIds.Where(id => !masterIds.Contains(id));
-            return removals.Select(id => new TChange
+            return removals.Select(id => new Change
                                                     {
-                                                        ChangeEntityId = id,
-                                                        ActionType = ChangeAction.Delete,
+                                                        EntityId = id,
+                                                        EntityType = typeof(T).Name,
+                                                        Action = ChangeAction.Delete.ToString(),
                                                         Key = string.Empty,
                                                         Value = string.Empty
                                                     }).ToList();
         }
 
-        private static IList<TChange> FindAddedDifferencesWith<T, TChange>(this IEnumerable<T> masterList, IEnumerable<T> localList) where T : EntityBase, IHasIdentifier, new() where TChange : class, IChange, new() 
+        private static IEnumerable<Change> FindAddedDifferencesWith<T>(this IEnumerable<T> masterList, IEnumerable<T> localList) where T : EntityBase, IHasIdentifier, new()
         {
             // find the IDs of sessions which are in the master but are not in local
             // add them to changes listing going back
             var locals = localList.Select(s => s.ID).ToArray();
 
-            var changes = new List<TChange>();
+            var changes = new List<Change>();
             foreach (var entity in masterList.Where(s => !locals.Contains(s.ID)))
             {
                 var newEntity = new T();
-                var differences = CreateDifferencesList<TChange>(entity.CompareTo(newEntity), entity.ID).ToList();
+                var differences = CreateDifferencesList<T>(entity.CompareTo(newEntity), entity.ID).ToList();
 
                 // by defailt CreateDifferencesList will mark the action as modify - we need to override this
-                differences.Apply(d => d.ActionType = ChangeAction.Add);
+                differences.Apply(d => d.Action = ChangeAction.Add.ToString());
 
                 changes.AddRange(differences);
             }
@@ -101,12 +101,13 @@ namespace Codemash.Api.Data.Extensions
         /// <param name="differences">The differences between the entities stored as key/value pairs</param>
         /// <param name="id">The id which has changed</param>
         /// <returns></returns>
-        private static IEnumerable<TChange> CreateDifferencesList<TChange>(IEnumerable<KeyValuePair<string, string>> differences, long id) where TChange : IChange, new()
+        private static IEnumerable<Change> CreateDifferencesList<T>(IEnumerable<KeyValuePair<string, string>> differences, long id)
         {
-            return differences.Select(kv => new TChange
+            return differences.Select(kv => new Change
             {
-                ChangeEntityId = id,
-                ActionType = ChangeAction.Modify,
+                EntityId = id,
+                Action = ChangeAction.Modify.ToString(),
+                EntityType = typeof(T).Name,
                 Key = kv.Key,
                 Value = kv.Value
             }).ToList();

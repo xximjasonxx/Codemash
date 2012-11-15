@@ -19,7 +19,7 @@ namespace Server.CoreTests
         public void test_that_a_process_instance_can_be_extracted_from_poller_container()
         {
             var container = new PollerContainer();
-            Assert.AreNotEqual(null, container.Get<SessionWorkerProcess>());
+            Assert.AreNotEqual(null, container.Get<SessionSynchronize>());
         }
 
         [TestMethod]
@@ -33,10 +33,10 @@ namespace Server.CoreTests
             var sessionMock = new Mock<ISessionRepository>();
             sessionMock.Setup(m => m.GetAll()).Returns(new List<Session>());
             container.Bind<ISessionRepository>().ToConstant(sessionMock.Object);
-            container.Bind<ISessionChangeRepository>().ToConstant(new Mock<ISessionChangeRepository>().Object);
+            container.Bind<IChangeRepository>().ToConstant(new Mock<IChangeRepository>().Object);
 
-            var process = container.Get<SessionWorkerProcess>();
-            process.Execute();
+            var process = container.Get<SessionSynchronize>();
+            process.Synchronize();
         }
 
         [TestMethod]
@@ -45,12 +45,12 @@ namespace Server.CoreTests
             var kernel = new StandardKernel();
             kernel.Bind<ISessionRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetStandardSessionRepository());
             kernel.Bind<IMasterDataProvider>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetStandardMasterDataProvider());
-            kernel.Bind<ISessionChangeRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetSessionChangeRepository()).InSingletonScope();
+            kernel.Bind<IChangeRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetSessionChangeRepository()).InSingletonScope();
 
-            var process = kernel.Get<SessionWorkerProcess>();
-            process.Execute();
+            var process = kernel.Get<SessionSynchronize>();
+            process.Synchronize();
 
-            var repository = kernel.Get<ISessionChangeRepository>();
+            var repository = kernel.Get<IChangeRepository>();
             Assert.AreEqual(0, repository.GetAll().Count);
         }
 
@@ -60,12 +60,12 @@ namespace Server.CoreTests
             var kernel = new StandardKernel();
             kernel.Bind<ISessionRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetNonStandardSessionRepository());
             kernel.Bind<IMasterDataProvider>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetStandardMasterDataProvider());
-            kernel.Bind<ISessionChangeRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetSessionChangeRepository()).InSingletonScope();
+            kernel.Bind<IChangeRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetSessionChangeRepository()).InSingletonScope();
 
-            var process = kernel.Get<SessionWorkerProcess>();
-            process.Execute();
+            var process = kernel.Get<SessionSynchronize>();
+            process.Synchronize();
 
-            var repository = kernel.Get<ISessionChangeRepository>();
+            var repository = kernel.Get<IChangeRepository>();
             Assert.AreNotEqual(0, repository.GetAll().Count);
         }
 
@@ -75,10 +75,10 @@ namespace Server.CoreTests
             var kernel = new StandardKernel();
             kernel.Bind<ISessionRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetOneLessSessionRepository()).InSingletonScope();
             kernel.Bind<IMasterDataProvider>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetStandardMasterDataProvider());
-            kernel.Bind<ISessionChangeRepository>().ToConstant(new Mock<ISessionChangeRepository>().Object);
+            kernel.Bind<IChangeRepository>().ToConstant(new Mock<IChangeRepository>().Object);
 
-            var process = kernel.Get<SessionWorkerProcess>();
-            process.Execute();
+            var process = kernel.Get<SessionSynchronize>();
+            process.Synchronize();
 
             var repository = kernel.Get<ISessionRepository>();
             var provider = kernel.Get<IMasterDataProvider>();
@@ -91,10 +91,10 @@ namespace Server.CoreTests
             var kernel = new StandardKernel();
             kernel.Bind<ISessionRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetSessionRepositoryWithAddApplyRange()).InSingletonScope();
             kernel.Bind<IMasterDataProvider>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetOneLessMasterDataProvider());
-            kernel.Bind<ISessionChangeRepository>().ToConstant(new Mock<ISessionChangeRepository>().Object);
+            kernel.Bind<IChangeRepository>().ToConstant(new Mock<IChangeRepository>().Object);
 
-            var process = kernel.Get<SessionWorkerProcess>();
-            process.Execute();
+            var process = kernel.Get<SessionSynchronize>();
+            process.Synchronize();
 
             var repository = kernel.Get<ISessionRepository>();
             var provider = kernel.Get<IMasterDataProvider>();
@@ -108,15 +108,15 @@ namespace Server.CoreTests
             var kernel = new StandardKernel();
             kernel.Bind<IMasterDataProvider>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetStandardMasterDataProvider());
             kernel.Bind<ISessionRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetEmptySessionRepository()).InSingletonScope();
-            kernel.Bind<ISessionChangeRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetSessionChangeRepository()).InSingletonScope();
+            kernel.Bind<IChangeRepository>().ToConstant(new MoqSessionWorkerProcessTestFactory().GetSessionChangeRepository()).InSingletonScope();
 
             // act
-            var process = kernel.Get<SessionWorkerProcess>();
-            process.Execute();
+            var process = kernel.Get<SessionSynchronize>();
+            process.Synchronize();
 
             // assert
             Assert.AreNotEqual(0, kernel.Get<ISessionRepository>().GetAll().Count);
-            Assert.AreEqual(0, kernel.Get<ISessionChangeRepository>().GetAll().Count);
+            Assert.AreEqual(0, kernel.Get<IChangeRepository>().GetAll().Count);
         }
     }
 }

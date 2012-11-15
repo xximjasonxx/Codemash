@@ -27,7 +27,7 @@ namespace Server.CoreTests.Factory
         }
 
         private IList<Session> _sessionRepository;
-        private IList<SessionChange> _sessionChangeRepository;
+        private IList<Change> _sessionChangeRepository;
 
         public ISessionRepository GetStandardSessionRepository()
         {
@@ -68,16 +68,16 @@ namespace Server.CoreTests.Factory
             return mock.Object;
         }
 
-        public ISessionChangeRepository GetSessionChangeRepository()
+        public IChangeRepository GetSessionChangeRepository()
         {
             _sessionChangeRepository = null;
-            var mock = new Mock<ISessionChangeRepository>();
-            mock.Setup(m => m.GetAll()).Returns(() => _sessionChangeRepository ?? (_sessionChangeRepository = new List<SessionChange>()));
-            mock.Setup(m => m.SaveRange(It.IsAny<IEnumerable<SessionChange>>())).Callback(
-                (IEnumerable<SessionChange> sessions) =>
+            var mock = new Mock<IChangeRepository>();
+            mock.Setup(m => m.GetAll()).Returns(() => _sessionChangeRepository ?? (_sessionChangeRepository = new List<Change>()));
+            mock.Setup(m => m.SaveRange(It.IsAny<IEnumerable<Change>>())).Callback(
+                (IEnumerable<Change> sessions) =>
                     {
                         if (_sessionChangeRepository == null)
-                            _sessionChangeRepository = new List<SessionChange>();
+                            _sessionChangeRepository = new List<Change>();
 
                         sessions.ToList().ForEach(s => _sessionChangeRepository.Add(s));
                     });

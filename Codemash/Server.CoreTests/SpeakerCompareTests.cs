@@ -28,7 +28,7 @@ namespace Server.CoreTests
             var localSpeakers = _dataFactory.GetSpeakers();
 
             // act
-            var differences = masterSpeakers.Compare<Speaker, SpeakerChange>(localSpeakers);
+            var differences = masterSpeakers.Compare(localSpeakers);
 
             // assert
             Assert.AreEqual(0, differences.Count);
@@ -43,7 +43,7 @@ namespace Server.CoreTests
 
             // act
             masterSpeakers[0].Name = "Test";
-            var differences = masterSpeakers.Compare<Speaker, SpeakerChange>(localSpeakers);
+            var differences = masterSpeakers.Compare(localSpeakers);
 
             // assert
             Assert.AreNotEqual(0, differences.Count);
@@ -58,10 +58,10 @@ namespace Server.CoreTests
 
             // act
             masterSpeakers.RemoveAt(0);
-            var differences = masterSpeakers.Compare<Speaker, SpeakerChange>(localSpeakers);
+            var differences = masterSpeakers.Compare(localSpeakers);
 
             // assert
-            Assert.AreNotEqual(0, differences.Count(d => d.ActionType == ChangeAction.Delete));
+            Assert.AreNotEqual(0, differences.Count(d => d.Action == ChangeAction.Delete.ToString()));
         }
 
         [TestMethod]
@@ -73,10 +73,10 @@ namespace Server.CoreTests
 
             // act
             localSpeakers.RemoveAt(0);
-            var differences = masterSpeakers.Compare<Speaker, SpeakerChange>(localSpeakers);
+            var differences = masterSpeakers.Compare(localSpeakers);
             
             // assert
-            Assert.AreNotEqual(0, differences.Count(d => d.ActionType == ChangeAction.Add));
+            Assert.AreNotEqual(0, differences.Count(d => d.Action == ChangeAction.Add.ToString()));
         }
     }
 }

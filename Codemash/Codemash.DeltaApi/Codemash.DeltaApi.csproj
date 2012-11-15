@@ -138,9 +138,8 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\SessionChangeController.cs" />
+    <Compile Include="Controllers\ChangeController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
-    <Compile Include="Controllers\SpeakerChangeController.cs" />
     <Compile Include="Controllers\SpeakerController.cs" />
     <Compile Include="Core\WebContainer.cs" />
     <Compile Include="Core\WebExtensions.cs" />
@@ -149,9 +148,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\SessionChangeViewModel.cs" />
+    <Compile Include="Models\ChangeViewModel.cs" />
     <Compile Include="Models\SessionViewModel.cs" />
-    <Compile Include="Models\SpeakerChangeViewModel.cs" />
     <Compile Include="Models\SpeakerViewModel.cs" />
     <Compile Include="Modules\AssemblyIHttpControllerNinjectModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

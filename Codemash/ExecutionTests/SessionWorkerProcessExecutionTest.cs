@@ -23,8 +23,8 @@ namespace ExecutionTests
         public void test_general_execution_of_session_worker_process()
         {
             var container = new PollerContainer();
-            var process = container.Get<IProcess>("Session");
-            process.Execute();
+            var process = container.Get<ISynchronize>("Session");
+            process.Synchronize();
         }
 
         [TestCleanup]

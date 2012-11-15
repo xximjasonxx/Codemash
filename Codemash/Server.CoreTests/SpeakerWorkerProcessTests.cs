@@ -18,8 +18,8 @@ namespace Server.CoreTests
         public void TestInitialize()
         {
             _theKernel = new StandardKernel();
-            _theKernel.Bind<IProcess>().To<SpeakerWorkerProcess>();
-            _theKernel.Bind<ISpeakerChangeRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetStandardSpeakerChangeRepositoryMock()).InSingletonScope();
+            _theKernel.Bind<ISynchronize>().To<SpeakerSynchronize>();
+            _theKernel.Bind<IChangeRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetStandardSpeakerChangeRepositoryMock()).InSingletonScope();
         }
 
         [TestMethod]
@@ -30,11 +30,11 @@ namespace Server.CoreTests
             _theKernel.Bind<ISpeakerRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetSpeakerRepositoryWithGetAllMockedToReturnStandardSpeakers());
 
             // act
-            var process = _theKernel.Get<IProcess>();
-            process.Execute();
+            var process = _theKernel.Get<ISynchronize>();
+            process.Synchronize();
 
             // assert
-            var repository = _theKernel.Get<ISpeakerChangeRepository>();
+            var repository = _theKernel.Get<IChangeRepository>();
             Assert.AreEqual(0, repository.GetAll().Count);
         }
 
@@ -46,11 +46,11 @@ namespace Server.CoreTests
             _theKernel.Bind<ISpeakerRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetSpeakerRepositoryWithGetAllMockedToReturnStandardSpeakers());
 
             // act
-            var process = _theKernel.Get<IProcess>();
-            process.Execute();
+            var process = _theKernel.Get<ISynchronize>();
+            process.Synchronize();
 
             // assert
-            var repository = _theKernel.Get<ISpeakerChangeRepository>();
+            var repository = _theKernel.Get<IChangeRepository>();
             Assert.AreEqual(1, repository.GetAll().Count);
         }
 
@@ -62,12 +62,12 @@ namespace Server.CoreTests
             _theKernel.Bind<ISpeakerRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetSpeakerRepositoryWithSpeakerRemovedMock());
 
             // act
-            var process = _theKernel.Get<IProcess>();
-            process.Execute();
+            var process = _theKernel.Get<ISynchronize>();
+            process.Synchronize();
 
             // assert
-            var repository = _theKernel.Get<ISpeakerChangeRepository>();
-            Assert.AreNotEqual(0, repository.GetAll().Count(sc => sc.ActionType == ChangeAction.Add));
+            var repository = _theKernel.Get<IChangeRepository>();
+            Assert.AreNotEqual(0, repository.GetAll().Count(sc => sc.Action == ChangeAction.Add.ToString()));
         }
 
         [TestMethod]
@@ -78,12 +78,12 @@ namespace Server.CoreTests
             _theKernel.Bind<ISpeakerRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetSpeakerRepositoryWithGetAllMockedToReturnStandardSpeakers());
 
             // act
-            var process = _theKernel.Get<IProcess>();
-            process.Execute();
+            var process = _theKernel.Get<ISynchronize>();
+            process.Synchronize();
 
             // assert
-            var repository = _theKernel.Get<ISpeakerChangeRepository>();
-            Assert.AreEqual(1, repository.GetAll().Count(sp => sp.ActionType == ChangeAction.Delete));
+            var repository = _theKernel.Get<IChangeRepository>();
+            Assert.AreEqual(1, repository.GetAll().Count(sp => sp.Action == ChangeAction.Delete.ToString()));
         }
 
         [TestMethod]
@@ -94,12 +94,12 @@ namespace Server.CoreTests
             _theKernel.Bind<ISpeakerRepository>().ToConstant(new MoqSpeakerWorkerProcessTestFactory().GetEmptySpeakerRepository()).InSingletonScope();
 
             // act
-            var process = _theKernel.Get<IProcess>();
-            process.Execute();
+            var process = _theKernel.Get<ISynchronize>();
+            process.Synchronize();
 
             // assert
             Assert.AreNotEqual(0, _theKernel.Get<ISpeakerRepository>().GetAll().Count);
-            Assert.AreEqual(0, _theKernel.Get<ISpeakerChangeRepository>().GetAll().Count);
+            Assert.AreEqual(0, _theKernel.Get<IChangeRepository>().GetAll().Count);
         }
 
         [TestCleanup]

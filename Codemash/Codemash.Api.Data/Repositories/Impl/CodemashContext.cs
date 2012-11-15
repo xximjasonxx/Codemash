@@ -17,9 +17,7 @@ namespace Codemash.Api.Data.Repositories.Impl
 
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Speaker> Speakers { get; set; }
-
-        public DbSet<SessionChange> SessionChanges { get; set; }
-        public DbSet<SpeakerChange> SpeakerChanges { get; set; }
+        public DbSet<Change> Changes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -32,12 +30,6 @@ namespace Codemash.Api.Data.Repositories.Impl
 
             // speaker
             modelBuilder.Entity<Speaker>().Property(s => s.Biography).HasColumnType("text");
-
-            // session changes
-            modelBuilder.Entity<SessionChange>().Property(sc => sc.Value).HasColumnType("text");
-
-            // speaker changes
-            modelBuilder.Entity<SpeakerChange>().Property(sc => sc.Value).HasColumnType("text");
         }
 
         protected override bool ShouldValidateEntity(System.Data.Entity.Infrastructure.DbEntityEntry entityEntry)

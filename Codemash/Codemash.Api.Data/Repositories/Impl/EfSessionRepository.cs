@@ -108,10 +108,10 @@ namespace Codemash.Api.Data.Repositories.Impl
                 existingSession.Abstract = session.Abstract;
                 existingSession.Start = session.Start;
                 existingSession.End = session.End;
-                existingSession.LevelType = session.LevelType;
-                existingSession.RoomType = session.RoomType;
+                existingSession.Level = session.Level;
+                existingSession.Room = session.Room;
                 existingSession.SpeakerId = session.SpeakerId;
-                existingSession.TrackType = session.TrackType;
+                existingSession.Track = session.Track;
             }
         }
 

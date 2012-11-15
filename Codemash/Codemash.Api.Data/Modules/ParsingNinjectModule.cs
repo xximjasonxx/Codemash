@@ -13,9 +13,6 @@ namespace Codemash.Api.Data.Modules
         /// </summary>
         public override void Load()
         {
-            Bind<RoomEnumParse>().ToSelf().InSingletonScope();
-            Bind<TrackEnumParse>().ToSelf().InSingletonScope();
-
             Bind<ISessionEntityParser>().To<CodemashSessionEntityParser>().InSingletonScope();
             Bind<ISpeakerEntityParser>().To<CodemashSpeakerEntityParser>().InSingletonScope();
         }

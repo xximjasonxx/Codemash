@@ -59,19 +59,6 @@ namespace Server.CoreTests
         }
 
         [TestMethod]
-        public void test_when_comparing_sessions_with_track_differences_the_value_returned_is_correct()
-        {
-            var session1 = _dataFactory.GetSessions().First();
-            var session2 = _dataFactory.GetSessions().First();
-            session2.TrackType = Track.Unknown;
-
-            var trackParser = new TrackEnumParse();
-            var result = session1.CompareTo(session2);
-            Assert.AreEqual(true, result.ContainsKey("Track"));
-            Assert.AreEqual(session1.TrackType, trackParser.Parse(result["Track"], Track.Unknown));
-        }
-
-        [TestMethod]
         public void test_when_comparing_sessions_with_multiple_property_differences_dictionary_has_equivalent_count()
         {
             // test for two differences

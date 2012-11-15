@@ -38,13 +38,13 @@ namespace Codemash.DeltaApi.Controllers
                        {
                            Abstract = session.Abstract,
                            End = session.End.AsDateTimeDisplay(),
-                           Level = session.LevelType.AsDisplayString(),
-                           Room = session.RoomType.AsDisplayString(),
+                           Level = session.Level,
+                           Room = session.Room,
                            SessionId = session.SessionId,
                            SpeakerId = session.SpeakerId,
                            Start = session.Start.AsDateTimeDisplay(),
                            Title = session.Title,
-                           Track = session.TrackType.AsDisplayString()
+                           Track = session.Track
                        };
         }
     }

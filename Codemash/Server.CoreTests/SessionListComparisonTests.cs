@@ -52,7 +52,7 @@ namespace Server.CoreTests
             var childList = _dataFactory.GetSessions();
 
             childList[0].Title = "I have been changed";
-            childList[0].RoomType = Room.IndigoBay;
+            childList[0].Room = "Indigo Bay";
             childList[1].Abstract = "I am a new abstract";
             childList[1].Start = childList[1].Start.AddHours(1);
 

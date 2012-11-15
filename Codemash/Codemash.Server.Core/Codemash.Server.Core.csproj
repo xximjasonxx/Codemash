@@ -111,7 +111,6 @@
     <Compile Include="Attributes\ComparableAttribute.cs" />
     <Compile Include="Attributes\EnumKeyAttribute.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="Enum.cs" />
     <Compile Include="Extensions\ListManipulationExtensions.cs" />
     <Compile Include="Extensions\PrimitiveParsingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

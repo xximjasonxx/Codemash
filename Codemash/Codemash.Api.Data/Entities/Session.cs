@@ -31,26 +31,14 @@ namespace Codemash.Api.Data.Entities
         [Comparable, Required]
         public DateTime End { get; set; }
 
-        [Comparable("Level")]
-        public Level LevelType
-        {
-            get { return (Level) this.Level; }
-            set { this.Level = (int) value; }
-        }
+        [Comparable]
+        public string Level { get; set; }
 
-        [Comparable("Track")]
-        public Track TrackType
-        {
-            get { return (Track) this.Track; }
-            set { this.Track = (int) value; }
-        }
+        [Comparable]
+        public string Track { get; set; }
 
-        [Comparable("Room")]
-        public Room RoomType
-        {
-            get { return (Room) this.Room; }
-            set { this.Room = (int) value; }
-        }
+        [Comparable]
+        public string Room { get; set; }
 
         // constructor
         public Session()
@@ -59,14 +47,10 @@ namespace Codemash.Api.Data.Entities
             Abstract = string.Empty;
             Start = DateTime.MinValue;
             End = DateTime.MinValue;
-            LevelType = Data.Level.Unknown;
-            RoomType = Data.Room.Unknown;
-            TrackType = Data.Track.Unknown;
+            Level = string.Empty;
+            Track = string.Empty;
+            Room = string.Empty;
         }
-
-        public int Level { get; private set; }
-        public int Room { get; private set; }
-        public int Track { get; private set; }
 
         #region Implementation of IHasIdentifier
 

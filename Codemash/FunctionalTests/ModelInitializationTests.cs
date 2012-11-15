@@ -10,7 +10,6 @@ namespace FunctionalTests
     {
         [TestMethod]
         [TestCategory("Integration")]
-        [Ignore]
         public void test_that_all_tables_are_empty()
         {
             try

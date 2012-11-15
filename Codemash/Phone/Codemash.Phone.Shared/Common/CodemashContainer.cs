@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
 using Codemash.Phone.Data.Modules;
+using Codemash.Phone.Shared.Services;
+using Codemash.Phone.Shared.Services.Impl;
 using Microsoft.Phone.Controls;
 using Ninject;
 
@@ -17,6 +19,9 @@ namespace Codemash.Phone.Shared.Common
 
             // bind repositories
             Load(new[] {new CodemashRepositoryModule()});
+
+            // bind custom services
+            Bind<IAppService>().To<CustomAppService>().InSingletonScope();
         }
     }
 }

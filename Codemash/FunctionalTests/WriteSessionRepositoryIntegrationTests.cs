@@ -136,9 +136,9 @@ namespace FunctionalTests
                                  Abstract = "Some Abstract",
                                  End = DateTime.Now,
                                  Start = DateTime.Now,
-                                 LevelType = Level.Unknown,
-                                 RoomType = Room.Unknown,
-                                 TrackType = Track.Unknown,
+                                 Level = string.Empty,
+                                 Room = string.Empty,
+                                 Track = string.Empty,
                                  SpeakerId = 9999
                              });
             var repository = new PollerContainer().Get<ISessionRepository>();
@@ -167,8 +167,8 @@ namespace FunctionalTests
                                    Title = "Session 1",
                                    Abstract = "Abstract",
                                    End = DateTime.Now.AddHours(1),
-                                   LevelType = Level.General,
-                                   RoomType = Room.IndigoBay,
+                                   Level = "General",
+                                   Room = "Indigo Bay",
                                    SpeakerId = _speakerId,
                                    Start = DateTime.Now
                                },
@@ -178,8 +178,8 @@ namespace FunctionalTests
                                    Title = "Session 2",
                                    Abstract = "Abstract",
                                    End = DateTime.Now.AddHours(1),
-                                   LevelType = Level.General,
-                                   RoomType = Room.IndigoBay,
+                                   Level = "General",
+                                   Room = "Indigo Bay",
                                    SpeakerId = _speakerId,
                                    Start = DateTime.Now
                                },
@@ -189,8 +189,8 @@ namespace FunctionalTests
                                    Title = "Session 3",
                                    Abstract = "Abstract",
                                    End = DateTime.Now.AddHours(1),
-                                   LevelType = Level.General,
-                                   RoomType = Room.IndigoBay,
+                                   Level = "General",
+                                   Room = "Indigo Bay",
                                    SpeakerId = _speakerId,
                                    Start = DateTime.Now
                                }

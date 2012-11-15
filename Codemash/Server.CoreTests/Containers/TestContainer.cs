@@ -15,10 +15,6 @@ namespace Server.CoreTests.Containers
             // entity parsing
             Bind<ISessionEntityParser>().To<CodemashSessionEntityParser>();
             Bind<ISpeakerEntityParser>().To<CodemashSpeakerEntityParser>();
-
-            // location parsing
-            Bind<RoomEnumParse>().ToSelf();
-            Bind<TrackEnumParse>().ToSelf();
         }
     }
 }

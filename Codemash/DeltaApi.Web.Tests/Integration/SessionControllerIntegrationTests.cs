@@ -104,7 +104,7 @@ namespace DeltaApi.Web.Tests.Integration
                 using (var speakerCommand = new SqlCommand(cmdText, connection))
                 {
                     speakerId = speakerCommand.ExecuteScalar().ToString().AsInt();
-                    speakerCommand.CommandText = "insert into Speakers(SpeakerId, Biography, EmailAddress, FirstName, LastName) Values(" + speakerId + 1 + ", 'a', 'b', 'c', 'd');";
+                    speakerCommand.CommandText = "insert into Speakers(SpeakerId, Biography, EmailAddress, Name) Values(" + speakerId + 1 + ", 'a', 'b', 'c');";
                     speakerCommand.ExecuteNonQuery();
 
                     speakerCommand.CommandText = "select max(SpeakerId) from Speakers";

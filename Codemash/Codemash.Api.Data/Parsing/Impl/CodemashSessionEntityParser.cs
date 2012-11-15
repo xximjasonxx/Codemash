@@ -13,12 +13,6 @@ namespace Codemash.Api.Data.Parsing.Impl
 {
     public class CodemashSessionEntityParser : ISessionEntityParser
     {
-        [Inject]
-        public TrackEnumParse TrackParser { get; set; }
-
-        [Inject]
-        public RoomEnumParse RoomParser { get; set; }
-
         #region Implementation of IEntityParser<Session>
 
         /// <summary>
@@ -32,11 +26,11 @@ namespace Codemash.Api.Data.Parsing.Impl
             var session = new Session
                        {
                            Abstract = new StringWrapper(jToken["Abstract"]).ToString(),
-                           LevelType = new StringWrapper(jToken["Difficulty"]).ToString().AsLevel(Level.Unknown),
+                           Level = new StringWrapper(jToken["Difficulty"]).ToString(),
                            SessionId = new StringWrapper(jToken["Title"]).ToString().GetHashCode(),
                            SpeakerId = new StringWrapper(jToken["SpeakerName"]).ToString().GetHashCode(),
-                           TrackType = TrackParser.Parse(new StringWrapper(jToken["Technology"]).ToString(), Track.Unknown),
-                           RoomType = RoomParser.Parse(new StringWrapper(jToken["Room"]).ToString(), Room.Unknown),
+                           Track = new StringWrapper(jToken["Technology"]).ToString(),
+                           Room = new StringWrapper(jToken["Room"]).ToString(),
                            Title = new StringWrapper(jToken["Title"]).ToString(),
                            Start = new StringWrapper(jToken["Start"]).ToString().AsDateTime(),
                            End = new StringWrapper(jToken["End"]).ToString().AsDateTime()

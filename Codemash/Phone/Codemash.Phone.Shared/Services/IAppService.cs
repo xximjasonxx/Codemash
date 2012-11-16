@@ -8,6 +8,14 @@ namespace Codemash.Phone.Shared.Services
 {
     public interface IAppService
     {
-        HttpNotificationChannel NotificationChannel { get; }
+        /// <summary>
+        /// Called to setup the push notification channel
+        /// </summary>
+        void InitializePushChannel();
+
+        /// <summary>
+        /// Event indicating that the Push Channel has been initialized
+        /// </summary>
+        event EventHandler PushChannelInitialized;
     }
 }

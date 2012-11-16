@@ -78,5 +78,8 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Cloud Server Package' ">
     <OutputPath>bin\Cloud Server Package\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Cloud Server Package 2' ">
+    <OutputPath>bin\Cloud Server Package 2\</OutputPath>
+  </PropertyGroup>
   <Import Project="$(CloudExtensionsDir)Microsoft.WindowsAzure.targets" />
 </Project>

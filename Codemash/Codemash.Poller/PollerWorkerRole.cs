@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Transactions;
 using Codemash.Api.Data.Repositories;
 using Codemash.Poller.Container;
@@ -25,24 +26,22 @@ namespace Codemash.Poller
 
         public override void Run()
         {
-            // spin off a thread which will fire every configurable minutes to check our source for changes
-            // not using Timer here because we need the process to be blocking as each execution could be longer than others
             while (true)
             {
                 try
                 {
-                    Trace.WriteLine("Process beginning");
+                    Logger.Current.LogInformation("Process Start");
 
                     ExecuteProcess();
 
-                    Trace.WriteLine("Execution Complete");
+                    Logger.Current.LogInformation("Process Complete");
 
                     // wait to check again
                     Thread.Sleep(TimeSpan.FromMinutes(Config.MinutesWaitTime));
                 }
                 catch (Exception ex)
                 {
-                    Trace.WriteLine(ex.Message);
+                    Logger.Current.LogException(ex);
                 }
             }
         }
@@ -51,6 +50,7 @@ namespace Codemash.Poller
         {
             // Set the maximum number of concurrent connections 
             ServicePointManager.DefaultConnectionLimit = 12;
+
             return base.OnStart();
         }
 
@@ -63,12 +63,15 @@ namespace Codemash.Poller
             using (var scope = new TransactionScope())
             {
                 // synchronize speakrs (should go first since session has a dependancy here)
+                Logger.Current.LogInformation("Synchronizing Speakers");
                 var speakerChanges = speakerProcess.Synchronize();
 
                 // now do the session data
+                Logger.Current.LogInformation("Synchronizing Sessions");
                 var sessionChanges = sessionProcess.Synchronize();
 
                 // collect the changes and save them
+                Logger.Current.LogInformation("Saving Delta Information");
                 var allChanges = speakerChanges.Concat(sessionChanges).ToList();
                 if (allChanges.Count > 0)
                 {
@@ -77,6 +80,7 @@ namespace Codemash.Poller
                 }
 
                 // complete the transaction
+                Logger.Current.LogInformation("Completing the Procss");
                 scope.Complete();
             }
         }

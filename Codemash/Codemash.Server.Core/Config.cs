@@ -19,5 +19,17 @@ namespace Codemash.Server.Core
                 return waitTime;
             }
         }
+
+        public static string DriveRoot
+        {
+            get
+            {
+                string value = ConfigurationManager.AppSettings["DriveRoot"];
+                if (string.IsNullOrEmpty(value))
+                    throw new ConfigurationErrorsException("No DriveRoot specified");
+
+                return value;
+            }
+        }
     }
 }

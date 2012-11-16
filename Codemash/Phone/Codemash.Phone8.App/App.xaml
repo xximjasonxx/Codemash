@@ -5,7 +5,7 @@
     xmlns:shared="clr-namespace:Codemash.Phone.Shared.Common;assembly=Codemash.Phone.Shared">
 
     <Application.Resources>
-        <shared:CodemashBootstrapper x:Key="bootstrapper" />
+        <shared:CodemashBootstrapper x:Key="bootstrapper" ClientTypeName="WinPhone8" />
 
         <s:String x:Key="ChevronGlyph">&#xE26B;</s:String>
 

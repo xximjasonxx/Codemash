@@ -94,6 +94,15 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Cloud Server Package 2|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Cloud Server Package 2\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
@@ -116,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Change.cs" />
+    <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Interfaces\IChange.cs" />
     <Compile Include="Entities\Interfaces\IHasIdentifier.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />

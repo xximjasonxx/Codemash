@@ -7,4 +7,11 @@ namespace Codemash.Api.Data
         Modify,
         Delete
     }
+
+    public enum PushClientTypes
+    {
+        WinPhone7,
+        WinPhone8,
+        Win8
+    }
 }

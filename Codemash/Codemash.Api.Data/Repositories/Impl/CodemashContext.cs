@@ -18,6 +18,7 @@ namespace Codemash.Api.Data.Repositories.Impl
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<Change> Changes { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

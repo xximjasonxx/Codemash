@@ -14,4 +14,10 @@ namespace Codemash.Phone.Shared.Common
         ByTech,
         ByRoom
     }
+
+    public enum PhoneClientType
+    {
+        WinPhone7,
+        WinPhone8
+    }
 }

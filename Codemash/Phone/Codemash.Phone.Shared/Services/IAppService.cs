@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Codemash.Phone.Shared.Common;
 using Microsoft.Phone.Notification;
 
 namespace Codemash.Phone.Shared.Services
@@ -11,7 +12,8 @@ namespace Codemash.Phone.Shared.Services
         /// <summary>
         /// Called to setup the push notification channel
         /// </summary>
-        void InitializePushChannel();
+        /// <param name="clientType"> </param>
+        void InitializePushChannel(PhoneClientType clientType);
 
         /// <summary>
         /// Event indicating that the Push Channel has been initialized

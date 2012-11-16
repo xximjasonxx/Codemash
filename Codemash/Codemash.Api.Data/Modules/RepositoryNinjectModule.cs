@@ -16,6 +16,7 @@ namespace Codemash.Api.Data.Modules
             Bind<ISessionRepository>().To<EfSessionRepository>().InSingletonScope();
             Bind<ISpeakerRepository>().To<EfSpeakerRepository>().InSingletonScope();
             Bind<IChangeRepository>().To<EfChangeRepository>().InSingletonScope();
+            Bind<IClientRepository>().To<EfClientRepository>().InSingletonScope();
         }
 
         #endregion

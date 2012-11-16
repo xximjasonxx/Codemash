@@ -9,7 +9,7 @@ namespace Codemash.Phone.Shared.Common
 {
     public class CodemashContainer : StandardKernel
     {
-        public CodemashContainer(PhoneApplicationFrame frame, PhoneClientType clientType)
+        public CodemashContainer(PhoneApplicationFrame frame)
         {
             // bind standard Caliburn Components
             Bind<IWindowManager>().To<WindowManager>().InSingletonScope();
@@ -21,8 +21,8 @@ namespace Codemash.Phone.Shared.Common
             Load(new[] {new CodemashRepositoryModule()});
 
             // bind custom services
-            var appService = new CustomAppService(clientType);
-            Bind<IAppService>().ToConstant(appService).InSingletonScope();
+            Bind<IAppService>().To<CustomAppService>().InSingletonScope();
+            Bind<INotificationRegistrationService>().To<CustomNotificationRegistrationService>();
         }
     }
 }

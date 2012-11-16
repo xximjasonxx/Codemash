@@ -18,5 +18,10 @@ namespace Codemash.Phone.Shared.Services
         /// Event indicating the client has successfully registered wit the NotificationTracking Service
         /// </summary>
         event EventHandler RegistrationCompleted;
+
+        /// <summary>
+        /// Event indicating that registration of the client for Push notifications has failed
+        /// </summary>
+        event EventHandler RegistrationFailed;
     }
 }

@@ -14,8 +14,8 @@ namespace Codemash.Api.Data.Repositories
         /// <summary>
         /// Get all the changes for a particular version
         /// </summary>
-        /// <param name="version">The version of changes to get</param>
+        /// <param name="changeset">The version of changes to get</param>
         /// <returns></returns>
-        IEnumerable<Change> GetAll(int changeSet);
+        IEnumerable<Change> GetAll(int changeset);
     }
 }

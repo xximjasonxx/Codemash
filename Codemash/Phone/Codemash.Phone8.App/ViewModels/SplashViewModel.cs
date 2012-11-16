@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows;
+using Codemash.Phone.Shared.Common;
 using Ninject;
 using Caliburn.Micro;
 using Codemash.Phone.Data.Repository;
@@ -8,8 +10,6 @@ namespace Codemash.Phone8.App.ViewModels
 {
     public class SplashViewModel : ViewModelBase
     {
-        private const string ClientTypeName = "WinPhone8";
-
         [Inject]
         public ISessionRepository SessionRepository { get; set; }
 
@@ -29,7 +29,7 @@ namespace Codemash.Phone8.App.ViewModels
         public void PageLoaded()
         {
             ApplicationService.PushChannelInitialized += ApplicationService_PushChannelInitialized;
-            ApplicationService.InitializePushChannel();
+            ApplicationService.InitializePushChannel(PhoneClientType.WinPhone8);
         }
 
         void ApplicationService_PushChannelInitialized(object sender, EventArgs e)
@@ -48,7 +48,7 @@ namespace Codemash.Phone8.App.ViewModels
         // the load of the Speaker Repository completed
         void SpeakerRepository_LoadCompleted(object sender, EventArgs e)
         {
-            NavigationService.UriFor<MainViewModel>().Navigate();
+            Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.UriFor<MainViewModel>().Navigate());
         }
     }
 }

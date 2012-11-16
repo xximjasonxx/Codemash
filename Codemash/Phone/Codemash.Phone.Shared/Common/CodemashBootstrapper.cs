@@ -7,11 +7,10 @@ namespace Codemash.Phone.Shared.Common
     public class CodemashBootstrapper : PhoneBootstrapper
     {
         public IKernel NinjectContainer { get; private set; }
-        public PhoneClientType ClientTypeName { get; set; }
 
         protected override void Configure()
         {
-            NinjectContainer = new CodemashContainer(RootFrame, ClientTypeName);
+            NinjectContainer = new CodemashContainer(RootFrame);
         }
 
         protected override object GetInstance(Type service, string key)

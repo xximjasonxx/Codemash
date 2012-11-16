@@ -1,9 +1,7 @@
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Transactions;
 using Codemash.Api.Data.Repositories;
 using Codemash.Poller.Container;
@@ -33,6 +31,7 @@ namespace Codemash.Poller
                     Logger.Current.LogInformation("Process Start");
 
                     ExecuteProcess();
+                    ExecuteNotificationCheck();
 
                     Logger.Current.LogInformation("Process Complete");
 
@@ -83,6 +82,12 @@ namespace Codemash.Poller
                 Logger.Current.LogInformation("Completing the Procss");
                 scope.Complete();
             }
+        }
+
+        private void ExecuteNotificationCheck()
+        {
+            var process = _container.Get<IProcess>();
+            process.Execute();
         }
     }
 }

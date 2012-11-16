@@ -10,6 +10,7 @@ namespace Codemash.Phone.Shared.Services.Impl
     {
         private const string PushNotificationChannelName = "CodemashPushChannel";
         private string _clientTypeName = string.Empty;
+        private HttpNotificationChannel _notificationChannel;
 
         [Inject]
         public INotificationRegistrationService RegistrationService { get; set; }
@@ -23,20 +24,35 @@ namespace Codemash.Phone.Shared.Services.Impl
         public void InitializePushChannel(PhoneClientType clientType)
         {
             _clientTypeName = clientType.ToString();
-            var notificationChannel = HttpNotificationChannel.Find(PushNotificationChannelName);
-            if (notificationChannel == null)
+            _notificationChannel = HttpNotificationChannel.Find(PushNotificationChannelName);
+            if (_notificationChannel == null)
             {
-                notificationChannel = new HttpNotificationChannel(PushNotificationChannelName);
-                notificationChannel.ChannelUriUpdated += NotificationChannel_ChannelUriUpdated;
+                _notificationChannel = new HttpNotificationChannel(PushNotificationChannelName);
+                _notificationChannel.ChannelUriUpdated += NotificationChannel_ChannelUriUpdated;
+                _notificationChannel.HttpNotificationReceived += NotificationChannel_HttpNotificationReceived;
+                _notificationChannel.ShellToastNotificationReceived += NotificationChannel_ShellToastNotificationReceived;
 
                 // open the channel
-                notificationChannel.Open();
+                _notificationChannel.Open();
             }
             else
             {
+                _notificationChannel.HttpNotificationReceived += NotificationChannel_HttpNotificationReceived;
+                _notificationChannel.ShellToastNotificationReceived += NotificationChannel_ShellToastNotificationReceived;
+
                 if (PushChannelInitialized != null)
                     PushChannelInitialized(this, new EventArgs());
             }
+        }
+
+        void NotificationChannel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
+        {
+            return;
+        }
+
+        void NotificationChannel_HttpNotificationReceived(object sender, HttpNotificationEventArgs e)
+        {
+            return;
         }
 
         void NotificationChannel_ChannelUriUpdated(object sender, NotificationChannelUriEventArgs e)
@@ -53,6 +69,9 @@ namespace Codemash.Phone.Shared.Services.Impl
 
         void RegistrationService_RegistrationCompleted(object sender, EventArgs e)
         {
+            if (!_notificationChannel.IsShellTileBound)
+                _notificationChannel.BindToShellTile();
+
             if (PushChannelInitialized != null)
                 PushChannelInitialized(this, new EventArgs());
         }

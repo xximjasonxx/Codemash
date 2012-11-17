@@ -134,6 +134,7 @@
   <ItemGroup>
     <Compile Include="Container\PollerContainer.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Notification\Enum.cs" />
     <Compile Include="Notification\Impl\Manager\NotificationManagerBase.cs" />
     <Compile Include="Notification\Impl\Resolver\PollerNotificationManagerResolver.cs" />
     <Compile Include="Notification\INotificationManager.cs" />

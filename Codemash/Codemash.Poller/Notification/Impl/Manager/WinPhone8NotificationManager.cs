@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Net;
 using System.Xml;
 
 namespace Codemash.Poller.Notification.Impl.Manager
@@ -14,6 +16,29 @@ namespace Codemash.Poller.Notification.Impl.Manager
         /// <param name="title">The title (Text1) of the Toast notification</param>
         /// <param name="subtitle">The subtitle (Text2) of the Toast notification</param>
         public void SendToast(string channelUri, string title, string subtitle)
+        {
+            var payload = GetPayload(title, subtitle);
+            var request = (HttpWebRequest)WebRequest.Create(channelUri);
+            request.Method = WebRequestMethods.Http.Post;
+            request.ContentLength = payload.Length;
+            request.ContentType = "text/xml";
+
+            request.Headers.Add("X-Message-ID", Guid.NewGuid().ToString());
+            request.Headers.Add("X-WindowsPhone-Target", "toast");
+            request.Headers.Add("X-NotificationClass", ((int) BatchingInterval.ImemdiateToast).ToString());
+
+            // send the request
+            using (var requestStream = request.GetRequestStream())
+            {
+                requestStream.Write(payload, 0, payload.Length);
+            }
+
+            request.GetResponse();
+        }
+
+        #endregion
+
+        private byte[] GetPayload(string title, string subtitle)
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -37,10 +62,8 @@ namespace Codemash.Poller.Notification.Impl.Manager
                     writer.Flush();
                 }
 
-                byte[] payload = memoryStream.ToArray();
+                return memoryStream.ToArray();
             }
         }
-
-        #endregion
     }
 }

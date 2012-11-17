@@ -69,8 +69,8 @@ namespace Codemash.Phone.Shared.Services.Impl
 
         void RegistrationService_RegistrationCompleted(object sender, EventArgs e)
         {
-            if (!_notificationChannel.IsShellTileBound)
-                _notificationChannel.BindToShellTile();
+            if (!_notificationChannel.IsShellToastBound)
+                _notificationChannel.BindToShellToast();
 
             if (PushChannelInitialized != null)
                 PushChannelInitialized(this, new EventArgs());

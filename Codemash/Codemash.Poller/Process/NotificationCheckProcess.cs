@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Codemash.Api.Data.Repositories;
+﻿using System.Linq;
 using Codemash.Api.Data.Repositories.Impl;
 using Codemash.Poller.Notification;
 using Ninject;

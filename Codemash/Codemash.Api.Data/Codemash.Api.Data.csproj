@@ -137,6 +137,7 @@
     <Compile Include="Parsing\ISessionEntityParser.cs" />
     <Compile Include="Parsing\ISpeakerEntityParser.cs" />
     <Compile Include="Provider\Impl\CodemashMasterDataProvider.cs" />
+    <Compile Include="Provider\Impl\LocalFileSystemMasterDataProvider.cs" />
     <Compile Include="Repositories\IChangeRepository.cs" />
     <Compile Include="Repositories\IClientRepository.cs" />
     <Compile Include="Repositories\Impl\CodemashContext.cs" />

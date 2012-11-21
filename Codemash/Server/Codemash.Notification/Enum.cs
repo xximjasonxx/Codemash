@@ -1,5 +1,5 @@
 ﻿
-namespace Codemash.Poller.Notification
+namespace Codemash.Notification
 {
     public enum BatchingInterval
     {

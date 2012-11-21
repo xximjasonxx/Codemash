@@ -30,7 +30,6 @@ namespace Codemash.Phone.Shared.Services.Impl
                 _notificationChannel = new HttpNotificationChannel(PushNotificationChannelName);
                 _notificationChannel.ChannelUriUpdated += NotificationChannel_ChannelUriUpdated;
                 _notificationChannel.HttpNotificationReceived += NotificationChannel_HttpNotificationReceived;
-                _notificationChannel.ShellToastNotificationReceived += NotificationChannel_ShellToastNotificationReceived;
 
                 // open the channel
                 _notificationChannel.Open();
@@ -38,16 +37,10 @@ namespace Codemash.Phone.Shared.Services.Impl
             else
             {
                 _notificationChannel.HttpNotificationReceived += NotificationChannel_HttpNotificationReceived;
-                _notificationChannel.ShellToastNotificationReceived += NotificationChannel_ShellToastNotificationReceived;
 
                 if (PushChannelInitialized != null)
                     PushChannelInitialized(this, new EventArgs());
             }
-        }
-
-        void NotificationChannel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
-        {
-            return;
         }
 
         void NotificationChannel_HttpNotificationReceived(object sender, HttpNotificationEventArgs e)
@@ -69,8 +62,8 @@ namespace Codemash.Phone.Shared.Services.Impl
 
         void RegistrationService_RegistrationCompleted(object sender, EventArgs e)
         {
-            if (!_notificationChannel.IsShellToastBound)
-                _notificationChannel.BindToShellToast();
+            if (!_notificationChannel.IsShellTileBound)
+                _notificationChannel.BindToShellTile();
 
             if (PushChannelInitialized != null)
                 PushChannelInitialized(this, new EventArgs());

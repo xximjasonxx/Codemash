@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Windows;
 using Caliburn.Micro;
 using Codemash.Phone.Data.Repository;
+using Codemash.Phone.Shared.Common;
+using Codemash.Phone.Shared.Services;
 using Ninject;
 
 namespace Codemash.Phone7.App.ViewModels
@@ -13,12 +16,21 @@ namespace Codemash.Phone7.App.ViewModels
         [Inject]
         public ISpeakerRepository SpeakerRepository { get; set; }
 
+        [Inject]
+        public IAppService ApplicationService { get; set; }
+
         public SplashViewModel(INavigationService navigationService) : base(navigationService)
         {
         }
 
         // behaviors
         public void PageLoaded()
+        {
+            ApplicationService.PushChannelInitialized += ApplicationService_PushChannelInitialized;
+            ApplicationService.InitializePushChannel(PhoneClientType.WinPhone7);
+        }
+
+        void ApplicationService_PushChannelInitialized(object sender, EventArgs e)
         {
             SessionRepository.LoadCompleted += SessionRepository_LoadCompleted;
             SessionRepository.Load();
@@ -34,7 +46,7 @@ namespace Codemash.Phone7.App.ViewModels
         // the load of the Speaker Repository completed
         private void SpeakerRepository_LoadCompleted(object sender, EventArgs e)
         {
-            NavigationService.UriFor<MainViewModel>().Navigate();
+            Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.UriFor<MainViewModel>().Navigate());
         }
     }
 }

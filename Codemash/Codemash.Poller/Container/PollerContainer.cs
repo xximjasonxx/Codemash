@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Codemash.Api.Data.Modules;
-using Codemash.Poller.Notification.Module;
+using Codemash.Notification.Modules;
 using Codemash.Poller.Process;
 using Ninject;
 using Ninject.Modules;
@@ -20,7 +20,7 @@ namespace Codemash.Poller.Container
             var dataProviderModule = new DataProviderNinjectModule();
             var repositoryModule = new RepositoryNinjectModule();
             var parsingModule = new ParsingNinjectModule();
-            var notificationModule = new PollerNotificationNinjectModule(this);
+            var notificationModule = new NotificationNinjectModule();
 
             // add them into container
             Load(new List<INinjectModule>

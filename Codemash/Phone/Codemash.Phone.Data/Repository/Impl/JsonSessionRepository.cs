@@ -14,7 +14,7 @@ namespace Codemash.Phone.Data.Repository.Impl
 
         protected override string DownloadUrl
         {
-            get { return "http://codemashdelta.azurewebsites.net/api/Session"; }
+            get { return "http://192.168.1.101/DeltaApi/api/Session"; }
         }
 
         protected override Session CreateObject(JToken jToken)
@@ -42,16 +42,6 @@ namespace Codemash.Phone.Data.Repository.Impl
         {
             if (Repository.Count(it => it.IsDirty) > 0)
             {
-                // debug
-                var bad = (from s in Repository
-                           group s by s.SessionId
-                           into Groups
-                           select new
-                                      {
-                                          Groups.Key,
-                                          Count = Groups.Count()
-                                      }).Where(g => g.Count > 1).ToList();
-
                 using (var db = GetContext())
                 {
                     foreach (var item in Repository.Where(it => it.IsDirty))

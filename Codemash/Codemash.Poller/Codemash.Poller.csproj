@@ -134,15 +134,6 @@
   <ItemGroup>
     <Compile Include="Container\PollerContainer.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="Notification\Enum.cs" />
-    <Compile Include="Notification\Impl\Manager\NotificationManagerBase.cs" />
-    <Compile Include="Notification\Impl\Resolver\PollerNotificationManagerResolver.cs" />
-    <Compile Include="Notification\INotificationManager.cs" />
-    <Compile Include="Notification\INotificationManagerResolver.cs" />
-    <Compile Include="Notification\Impl\Manager\Win8NotificationManager.cs" />
-    <Compile Include="Notification\Impl\Manager\WinPhone7NotificationManager.cs" />
-    <Compile Include="Notification\Impl\Manager\WinPhone8NotificationManager.cs" />
-    <Compile Include="Notification\Module\PollerNotificationNinjectModule.cs" />
     <Compile Include="Process\IProcess.cs" />
     <Compile Include="Process\ISynchronize.cs" />
     <Compile Include="Process\NotificationCheckProcess.cs" />
@@ -165,6 +156,10 @@
     <ProjectReference Include="..\Codemash.Server.Core\Codemash.Server.Core.csproj">
       <Project>{de4a2f3e-5896-4356-8603-473a7fd436d7}</Project>
       <Name>Codemash.Server.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Server\Codemash.Notification\Codemash.Notification.csproj">
+      <Project>{1ebdcefd-994b-4827-8068-e7f3e65699d0}</Project>
+      <Name>Codemash.Notification</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

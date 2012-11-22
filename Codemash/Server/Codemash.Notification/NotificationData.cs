@@ -9,6 +9,7 @@ namespace Codemash.Notification
     {
         public string BackContent { get; internal set; }
         public string FrontBackgroundImageUrl { get; internal set; }
+        public string BackBackgroundImageUrl { get; internal set; }
 
         public string ChannelUri { get; internal set; }
     }

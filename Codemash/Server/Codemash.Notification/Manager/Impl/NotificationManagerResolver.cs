@@ -9,7 +9,7 @@ namespace Codemash.Notification.Manager.Impl
 
         public NotificationManagerResolver(IKernel container)
         {
-            container = _container;
+            _container = container;
         }
 
         #region Implementation of IResolver<INotificationManager>

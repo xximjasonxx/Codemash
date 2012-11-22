@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
+﻿using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Web;
 using Codemash.Server.Core.Extensions;
 
@@ -27,6 +23,10 @@ namespace Codemash.DeltaApi.Handlers
                 {
                     CreateNotificationTile(basePath, count);
                 }
+
+                context.Response.ContentType = "image/png";
+                context.Response.WriteFile(Path.Combine(basePath, GetFilename(count)));
+                context.Response.Flush();
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using Codemash.Phone.Shared.Common;
 using Microsoft.Phone.Notification;
@@ -63,7 +64,10 @@ namespace Codemash.Phone.Shared.Services.Impl
         void RegistrationService_RegistrationCompleted(object sender, EventArgs e)
         {
             if (!_notificationChannel.IsShellTileBound)
-                _notificationChannel.BindToShellTile();
+                _notificationChannel.BindToShellTile(new Collection<Uri>()
+                                                         {
+                                                             new Uri("http://192.168.1.4", UriKind.RelativeOrAbsolute)
+                                                         });
 
             if (PushChannelInitialized != null)
                 PushChannelInitialized(this, new EventArgs());

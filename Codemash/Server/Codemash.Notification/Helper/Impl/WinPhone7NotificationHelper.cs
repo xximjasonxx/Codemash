@@ -12,7 +12,16 @@ namespace Codemash.Notification.Helper.Impl
         /// <returns></returns>
         public string GetImageUrlPathForCount(int changesetCount)
         {
-            return string.Format("{0}/Phone7Notification.ashx?count={1}", Config.DeltaApiDomain, changesetCount);
+            return string.Format("{0}/Handlers/Phone7Notification.ashx?count={1}", Config.DeltaApiDomain, changesetCount);
+        }
+
+        /// <summary>
+        /// Returns the image used as the background for the back of the tile
+        /// </summary>
+        /// <returns></returns>
+        public string GetBackImageUrlPath()
+        {
+            return string.Format("{0}/Handlers/Images/wp7/phone7_back.png", Config.DeltaApiDomain);
         }
 
         #endregion

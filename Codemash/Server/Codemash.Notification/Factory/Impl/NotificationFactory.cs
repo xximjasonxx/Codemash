@@ -1,4 +1,4 @@
-﻿using Codemash.Api.Data;
+﻿
 using Ninject;
 
 namespace Codemash.Notification.Factory.Impl
@@ -19,6 +19,7 @@ namespace Codemash.Notification.Factory.Impl
 
             var helper = NotificationHelperResolver.Resolve(clientType);
             notificationData.FrontBackgroundImageUrl = helper.GetImageUrlPathForCount(missingChangesetCount);
+            notificationData.BackBackgroundImageUrl = helper.GetBackImageUrlPath();
 
             // return our notification data
             return notificationData;

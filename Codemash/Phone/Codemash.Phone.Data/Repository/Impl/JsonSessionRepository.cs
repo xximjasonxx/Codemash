@@ -14,7 +14,7 @@ namespace Codemash.Phone.Data.Repository.Impl
 
         protected override string DownloadUrl
         {
-            get { return "http://192.168.1.101/DeltaApi/api/Session"; }
+            get { return "http://192.168.1.4/DeltaApi/api/Session"; }
         }
 
         protected override Session CreateObject(JToken jToken)

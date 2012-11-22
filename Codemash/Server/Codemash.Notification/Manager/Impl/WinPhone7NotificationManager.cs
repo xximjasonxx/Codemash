@@ -15,7 +15,8 @@ namespace Codemash.Notification.Manager.Impl
         /// <param name="notification"></param>
         public void SendNotification(NotificationData notification)
         {
-            var payload = GetPayload(notification.FrontBackgroundImageUrl, notification.BackContent);
+            var payload = GetPayload(notification.FrontBackgroundImageUrl, notification.BackContent,
+                notification.BackBackgroundImageUrl);
             var request = (HttpWebRequest)WebRequest.Create(notification.ChannelUri);
             request.Method = WebRequestMethods.Http.Post;
             request.ContentLength = payload.Length;
@@ -40,7 +41,7 @@ namespace Codemash.Notification.Manager.Impl
         /// Return the Payload that will be sent as part of the push notification
         /// </summary>
         /// <returns></returns>
-        public byte[] GetPayload(string backImageUrl, string backContent)
+        public byte[] GetPayload(string backImageUrl, string backContent, string backBackImageUrl)
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -56,6 +57,10 @@ namespace Codemash.Notification.Manager.Impl
 
                     writer.WriteStartElement("wp", "BackContent", "WPNotification");
                     writer.WriteValue(backContent);
+                    writer.WriteEndElement();
+
+                    writer.WriteStartElement("wp", "BackBackgroundImage", "WPNotification");
+                    writer.WriteValue(backBackImageUrl);
                     writer.WriteEndElement();
 
                     writer.WriteEndElement();

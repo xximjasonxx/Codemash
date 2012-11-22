@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Codemash.Api.Data.Repositories.Impl;
-using Codemash.Notification;
 using Codemash.Notification.Factory;
+using Codemash.Notification.Manager;
 using Ninject;
 
 namespace Codemash.Poller.Process
@@ -10,6 +10,9 @@ namespace Codemash.Poller.Process
     {
         [Inject]
         public INotificationFactory NotificationFactory { get; set; }
+
+        [Inject]
+        public INotificationManagerResolver NotificationManagerResolver { get; set; }
 
         #region Implementation of IProcess
 
@@ -25,7 +28,10 @@ namespace Codemash.Poller.Process
                 foreach (var client in context.Clients.Where(c => c.CurrentChangeSet != currentChangeset))
                 {
                     int changesetDifference = currentChangeset - client.CurrentChangeSet;
-                    var notification = NotificationFactory.BuildNotification(client.ChannelUri, changesetDifference);
+                    var notification = NotificationFactory.BuildNotification(client.ChannelUri, client.ClientType, changesetDifference);
+                    var manager = NotificationManagerResolver.Resolve(client.ClientType);
+
+                    manager.SendNotification(notification);
                 }
             }
         }

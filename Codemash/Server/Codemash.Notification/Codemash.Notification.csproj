@@ -37,6 +37,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,21 +47,33 @@
   <ItemGroup>
     <Compile Include="Enum.cs" />
     <Compile Include="Factory\INotificationFactory.cs" />
+    <Compile Include="Helper\Impl\WinPhone7NotificationHelper.cs" />
+    <Compile Include="Helper\INotificationHelper.cs" />
+    <Compile Include="INotificationHelperResolver.cs" />
+    <Compile Include="Manager\Impl\NotificationManagerResolver.cs" />
+    <Compile Include="Manager\Impl\WinPhone7NotificationManager.cs" />
+    <Compile Include="Manager\INotificationManager.cs" />
+    <Compile Include="Manager\INotificationManagerResolver.cs" />
     <Compile Include="Modules\NotificationNinjectModule.cs" />
     <Compile Include="NotificationData.cs" />
     <Compile Include="Factory\Impl\NotificationFactory.cs" />
+    <Compile Include="NotificationHelperResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Codemash.Api.Data\Codemash.Api.Data.csproj">
+      <Project>{299b9b1a-9a60-4a88-a3ea-911f7d5d4a08}</Project>
+      <Name>Codemash.Api.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Codemash.Server.Core\Codemash.Server.Core.csproj">
       <Project>{de4a2f3e-5896-4356-8603-473a7fd436d7}</Project>
       <Name>Codemash.Server.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

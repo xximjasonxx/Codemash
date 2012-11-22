@@ -63,6 +63,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -149,6 +150,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\Phone7Notification.ashx.cs">
+      <DependentUpon>Phone7Notification.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Models\ChangeViewModel.cs" />
     <Compile Include="Models\SessionViewModel.cs" />
     <Compile Include="Models\SpeakerViewModel.cs" />
@@ -183,6 +187,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Handlers\Phone7Notification.ashx" />
     <None Include="Properties\PublishProfiles\codemashdelta - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\codemashdelta - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\codemashdelta - FTP.pubxml" />

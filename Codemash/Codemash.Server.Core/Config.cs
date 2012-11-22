@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.IO;
 using Codemash.Server.Core.Extensions;
 
 namespace Codemash.Server.Core
@@ -27,6 +28,31 @@ namespace Codemash.Server.Core
                 string value = ConfigurationManager.AppSettings["DriveRoot"];
                 if (string.IsNullOrEmpty(value))
                     throw new ConfigurationErrorsException("No DriveRoot specified");
+
+                return value;
+            }
+        }
+
+        public static string NotificationImagesRoot
+        {
+            get
+            {
+                string value = ConfigurationManager.AppSettings["NotificationImagesRoot"];
+                if (string.IsNullOrEmpty(value))
+                    throw new ConfigurationErrorsException("No Image Root specified");
+
+                string drive = DriveRoot + ":/";
+                return Path.Combine(drive, value);
+            }
+        }
+
+        public static string DeltaApiDomain
+        {
+            get
+            {
+                string value = ConfigurationManager.AppSettings["DeltaApiDomain"];
+                if (string.IsNullOrEmpty(value))
+                    throw new ConfigurationErrorsException("No Domain for the DeltaApi Provided");
 
                 return value;
             }

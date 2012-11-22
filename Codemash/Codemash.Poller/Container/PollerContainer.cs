@@ -20,7 +20,7 @@ namespace Codemash.Poller.Container
             var dataProviderModule = new DataProviderNinjectModule();
             var repositoryModule = new RepositoryNinjectModule();
             var parsingModule = new ParsingNinjectModule();
-            var notificationModule = new NotificationNinjectModule();
+            var notificationModule = new NotificationNinjectModule(this);
 
             // add them into container
             Load(new List<INinjectModule>

@@ -7,6 +7,8 @@ namespace Codemash.DeltaApi
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.Ignore("Handlers/*.ashx");
+
             routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

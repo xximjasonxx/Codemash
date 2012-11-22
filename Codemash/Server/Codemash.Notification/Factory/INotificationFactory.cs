@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Codemash.Api.Data;
 
 namespace Codemash.Notification.Factory
 {
@@ -11,8 +8,9 @@ namespace Codemash.Notification.Factory
         /// Build up the data needed to send a notification
         /// </summary>
         /// <param name="channelUri">The channel Uri the notification will be sent to</param>
+        /// <param name="clientType">the type of client we are creating the notification for</param>
         /// <param name="missingChangesetCount">The missing changeset count</param>
         /// <returns>Notification data object</returns>
-        NotificationData BuildNotification(string channelUri, int missingChangesetCount);
+        NotificationData BuildNotification(string channelUri, string clientType, int missingChangesetCount);
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using System.IO;
-using Codemash.Server.Core;
+﻿using Codemash.Server.Core;
 
 namespace Codemash.Notification.Helper.Impl
 {

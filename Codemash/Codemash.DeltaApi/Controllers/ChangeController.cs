@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
 using Codemash.Api.Data;
 using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Repositories;
 using Codemash.DeltaApi.Models;
+using Codemash.Server.Core.Ex;
 using Ninject;
 
 namespace Codemash.DeltaApi.Controllers
@@ -21,7 +23,14 @@ namespace Codemash.DeltaApi.Controllers
 
         public IEnumerable<ChangeViewModel> Get(string channel)
         {
-            return ChangeRepository.GetChangesForChannel(channel).Select(CreateChangeViewModel);
+            try
+            {
+                return ChangeRepository.GetChangesForChannel(channel).Select(CreateChangeViewModel);
+            }
+            catch (ClientNotFoundException)
+            {
+                throw new HttpResponseException(HttpStatusCode.Unauthorized);
+            }
         }
 
         // private helper methods

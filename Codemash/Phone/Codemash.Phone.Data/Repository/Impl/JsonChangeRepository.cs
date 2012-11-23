@@ -1,5 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Codemash.Phone.Core;
+using Codemash.Phone.Data.Common;
 using Codemash.Phone.Data.Entities;
+using Codemash.Phone.Data.Extensions;
+using Newtonsoft.Json.Linq;
 using Ninject;
 using RestSharp;
 
@@ -7,6 +13,8 @@ namespace Codemash.Phone.Data.Repository.Impl
 {
     public class JsonChangeRepository : IChangeRepository
     {
+        private IList<Change> _repository;
+
         [Inject]
         public ISettingsRepository SettingsRepository { get; set; }
 
@@ -23,7 +31,12 @@ namespace Codemash.Phone.Data.Repository.Impl
 
             client.ExecuteAsync(request, resp =>
                                              {
-                                                 return;
+                                                 JArray jsonArray = JArray.Parse(resp.Content);
+                                                 _repository = (from ch in jsonArray.AsJEnumerable()
+                                                                select CreateChangeEntity(ch)).ToList();
+
+                                                 if (LoadCompleted != null)
+                                                     LoadCompleted(this, new EventArgs());
                                              });
         }
 
@@ -48,9 +61,25 @@ namespace Codemash.Phone.Data.Repository.Impl
         /// </summary>
         public bool HasChanges
         {
-            get { throw new NotImplementedException(); }
+            get { return _repository.Count > 0; }
         }
 
         #endregion
+
+        private Change CreateChangeEntity(JToken ch)
+        {
+            var change = new Change
+                       {
+                           Action = new StringWrapper(ch["Action"]).ToString().AsActionTypeEnum(),
+                           ChangeId = int.MinValue,
+                           Changeset = new StringWrapper(ch["Changeset"]).ToString().AsInt(),
+                           EntityId = new StringWrapper(ch["EntityId"]).ToString().AsInt(),
+                           Key = new StringWrapper(ch["Key"]).ToString(),
+                           Value = new StringWrapper(ch["Value"]).ToString()
+                       };
+
+            change.MarkAsClean();
+            return change;
+        }
     }
 }

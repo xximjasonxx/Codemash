@@ -17,7 +17,7 @@ namespace Codemash.Phone.Data.Modules
             Bind<ISessionRepository>().To<JsonSessionRepository>().InSingletonScope();
             Bind<ISpeakerRepository>().To<JsonSpeakerRepository>().InSingletonScope();
             Bind<ISettingsRepository>().To<IsolatedStorageSettingsRepository>().InSingletonScope();
-            Bind<IChangeRepository>().To<JsonChangeRepository>();
+            Bind<IChangeRepository>().To<JsonChangeRepository>().InSingletonScope();
         }
 
         #endregion

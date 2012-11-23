@@ -1,4 +1,5 @@
-﻿using System.IO.IsolatedStorage;
+﻿using System.IO;
+using System.IO.IsolatedStorage;
 using Codemash.Phone.Core;
 using Codemash.Phone.Core.Ev;
 
@@ -16,8 +17,26 @@ namespace Codemash.Phone.Data.Repository.Impl
         /// </summary>
         public bool HasSeenListPage
         {
-            get { return IsolatedStorageSettings.ApplicationSettings[SeenListPageKey].ToString().AsBoolean(false); }
-            set { IsolatedStorageSettings.ApplicationSettings[SeenListPageKey] = value.ToString(); }
+            get
+            {
+                using (var storage = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    using (var stream = new StreamReader(storage.OpenFile(SeenListPageKey, FileMode.Open, FileAccess.Read)))
+                    {
+                        return stream.ReadLine().Trim().AsBoolean(false);
+                    }
+                }
+            }
+            set
+            {
+                using (var storage = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    using (var stream = new StreamWriter(storage.OpenFile(SeenListPageKey, FileMode.Create, FileAccess.Write)))
+                    {
+                        stream.WriteLine(value.ToString());
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -27,13 +46,35 @@ namespace Codemash.Phone.Data.Repository.Impl
         {
             get
             {
-                if (!IsolatedStorageSettings.ApplicationSettings.Contains(ClientUriKey) ||
-                    string.IsNullOrEmpty(IsolatedStorageSettings.ApplicationSettings[ClientUriKey].ToString()))
-                    throw new ChannelNotInitializedException();
+                using (var storage = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    try
+                    {
+                        using (var stream = new StreamReader(storage.OpenFile(ClientUriKey, FileMode.Open, FileAccess.Read)))
+                        {
+                            string channelUri = stream.ReadLine().Trim();
+                            if (string.IsNullOrEmpty(channelUri))
+                                throw new ChannelNotInitializedException();
 
-                return IsolatedStorageSettings.ApplicationSettings[ClientUriKey].ToString();
+                            return channelUri;
+                        }
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        throw new ChannelNotInitializedException();
+                    }
+                }
             }
-            set { IsolatedStorageSettings.ApplicationSettings[ClientUriKey] = value; }
+            set
+            {
+                using (var storage = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    using (var stream = new StreamWriter(storage.OpenFile(ClientUriKey, FileMode.Create, FileAccess.Write)))
+                    {
+                        stream.WriteLine(value);
+                    }
+                }
+            }
         }
 
         #endregion

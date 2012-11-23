@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Codemash.Api.Data.Entities;
+using Codemash.Server.Core.Ex;
 using Codemash.Server.Core.Extensions;
 
 namespace Codemash.Api.Data.Repositories.Impl
@@ -131,7 +132,14 @@ namespace Codemash.Api.Data.Repositories.Impl
         /// <returns></returns>
         public IEnumerable<Change> GetChangesForChannel(string channelUri)
         {
-            return new List<Change>();
+            using (var context = new CodemashContext())
+            {
+                var client = context.Clients.FirstOrDefault(c => c.ChannelUri == channelUri);
+                if (client == null)
+                    throw new ClientNotFoundException();
+
+                return context.Changes.Where(c => c.Changeset > client.CurrentChangeSet).ToList();
+            }
         }
 
         #endregion

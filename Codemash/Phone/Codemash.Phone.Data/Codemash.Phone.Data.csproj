@@ -103,12 +103,15 @@
   <ItemGroup>
     <Compile Include="Common\Enum.cs" />
     <Compile Include="Context\CodemashDataContext.cs" />
+    <Compile Include="Entities\Change.cs" />
     <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="Entities\Session.cs" />
     <Compile Include="Entities\Speaker.cs" />
     <Compile Include="Modules\CodemashRepositoryModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IChangeRepository.cs" />
     <Compile Include="Repository\Impl\IsolatedStorageSettingsRepository.cs" />
+    <Compile Include="Repository\Impl\JsonChangeRepository.cs" />
     <Compile Include="Repository\Impl\JsonSessionRepository.cs" />
     <Compile Include="Repository\Impl\JsonSpeakerRepository.cs" />
     <Compile Include="Repository\Impl\RepositoryBase.cs" />

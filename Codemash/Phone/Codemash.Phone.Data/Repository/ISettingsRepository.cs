@@ -9,8 +9,8 @@ namespace Codemash.Phone.Data.Repository
         bool HasSeenListPage { get; set; }
 
         /// <summary>
-        /// Save the current settings
+        /// Stores the Push Channel URI for the application which Push will use for communication
         /// </summary>
-        void Save();
+        string PushChannelUri { get; set; }
     }
 }

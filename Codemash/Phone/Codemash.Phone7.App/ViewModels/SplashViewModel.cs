@@ -17,7 +17,13 @@ namespace Codemash.Phone7.App.ViewModels
         public ISpeakerRepository SpeakerRepository { get; set; }
 
         [Inject]
+        public ISettingsRepository SettingsRepository { get; set; }
+
+        [Inject]
         public IAppService ApplicationService { get; set; }
+
+        [Inject]
+        public IChangeRepository ChangeRepository { get; set; }
 
         public SplashViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -37,16 +43,30 @@ namespace Codemash.Phone7.App.ViewModels
         }
 
         // the load of the Session Repository completed
-        private void SessionRepository_LoadCompleted(object sender, EventArgs e)
+        void SessionRepository_LoadCompleted(object sender, EventArgs e)
         {
             SpeakerRepository.LoadCompleted += SpeakerRepository_LoadCompleted;
             SpeakerRepository.Load();
         }
 
         // the load of the Speaker Repository completed
-        private void SpeakerRepository_LoadCompleted(object sender, EventArgs e)
+        void SpeakerRepository_LoadCompleted(object sender, EventArgs e)
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.UriFor<MainViewModel>().Navigate());
+            ChangeRepository.LoadCompleted += ChangeRepository_LoadCompleted;
+            ChangeRepository.Load();
+        }
+
+        // load of the pending changes is completed (not applied)
+        void ChangeRepository_LoadCompleted(object sender, EventArgs e)
+        {
+            if (ChangeRepository.HasChanges)
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.UriFor<ChangesViewModel>().Navigate());
+            }
+            else
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.UriFor<MainViewModel>().Navigate());
+            }
         }
     }
 }

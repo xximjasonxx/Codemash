@@ -16,16 +16,16 @@ namespace Codemash.DeltaApi.Controllers
 
         public IEnumerable<ChangeViewModel> Get()
         {
-            return ChangeRepository.GetLatest().Select(CreateSessionChangeViewModel);
+            return ChangeRepository.GetAll().Select(CreateChangeViewModel);
         }
 
-        public IEnumerable<ChangeViewModel> Get(int id)
+        public IEnumerable<ChangeViewModel> Get(string channel)
         {
-            return ChangeRepository.GetAll(id).Select(CreateSessionChangeViewModel);
+            return ChangeRepository.GetChangesForChannel(channel).Select(CreateChangeViewModel);
         }
 
         // private helper methods
-        private static ChangeViewModel CreateSessionChangeViewModel(Change change)
+        private static ChangeViewModel CreateChangeViewModel(Change change)
         {
             var result = new ChangeViewModel
                              {

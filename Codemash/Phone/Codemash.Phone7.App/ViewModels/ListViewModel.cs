@@ -74,7 +74,6 @@ namespace Codemash.Phone7.App.ViewModels
             {
                 MessageBox.Show("Touch the Group Headers to quickly move through the whole list");
                 SettingsRepository.HasSeenListPage = true;
-                SettingsRepository.Save();
             }
         }
 

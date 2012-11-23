@@ -6,16 +6,10 @@ namespace Codemash.Api.Data.Repositories
     public interface IChangeRepository : IReadRepository<Change, int>, IWriteRepository<Change, int>
     {
         /// <summary>
-        /// Return the SessionChanges as part of the latest version of changes
+        /// Return the unregistered changes for a given client
         /// </summary>
+        /// <param name="channelUri">The Uri identifying the channel and thus the client</param>
         /// <returns></returns>
-        IEnumerable<Change> GetLatest();
-
-        /// <summary>
-        /// Get all the changes for a particular version
-        /// </summary>
-        /// <param name="changeset">The version of changes to get</param>
-        /// <returns></returns>
-        IEnumerable<Change> GetAll(int changeset);
+        IEnumerable<Change> GetChangesForChannel(string channelUri);
     }
 }

@@ -16,6 +16,12 @@ namespace Codemash.Phone.Core
             return int.TryParse(str, out intVal) ? intVal : int.MinValue;
         }
 
+        public static int AsInt(this string str, int defaultValue)
+        {
+            int value = str.AsInt();
+            return value == int.MinValue ? defaultValue : value;
+        }
+
         /// <summary>
         /// Convert a string to its boolean representation, return the default is the parse fails
         /// </summary>

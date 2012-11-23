@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.Common;
 using Microsoft.Phone.Notification;
 using Ninject;
@@ -15,6 +16,9 @@ namespace Codemash.Phone.Shared.Services.Impl
 
         [Inject]
         public INotificationRegistrationService RegistrationService { get; set; }
+
+        [Inject]
+        public ISettingsRepository SettingsRepository { get; set; }
 
         #region Implementation of IAppService
 
@@ -53,6 +57,7 @@ namespace Codemash.Phone.Shared.Services.Impl
         {
             RegistrationService.RegistrationCompleted += RegistrationService_RegistrationCompleted;
             RegistrationService.RegistrationFailed += RegistrationService_RegistrationFailed;
+
             RegistrationService.Register(e.ChannelUri.ToString(), _clientTypeName);
         }
 
@@ -63,6 +68,7 @@ namespace Codemash.Phone.Shared.Services.Impl
 
         void RegistrationService_RegistrationCompleted(object sender, EventArgs e)
         {
+            SettingsRepository.PushChannelUri = _notificationChannel.ChannelUri.ToString();
             if (!_notificationChannel.IsShellTileBound)
                 _notificationChannel.BindToShellTile(new Collection<Uri>()
                                                          {

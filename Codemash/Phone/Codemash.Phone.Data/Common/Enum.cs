@@ -8,4 +8,11 @@ namespace Codemash.Phone.Data.Common
         Removed,
         Clean
     }
+
+    public enum ActionType
+    {
+        Add,
+        Modify,
+        Delete
+    }
 }

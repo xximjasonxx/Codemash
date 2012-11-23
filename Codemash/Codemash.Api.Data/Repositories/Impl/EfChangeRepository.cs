@@ -124,6 +124,16 @@ namespace Codemash.Api.Data.Repositories.Impl
             }
         }
 
+        /// <summary>
+        /// Return the unregistered changes for a given client
+        /// </summary>
+        /// <param name="channelUri">The Uri identifying the channel and thus the client</param>
+        /// <returns></returns>
+        public IEnumerable<Change> GetChangesForChannel(string channelUri)
+        {
+            return new List<Change>();
+        }
+
         #endregion
     }
 }

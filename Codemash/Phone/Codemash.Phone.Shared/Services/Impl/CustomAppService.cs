@@ -34,23 +34,15 @@ namespace Codemash.Phone.Shared.Services.Impl
             {
                 _notificationChannel = new HttpNotificationChannel(PushNotificationChannelName);
                 _notificationChannel.ChannelUriUpdated += NotificationChannel_ChannelUriUpdated;
-                _notificationChannel.HttpNotificationReceived += NotificationChannel_HttpNotificationReceived;
 
                 // open the channel
                 _notificationChannel.Open();
             }
             else
             {
-                _notificationChannel.HttpNotificationReceived += NotificationChannel_HttpNotificationReceived;
-
                 if (PushChannelInitialized != null)
                     PushChannelInitialized(this, new EventArgs());
             }
-        }
-
-        void NotificationChannel_HttpNotificationReceived(object sender, HttpNotificationEventArgs e)
-        {
-            return;
         }
 
         void NotificationChannel_ChannelUriUpdated(object sender, NotificationChannelUriEventArgs e)

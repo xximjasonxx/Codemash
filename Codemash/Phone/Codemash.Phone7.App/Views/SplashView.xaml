@@ -16,8 +16,9 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="443*" />
-            <RowDefinition Height="325*" />
+            <RowDefinition Height="461*" />
+            <RowDefinition Height="13*" />
+            <RowDefinition Height="326*"/>
         </Grid.RowDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="/SplashScreenImage.jpg" />
@@ -25,5 +26,8 @@
         
         <ProgressBar IsIndeterminate="True" HorizontalAlignment="Stretch"
                      Grid.Row="1" VerticalAlignment="Top" Foreground="White" />
+        
+        <TextBlock Foreground="White" FontFamily="Segoe UI" FontSize="30" HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Text="{Binding LoadStatus}" Grid.Row="2" />
     </Grid>
 </phone:PhoneApplicationPage>

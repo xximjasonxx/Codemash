@@ -163,6 +163,9 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Handlers\Images\wp7\phone7_none.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Handlers\Images\wp7\phone7_back.png" />
     <Content Include="Handlers\Images\wp7\phone7_template.png" />
     <Content Include="Web.config" />

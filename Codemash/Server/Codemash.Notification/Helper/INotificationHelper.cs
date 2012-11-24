@@ -19,5 +19,11 @@ namespace Codemash.Notification.Helper
         /// </summary>
         /// <returns></returns>
         string GetBackImageUrlPath();
+
+        /// <summary>
+        /// Returns the imaged used as the back for no notifications
+        /// </summary>
+        /// <returns></returns>
+        string GetNoneImageUrl();
     }
 }

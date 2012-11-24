@@ -45,20 +45,19 @@ namespace Codemash.DeltaApi.Controllers
         }
 
         [HttpPost]
-        public void Update(ClientUpdateModel model)
+        public HttpStatusCode Update(ClientUpdateModel model)
         {
             var client = ClientRepository.Get(model.ChannelUri);
             if (client != null)
             {
                 // update the client
-                ClientRepository.UpdateClientChangeset(model.ChannelUri, model.Changeset);
-
-                // send the clear notification for the client type
+                ClientRepository.UpdateClientChangeset(client.ChannelUri, model.Changeset);
                 var notification = NotificationFactory.BuildClearNotification(client.ChannelUri, client.ClientType);
                 var manager = NotificationManagerResolver.Resolve(client.ClientType);
-                manager.SendNotification(notification);
 
+                manager.SendNotification(notification);
             }
+            return HttpStatusCode.OK;
         }
 
         // private helper methods

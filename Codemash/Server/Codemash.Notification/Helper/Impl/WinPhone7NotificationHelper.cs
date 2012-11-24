@@ -24,6 +24,15 @@ namespace Codemash.Notification.Helper.Impl
             return string.Format("{0}/Handlers/Images/wp7/phone7_back.png", Config.DeltaApiDomain);
         }
 
+        /// <summary>
+        /// Returns the imaged used as the back for no notifications
+        /// </summary>
+        /// <returns></returns>
+        public string GetNoneImageUrl()
+        {
+            return string.Format("{0}/Handlers/Images/wp7/phone7_none.png", Config.DeltaApiDomain);
+        }
+
         #endregion
     }
 }

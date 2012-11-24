@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Net;
 using Codemash.Phone.Data.Common;
 using Codemash.Phone.Data.Entities;
 using Codemash.Phone.Data.Extensions;
 using Codemash.Phone.Data.Repository;
+using Microsoft.Phone.Shell;
 using Ninject;
 using RestSharp;
 
@@ -42,9 +44,11 @@ namespace Codemash.Phone.Data.Provider.Impl
             SessionRepository.SaveChanges();
 
             // indicate to the service that we are up to date (we will not work on the response to this)
-            int changeSet = changeList.Max(c => c.Changeset);
-            if (changeSet > 0)
+            if (changeList.Count > 0)
+            {
+                int changeSet = changeList.Max(c => c.Changeset);
                 UpdateClientChangesetToLatest(changeSet);
+            }
         }
 
         #endregion
@@ -165,7 +169,10 @@ namespace Codemash.Phone.Data.Provider.Impl
             request.AddParameter("ChannelUri", SettingsRepository.PushChannelUri);
             request.AddParameter("Changeset", changeset);
 
-            client.ExecuteAsync(request, resp => { });
+            client.ExecuteAsync(request, resp =>
+                                             {
+                                                 return;
+                                             });
         }
     }
 }

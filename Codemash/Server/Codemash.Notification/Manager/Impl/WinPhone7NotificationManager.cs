@@ -31,7 +31,11 @@ namespace Codemash.Notification.Manager.Impl
                 requestStream.Write(payload, 0, payload.Length);
             }
 
-            request.GetResponse();
+            try
+            {
+                request.GetResponse();
+            }
+            catch (WebException ex) { }
         }
 
         #endregion

@@ -33,10 +33,15 @@ namespace Codemash.Notification.Factory.Impl
         /// <returns></returns>
         public NotificationData BuildClearNotification(string channelUri, string clientType)
         {
+            var helper = NotificationHelperResolver.Resolve(clientType);
+
             return new NotificationData
                        {
                            Count = 0,
-                           ChannelUri = channelUri
+                           ChannelUri = channelUri,
+                           BackBackgroundImageUrl = null,
+                           BackContent = string.Empty,
+                           FrontBackgroundImageUrl = helper.GetNoneImageUrl()
                        };
         }
     }

@@ -1,4 +1,6 @@
-﻿using Codemash.Phone.Data.Repository;
+﻿using Codemash.Phone.Data.Provider;
+using Codemash.Phone.Data.Provider.Impl;
+using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Data.Repository.Impl;
 using Ninject.Modules;
 
@@ -18,6 +20,9 @@ namespace Codemash.Phone.Data.Modules
             Bind<ISpeakerRepository>().To<JsonSpeakerRepository>().InSingletonScope();
             Bind<ISettingsRepository>().To<IsolatedStorageSettingsRepository>().InSingletonScope();
             Bind<IChangeRepository>().To<JsonChangeRepository>().InSingletonScope();
+
+            // bind providers
+            Bind<IChangeProvider>().To<SessionSpeakerChangeProvider>();
         }
 
         #endregion

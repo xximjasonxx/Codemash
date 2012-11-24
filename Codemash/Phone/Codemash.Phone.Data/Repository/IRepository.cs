@@ -20,6 +20,6 @@ namespace Codemash.Phone.Data.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        T Get(int id);
+        T Get(long id);
     }
 }

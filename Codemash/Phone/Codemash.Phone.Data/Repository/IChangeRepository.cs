@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Codemash.Phone.Data.Entities;
 
 namespace Codemash.Phone.Data.Repository
@@ -9,8 +6,9 @@ namespace Codemash.Phone.Data.Repository
     public interface IChangeRepository : IRepository<Change>
     {
         /// <summary>
-        /// Return whether there are changes in the repository or not
+        /// Return all changes in the current repository
         /// </summary>
-        bool HasChanges { get; }
+        /// <returns></returns>
+        IList<Change> GetAll();
     }
 }

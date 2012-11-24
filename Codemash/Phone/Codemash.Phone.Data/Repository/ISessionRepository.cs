@@ -22,5 +22,10 @@ namespace Codemash.Phone.Data.Repository
         /// <param name="searchTerm"></param>
         /// <returns></returns>
         IList<Session> FindSessions(string searchTerm);
+
+        /// <summary>
+        /// Save the current state of the repository
+        /// </summary>
+        void Save();
     }
 }

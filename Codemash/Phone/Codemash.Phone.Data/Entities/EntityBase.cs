@@ -6,7 +6,6 @@ namespace Codemash.Phone.Data.Entities
     {
         internal EntityState EntityState { get; private set; }
         internal bool IsDirty { get { return EntityState != EntityState.Clean; } }
-        internal abstract int PrimaryKey { get; }
 
         protected EntityBase()
         {
@@ -16,6 +15,19 @@ namespace Codemash.Phone.Data.Entities
         internal void MarkAsClean()
         {
             EntityState = EntityState.Clean;
+        }
+
+        internal void MarkAsDeleted()
+        {
+            EntityState = EntityState.Removed;
+        }
+
+        protected void MarkAsDirty()
+        {
+            if (EntityState == EntityState.New)
+                return;
+
+            EntityState = EntityState.Modified;
         }
     }
 }

@@ -23,6 +23,23 @@ namespace Codemash.Phone.Core
         }
 
         /// <summary>
+        /// Convert a string to its long representation, return MinValue if the parse fails
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static long AsLong(this string str)
+        {
+            long longVal;
+            return long.TryParse(str, out longVal) ? longVal : long.MinValue;
+        }
+
+        public static long AsLong(this string str, long defaultValue)
+        {
+            long value = str.AsLong();
+            return value == long.MinValue ? defaultValue : value;
+        }
+
+        /// <summary>
         /// Convert a string to its boolean representation, return the default is the parse fails
         /// </summary>
         /// <param name="str"></param>

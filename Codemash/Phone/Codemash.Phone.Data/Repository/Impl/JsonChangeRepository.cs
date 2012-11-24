@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Codemash.Phone.Core;
-using Codemash.Phone.Data.Common;
 using Codemash.Phone.Data.Entities;
 using Codemash.Phone.Data.Extensions;
 using Newtonsoft.Json.Linq;
@@ -47,21 +46,18 @@ namespace Codemash.Phone.Data.Repository.Impl
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Change Get(int id)
+        public Change Get(long id)
         {
             throw new NotImplementedException();
         }
 
-        #endregion
-
-        #region Implementation of IChangeRepository
-
         /// <summary>
-        /// Return whether there are changes in the repository or not
+        /// Return all changes in the current repository
         /// </summary>
-        public bool HasChanges
+        /// <returns></returns>
+        public IList<Change> GetAll()
         {
-            get { return _repository.Count > 0; }
+            return _repository;
         }
 
         #endregion
@@ -71,9 +67,9 @@ namespace Codemash.Phone.Data.Repository.Impl
             var change = new Change
                        {
                            Action = new StringWrapper(ch["Action"]).ToString().AsActionTypeEnum(),
-                           ChangeId = int.MinValue,
                            Changeset = new StringWrapper(ch["Changeset"]).ToString().AsInt(),
-                           EntityId = new StringWrapper(ch["EntityId"]).ToString().AsInt(),
+                           EntityId = new StringWrapper(ch["EntityId"]).ToString().AsLong(),
+                           EntityType = new StringWrapper(ch["EntityType"]).ToString(),
                            Key = new StringWrapper(ch["Key"]).ToString(),
                            Value = new StringWrapper(ch["Value"]).ToString()
                        };

@@ -23,7 +23,7 @@ namespace Codemash.Phone.Data.Repository.Impl
                                   BlogUrl = new StringWrapper(jToken["BlogUrl"]).ToString(),
                                   Name = new StringWrapper(jToken["Name"]).ToString(),
                                   Twitter = new StringWrapper(jToken["Twitter"]).ToString(),
-                                  SpeakerId = new StringWrapper(jToken["SpeakerId"]).ToString().AsInt()
+                                  SpeakerId = new StringWrapper(jToken["SpeakerId"]).ToString().AsLong()
                               };
 
             return speaker;
@@ -69,7 +69,7 @@ namespace Codemash.Phone.Data.Repository.Impl
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Speaker Get(int id)
+        public Speaker Get(long id)
         {
             return Repository.First(s => s.SpeakerId == id);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using Caliburn.Micro;
+using Codemash.Phone.Data.Provider;
 using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.Common;
 using Codemash.Phone.Shared.Services;
@@ -17,7 +18,7 @@ namespace Codemash.Phone7.App.ViewModels
         public ISpeakerRepository SpeakerRepository { get; set; }
 
         [Inject]
-        public ISettingsRepository SettingsRepository { get; set; }
+        public IChangeProvider ChangeProvider { get; set; }
 
         [Inject]
         public IAppService ApplicationService { get; set; }
@@ -59,14 +60,8 @@ namespace Codemash.Phone7.App.ViewModels
         // load of the pending changes is completed (not applied)
         void ChangeRepository_LoadCompleted(object sender, EventArgs e)
         {
-            if (ChangeRepository.HasChanges)
-            {
-                Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.UriFor<ChangesViewModel>().Navigate());
-            }
-            else
-            {
-                Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.UriFor<MainViewModel>().Navigate());
-            }
+            ChangeProvider.ApplyChanges(ChangeRepository.GetAll());
+            Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.UriFor<MainViewModel>().Navigate());
         }
     }
 }

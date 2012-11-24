@@ -23,8 +23,8 @@ namespace Codemash.Phone.Data.Repository.Impl
                               {
                                   Abstract = new StringWrapper(jToken["Abstract"]).ToString(),
                                   Difficulty = new StringWrapper(jToken["Level"]).ToString(),
-                                  SessionId = new StringWrapper(jToken["SessionId"]).ToString().AsInt(),
-                                  SpeakerId = new StringWrapper(jToken["SpeakerId"]).ToString().AsInt(),
+                                  SessionId = new StringWrapper(jToken["SessionId"]).ToString().AsLong(),
+                                  SpeakerId = new StringWrapper(jToken["SpeakerId"]).ToString().AsLong(),
                                   Technology = new StringWrapper(jToken["Track"]).ToString(),
                                   Title = new StringWrapper(jToken["Title"]).ToString(),
                                   Starts = new StringWrapper(jToken["Start"]).ToString(),
@@ -112,7 +112,7 @@ namespace Codemash.Phone.Data.Repository.Impl
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Session Get(int id)
+        public Session Get(long id)
         {
             return Repository.First(s => s.SessionId == id);
         }

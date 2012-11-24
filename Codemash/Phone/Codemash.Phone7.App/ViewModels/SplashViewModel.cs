@@ -4,6 +4,7 @@ using Caliburn.Micro;
 using Codemash.Phone.Data.Provider;
 using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.Common;
+using Codemash.Phone.Shared.Notification;
 using Codemash.Phone.Shared.Services;
 using Ninject;
 
@@ -61,6 +62,8 @@ namespace Codemash.Phone7.App.ViewModels
         void ChangeRepository_LoadCompleted(object sender, EventArgs e)
         {
             ChangeProvider.ApplyChanges(ChangeRepository.GetAll());
+            NotificationManager.ResetTile();
+
             Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.UriFor<MainViewModel>().Navigate());
         }
     }

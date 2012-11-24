@@ -34,8 +34,8 @@ namespace Codemash.Phone.Data.Provider.Impl
             ApplySessionChanges(sessionChanges);
 
             // save the changes
-            SpeakerRepository.Save();
-            SessionRepository.Save();
+            SpeakerRepository.SaveChanges();
+            SessionRepository.SaveChanges();
         }
 
         #endregion

@@ -93,6 +93,7 @@
     <Compile Include="Grouping\ByTechGroup.cs" />
     <Compile Include="Grouping\GroupingFactory.cs" />
     <Compile Include="Grouping\IGroup.cs" />
+    <Compile Include="Notification\NotificationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IAppService.cs" />
     <Compile Include="Services\Impl\CustomAppService.cs" />

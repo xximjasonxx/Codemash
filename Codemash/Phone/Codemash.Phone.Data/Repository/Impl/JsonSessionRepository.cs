@@ -38,7 +38,7 @@ namespace Codemash.Phone.Data.Repository.Impl
         /// <summary>
         /// Instructs the repository to Save all dirty records
         /// </summary>
-        public override void Save()
+        protected override void Save()
         {
             if (Repository.Count(it => it.IsDirty) > 0)
             {

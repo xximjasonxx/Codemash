@@ -26,6 +26,6 @@ namespace Codemash.Phone.Data.Repository
         /// <summary>
         /// Save the current state of the repository
         /// </summary>
-        void Save();
+        void SaveChanges();
     }
 }

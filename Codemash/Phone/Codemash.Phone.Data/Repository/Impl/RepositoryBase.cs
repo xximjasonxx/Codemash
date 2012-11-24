@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Codemash.Phone.Data.Common;
 using Codemash.Phone.Data.Context;
 using Codemash.Phone.Data.Entities;
 using Newtonsoft.Json.Linq;
@@ -49,10 +50,7 @@ namespace Codemash.Phone.Data.Repository.Impl
                 }
                 else
                 {
-                    // make sure we reset the flag for all items coming from the database
-                    foreach (var item in _repository)
-                        item.MarkAsClean();
-
+                    CleanRepository();
                     if (LoadCompleted != null)
                         LoadCompleted(this, new EventArgs());
                 }
@@ -65,11 +63,30 @@ namespace Codemash.Phone.Data.Repository.Impl
             var jsonArray = JArray.Parse(jsonString);
             _repository = (from ja in jsonArray.AsJEnumerable()
                            select CreateObject(ja)).ToList();
-            Save();
+            SaveChanges();
 
             if (LoadCompleted != null)
                 LoadCompleted(this, new EventArgs());
 
+        }
+
+        public void SaveChanges()
+        {
+            Save();     // Repository specific Save method
+
+            // Cleanup
+            CleanRepository();
+        }
+
+        private void CleanRepository()
+        {
+            // remove any items that are marked as removed
+            foreach (var item in _repository.Where(i => i.EntityState == EntityState.Removed))
+                _repository.Remove(item);
+
+            // make sure we reset the flag for all items coming from the database
+            foreach (var item in _repository)
+                item.MarkAsClean();
         }
 
         // abstract properties
@@ -77,6 +94,6 @@ namespace Codemash.Phone.Data.Repository.Impl
 
         // abstract methods
         protected abstract T CreateObject(JToken jToken);
-        public abstract void Save();
+        protected abstract void Save();
     }
 }

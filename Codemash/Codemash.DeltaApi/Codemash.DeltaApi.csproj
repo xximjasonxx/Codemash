@@ -154,6 +154,7 @@
       <DependentUpon>Phone7Notification.ashx</DependentUpon>
     </Compile>
     <Compile Include="Models\ChangeViewModel.cs" />
+    <Compile Include="Models\ClientUpdateModel.cs" />
     <Compile Include="Models\SessionViewModel.cs" />
     <Compile Include="Models\SpeakerViewModel.cs" />
     <Compile Include="Modules\AssemblyIHttpControllerNinjectModule.cs" />
@@ -188,6 +189,10 @@
     <ProjectReference Include="..\Codemash.Server.Core\Codemash.Server.Core.csproj">
       <Project>{de4a2f3e-5896-4356-8603-473a7fd436d7}</Project>
       <Name>Codemash.Server.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Server\Codemash.Notification\Codemash.Notification.csproj">
+      <Project>{1ebdcefd-994b-4827-8068-e7f3e65699d0}</Project>
+      <Name>Codemash.Notification</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

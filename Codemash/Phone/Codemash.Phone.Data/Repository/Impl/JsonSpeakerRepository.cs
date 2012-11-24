@@ -49,7 +49,14 @@ namespace Codemash.Phone.Data.Repository.Impl
                                 db.Speakers.DeleteOnSubmit(item);
                                 break;
                             case EntityState.Modified:
-                                db.Speakers.Attach(item, true);
+                                var speaker = db.Speakers.FirstOrDefault(s => s.SpeakerId == item.SpeakerId);
+                                if (speaker != null)
+                                {
+                                    speaker.Biography = item.Biography;
+                                    speaker.BlogUrl = item.BlogUrl;
+                                    speaker.Name = item.Name;
+                                    speaker.Twitter = item.Twitter;
+                                }
                                 break;
                         }
                     }
@@ -70,7 +77,7 @@ namespace Codemash.Phone.Data.Repository.Impl
         /// <returns></returns>
         public Speaker Get(long id)
         {
-            return Repository.First(s => s.SpeakerId == id);
+            return Repository.FirstOrDefault(s => s.SpeakerId == id);
         }
 
         #endregion

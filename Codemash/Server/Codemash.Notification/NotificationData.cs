@@ -12,5 +12,11 @@ namespace Codemash.Notification
         public string BackBackgroundImageUrl { get; internal set; }
 
         public string ChannelUri { get; internal set; }
+        public int? Count { get; set; }
+
+        public NotificationData()
+        {
+            Count = null;
+        }
     }
 }

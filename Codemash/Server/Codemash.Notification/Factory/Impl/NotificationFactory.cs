@@ -24,5 +24,20 @@ namespace Codemash.Notification.Factory.Impl
             // return our notification data
             return notificationData;
         }
+
+        /// <summary>
+        /// Construct a NotificationData class instance which will clear any notifications present on the client
+        /// </summary>
+        /// <param name="channelUri">The channel URI identifying the client</param>
+        /// <param name="clientType">The type of client represented</param>
+        /// <returns></returns>
+        public NotificationData BuildClearNotification(string channelUri, string clientType)
+        {
+            return new NotificationData
+                       {
+                           Count = 0,
+                           ChannelUri = channelUri
+                       };
+        }
     }
 }

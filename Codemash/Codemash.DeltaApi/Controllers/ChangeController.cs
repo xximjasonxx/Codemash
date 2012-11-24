@@ -6,6 +6,8 @@ using Codemash.Api.Data;
 using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Repositories;
 using Codemash.DeltaApi.Models;
+using Codemash.Notification.Factory;
+using Codemash.Notification.Manager;
 using Codemash.Server.Core.Ex;
 using Ninject;
 
@@ -15,6 +17,15 @@ namespace Codemash.DeltaApi.Controllers
     {
         [Inject]
         public IChangeRepository ChangeRepository { get; set; }
+
+        [Inject]
+        public IClientRepository ClientRepository { get; set; }
+
+        [Inject]
+        public INotificationFactory NotificationFactory { get; set; }
+
+        [Inject]
+        public INotificationManagerResolver NotificationManagerResolver { get; set; }
 
         public IEnumerable<ChangeViewModel> Get()
         {
@@ -30,6 +41,23 @@ namespace Codemash.DeltaApi.Controllers
             catch (ClientNotFoundException)
             {
                 throw new HttpResponseException(HttpStatusCode.Unauthorized);
+            }
+        }
+
+        [HttpPost]
+        public void Update(ClientUpdateModel model)
+        {
+            var client = ClientRepository.Get(model.ChannelUri);
+            if (client != null)
+            {
+                // update the client
+                ClientRepository.UpdateClientChangeset(model.ChannelUri, model.Changeset);
+
+                // send the clear notification for the client type
+                var notification = NotificationFactory.BuildClearNotification(client.ChannelUri, client.ClientType);
+                var manager = NotificationManagerResolver.Resolve(client.ClientType);
+                manager.SendNotification(notification);
+
             }
         }
 

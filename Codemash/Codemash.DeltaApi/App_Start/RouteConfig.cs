@@ -9,8 +9,14 @@ namespace Codemash.DeltaApi
         {
             routes.Ignore("Handlers/*.ashx");
 
+            // Explicit Routes
             routes.MapHttpRoute(
-                name: "GetChangesRoute",
+                name: "UpdateChangesetRoute",
+                routeTemplate: "api/Change/Update",
+                defaults: new {controller = "Change", action = "Update"});
+
+            routes.MapHttpRoute(
+                name: "ChangesRoute",
                 routeTemplate: "api/Change/{channel}",
                 defaults: new {controller = "Change"});
 

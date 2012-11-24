@@ -6,6 +6,7 @@ using Codemash.Phone.Data.Entities;
 using Codemash.Phone.Data.Extensions;
 using Codemash.Phone.Data.Repository;
 using Ninject;
+using RestSharp;
 
 namespace Codemash.Phone.Data.Provider.Impl
 {
@@ -16,6 +17,9 @@ namespace Codemash.Phone.Data.Provider.Impl
 
         [Inject]
         public ISpeakerRepository SpeakerRepository { get; set; }
+
+        [Inject]
+        public ISettingsRepository SettingsRepository { get; set; }
 
         #region Implementation of IChangeProvider
 
@@ -36,9 +40,16 @@ namespace Codemash.Phone.Data.Provider.Impl
             // save the changes
             SpeakerRepository.SaveChanges();
             SessionRepository.SaveChanges();
+
+            // indicate to the service that we are up to date (we will not work on the response to this)
+            int changeSet = changeList.Max(c => c.Changeset);
+            if (changeSet > 0)
+                UpdateClientChangesetToLatest(changeSet);
         }
 
         #endregion
+
+        #region Speaker Change Application Methods
 
         /// <summary>
         /// Apply the changes for Speakers as dicated
@@ -92,6 +103,10 @@ namespace Codemash.Phone.Data.Provider.Impl
             }
         }
 
+        #endregion
+
+        #region Session Change Application Methods
+
         private void ApplySessionChanges(IEnumerable<Change> sessionChanges)
         {
             var sessionChangesList = sessionChanges.ToList();
@@ -138,6 +153,19 @@ namespace Codemash.Phone.Data.Provider.Impl
             var session = SessionRepository.Get(entityId);
             if (session != null)
                 session.MarkAsDeleted();
+        }
+
+        #endregion
+
+        private void UpdateClientChangesetToLatest(int changeset)
+        {
+            var client = new RestClient("http://192.168.1.4/DeltaApi/api");
+            var request = new RestRequest("Change/Update", Method.POST);
+            request.RequestFormat = DataFormat.Json;
+            request.AddParameter("ChannelUri", SettingsRepository.PushChannelUri);
+            request.AddParameter("Changeset", changeset);
+
+            client.ExecuteAsync(request, resp => { });
         }
     }
 }

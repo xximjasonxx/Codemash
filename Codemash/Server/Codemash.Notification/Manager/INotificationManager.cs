@@ -8,9 +8,15 @@ namespace Codemash.Notification.Manager
     public interface INotificationManager
     {
         /// <summary>
-        /// Send a notification
+        /// Send a Tile notification
         /// </summary>
         /// <param name="notification"></param>
-        void SendNotification(NotificationData notification);
+        void SendTileNotification(TileNotificationData notification);
+
+        /// <summary>
+        /// Send a Toast notification
+        /// </summary>
+        /// <param name="notification"></param>
+        void SendToastNotification(ToastNotificationData notification);
     }
 }

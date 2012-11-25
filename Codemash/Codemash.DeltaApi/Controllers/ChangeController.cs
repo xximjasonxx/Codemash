@@ -52,10 +52,10 @@ namespace Codemash.DeltaApi.Controllers
             {
                 // update the client
                 ClientRepository.UpdateClientChangeset(client.ChannelUri, model.Changeset);
-                var notification = NotificationFactory.BuildClearNotification(client.ChannelUri, client.ClientType);
+                var notification = NotificationFactory.BuildTileClearNotification(client.ChannelUri, client.ClientType);
                 var manager = NotificationManagerResolver.Resolve(client.ClientType);
 
-                manager.SendNotification(notification);
+                manager.SendTileNotification(notification);
             }
             return HttpStatusCode.OK;
         }
@@ -71,7 +71,7 @@ namespace Codemash.DeltaApi.Controllers
                                  EntityType = change.EntityType
                              };
 
-            if (change.Action == ChangeAction.Modify.ToString())
+            if (change.Action != ChangeAction.Delete.ToString())
             {
                 result.Key = change.Key;
                 result.Value = change.Value;

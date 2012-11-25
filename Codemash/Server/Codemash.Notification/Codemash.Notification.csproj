@@ -55,10 +55,11 @@
     <Compile Include="Manager\INotificationManager.cs" />
     <Compile Include="Manager\INotificationManagerResolver.cs" />
     <Compile Include="Modules\NotificationNinjectModule.cs" />
-    <Compile Include="NotificationData.cs" />
+    <Compile Include="TileNotificationData.cs" />
     <Compile Include="Factory\Impl\NotificationFactory.cs" />
     <Compile Include="NotificationHelperResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToastNotificationData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Codemash.Api.Data\Codemash.Api.Data.csproj">

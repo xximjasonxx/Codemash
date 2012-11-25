@@ -67,6 +67,9 @@ namespace Codemash.Phone.Shared.Services.Impl
                                                              new Uri("http://192.168.1.4", UriKind.RelativeOrAbsolute)
                                                          });
 
+            if (!_notificationChannel.IsShellToastBound)
+                _notificationChannel.BindToShellToast();
+
             if (PushChannelInitialized != null)
                 PushChannelInitialized(this, new EventArgs());
         }

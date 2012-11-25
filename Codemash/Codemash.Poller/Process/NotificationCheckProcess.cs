@@ -28,13 +28,15 @@ namespace Codemash.Poller.Process
                 if (changeList.Count > 0)
                 {
                     int currentChangeset = changeList.Max(c => c.Changeset);
-                    foreach (var client in context.Clients.Where(c => c.CurrentChangeSet != currentChangeset))
+                    foreach (var client in context.Clients.Where(c => c.CurrentChangeSet < currentChangeset))
                     {
                         int changesetDifference = currentChangeset - client.CurrentChangeSet;
-                        var notification = NotificationFactory.BuildNotification(client.ChannelUri, client.ClientType, changesetDifference);
+                        var tileNotification = NotificationFactory.BuildTileNotification(client.ChannelUri, client.ClientType, changesetDifference);
+                        var toastNotification = NotificationFactory.BuildToastNotification(client.ChannelUri, client.ClientType, changesetDifference);
                         var manager = NotificationManagerResolver.Resolve(client.ClientType);
 
-                        manager.SendNotification(notification);
+                        manager.SendTileNotification(tileNotification);
+                        manager.SendToastNotification(toastNotification);
                     }
                 }
             }

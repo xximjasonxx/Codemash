@@ -8,9 +8,9 @@ namespace Codemash.Notification.Factory.Impl
         [Inject]
         public INotificationHelperResolver NotificationHelperResolver { get; set; }
 
-        public NotificationData BuildNotification(string channelUri, string clientType, int missingChangesetCount)
+        public TileNotificationData BuildTileNotification(string channelUri, string clientType, int missingChangesetCount)
         {
-            var notificationData = new NotificationData();
+            var notificationData = new TileNotificationData();
             notificationData.ChannelUri = channelUri;
 
             notificationData.BackContent = string.Format("{0} update{1} {2} available", missingChangesetCount,
@@ -31,11 +31,11 @@ namespace Codemash.Notification.Factory.Impl
         /// <param name="channelUri">The channel URI identifying the client</param>
         /// <param name="clientType">The type of client represented</param>
         /// <returns></returns>
-        public NotificationData BuildClearNotification(string channelUri, string clientType)
+        public TileNotificationData BuildTileClearNotification(string channelUri, string clientType)
         {
             var helper = NotificationHelperResolver.Resolve(clientType);
 
-            return new NotificationData
+            return new TileNotificationData
                        {
                            Count = 0,
                            ChannelUri = channelUri,
@@ -43,6 +43,25 @@ namespace Codemash.Notification.Factory.Impl
                            BackContent = string.Empty,
                            FrontBackgroundImageUrl = helper.GetNoneImageUrl()
                        };
+        }
+
+        /// <summary>
+        /// Construct a ToastNotificationData to alert the user that changes have taken place
+        /// </summary>
+        /// <param name="channelUri"></param>
+        /// <param name="clientType"></param>
+        /// <param name="changesetCount"></param>
+        /// <returns></returns>
+        public ToastNotificationData BuildToastNotification(string channelUri, string clientType, int changesetCount)
+        {
+            var notificationData = new ToastNotificationData();
+            notificationData.ChannelUri = channelUri;
+            notificationData.Title = "Codemash";
+            notificationData.Message = string.Format("{0} update{1} {2} available", changesetCount,
+                                                         changesetCount == 1 ? string.Empty : "s",
+                                                         changesetCount == 1 ? "is" : "are");
+
+            return notificationData;
         }
     }
 }

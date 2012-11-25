@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Codemash.Notification
 {
-    public class NotificationData
+    public class TileNotificationData
     {
         public string BackContent { get; internal set; }
         public string FrontBackgroundImageUrl { get; internal set; }
@@ -14,7 +14,7 @@ namespace Codemash.Notification
         public string ChannelUri { get; internal set; }
         public int? Count { get; set; }
 
-        public NotificationData()
+        public TileNotificationData()
         {
             Count = null;
         }

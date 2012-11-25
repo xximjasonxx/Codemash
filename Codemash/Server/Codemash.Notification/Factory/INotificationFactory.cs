@@ -11,14 +11,23 @@ namespace Codemash.Notification.Factory
         /// <param name="clientType">the type of client we are creating the notification for</param>
         /// <param name="missingChangesetCount">The missing changeset count</param>
         /// <returns>Notification data object</returns>
-        NotificationData BuildNotification(string channelUri, string clientType, int missingChangesetCount);
+        TileNotificationData BuildTileNotification(string channelUri, string clientType, int missingChangesetCount);
 
         /// <summary>
-        /// Construct a NotificationData class instance which will clear any notifications present on the client
+        /// Construct a TileNotificationData class instance which will clear any notifications present on the client
         /// </summary>
         /// <param name="channelUri">The channel URI identifying the client</param>
         /// <param name="clientType">The type of client represented</param>
         /// <returns></returns>
-        NotificationData BuildClearNotification(string channelUri, string clientType);
+        TileNotificationData BuildTileClearNotification(string channelUri, string clientType);
+
+        /// <summary>
+        /// Construct a ToastNotificationData to alert the user that changes have taken place
+        /// </summary>
+        /// <param name="channelUri"></param>
+        /// <param name="clientType"></param>
+        /// <param name="changesetCount"></param>
+        /// <returns></returns>
+        ToastNotificationData BuildToastNotification(string channelUri, string clientType, int changesetCount);
     }
 }

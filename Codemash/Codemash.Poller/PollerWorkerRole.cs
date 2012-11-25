@@ -34,13 +34,15 @@ namespace Codemash.Poller
                     ExecuteNotificationCheck();
 
                     Logger.Current.LogInformation("Process Complete");
-
-                    // wait to check again
-                    Thread.Sleep(TimeSpan.FromMinutes(Config.MinutesWaitTime));
                 }
                 catch (Exception ex)
                 {
                     Logger.Current.LogException(ex);
+                }
+                finally
+                {
+                    // wait to check again
+                    Thread.Sleep(TimeSpan.FromMinutes(Config.MinutesWaitTime));
                 }
             }
         }

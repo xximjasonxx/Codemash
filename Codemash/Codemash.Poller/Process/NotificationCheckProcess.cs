@@ -24,14 +24,18 @@ namespace Codemash.Poller.Process
             // check each client to make sure they are at the current highest changeset
             using (var context = new CodemashContext())
             {
-                int currentChangeset = context.Changes.Max(c => c.Changeset);
-                foreach (var client in context.Clients.Where(c => c.CurrentChangeSet != currentChangeset))
+                var changeList = context.Changes.ToList();
+                if (changeList.Count > 0)
                 {
-                    int changesetDifference = currentChangeset - client.CurrentChangeSet;
-                    var notification = NotificationFactory.BuildNotification(client.ChannelUri, client.ClientType, changesetDifference);
-                    var manager = NotificationManagerResolver.Resolve(client.ClientType);
+                    int currentChangeset = changeList.Max(c => c.Changeset);
+                    foreach (var client in context.Clients.Where(c => c.CurrentChangeSet != currentChangeset))
+                    {
+                        int changesetDifference = currentChangeset - client.CurrentChangeSet;
+                        var notification = NotificationFactory.BuildNotification(client.ChannelUri, client.ClientType, changesetDifference);
+                        var manager = NotificationManagerResolver.Resolve(client.ClientType);
 
-                    manager.SendNotification(notification);
+                        manager.SendNotification(notification);
+                    }
                 }
             }
         }

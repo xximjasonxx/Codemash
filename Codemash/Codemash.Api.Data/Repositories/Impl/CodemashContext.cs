@@ -25,12 +25,15 @@ namespace Codemash.Api.Data.Repositories.Impl
             base.OnModelCreating(modelBuilder);
 
             // session
-            modelBuilder.Entity<Session>().Property(s => s.Abstract).HasColumnType("text");
+            modelBuilder.Entity<Session>().Property(s => s.Abstract).HasColumnType("ntext");
             modelBuilder.Entity<Session>().Property(s => s.Start).HasColumnType("datetime2");
             modelBuilder.Entity<Session>().Property(s => s.End).HasColumnType("datetime2");
 
             // speaker
-            modelBuilder.Entity<Speaker>().Property(s => s.Biography).HasColumnType("text");
+            modelBuilder.Entity<Speaker>().Property(s => s.Biography).HasColumnType("ntext");
+
+            // change
+            modelBuilder.Entity<Change>().Property(c => c.Value).HasColumnType("ntext");
         }
 
         protected override bool ShouldValidateEntity(System.Data.Entity.Infrastructure.DbEntityEntry entityEntry)

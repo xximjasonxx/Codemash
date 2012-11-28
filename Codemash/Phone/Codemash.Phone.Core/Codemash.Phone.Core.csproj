@@ -89,6 +89,7 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
     <Compile Include="Ev\ChannelNotInitializedException.cs" />
     <Compile Include="FormattingExtensionMethods.cs" />
     <Compile Include="ParsingExtensionMethods.cs" />

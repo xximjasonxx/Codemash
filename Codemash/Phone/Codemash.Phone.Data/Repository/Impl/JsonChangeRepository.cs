@@ -24,7 +24,7 @@ namespace Codemash.Phone.Data.Repository.Impl
         /// </summary>
         public void Load()
         {
-            var client = new RestClient("http://192.168.1.4/DeltaApi/api/");
+            var client = new RestClient(Config.DeltaApiUrl);
             var request = new RestRequest("Change", Method.GET);
             request.AddParameter("channel", SettingsRepository.PushChannelUri);
 

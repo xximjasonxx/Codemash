@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
+using Codemash.Phone.Core;
 using RestSharp;
 
 namespace Codemash.Phone.Shared.Services.Impl
@@ -18,7 +16,7 @@ namespace Codemash.Phone.Shared.Services.Impl
         /// <param name="clientTypeName"></param>
         public void Register(string channelUri, string clientTypeName)
         {
-            var client = new RestClient("http://192.168.1.4/DeltaApi/api/");
+            var client = new RestClient(Config.DeltaApiUrl);
             var request = new RestRequest("Notification", Method.POST);
             request.AddParameter("ChannelUri", channelUri);
             request.AddParameter("ClientType", clientTypeName);

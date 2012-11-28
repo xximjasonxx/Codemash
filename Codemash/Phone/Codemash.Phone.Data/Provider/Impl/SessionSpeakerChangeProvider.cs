@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Net;
+using Codemash.Phone.Core;
 using Codemash.Phone.Data.Common;
 using Codemash.Phone.Data.Entities;
 using Codemash.Phone.Data.Extensions;
 using Codemash.Phone.Data.Repository;
-using Microsoft.Phone.Shell;
 using Ninject;
 using RestSharp;
 
@@ -163,7 +162,7 @@ namespace Codemash.Phone.Data.Provider.Impl
 
         private void UpdateClientChangesetToLatest(int changeset)
         {
-            var client = new RestClient("http://192.168.1.4/DeltaApi/api");
+            var client = new RestClient(Config.DeltaApiUrl);
             var request = new RestRequest("Change/Update", Method.POST);
             request.RequestFormat = DataFormat.Json;
             request.AddParameter("ChannelUri", SettingsRepository.PushChannelUri);

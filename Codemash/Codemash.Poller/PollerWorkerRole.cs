@@ -24,26 +24,18 @@ namespace Codemash.Poller
 
         public override void Run()
         {
-            while (true)
+            try
             {
-                try
-                {
-                    Logger.Current.LogInformation("Process Start");
+                Logger.Current.LogInformation("Process Start");
 
-                    ExecuteProcess();
-                    ExecuteNotificationCheck();
+                ExecuteProcess();
+                ExecuteNotificationCheck();
 
-                    Logger.Current.LogInformation("Process Complete");
-                }
-                catch (Exception ex)
-                {
-                    Logger.Current.LogException(ex);
-                }
-                finally
-                {
-                    // wait to check again
-                    Thread.Sleep(TimeSpan.FromMinutes(Config.MinutesWaitTime));
-                }
+                Logger.Current.LogInformation("Process Complete");
+            }
+            catch (Exception ex)
+            {
+                Logger.Current.LogException(ex);
             }
         }
 

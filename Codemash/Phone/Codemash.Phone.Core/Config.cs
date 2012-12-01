@@ -9,7 +9,7 @@ namespace Codemash.Phone.Core
     {
         public static string DeltaApiUrl
         {
-            get { return "http://192.168.50.70/DeltaApi/api"; }
+            get { return "http://192.168.1.101/DeltaApi/api"; }
         }
     }
 }

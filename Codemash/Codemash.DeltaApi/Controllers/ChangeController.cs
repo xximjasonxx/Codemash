@@ -6,7 +6,6 @@ using Codemash.Api.Data;
 using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Repositories;
 using Codemash.DeltaApi.Models;
-using Codemash.Notification.Factory;
 using Codemash.Notification.Manager;
 using Codemash.Server.Core.Ex;
 using Ninject;
@@ -20,9 +19,6 @@ namespace Codemash.DeltaApi.Controllers
 
         [Inject]
         public IClientRepository ClientRepository { get; set; }
-
-        [Inject]
-        public INotificationFactory NotificationFactory { get; set; }
 
         [Inject]
         public INotificationManagerResolver NotificationManagerResolver { get; set; }
@@ -52,10 +48,9 @@ namespace Codemash.DeltaApi.Controllers
             {
                 // update the client
                 ClientRepository.UpdateClientChangeset(client.ChannelUri, model.Changeset);
-                var notification = NotificationFactory.BuildTileClearNotification(client.ChannelUri, client.ClientType);
                 var manager = NotificationManagerResolver.Resolve(client.ClientType);
 
-                manager.SendTileNotification(notification);
+                manager.SendClearTileNotification(client.ChannelUri);
             }
             return HttpStatusCode.OK;
         }

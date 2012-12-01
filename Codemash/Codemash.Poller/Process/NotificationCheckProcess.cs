@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Codemash.Api.Data.Repositories.Impl;
-using Codemash.Notification.Factory;
 using Codemash.Notification.Manager;
 using Ninject;
 
@@ -8,9 +7,6 @@ namespace Codemash.Poller.Process
 {
     public class NotificationCheckProcess : IProcess
     {
-        [Inject]
-        public INotificationFactory NotificationFactory { get; set; }
-
         [Inject]
         public INotificationManagerResolver NotificationManagerResolver { get; set; }
 
@@ -31,12 +27,10 @@ namespace Codemash.Poller.Process
                     foreach (var client in context.Clients.Where(c => c.CurrentChangeSet < currentChangeset))
                     {
                         int changesetDifference = currentChangeset - client.CurrentChangeSet;
-                        var tileNotification = NotificationFactory.BuildTileNotification(client.ChannelUri, client.ClientType, changesetDifference);
-                        var toastNotification = NotificationFactory.BuildToastNotification(client.ChannelUri, client.ClientType, changesetDifference);
                         var manager = NotificationManagerResolver.Resolve(client.ClientType);
 
-                        manager.SendTileNotification(tileNotification);
-                        manager.SendToastNotification(toastNotification);
+                        manager.SendTileNotification(client.ChannelUri, changesetDifference);
+                        manager.SendToastNotification(client.ChannelUri, changesetDifference);
                     }
                 }
             }

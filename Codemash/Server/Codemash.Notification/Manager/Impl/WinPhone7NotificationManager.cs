@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Xml;
+using Codemash.Server.Core;
 
 namespace Codemash.Notification.Manager.Impl
 {
@@ -12,11 +13,12 @@ namespace Codemash.Notification.Manager.Impl
         /// <summary>
         /// Send a notification
         /// </summary>
-        /// <param name="notification"></param>
-        public void SendTileNotification(TileNotificationData notification)
+        /// <param name="channelUri"> </param>
+        /// <param name="changeCount"> </param>
+        public void SendTileNotification(string channelUri, int changeCount)
         {
-            var payload = GetPayload(notification);
-            var request = (HttpWebRequest)WebRequest.Create(notification.ChannelUri);
+            var payload = GetTilePayload(changeCount);
+            var request = (HttpWebRequest)WebRequest.Create(channelUri);
             request.Method = WebRequestMethods.Http.Post;
             request.ContentLength = payload.Length;
             request.ContentType = "text/xml";
@@ -30,13 +32,34 @@ namespace Codemash.Notification.Manager.Impl
         }
 
         /// <summary>
+        /// Send a notification to the client instructing the tile to revert to its pre notification state
+        /// </summary>
+        /// <param name="channelUri"></param>
+        public void SendClearTileNotification(string channelUri)
+        {
+            var payload = GetTileClearPayload();
+            var request = (HttpWebRequest)WebRequest.Create(channelUri);
+            request.Method = WebRequestMethods.Http.Post;
+            request.ContentLength = payload.Length;
+            request.ContentType = "text/xml";
+
+            request.Headers.Add("X-Message-ID", Guid.NewGuid().ToString());
+            request.Headers.Add("X-WindowsPhone-Target", "token");
+            request.Headers.Add("X-NotificationClass", ((int)BatchingInterval.ImmediateTile).ToString());
+
+            // send the request
+            SendNotification(request, payload);
+        }
+
+        /// <summary>
         /// Send a Toast notification
         /// </summary>
-        /// <param name="data"></param>
-        public void SendToastNotification(ToastNotificationData data)
+        /// <param name="channelUri"> </param>
+        /// <param name="changesetCount"> </param>
+        public void SendToastNotification(string channelUri, int changesetCount)
         {
-            var payload = GetPayload(data);
-            var request = (HttpWebRequest)WebRequest.Create(data.ChannelUri);
+            var payload = GetToastPayload(changesetCount);
+            var request = (HttpWebRequest)WebRequest.Create(channelUri);
             request.Method = WebRequestMethods.Http.Post;
             request.ContentLength = payload.Length;
             request.ContentType = "text/xml";
@@ -54,8 +77,15 @@ namespace Codemash.Notification.Manager.Impl
         /// Return the Payload that will be sent as part of the push notification
         /// </summary>
         /// <returns></returns>
-        private byte[] GetPayload(TileNotificationData data)
+        private byte[] GetTilePayload(int changesetCount)
         {
+            var backContent = string.Format("{0} update{1} {2} available", changesetCount,
+                                            changesetCount == 1 ? string.Empty : "s", changesetCount == 1 ? "is" : "are");
+            var frontBackImage = string.Format("{0}/Handlers/Phone7Notification.ashx?count={1}", Config.DeltaApiDomain,
+                                               changesetCount);
+            var backBackImage = string.Format("{0}/Handlers/Images/wp7/phone7_back.png", Config.DeltaApiDomain);
+
+
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 using (XmlWriter writer = XmlWriter.Create(memoryStream))
@@ -64,33 +94,17 @@ namespace Codemash.Notification.Manager.Impl
                     writer.WriteStartElement("wp", "Notification", "WPNotification");
                     writer.WriteStartElement("wp", "Tile", "WPNotification");
 
-                    if (data.FrontBackgroundImageUrl != null)
-                    {
-                        writer.WriteStartElement("wp", "BackgroundImage", "WPNotification");
-                        writer.WriteValue(data.FrontBackgroundImageUrl);
-                        writer.WriteEndElement();
-                    }
+                    writer.WriteStartElement("wp", "BackgroundImage", "WPNotification");
+                    writer.WriteValue(frontBackImage);
+                    writer.WriteEndElement();
 
-                    if (data.Count.HasValue)
-                    {
-                        writer.WriteStartElement("wp", "Count", "WPNotification");
-                        writer.WriteValue(data.Count.Value);
-                        writer.WriteEndElement();
-                    }
+                    writer.WriteStartElement("wp", "BackContent", "WPNotification");
+                    writer.WriteValue(backContent);
+                    writer.WriteEndElement();
 
-                    if (data.BackContent != null)
-                    {
-                        writer.WriteStartElement("wp", "BackContent", "WPNotification");
-                        writer.WriteValue(data.BackContent);
-                        writer.WriteEndElement();
-                    }
-
-                    if (data.BackBackgroundImageUrl != null)
-                    {
-                        writer.WriteStartElement("wp", "BackBackgroundImage", "WPNotification");
-                        writer.WriteValue(data.BackBackgroundImageUrl);
-                        writer.WriteEndElement();
-                    }
+                    writer.WriteStartElement("wp", "BackBackgroundImage", "WPNotification");
+                    writer.WriteValue(backBackImage);
+                    writer.WriteEndElement();
 
                     writer.WriteEndElement();
                     writer.WriteEndDocument();
@@ -101,30 +115,57 @@ namespace Codemash.Notification.Manager.Impl
             }
         }
 
-        private byte[] GetPayload(ToastNotificationData data)
+        private byte[] GetTileClearPayload()
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 using (XmlWriter writer = XmlWriter.Create(memoryStream))
                 {
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("wp", "Notification", "WPNotification");
+                    writer.WriteStartElement("wp", "Tile", "WPNotification");
 
+                    writer.WriteStartElement("wp", "BackgroundImage", "WPNotification");
+                    writer.WriteValue(string.Format("{0}/Handlers/Images/wp7/phone7_none.png", Config.DeltaApiDomain));
+                    writer.WriteEndElement();
+
+                    writer.WriteStartElement("wp", "BackContent", "WPNotification");
+                    writer.WriteAttributeString("Action", "Clear");
+                    writer.WriteEndElement();
+
+                    writer.WriteStartElement("wp", "BackBackgroundImage", "WPNotification");
+                    writer.WriteAttributeString("Action", "Clear");
+                    writer.WriteEndElement();
+
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
+                    writer.Flush();
+
+                    return memoryStream.ToArray();
+                }
+            }
+        }
+
+        private byte[] GetToastPayload(int changesetCount)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                using (XmlWriter writer = XmlWriter.Create(memoryStream))
+                {
                     writer.WriteStartDocument();
                     writer.WriteStartElement("wp", "Notification", "WPNotification");
                     writer.WriteStartElement("wp", "Toast", "WPNotification");
 
-                    if (data.Title != null)
-                    {
-                        writer.WriteStartElement("wp", "Text1", "WPNotification");
-                        writer.WriteValue(data.Title);
-                        writer.WriteEndElement();
-                    }
+                    writer.WriteStartElement("wp", "Text1", "WPNotification");
+                    writer.WriteValue("Codemash");
+                    writer.WriteEndElement();
 
-                    if (data.Message != null)
-                    {
-                        writer.WriteStartElement("wp", "Text2", "WPNotification");
-                        writer.WriteValue(data.Message);
-                        writer.WriteEndElement();
-                    }
+                    string message = string.Format("{0} update{1} {2} available", changesetCount,
+                                                   changesetCount == 1 ? string.Empty : "s",
+                                                   changesetCount == 1 ? "is" : "are");
+                    writer.WriteStartElement("wp", "Text2", "WPNotification");
+                    writer.WriteValue(message);
+                    writer.WriteEndElement();
 
                     writer.WriteEndElement();
                     writer.WriteEndDocument();

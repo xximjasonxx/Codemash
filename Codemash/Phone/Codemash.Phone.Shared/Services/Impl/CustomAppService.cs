@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using Codemash.Phone.Core;
 using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.Common;
 using Microsoft.Phone.Notification;
@@ -64,7 +65,7 @@ namespace Codemash.Phone.Shared.Services.Impl
             if (!_notificationChannel.IsShellTileBound)
                 _notificationChannel.BindToShellTile(new Collection<Uri>()
                                                          {
-                                                             new Uri("http://192.168.1.4", UriKind.RelativeOrAbsolute)
+                                                             new Uri("http://192.168.1.101", UriKind.RelativeOrAbsolute)
                                                          });
 
             if (!_notificationChannel.IsShellToastBound)

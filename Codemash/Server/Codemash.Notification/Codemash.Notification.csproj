@@ -46,18 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enum.cs" />
-    <Compile Include="Factory\INotificationFactory.cs" />
-    <Compile Include="Helper\Impl\WinPhone7NotificationHelper.cs" />
-    <Compile Include="Helper\INotificationHelper.cs" />
-    <Compile Include="INotificationHelperResolver.cs" />
     <Compile Include="Manager\Impl\NotificationManagerResolver.cs" />
     <Compile Include="Manager\Impl\WinPhone7NotificationManager.cs" />
+    <Compile Include="Manager\Impl\WinPhone8NotificationManager.cs" />
     <Compile Include="Manager\INotificationManager.cs" />
     <Compile Include="Manager\INotificationManagerResolver.cs" />
     <Compile Include="Modules\NotificationNinjectModule.cs" />
-    <Compile Include="TileNotificationData.cs" />
-    <Compile Include="Factory\Impl\NotificationFactory.cs" />
-    <Compile Include="NotificationHelperResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToastNotificationData.cs" />
   </ItemGroup>

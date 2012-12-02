@@ -14,7 +14,7 @@ namespace Codemash.Phone.Data.Repository.Impl
 
         protected override string DownloadUrl
         {
-            get { return string.Format("{0}/Session", Config.DeltaApiUrl); }
+            get { return string.Format("{0}/Session", Config.DeltaApiRoot); }
         }
 
         protected override Session CreateObject(JToken jToken)

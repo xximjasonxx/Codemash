@@ -20,9 +20,6 @@ namespace Codemash.DeltaApi.Controllers
         [Inject]
         public IClientRepository ClientRepository { get; set; }
 
-        [Inject]
-        public INotificationManagerResolver NotificationManagerResolver { get; set; }
-
         public IEnumerable<ChangeViewModel> Get()
         {
             return ChangeRepository.GetAll().Select(CreateChangeViewModel);
@@ -47,11 +44,9 @@ namespace Codemash.DeltaApi.Controllers
             if (client != null)
             {
                 // update the client
-                ClientRepository.UpdateClientChangeset(client.ChannelUri, model.Changeset);
-                var manager = NotificationManagerResolver.Resolve(client.ClientType);
-
-                manager.SendClearTileNotification(client.ChannelUri);
+                //ClientRepository.UpdateClientChangeset(client.ChannelUri, model.Changeset);
             }
+
             return HttpStatusCode.OK;
         }
 

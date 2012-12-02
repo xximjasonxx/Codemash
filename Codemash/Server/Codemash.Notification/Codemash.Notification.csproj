@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enum.cs" />
+    <Compile Include="Manager\Impl\NotificationManagerBase.cs" />
     <Compile Include="Manager\Impl\NotificationManagerResolver.cs" />
     <Compile Include="Manager\Impl\WinPhone7NotificationManager.cs" />
     <Compile Include="Manager\Impl\WinPhone8NotificationManager.cs" />

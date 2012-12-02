@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Codemash.Api.Data.Entities;
 using Codemash.Server.Core.Ex;
-using Codemash.Server.Core.Extensions;
 
 namespace Codemash.Api.Data.Repositories.Impl
 {

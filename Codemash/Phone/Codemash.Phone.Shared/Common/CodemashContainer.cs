@@ -7,7 +7,7 @@ using Ninject;
 
 namespace Codemash.Phone.Shared.Common
 {
-    public class CodemashContainer : StandardKernel
+    public abstract class CodemashContainer : StandardKernel
     {
         public CodemashContainer(PhoneApplicationFrame frame)
         {
@@ -23,6 +23,11 @@ namespace Codemash.Phone.Shared.Common
             // bind custom services
             Bind<IAppService>().To<CustomAppService>().InSingletonScope();
             Bind<INotificationRegistrationService>().To<CustomNotificationRegistrationService>();
+
+            // bind version specific dependencies
+            BindVersionSpecificDependencies(frame);
         }
+
+        protected abstract void BindVersionSpecificDependencies(PhoneApplicationFrame frame);
     }
 }

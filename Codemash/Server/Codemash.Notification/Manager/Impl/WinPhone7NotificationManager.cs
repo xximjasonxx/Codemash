@@ -6,7 +6,7 @@ using Codemash.Server.Core;
 
 namespace Codemash.Notification.Manager.Impl
 {
-    public class WinPhone7NotificationManager : INotificationManager
+    public class WinPhone7NotificationManager : NotificationManagerBase, INotificationManager
     {
         #region Implementation of INotificationManager
 
@@ -174,20 +174,6 @@ namespace Codemash.Notification.Manager.Impl
 
                 return memoryStream.ToArray();
             }
-        }
-
-        private void SendNotification(WebRequest request, byte[] payload)
-        {
-            using (var requestStream = request.GetRequestStream())
-            {
-                requestStream.Write(payload, 0, payload.Length);
-            }
-
-            try
-            {
-                request.GetResponse();
-            }
-            catch (WebException ex) { /* this happens if certain channels are no longer active */ }
         }
     }
 }

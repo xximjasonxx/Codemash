@@ -215,6 +215,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\Phone8CodemashBootstrapper.cs" />
+    <Compile Include="Core\Phone8CodemashContainer.cs" />
+    <Compile Include="Core\Phone8TileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

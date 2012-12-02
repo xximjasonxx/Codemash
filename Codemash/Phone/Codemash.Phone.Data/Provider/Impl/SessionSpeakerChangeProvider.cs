@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Net;
 using Codemash.Phone.Core;
 using Codemash.Phone.Data.Common;
 using Codemash.Phone.Data.Entities;
@@ -21,6 +22,9 @@ namespace Codemash.Phone.Data.Provider.Impl
 
         [Inject]
         public ISettingsRepository SettingsRepository { get; set; }
+
+        [Inject]
+        public ITileService PhoneTileService { get; set; }
 
         #region Implementation of IChangeProvider
 
@@ -162,7 +166,7 @@ namespace Codemash.Phone.Data.Provider.Impl
 
         private void UpdateClientChangesetToLatest(int changeset)
         {
-            var client = new RestClient(Config.DeltaApiUrl);
+            var client = new RestClient(Config.DeltaApiRoot);
             var request = new RestRequest("Change/Update", Method.POST);
             request.RequestFormat = DataFormat.Json;
             request.AddParameter("ChannelUri", SettingsRepository.PushChannelUri);
@@ -170,7 +174,8 @@ namespace Codemash.Phone.Data.Provider.Impl
 
             client.ExecuteAsync(request, resp =>
                                              {
-                                                 return;
+                                                 if (resp.StatusCode == HttpStatusCode.OK)
+                                                     PhoneTileService.ClearTileNotification();
                                              });
         }
     }

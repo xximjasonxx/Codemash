@@ -33,19 +33,6 @@ namespace Codemash.Server.Core
             }
         }
 
-        public static string NotificationImagesRoot
-        {
-            get
-            {
-                string value = ConfigurationManager.AppSettings["NotificationImagesRoot"];
-                if (string.IsNullOrEmpty(value))
-                    throw new ConfigurationErrorsException("No Image Root specified");
-
-                string drive = DriveRoot + ":/";
-                return Path.Combine(drive, value);
-            }
-        }
-
         public static string DeltaApiDomain
         {
             get

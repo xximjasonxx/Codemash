@@ -120,6 +120,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Codemash.Api.Data\Codemash.Api.Data.csproj">
+      <Project>{299b9b1a-9a60-4a88-a3ea-911f7d5d4a08}</Project>
+      <Name>Codemash.Api.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Codemash.Poller\Codemash.Poller.csproj">
       <Project>{d1c10041-2eb0-4f7f-bd01-e8daff5ef3a1}</Project>
       <Name>Codemash.Poller</Name>

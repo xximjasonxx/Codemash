@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace Codemash.Notification.Manager.Impl
 {
-    public class WinPhone8NotificationManager : INotificationManager
+    public class WinPhone8NotificationManager : NotificationManagerBase, INotificationManager
     {
         #region Implementation of INotificationManager
 
@@ -74,12 +74,9 @@ namespace Codemash.Notification.Manager.Impl
 
         private byte[] GetTilePayload(int changesetCount)
         {
-            const string smallIconUrl = "/Assets/Tiles/IconicTileSmall.png";
-            const string mediumIconUrl = "/Assets/Tiles/IconicMediumLarge.png";
-            var wideContent = string.Format("{0} update{1} {2} available", changesetCount,
+            const string wideContent = "Codemash 2013 Update";
+            var wideContent2 = string.Format("{0} update{1} {2} available", changesetCount,
                                             changesetCount == 1 ? string.Empty : "s", changesetCount == 1 ? "is" : "are");
-            const string title = "Codemash 2.0.1.3 Changes";
-            const string backgroundColor = "#FFFB8102";
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -90,28 +87,16 @@ namespace Codemash.Notification.Manager.Impl
                     writer.WriteStartElement("wp", "Tile", "WPNotification");
                     writer.WriteAttributeString("Template", "IconicTile");
 
-                    writer.WriteStartElement("wp", "SmallIconImage", "WPNotification");
-                    writer.WriteValue(smallIconUrl);
-                    writer.WriteEndElement();
-
-                    writer.WriteStartElement("wp", "IconImage", "WPNotification");
-                    writer.WriteValue(mediumIconUrl);
-                    writer.WriteEndElement();
-
                     writer.WriteStartElement("wp", "WideContent1", "WPNotification");
                     writer.WriteValue(wideContent);
                     writer.WriteEndElement();
 
+                    writer.WriteStartElement("wp", "WideContent2", "WPNotification");
+                    writer.WriteValue(wideContent2);
+                    writer.WriteEndElement();
+
                     writer.WriteStartElement("wp", "Count", "WPNotification");
                     writer.WriteValue(changesetCount);
-                    writer.WriteEndElement();
-
-                    writer.WriteStartElement("wp", "Title", "WPNotification");
-                    writer.WriteValue(title);
-                    writer.WriteEndElement();
-
-                    writer.WriteStartElement("wp", "BackgroundColor", "WPNotification");
-                    writer.WriteValue(backgroundColor);
                     writer.WriteEndElement();
 
                     writer.WriteEndElement();
@@ -134,27 +119,15 @@ namespace Codemash.Notification.Manager.Impl
                     writer.WriteStartElement("wp", "Tile", "WPNotification");
                     writer.WriteAttributeString("Template", "IconicTile");
 
-                    writer.WriteStartElement("wp", "SmallIconImage", "WPNotification");
-                    writer.WriteStartAttribute("Action", "Clear");
-                    writer.WriteEndElement();
-
-                    writer.WriteStartElement("wp", "IconImage", "WPNotification");
-                    writer.WriteStartAttribute("Action", "Clear");
-                    writer.WriteEndElement();
-
                     writer.WriteStartElement("wp", "WideContent1", "WPNotification");
                     writer.WriteStartAttribute("Action", "Clear");
                     writer.WriteEndElement();
 
+                    writer.WriteStartElement("wp", "WideContent2", "WPNotification");
+                    writer.WriteStartAttribute("Action", "Clear");
+                    writer.WriteEndElement();
+
                     writer.WriteStartElement("wp", "Count", "WPNotification");
-                    writer.WriteStartAttribute("Action", "Clear");
-                    writer.WriteEndElement();
-
-                    writer.WriteStartElement("wp", "Title", "WPNotification");
-                    writer.WriteStartAttribute("Action", "Clear");
-                    writer.WriteEndElement();
-
-                    writer.WriteStartElement("wp", "BackgroundColor", "WPNotification");
                     writer.WriteStartAttribute("Action", "Clear");
                     writer.WriteEndElement();
 
@@ -195,20 +168,6 @@ namespace Codemash.Notification.Manager.Impl
 
                 return memoryStream.ToArray();
             }
-        }
-
-        private void SendNotification(WebRequest request, byte[] payload)
-        {
-            using (var requestStream = request.GetRequestStream())
-            {
-                requestStream.Write(payload, 0, payload.Length);
-            }
-
-            try
-            {
-                request.GetResponse();
-            }
-            catch (WebException ex) { /* this happens if certain channels are no longer active */ }
         }
     }
 }

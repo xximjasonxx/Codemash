@@ -12,7 +12,7 @@ namespace Codemash.Phone.Data.Repository.Impl
 
         protected override string DownloadUrl
         {
-            get { return string.Format("{0}/Speaker", Config.DeltaApiUrl); }
+            get { return string.Format("{0}/Speaker", Config.DeltaApiRoot); }
         }
 
         protected override Speaker CreateObject(JToken jToken)

@@ -4,14 +4,9 @@ using Ninject;
 
 namespace Codemash.Phone.Shared.Common
 {
-    public class CodemashBootstrapper : PhoneBootstrapper
+    public abstract class CodemashBootstrapper : PhoneBootstrapper
     {
-        public IKernel NinjectContainer { get; private set; }
-
-        protected override void Configure()
-        {
-            NinjectContainer = new CodemashContainer(RootFrame);
-        }
+        public IKernel NinjectContainer { get; protected set; }
 
         protected override object GetInstance(Type service, string key)
         {

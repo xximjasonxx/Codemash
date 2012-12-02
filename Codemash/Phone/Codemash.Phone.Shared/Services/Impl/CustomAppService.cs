@@ -65,7 +65,7 @@ namespace Codemash.Phone.Shared.Services.Impl
             if (!_notificationChannel.IsShellTileBound)
                 _notificationChannel.BindToShellTile(new Collection<Uri>()
                                                          {
-                                                             new Uri("http://192.168.1.101", UriKind.RelativeOrAbsolute)
+                                                             new Uri(Config.DeltaApiDomain, UriKind.RelativeOrAbsolute)
                                                          });
 
             if (!_notificationChannel.IsShellToastBound)

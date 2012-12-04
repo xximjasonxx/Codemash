@@ -24,7 +24,7 @@ namespace Codemash.Phone.Data.Entities
             }
         }
 
-        [Column(CanBeNull = false, DbType = "ntext")]
+        [Column(CanBeNull = false, DbType = "ntext", UpdateCheck = UpdateCheck.Never)]
         public string Biography
         {
             get { return _biography; }

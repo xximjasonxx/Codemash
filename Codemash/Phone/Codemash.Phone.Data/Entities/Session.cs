@@ -14,6 +14,7 @@ namespace Codemash.Phone.Data.Entities
         private string _room;
         private string _starts;
         private string _ends;
+        private bool _isFavorite;
         private long _speakerId;
 
         [Column(CanBeNull = false)]
@@ -27,7 +28,7 @@ namespace Codemash.Phone.Data.Entities
             }
         }
 
-        [Column(CanBeNull = false, DbType = "ntext")]
+        [Column(CanBeNull = false, DbType = "ntext", UpdateCheck = UpdateCheck.Never)]
         public string Abstract
         {
             get { return _abstract; }
@@ -79,6 +80,17 @@ namespace Codemash.Phone.Data.Entities
             {
                 MarkAsDirty();
                 _starts = value;
+            }
+        }
+
+        [Column(CanBeNull = false)]
+        public bool IsFavorite
+        {
+            get { return _isFavorite; }
+            set
+            {
+                MarkAsDirty();
+                _isFavorite = value;
             }
         }
 

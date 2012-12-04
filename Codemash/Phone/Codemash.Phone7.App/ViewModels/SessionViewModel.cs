@@ -1,7 +1,9 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using Codemash.Phone.Core;
 using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.DataModels;
+using Microsoft.Phone.Shell;
 using Ninject;
 
 namespace Codemash.Phone7.App.ViewModels
@@ -10,7 +12,7 @@ namespace Codemash.Phone7.App.ViewModels
     {
         private SessionDetailView _sessionDetailView;
 
-        public int IncomingSession { get; set; }
+        public long IncomingSession { get; set; }
 
         [Inject]
         public ISessionRepository SessionRepository { get; set; }
@@ -39,7 +41,8 @@ namespace Codemash.Phone7.App.ViewModels
                                                  Difficulty = session.Difficulty,
                                                  Room = session.Room,
                                                  Abstract = session.Abstract,
-                                                 Speaker = new SpeakerDetailView(SpeakerRepository.Get(session.SpeakerId))
+                                                 Speaker = new SpeakerDetailView(SpeakerRepository.Get(session.SpeakerId)),
+                                                 IsFavorite = session.IsFavorite
                                              };
                 }
 
@@ -47,10 +50,31 @@ namespace Codemash.Phone7.App.ViewModels
             }
         }
 
+        public bool CanMakeFavorite { get { return !Session.IsFavorite; } }
+        public bool CanMakeNotFavorite { get { return Session.IsFavorite; } }
+
         // behaviors
         public void ShowMap()
         {
             NavigationService.UriFor<MapViewModel>().Navigate();
+        }
+
+        public void MakeFavorite()
+        {
+            UpdateFavorite(true);
+        }
+
+        public void MakeNotFavorite()
+        {
+            UpdateFavorite(false);
+        }
+
+        private void UpdateFavorite(bool favoriteStatus)
+        {
+            Session.IsFavorite = favoriteStatus;
+            NotifyOfPropertyChange("CanMakeFavorite");
+            NotifyOfPropertyChange("CanMakeNotFavorite");
+            SessionRepository.UpdateFavoriteStatus(IncomingSession, favoriteStatus);
         }
     }
 }

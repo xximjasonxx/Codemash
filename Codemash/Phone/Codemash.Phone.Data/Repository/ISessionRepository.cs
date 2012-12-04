@@ -24,6 +24,19 @@ namespace Codemash.Phone.Data.Repository
         IList<Session> FindSessions(string searchTerm);
 
         /// <summary>
+        /// Return a list of sessions that are marked as favorites
+        /// </summary>
+        /// <returns></returns>
+        IList<Session> GetFavoriteSessions();
+
+        /// <summary>
+        /// Update the favorite status in the local database
+        /// </summary>
+        /// <param name="sessionId"></param>
+        /// <param name="favoriteStatus"></param>
+        void UpdateFavoriteStatus(long sessionId, bool favoriteStatus);
+
+        /// <summary>
         /// Save the current state of the repository
         /// </summary>
         void SaveChanges();

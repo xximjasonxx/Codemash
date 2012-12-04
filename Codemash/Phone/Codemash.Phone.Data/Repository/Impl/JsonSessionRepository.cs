@@ -66,6 +66,7 @@ namespace Codemash.Phone.Data.Repository.Impl
                                     session.Starts = item.Starts;
                                     session.Technology = item.Technology;
                                     session.Title = item.Title;
+                                    session.IsFavorite = item.IsFavorite;
                                 }
                                 break;
                         }
@@ -112,6 +113,30 @@ namespace Codemash.Phone.Data.Repository.Impl
         public IList<Session> FindSessions(string searchTerm)
         {
             return Repository.Where(s => s.Title.ToLower().Contains(searchTerm.ToLower())).ToList();
+        }
+
+        /// <summary>
+        /// Return a list of sessions that are marked as favorites
+        /// </summary>
+        /// <returns></returns>
+        public IList<Session> GetFavoriteSessions()
+        {
+            return Repository.Where(s => s.IsFavorite).ToList();
+        }
+
+        /// <summary>
+        /// Update the favorite status in the local database
+        /// </summary>
+        /// <param name="sessionId"></param>
+        /// <param name="favoriteStatus"></param>
+        public void UpdateFavoriteStatus(long sessionId, bool favoriteStatus)
+        {
+            var session = Repository.FirstOrDefault(s => s.SessionId == sessionId);
+            if (session != null)
+            {
+                session.IsFavorite = favoriteStatus;
+                Save();
+            }
         }
 
         #endregion

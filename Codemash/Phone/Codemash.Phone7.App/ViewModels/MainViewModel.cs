@@ -1,11 +1,14 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using Caliburn.Micro;
 using Codemash.Phone.Core;
 using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.Common;
 using Codemash.Phone.Shared.DataModels;
+using Codemash.Phone.Shared.Grouping;
 using Ninject;
 
 namespace Codemash.Phone7.App.ViewModels
@@ -14,6 +17,8 @@ namespace Codemash.Phone7.App.ViewModels
     {
         [Inject]
         public ISessionRepository SessionRepository { get; set; }
+
+        private bool _mySessionsLoaded;
 
         public MainViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -36,6 +41,26 @@ namespace Codemash.Phone7.App.ViewModels
             }
         }
 
+        public IEnumerable<SessionGroup> MySessions
+        {
+            get
+            {
+                var grouper = GroupingFactory.GetGroupInstance(SessionGroupType.ByBlock);
+                var dictionary = grouper.Group(SessionRepository.GetFavoriteSessions());
+                var result = dictionary.Select(d => new SessionGroup(d.Key, d.Value.Select(s => new SessionListView
+                {
+                    Title = s.Title,
+                    SessionId = s.SessionId,
+                    StartsAt = s.Starts.AsDateTime().AsTimeDisplay()
+                }))).ToList();
+
+                _mySessionsLoaded = true;
+                return result.OrderBy(r => r.Key);
+            }
+        }
+
+        public bool MySessionsEmpty { get { return !MySessions.Any(); } }
+
         // behaviors
         public void SelectionChanged(SelectionChangedEventArgs ev)
         {
@@ -44,10 +69,19 @@ namespace Codemash.Phone7.App.ViewModels
                 var selectedSessionView = ev.AddedItems[0] as SessionListView;
                 if (selectedSessionView != null)
                 {
-                    NavigationService.UriFor<SessionViewModel>().WithParam(sv => sv.IncomingSession,
-                                                                           selectedSessionView.SessionId)
+                    NavigationService.UriFor<SessionViewModel>()
+                        .WithParam(sv => sv.IncomingSession, selectedSessionView.SessionId)
                         .Navigate();
                 }
+            }
+        }
+
+        public void PageLoaded()
+        {
+            if (_mySessionsLoaded)
+            {
+                NotifyOfPropertyChange("MySessions");
+                NotifyOfPropertyChange("MySessionsEmpty");
             }
         }
 

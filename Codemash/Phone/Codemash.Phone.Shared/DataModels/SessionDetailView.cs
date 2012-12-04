@@ -12,5 +12,7 @@ namespace Codemash.Phone.Shared.DataModels
         public string Duration { get; set; }
 
         public SpeakerDetailView Speaker { get; set; }
+
+        public bool IsFavorite { get; set; }
     }
 }

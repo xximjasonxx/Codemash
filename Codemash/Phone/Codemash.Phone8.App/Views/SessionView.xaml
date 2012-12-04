@@ -100,7 +100,6 @@
                                Foreground="{StaticResource TextGrayBrush}" FontFamily="Segoe WP"
                                FontSize="25" Text="{Binding Session.Speaker.Biography}" />
                         </StackPanel>
-
                     </ScrollViewer>
                 </Grid>
             </controls:PivotItem>
@@ -110,9 +109,15 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
             <shell:ApplicationBar.Buttons>
+                <cal:AppBarButton IconUri="/Assets/appbar.star.add_white.png"
+                                  Text="favorite"
+                                  Message="MakeFavorite" />
                 <cal:AppBarButton IconUri="/Assets/appbar.map_white.png"
-                                  Text="search"
+                                  Text="view map" 
                                   Message="ShowMap" />
+                <cal:AppBarButton IconUri="/Assets/appbar.star.delete_white.png"
+                                  Text="unfavorite"
+                                  Message="MakeNotFavorite" />
             </shell:ApplicationBar.Buttons>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

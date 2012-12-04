@@ -1,9 +1,7 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using Codemash.Phone.Core;
 using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.DataModels;
-using Microsoft.Phone.Shell;
 using Ninject;
 
 namespace Codemash.Phone7.App.ViewModels

@@ -10,7 +10,7 @@ namespace Codemash.Phone8.App.ViewModels
     {
         private SessionDetailView _sessionDetailView;
 
-        public int IncomingSession { get; set; }
+        public long IncomingSession { get; set; }
 
         [Inject]
         public ISessionRepository SessionRepository { get; set; }
@@ -18,7 +18,8 @@ namespace Codemash.Phone8.App.ViewModels
         [Inject]
         public ISpeakerRepository SpeakerRepository { get; set; }
 
-        public SessionViewModel(INavigationService navigationService) : base(navigationService)
+        public SessionViewModel(INavigationService navigationService)
+            : base(navigationService)
         {
         }
 
@@ -31,26 +32,48 @@ namespace Codemash.Phone8.App.ViewModels
                 {
                     var session = SessionRepository.Get(IncomingSession);
                     _sessionDetailView = new SessionDetailView
-                                             {
-                                                 Title = session.Title,
-                                                 Technology = session.Technology,
-                                                 Starts = session.Starts.AsDateTime().AsBlockDisplay(),
-                                                 Duration = session.Duration.AsFullDurationString(),
-                                                 Difficulty = session.Difficulty,
-                                                 Room = session.Room,
-                                                 Abstract = session.Abstract,
-                                                 Speaker = new SpeakerDetailView(SpeakerRepository.Get(session.SpeakerId))
-                                             };
+                    {
+                        Title = session.Title,
+                        Technology = session.Technology,
+                        Starts = session.Starts.AsDateTime().AsBlockDisplay(),
+                        Duration = session.Duration.AsFullDurationString(),
+                        Difficulty = session.Difficulty,
+                        Room = session.Room,
+                        Abstract = session.Abstract,
+                        Speaker = new SpeakerDetailView(SpeakerRepository.Get(session.SpeakerId)),
+                        IsFavorite = session.IsFavorite
+                    };
                 }
 
                 return _sessionDetailView;
             }
         }
 
+        public bool CanMakeFavorite { get { return !Session.IsFavorite; } }
+        public bool CanMakeNotFavorite { get { return Session.IsFavorite; } }
+
         // behaviors
         public void ShowMap()
         {
             NavigationService.UriFor<MapViewModel>().Navigate();
+        }
+
+        public void MakeFavorite()
+        {
+            UpdateFavorite(true);
+        }
+
+        public void MakeNotFavorite()
+        {
+            UpdateFavorite(false);
+        }
+
+        private void UpdateFavorite(bool favoriteStatus)
+        {
+            Session.IsFavorite = favoriteStatus;
+            NotifyOfPropertyChange("CanMakeFavorite");
+            NotifyOfPropertyChange("CanMakeNotFavorite");
+            SessionRepository.UpdateFavoriteStatus(IncomingSession, favoriteStatus);
         }
     }
 }

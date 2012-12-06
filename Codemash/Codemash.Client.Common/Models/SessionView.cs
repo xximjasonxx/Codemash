@@ -1,4 +1,4 @@
-﻿namespace Codemash.Client.DataModels
+﻿namespace Codemash.Client.Common.Models
 {
     public class SessionView
     {

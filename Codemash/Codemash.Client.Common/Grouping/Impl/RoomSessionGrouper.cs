@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Codemash.Client.Common.Models;
 using Codemash.Client.Data.Entities;
-using Codemash.Client.DataModels;
 
-namespace Codemash.Client.Grouping
+namespace Codemash.Client.Common.Grouping.Impl
 {
     public class RoomSessionGrouper : IGroupSessions
     {

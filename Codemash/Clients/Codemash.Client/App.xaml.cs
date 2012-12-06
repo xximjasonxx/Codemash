@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Caliburn.Micro;
-using Codemash.Client.Code;
-using Codemash.Client.Components;
-using Codemash.Client.Components.Impl;
+using Codemash.Client.Common;
+using Codemash.Client.Common.Services;
+using Codemash.Client.Common.Services.Impl;
 using Codemash.Client.Data.Repository;
 using Codemash.Client.Data.Repository.Impl;
 using Codemash.Client.Parameters;

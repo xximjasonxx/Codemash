@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Codemash.Client.Core;
+using Codemash.Client.Common.Models;
 using Codemash.Client.Data.Entities;
-using Codemash.Client.DataModels;
 
-namespace Codemash.Client.Grouping
+namespace Codemash.Client.Common.Grouping.Impl
 {
-    public class BlockSessionGrouper : IGroupSessions
+    public class TrackSessionGrouper : IGroupSessions
     {
         #region Implementation of IGroupSessions
 
@@ -19,12 +18,13 @@ namespace Codemash.Client.Grouping
         {
             Regex regex = new Regex(@"\w");
             var groupedSet = (from s in sessionList
-                              orderby s.Starts
-                              group s by s.Starts.AsBlockDisplay() into BlockSessions
+                              orderby s.Technology
+                              group s by s.Technology
+                              into TrackGrouping
                               select new
                                          {
-                                            Key = BlockSessions.Key,
-                                            Value = BlockSessions.OrderBy(s => regex.Matches(s.Title)[0].Value).ToList()
+                                             Key = TrackGrouping.Key,
+                                             Value = TrackGrouping.OrderBy(s => regex.Matches(s.Title)[0].Value)
                                          }).ToDictionary(kv => kv.Key, kv => kv.Value.ToList());
             return groupedSet.Select(kv => new SessionGroup(kv.Key, kv.Value)).ToList();
         }

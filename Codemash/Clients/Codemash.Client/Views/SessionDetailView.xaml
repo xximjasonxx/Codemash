@@ -1,12 +1,13 @@
-﻿<app:LayoutAwarePage
+﻿<com:LayoutAwarePage
     x:Class="Codemash.Client.Views.SessionDetailView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:app="using:Codemash.Client.Core"
-    xmlns:cal="using:Caliburn.Micro" xmlns:i="using:Windows.UI.Interactivity">
+    xmlns:cal="using:Caliburn.Micro" xmlns:i="using:Windows.UI.Interactivity"
+    xmlns:com="using:Codemash.Client.Components">
     
-    <app:LayoutAwarePage.Resources>
+    <com:LayoutAwarePage.Resources>
         <cal:BooleanToVisibilityConverter x:Key="visibilityConverter" />
-    </app:LayoutAwarePage.Resources>
+    </com:LayoutAwarePage.Resources>
 
     <Grid Background="{StaticResource ApplicationBackgroundBrush}">
         <Grid.RowDefinitions>
@@ -139,4 +140,4 @@
             </Grid>
         </Grid>
     </Grid>
-</app:LayoutAwarePage>
+</com:LayoutAwarePage>

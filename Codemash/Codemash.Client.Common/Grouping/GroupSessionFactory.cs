@@ -1,7 +1,7 @@
 ﻿using System;
-using Codemash.Client.Code;
+using Codemash.Client.Common.Grouping.Impl;
 
-namespace Codemash.Client.Grouping
+namespace Codemash.Client.Common.Grouping
 {
     public static class GroupSessionFactory
     {

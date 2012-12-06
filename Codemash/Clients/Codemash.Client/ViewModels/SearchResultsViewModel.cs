@@ -1,11 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Caliburn.Micro;
-using Codemash.Client.Components;
+using Codemash.Client.Common.Models;
+using Codemash.Client.Common.Services;
 using Codemash.Client.Data.Repository;
-using Codemash.Client.DataModels;
 using Codemash.Client.Parameters;
-using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 
 namespace Codemash.Client.ViewModels

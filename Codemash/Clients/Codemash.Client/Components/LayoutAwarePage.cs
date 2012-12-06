@@ -1,9 +1,9 @@
-﻿using Codemash.Client.Code;
+﻿using Codemash.Client.Common;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Codemash.Client.Core
+namespace Codemash.Client.Components
 {
     [Windows.Foundation.Metadata.WebHostHidden]
     public class LayoutAwarePage : Page

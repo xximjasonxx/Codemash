@@ -1,6 +1,8 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿
+using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
-namespace Codemash.Client.Components.Impl
+namespace Codemash.Client.Common.Services.Impl
 {
     public class CodemashApplicationService : IAppService
     {
@@ -17,6 +19,14 @@ namespace Codemash.Client.Components.Impl
         /// Application Service property indicating whether back is an option
         /// </summary>
         public bool CanGoBack { get { return _applicationFrame.CanGoBack; } }
+
+        /// <summary>
+        /// Initialize the Push channel to allow the device to receive notifications
+        /// </summary>
+        public Task InitalizePushChannel()
+        {
+            return null;
+        }
 
         #endregion
     }

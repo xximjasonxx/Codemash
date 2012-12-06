@@ -1,6 +1,6 @@
-﻿using Codemash.Client.Core;
+﻿using Codemash.Client.Common;
+using Codemash.Client.Components;
 using Windows.UI.Xaml;
-using Codemash.Client.Code;
 
 namespace Codemash.Client.Views
 {

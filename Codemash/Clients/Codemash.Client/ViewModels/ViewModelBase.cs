@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Codemash.Client.Common.Services;
 using Codemash.Client.Components;
 
 namespace Codemash.Client.ViewModels

@@ -1,4 +1,4 @@
-﻿namespace Codemash.Client.Code
+﻿namespace Codemash.Client.Common
 {
     public enum Settings
     {

@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Codemash.Client.Code;
+using Codemash.Client.Common.Models;
 using Codemash.Client.Data.Entities;
 using Codemash.Client.Core;
-using Codemash.Client.DataModels;
 
-namespace Codemash.Client.Grouping
+namespace Codemash.Client.Common.Grouping.Impl
 {
     public class AlphanumericSessionGrouper : IGroupSessions
     {

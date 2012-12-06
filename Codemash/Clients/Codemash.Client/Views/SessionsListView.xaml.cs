@@ -1,8 +1,6 @@
-﻿
-using System;
-using System.Linq;
-using Codemash.Client.Code;
-using Codemash.Client.Core;
+﻿using System.Linq;
+using Codemash.Client.Common;
+using Codemash.Client.Components;
 using Windows.UI.Xaml;
 
 namespace Codemash.Client.Views
@@ -23,7 +21,7 @@ namespace Codemash.Client.Views
             GroupList.ItemsSource = SessionList.View.CollectionGroups.ToList();
         }
 
-        protected override void HandleLayoutChange(Code.DisplayModeType displayType)
+        protected override void HandleLayoutChange(DisplayModeType displayType)
         {
             SnappedListView.Visibility = Visibility.Collapsed;
             FullGridView.Visibility = Visibility.Visible;

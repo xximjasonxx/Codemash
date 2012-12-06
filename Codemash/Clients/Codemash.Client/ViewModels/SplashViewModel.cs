@@ -1,30 +1,33 @@
 ﻿using System.Threading.Tasks;
 using Caliburn.Micro;
+using Codemash.Client.Common.Services;
 using Codemash.Client.Data.Repository;
 
 namespace Codemash.Client.ViewModels
 {
     public class SplashViewModel : ViewModelBase
     {
-        public ISessionRepository SessionRepository { get; set; }
-        public ISpeakerRepository SpeakerRepository { get; set; }
+        public ISessionRepository SessionRepository { get; private set; }
+        public ISpeakerRepository SpeakerRepository { get; private set; }
+        public IAppService ApplicationService { get; private set; }
 
-        public SplashViewModel(INavigationService navigationService, ISessionRepository sessionRepository, ISpeakerRepository speakerRepository)
+        public SplashViewModel(INavigationService navigationService, ISessionRepository sessionRepository, ISpeakerRepository speakerRepository,
+            IAppService applicationService)
             : base(navigationService)
         {
             // assignments
             SessionRepository = sessionRepository;
             SpeakerRepository = speakerRepository;
+            ApplicationService = applicationService;
 
-            StatusMessage = string.Empty;
-            if (SessionRepository.IsFirstLoad)
-            {
-                StatusMessage = "Loading Sessions for the first time";
-            }
+            LoadStatus = "Preparing Application...";
         }
 
         protected async override void OnViewReady(object view)
         {
+            LoadStatus = "Initializing Push Channel";
+            await ApplicationService.InitalizePushChannel();
+
             // do the multi load
             await LoadRepositoriesAsync();
             
@@ -33,12 +36,24 @@ namespace Codemash.Client.ViewModels
         }
 
         // attributes
-        public string StatusMessage { get; set; }
+        private string _loadStatus;
+        public string LoadStatus
+        {
+            get { return _loadStatus; }
+            private set
+            {
+                _loadStatus = value;
+                NotifyOfPropertyChange("LoadStatus");
+            }
+        }
 
         // methods
         private async Task LoadRepositoriesAsync()
         {
+            LoadStatus = "Loading Speakers...";
             await SpeakerRepository.LoadAsync();
+
+            LoadStatus = "Loading Sessions...";
             await SessionRepository.LoadAsync();
         }
     }

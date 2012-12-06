@@ -1,9 +1,10 @@
-﻿<app:LayoutAwarePage
+﻿<com:LayoutAwarePage
     x:Name="pageRoot"
     x:Class="Codemash.Client.Views.SearchResultsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:i="using:Windows.UI.Interactivity" xmlns:cal="using:Caliburn.Micro" xmlns:app="using:Codemash.Client.Core">
+    xmlns:i="using:Windows.UI.Interactivity" xmlns:cal="using:Caliburn.Micro"
+    xmlns:com="using:Codemash.Client.Components">
     
     <Page.Resources>
         <cal:BooleanToVisibilityConverter x:Key="visibilityConverter" />
@@ -53,4 +54,4 @@
             </i:Interaction.Triggers>
         </GridView>
     </Grid>
-</app:LayoutAwarePage>
+</com:LayoutAwarePage>

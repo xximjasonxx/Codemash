@@ -1,8 +1,6 @@
-﻿
-using Codemash.Client.Code;
-using Codemash.Client.Core;
+﻿using Codemash.Client.Common;
+using Codemash.Client.Components;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Codemash.Client.Views
 {
@@ -16,7 +14,7 @@ namespace Codemash.Client.Views
             this.InitializeComponent();
         }
 
-        protected override void HandleLayoutChange(Code.DisplayModeType displayType)
+        protected override void HandleLayoutChange(DisplayModeType displayType)
         {
             SnappedBorder.Visibility = Visibility.Collapsed;
             FullFilledGrid.Visibility = Visibility.Visible;

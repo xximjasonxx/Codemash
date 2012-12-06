@@ -44,5 +44,29 @@ namespace Codemash.Server.Core
                 return value;
             }
         }
+
+        public static string PackageSecurityToken
+        {
+            get
+            {
+                string value = ConfigurationManager.AppSettings["PackageSecurityToken"];
+                if (string.IsNullOrEmpty(value))
+                    throw new ConfigurationErrorsException("No Package Security Token found");
+
+                return value;
+            }
+        }
+
+        public static string PackageSecret
+        {
+            get
+            {
+                string value = ConfigurationManager.AppSettings["PackageSecret"];
+                if (string.IsNullOrEmpty(value))
+                    throw new ConfigurationErrorsException("No Package Secret Found");
+
+                return value;
+            }
+        }
     }
 }

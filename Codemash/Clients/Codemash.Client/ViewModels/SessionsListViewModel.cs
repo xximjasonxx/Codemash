@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Caliburn.Micro;
-using Codemash.Client.Code;
+using Codemash.Client.Common;
+using Codemash.Client.Common.Grouping;
+using Codemash.Client.Common.Models;
 using Codemash.Client.Data.Repository;
-using Codemash.Client.DataModels;
-using Codemash.Client.Grouping;
 using Codemash.Client.Parameters;
 using Windows.UI.Xaml.Controls;
 

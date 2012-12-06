@@ -107,16 +107,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Code\ParsingExtensionMethods.cs" />
-    <Compile Include="Components\IAppService.cs" />
-    <Compile Include="Components\Impl\CodemashApplicationService.cs" />
-    <Compile Include="Code\Enum.cs" />
-    <Compile Include="Core\LayoutAwarePage.cs" />
-    <Compile Include="DataModels\SessionDetailModel.cs" />
-    <Compile Include="DataModels\SessionGroup.cs" />
-    <Compile Include="DataModels\SessionView.cs" />
-    <Compile Include="DataModels\SpeakerDetailModel.cs" />
-    <Compile Include="Grouping\RoomSessionGrouper.cs" />
+    <Compile Include="Components\LayoutAwarePage.cs" />
     <Compile Include="Parameters\SearchTextParameter.cs" />
     <Compile Include="ViewModels\MapViewModel.cs" />
     <Compile Include="ViewModels\PrivacyViewModel.cs" />
@@ -131,11 +122,6 @@
     <Compile Include="Views\SearchResultsView.xaml.cs">
       <DependentUpon>SearchResultsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Grouping\AlphanumericSessionGrouper.cs" />
-    <Compile Include="Grouping\BlockSessionGrouper.cs" />
-    <Compile Include="Grouping\GroupSessionFactory.cs" />
-    <Compile Include="Grouping\IGroupSessions.cs" />
-    <Compile Include="Grouping\TrackSessionGrouper.cs" />
     <Compile Include="Parameters\GroupingParameter.cs" />
     <Compile Include="Parameters\SessionParameter.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -192,16 +178,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Common\CustomStyles.xaml">
+    <Page Include="Assets\Styles\CustomStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Common\StandardStyles.xaml">
+    <Page Include="Assets\Styles\StandardStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Common\Templates.xaml">
+    <Page Include="Assets\Styles\Templates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -236,6 +222,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Codemash.Client.Common\Codemash.Client.Common.csproj">
+      <Project>{4133c81f-2c7e-42ca-9a86-ca5cac9e9328}</Project>
+      <Name>Codemash.Client.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Codemash.Client.Core\Codemash.Client.Core.csproj">
       <Project>{cf7bbbd7-9a87-492e-a0b9-9d2066a35ae2}</Project>
       <Name>Codemash.Client.Core</Name>
@@ -256,6 +246,7 @@
       <HintPath>..\..\Libs\Windows.UI.Interactivity.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>

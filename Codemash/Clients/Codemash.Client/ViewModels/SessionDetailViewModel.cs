@@ -1,12 +1,11 @@
 ﻿
 using System;
 using Caliburn.Micro;
+using Codemash.Client.Common.Models;
 using Codemash.Client.Core;
 using Codemash.Client.Data.Repository;
-using Codemash.Client.DataModels;
 using Codemash.Client.Parameters;
 using Windows.System;
-using Windows.UI.Popups;
 
 namespace Codemash.Client.ViewModels
 {

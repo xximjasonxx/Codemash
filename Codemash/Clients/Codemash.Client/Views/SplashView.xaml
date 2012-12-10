@@ -18,7 +18,7 @@
         <ProgressRing Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" Foreground="White" Height="70" Width="70"
                       HorizontalAlignment="Center" IsActive="True" />
 
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30" Foreground="White" Text="{Binding StatusMessage}"
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30" Foreground="White" Text="{Binding LoadStatus}"
                    Grid.Row="3" />
     </Grid>
 </Page>

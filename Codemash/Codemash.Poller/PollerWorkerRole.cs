@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
 using System.Net;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Transactions;
 using Codemash.Api.Data.Repositories;
+using Codemash.Notification.Context;
+using Codemash.Notification.Context.Impl;
 using Codemash.Poller.Container;
 using Codemash.Poller.Process;
 using Codemash.Server.Core;
@@ -44,6 +46,9 @@ namespace Codemash.Poller
             // Set the maximum number of concurrent connections 
             ServicePointManager.DefaultConnectionLimit = 12;
 
+            // Establish Security Parameters for Notifications
+            ProvisionSecurity();
+
             return base.OnStart();
         }
 
@@ -82,6 +87,14 @@ namespace Codemash.Poller
         {
             var process = _container.Get<IProcess>();
             process.Execute();
+        }
+
+        private void ProvisionSecurity()
+        {
+            var securityContext = new Win8SecurityContext();
+            securityContext.Provision(Config.PackageSecurityToken, Config.PackageSecret);
+
+            _container.Bind<ISecurityContext>().ToConstant(securityContext).InSingletonScope();
         }
     }
 }

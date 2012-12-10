@@ -15,7 +15,7 @@ namespace Codemash.Client.ViewModels
         public ISessionRepository SessionRepository { get; set; }
 
         public SearchResultsViewModel(INavigationService navigationService, ISessionRepository sessionRepository, IAppService appService)
-            : base(navigationService, appService.CanGoBack)
+            : base(navigationService, navigationService.CanGoBack)
         {
             SessionRepository = sessionRepository;
         }

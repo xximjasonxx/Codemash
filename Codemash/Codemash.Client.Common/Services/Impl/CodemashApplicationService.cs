@@ -1,31 +1,57 @@
 ﻿
+using System;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
+using Windows.Networking.PushNotifications;
 
 namespace Codemash.Client.Common.Services.Impl
 {
     public class CodemashApplicationService : IAppService
     {
-        private readonly Frame _applicationFrame;
+        public ISettingsService SettingsService { get; private set; }
 
-        public CodemashApplicationService(Frame applicationFrame)
+        public INotificationRegistrationService RegistrationService { get; private set; }
+
+        public CodemashApplicationService(ISettingsService settingsService, INotificationRegistrationService registrationService)
         {
-            _applicationFrame = applicationFrame;
+            SettingsService = settingsService;
+            RegistrationService = registrationService;
         }
 
         #region Implementation of IAppService
 
         /// <summary>
-        /// Application Service property indicating whether back is an option
-        /// </summary>
-        public bool CanGoBack { get { return _applicationFrame.CanGoBack; } }
-
-        /// <summary>
         /// Initialize the Push channel to allow the device to receive notifications
         /// </summary>
-        public Task InitalizePushChannel()
+        public async Task<bool> InitalizePushChannel()
         {
-            return null;
+            try
+            {
+                var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+                if (string.IsNullOrEmpty(SettingsService.RegisteredChannelUri) ||
+                    string.Compare(channel.Uri, SettingsService.RegisteredChannelUri, StringComparison.CurrentCultureIgnoreCase) != 0)
+                {
+                    // register the URI with the service
+                    var result = await RegistrationService.Register(channel.Uri);
+                    if (!result.IsSuccess) return false;
+
+                    // assign the URI to the local AppSettings
+                    SettingsService.RegisteredChannelUri = channel.Uri;
+                }
+
+                // prepare to handle incoming push notifications
+                channel.PushNotificationReceived += channel_PushNotificationReceived;
+                return true;
+            }
+            catch
+            {
+                // something went wrong
+                return false;
+            }
+        }
+
+        void channel_PushNotificationReceived(PushNotificationChannel sender, PushNotificationReceivedEventArgs args)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

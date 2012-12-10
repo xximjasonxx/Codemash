@@ -25,6 +25,7 @@ namespace Codemash.Notification.Modules
 
             Bind<INotificationManager>().To<WinPhone7NotificationManager>().Named("WinPhone7");
             Bind<INotificationManager>().To<WinPhone8NotificationManager>().Named("WinPhone8");
+            Bind<INotificationManager>().To<Win8NotificationManager>().Named("Win8");
         }
 
         #endregion

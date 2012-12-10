@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Web.Http;
 using System.Web.Mvc;
 using Codemash.Api.Data.Entities;
@@ -14,12 +15,19 @@ namespace Codemash.DeltaApi.Controllers
 
         public ActionResult Post(Client client)
         {
-            if (!ClientRepository.IsClientRegistered(client.ChannelUri))
+            try
             {
-                ClientRepository.RegisterClient(client);
-            }
+                if (!ClientRepository.IsClientRegistered(client.ChannelUri))
+                {
+                    ClientRepository.RegisterClient(client);
+                }
 
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
         }
     }
 }

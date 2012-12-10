@@ -35,8 +35,13 @@ namespace Codemash.Client
             _container.RegisterWinRTServices();
 
             // repositories
-            _container.RegisterSingleton(typeof(ISessionRepository), null, typeof(JsonSessionRepository));
-            _container.RegisterSingleton(typeof(ISpeakerRepository), null, typeof(JsonSpeakerRepository));
+            _container.RegisterSingleton(typeof (ISessionRepository), null, typeof (JsonSessionRepository));
+            _container.RegisterSingleton(typeof (ISpeakerRepository), null, typeof (JsonSpeakerRepository));
+
+            // non frame services
+            _container.RegisterSingleton(typeof (ISettingsService), null, typeof (ApplicationSettingsService));
+            _container.RegisterSingleton(typeof (IAppService), null, typeof (CodemashApplicationService));
+            _container.RegisterSingleton(typeof(INotificationRegistrationService), null, typeof(CodemashNotificationRegistrationService));
         }
 
         protected override object GetInstance(Type service, string key)
@@ -57,7 +62,6 @@ namespace Codemash.Client
         protected override void PrepareViewFirst(Frame rootFrame)
         {
             _container.RegisterNavigationService(rootFrame);
-            _container.RegisterInstance(typeof(IAppService), null, new CodemashApplicationService(rootFrame));
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)

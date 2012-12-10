@@ -12,7 +12,7 @@ namespace Codemash.Api.Data.Repositories.Impl
     {
         public CodemashContext() : base("name=MainConnectionString")
         {
-            Database.SetInitializer(new CodemashInitializer());
+            //Database.SetInitializer(new CodemashInitializer());
         }
 
         public DbSet<Session> Sessions { get; set; }
@@ -34,6 +34,9 @@ namespace Codemash.Api.Data.Repositories.Impl
 
             // change
             modelBuilder.Entity<Change>().Property(c => c.Value).HasColumnType("ntext");
+
+            // client
+            modelBuilder.Entity<Client>().Property(c => c.ChannelUri).IsMaxLength();
         }
 
         protected override bool ShouldValidateEntity(System.Data.Entity.Infrastructure.DbEntityEntry entityEntry)

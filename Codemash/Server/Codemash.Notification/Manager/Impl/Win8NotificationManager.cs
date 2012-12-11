@@ -47,6 +47,8 @@ namespace Codemash.Notification.Manager.Impl
                     writer.WriteStartDocument();
                     writer.WriteStartElement("toast");
                     writer.WriteStartElement("visual");
+                    writer.WriteStartElement("binding");
+                    writer.WriteAttributeString("template", string.Empty, "ToastText02");
 
                     writer.WriteStartElement("text");
                     writer.WriteAttributeString("id", string.Empty, "1");
@@ -55,9 +57,10 @@ namespace Codemash.Notification.Manager.Impl
 
                     writer.WriteStartElement("text");
                     writer.WriteAttributeString("id", string.Empty, "2");
-                    writer.WriteValue(title);
+                    writer.WriteValue(message);
                     writer.WriteEndElement();
 
+                    writer.WriteEndElement();
                     writer.WriteEndElement();
                     writer.WriteEndDocument();
                     writer.Flush();
@@ -66,21 +69,7 @@ namespace Codemash.Notification.Manager.Impl
                 }
             }
 
-            request.ContentLength = payload.Length;
-            using (var requestStream = request.GetRequestStream())
-            {
-                requestStream.Write(payload, 0, payload.Length);
-            }
-
-            try
-            {
-                var response = (HttpWebResponse) request.GetResponse();
-            }
-            catch (WebException ex)
-            {
-                return;
-                /* this happens if certain channels are no longer active */
-            }
+            SendNotification(request, payload);
         }
     }
 }

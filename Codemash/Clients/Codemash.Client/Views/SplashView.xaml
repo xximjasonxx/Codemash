@@ -13,7 +13,7 @@
             <RowDefinition Height="127*"/>
         </Grid.RowDefinitions>
 
-        <Image Source="/Assets/LargeLogo.png" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="220" Margin="573,0" Width="220" />
+        <Image Source="/Assets/Logo/SmallLogo.targetsize-256.png" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="220" Margin="573,0" Width="220" />
         
         <ProgressRing Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" Foreground="White" Height="70" Width="70"
                       HorizontalAlignment="Center" IsActive="True" />

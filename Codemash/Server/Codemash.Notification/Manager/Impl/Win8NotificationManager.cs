@@ -22,9 +22,50 @@ namespace Codemash.Notification.Manager.Impl
         private const string ToastContentType = "text/xml";
         private const string TileContentType = "text/xml";
 
-        public void SendTileNotification(string channelUri, int changeCount)
+        public void SendTileNotification(string channelUri, int changesetCount)
         {
+            var request = (HttpWebRequest) WebRequest.Create(channelUri);
+            request.Method = "POST";
+            request.Headers.Add("X-WNS-Type", TileNotificationType);
+            request.ContentType = TileContentType;
+            request.Headers.Add("Authorization", String.Format("Bearer {0}", SecurityContext.AccessToken));
 
+            const string title = "Codemash 2.0.1.3";
+            var message = string.Format("{0} change{1}", changesetCount, changesetCount == 1 ? string.Empty : "s");
+
+            byte[] payload;
+            using (var memStream = new MemoryStream())
+            {
+                using (var writer = XmlWriter.Create(memStream))
+                {
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("tile");
+                    writer.WriteStartElement("visual");
+
+                    writer.WriteStartElement("binding");
+                    writer.WriteAttributeString("template", string.Empty, "TileSquareText01");
+                    
+                    writer.WriteStartElement("text");
+                    writer.WriteAttributeString("id", "1");
+                    writer.WriteValue(title);
+                    writer.WriteEndElement();
+
+                    writer.WriteStartElement("text");
+                    writer.WriteAttributeString("id", "2");
+                    writer.WriteValue(message);
+                    writer.WriteEndElement();
+
+                    writer.WriteEndElement();
+
+                    writer.WriteEndElement();
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
+                }
+
+                payload = memStream.ToArray();
+            }
+
+            SendNotification(request, payload);
         }
 
         public void SendToastNotification(string channelUri, int changesetCount)

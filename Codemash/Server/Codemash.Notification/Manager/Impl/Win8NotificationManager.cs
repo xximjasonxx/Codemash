@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Xml;
-using System.Xml.Linq;
 using Codemash.Notification.Context;
 using Ninject;
 
@@ -31,7 +27,7 @@ namespace Codemash.Notification.Manager.Impl
             request.Headers.Add("Authorization", String.Format("Bearer {0}", SecurityContext.AccessToken));
 
             const string title = "Codemash 2.0.1.3";
-            var message = string.Format("{0} change{1}", changesetCount, changesetCount == 1 ? string.Empty : "s");
+            var message = string.Format("{0} changeset{1}", changesetCount, changesetCount == 1 ? string.Empty : "s");
 
             byte[] payload;
             using (var memStream = new MemoryStream())
@@ -43,8 +39,23 @@ namespace Codemash.Notification.Manager.Impl
                     writer.WriteStartElement("visual");
 
                     writer.WriteStartElement("binding");
-                    writer.WriteAttributeString("template", string.Empty, "TileSquareText01");
+                    writer.WriteAttributeString("template", string.Empty, "TileSquareBlock");
                     
+                    writer.WriteStartElement("text");
+                    writer.WriteAttributeString("id", "1");
+                    writer.WriteValue(changesetCount);
+                    writer.WriteEndElement();
+
+                    writer.WriteStartElement("text");
+                    writer.WriteAttributeString("id", "2");
+                    writer.WriteValue("changset" + (changesetCount == 1 ? string.Empty : "s"));
+                    writer.WriteEndElement();
+
+                    writer.WriteEndElement();
+
+                    writer.WriteStartElement("binding");
+                    writer.WriteAttributeString("template", string.Empty, "TileWideText01");
+
                     writer.WriteStartElement("text");
                     writer.WriteAttributeString("id", "1");
                     writer.WriteValue(title);
@@ -110,7 +121,7 @@ namespace Codemash.Notification.Manager.Impl
                 }
             }
 
-            SendNotification(request, payload);
+            //SendNotification(request, payload);
         }
     }
 }

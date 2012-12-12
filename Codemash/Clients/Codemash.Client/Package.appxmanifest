@@ -17,7 +17,7 @@
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Codemash.Client.App">
       <VisualElements DisplayName="Codemash" Logo="Assets\Logo\Logo.png" SmallLogo="Assets\Logo\SmallLogo.png" Description="Session Manager for Codemasn 2.0.1.3 conference" ForegroundText="light" BackgroundColor="#FF7F00" ToastCapable="true">
         <LockScreen Notification="badge" BadgeLogo="Assets\Badge\Badge.png" />
-        <DefaultTile ShowName="allLogos" WideLogo="Assets\Logo\WideLogo.png" ShortName="Codemash 2.0.1.3" />
+        <DefaultTile ShowName="allLogos" WideLogo="Assets\Logo\WideLogo.png" />
         <SplashScreen Image="Assets\Splash\SplashScreen.png" BackgroundColor="#FF7F00" />
         <InitialRotationPreference>
           <Rotation Preference="landscape" />

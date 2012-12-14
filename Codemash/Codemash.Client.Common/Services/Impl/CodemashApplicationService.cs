@@ -1,19 +1,20 @@
 ﻿
 using System;
 using System.Threading.Tasks;
+using Codemash.Client.Data.Repository;
 using Windows.Networking.PushNotifications;
 
 namespace Codemash.Client.Common.Services.Impl
 {
     public class CodemashApplicationService : IAppService
     {
-        public ISettingsService SettingsService { get; private set; }
+        public ISettingsRepository SettingsRepository { get; private set; }
 
         public INotificationRegistrationService RegistrationService { get; private set; }
 
-        public CodemashApplicationService(ISettingsService settingsService, INotificationRegistrationService registrationService)
+        public CodemashApplicationService(ISettingsRepository settingsRepository, INotificationRegistrationService registrationService)
         {
-            SettingsService = settingsService;
+            SettingsRepository = settingsRepository;
             RegistrationService = registrationService;
         }
 
@@ -27,15 +28,17 @@ namespace Codemash.Client.Common.Services.Impl
             try
             {
                 var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-                if (string.IsNullOrEmpty(SettingsService.RegisteredChannelUri) ||
-                    string.Compare(channel.Uri, SettingsService.RegisteredChannelUri, StringComparison.CurrentCultureIgnoreCase) != 0)
+                if (string.IsNullOrEmpty(SettingsRepository.RegisteredChannelUri) ||
+                    string.Compare(channel.Uri, SettingsRepository.RegisteredChannelUri, StringComparison.CurrentCultureIgnoreCase) != 0)
                 {
                     // register the URI with the service
                     var result = await RegistrationService.Register(channel.Uri);
                     if (!result.IsSuccess) return false;
 
                     // assign the URI to the local AppSettings
-                    SettingsService.RegisteredChannelUri = channel.Uri;
+                    SettingsRepository.RegisteredChannelUri = channel.Uri;
+                    if (result.ClientId.HasValue)
+                        SettingsRepository.RegisteredClientId = result.ClientId.Value;
                 }
 
                 // prepare to handle incoming push notifications

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Caliburn.Micro;
 using Codemash.Client.Common.Services;
 using Codemash.Client.Data.Repository;
-using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 
@@ -14,16 +13,17 @@ namespace Codemash.Client.ViewModels
         public ISessionRepository SessionRepository { get; private set; }
         public ISpeakerRepository SpeakerRepository { get; private set; }
         public IAppService ApplicationService { get; private set; }
+        public IChangeRepository ChangeRepository { get; private set; }
 
         public SplashViewModel(INavigationService navigationService, ISessionRepository sessionRepository, ISpeakerRepository speakerRepository,
-            IAppService applicationService)
+            IAppService applicationService, IChangeRepository changeRepository)
             : base(navigationService)
         {
             // assignments
             SessionRepository = sessionRepository;
             SpeakerRepository = speakerRepository;
+            ChangeRepository = changeRepository;
             ApplicationService = applicationService;
-
             LoadStatus = "Preparing Application...";
         }
 
@@ -70,6 +70,15 @@ namespace Codemash.Client.ViewModels
 
             LoadStatus = "Loading Sessions...";
             await SessionRepository.LoadAsync();
+
+            LoadStatus = "Getting Changes...";
+            await ChangeRepository.LoadAsync();
+
+            var changes = ChangeRepository.GetAll();
+            if (changes.Count > 0)
+            {
+                LoadStatus = "Applying Changes...";
+            }
 
             return true;
         }

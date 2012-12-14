@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Web.Http;
-using System.Web.Mvc;
 using Codemash.Api.Data.Entities;
 using Codemash.Api.Data.Repositories;
+using Codemash.DeltaApi.Models;
 using Ninject;
 
 namespace Codemash.DeltaApi.Controllers
@@ -13,7 +13,7 @@ namespace Codemash.DeltaApi.Controllers
         [Inject]
         public IClientRepository ClientRepository { get; set; }
 
-        public ActionResult Post(Client client)
+        public ClientRegistrationResult Post(Client client)
         {
             try
             {
@@ -22,11 +22,12 @@ namespace Codemash.DeltaApi.Controllers
                     ClientRepository.RegisterClient(client);
                 }
 
-                return new HttpStatusCodeResult(HttpStatusCode.OK);
+                return new ClientRegistrationResult(client.ClientId);
             }
             catch (Exception ex)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                // todo: add logging
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
         }
     }

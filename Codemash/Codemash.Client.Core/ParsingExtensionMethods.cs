@@ -21,5 +21,22 @@ namespace Codemash.Client.Core
             // account for GMT Offset (EST -5)
             return dtVal.ToLocalTime();
         }
+
+        /// <summary>
+        /// Convert a string to its long representation, return MinValue if the parse fails
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static long AsLong(this string str)
+        {
+            long longVal;
+            return long.TryParse(str, out longVal) ? longVal : long.MinValue;
+        }
+
+        public static long AsLong(this string str, long defaultValue)
+        {
+            long value = str.AsLong();
+            return value == long.MinValue ? defaultValue : value;
+        }
     }
 }

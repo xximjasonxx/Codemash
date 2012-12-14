@@ -37,9 +37,10 @@ namespace Codemash.Client
             // repositories
             _container.RegisterSingleton(typeof (ISessionRepository), null, typeof (JsonSessionRepository));
             _container.RegisterSingleton(typeof (ISpeakerRepository), null, typeof (JsonSpeakerRepository));
+            _container.RegisterSingleton(typeof (IChangeRepository), null, typeof (JsonChangeRepository));
+            _container.RegisterSingleton(typeof(ISettingsRepository), null, typeof(ApplicationSettingsRepository));
 
             // non frame services
-            _container.RegisterSingleton(typeof (ISettingsService), null, typeof (ApplicationSettingsService));
             _container.RegisterSingleton(typeof (IAppService), null, typeof (CodemashApplicationService));
             _container.RegisterSingleton(typeof(INotificationRegistrationService), null, typeof(CodemashNotificationRegistrationService));
         }

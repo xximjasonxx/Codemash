@@ -154,6 +154,7 @@
       <DependentUpon>Phone7Notification.ashx</DependentUpon>
     </Compile>
     <Compile Include="Models\ChangeViewModel.cs" />
+    <Compile Include="Models\ClientRegistrationResult.cs" />
     <Compile Include="Models\ClientUpdateModel.cs" />
     <Compile Include="Models\SessionViewModel.cs" />
     <Compile Include="Models\SpeakerViewModel.cs" />

@@ -141,6 +141,18 @@ namespace Codemash.Api.Data.Repositories.Impl
             }
         }
 
+        public IEnumerable<Change> GetChangesForClient(int clientId)
+        {
+            using (var context = new CodemashContext())
+            {
+                var client = context.Clients.FirstOrDefault(c => c.ClientId == clientId);
+                if (client == null)
+                    throw new ClientNotFoundException();
+
+                return context.Changes.Where(c => c.ChangeId > client.CurrentChangeSet).ToList();
+            }
+        }
+
         #endregion
     }
 }

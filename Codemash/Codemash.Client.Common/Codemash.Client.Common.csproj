@@ -127,11 +127,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result\RegistrationResult.cs" />
     <Compile Include="Services\IAppService.cs" />
-    <Compile Include="Services\Impl\ApplicationSettingsService.cs" />
     <Compile Include="Services\Impl\CodemashApplicationService.cs" />
     <Compile Include="Services\Impl\CodemashNotificationRegistrationService.cs" />
     <Compile Include="Services\INotificationRegistrationService.cs" />
-    <Compile Include="Services\ISettingsService.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

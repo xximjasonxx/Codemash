@@ -13,4 +13,11 @@ namespace Codemash.Client.Data
         New,
         Unmodified
     }
+
+    public enum ActionType
+    {
+        Add,
+        Modify,
+        Delete
+    }
 }

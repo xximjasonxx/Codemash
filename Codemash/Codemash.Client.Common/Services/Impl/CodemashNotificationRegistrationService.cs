@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Codemash.Client.Common.Result;
 using Codemash.Client.Core;
+using Windows.Data.Json;
 
 namespace Codemash.Client.Common.Services.Impl
 {
@@ -21,8 +22,11 @@ namespace Codemash.Client.Common.Services.Impl
                     content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                     var response = await client.PostAsync(postUrl, content);
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    var jsonObject = JsonObject.Parse(responseString);
+
                     return response.StatusCode == HttpStatusCode.OK
-                               ? new RegistrationResult(true)
+                               ? new RegistrationResult(true, new StringWrapper(jsonObject["ClientId"].Stringify()).ToString().AsInt())
                                : new RegistrationResult(false);
                 }
             }

@@ -11,5 +11,12 @@ namespace Codemash.Api.Data.Repositories
         /// <param name="channelUri">The Uri identifying the channel and thus the client</param>
         /// <returns></returns>
         IEnumerable<Change> GetChangesForChannel(string channelUri);
+
+        /// <summary>
+        /// Return changes for a client based on their client Id value
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
+        IEnumerable<Change> GetChangesForClient(int clientId);
     }
 }

@@ -37,6 +37,18 @@ namespace Codemash.DeltaApi.Controllers
             }
         }
 
+        public IEnumerable<ChangeViewModel> Get(int clientId)
+        {
+            try
+            {
+                return ChangeRepository.GetChangesForClient(clientId).Select(CreateChangeViewModel);
+            }
+            catch (ClientNotFoundException)
+            {
+                throw new HttpResponseException(HttpStatusCode.Unauthorized);
+            }
+        }
+            
         [HttpPost]
         public HttpStatusCode Update(ClientUpdateModel model)
         {
@@ -44,7 +56,7 @@ namespace Codemash.DeltaApi.Controllers
             if (client != null)
             {
                 // update the client
-                //ClientRepository.UpdateClientChangeset(client.ChannelUri, model.Changeset);
+                ClientRepository.UpdateClientChangeset(client.ChannelUri, model.Changeset);
             }
 
             return HttpStatusCode.OK;

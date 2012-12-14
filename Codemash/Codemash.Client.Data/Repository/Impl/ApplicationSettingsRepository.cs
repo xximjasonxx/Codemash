@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Codemash.Client.Core;
+﻿using Codemash.Client.Core;
 using Windows.Storage;
 
-namespace Codemash.Client.Common.Services.Impl
+namespace Codemash.Client.Data.Repository.Impl
 {
-    public class ApplicationSettingsService : ISettingsService
+    public class ApplicationSettingsRepository : ISettingsRepository
     {
         private readonly ApplicationDataContainer _dataContainer;
 
-        public ApplicationSettingsService()
+        public ApplicationSettingsRepository()
         {
             var dataContainer = ApplicationData.Current.LocalSettings;
             if (!dataContainer.Containers.ContainsKey("AppSettings"))
@@ -30,6 +25,12 @@ namespace Codemash.Client.Common.Services.Impl
         {
             get { return new StringWrapper(_dataContainer.Values["ChannelUri"]).ToString(); }
             set { _dataContainer.Values["ChannelUri"] = value; }
+        }
+
+        public int RegisteredClientId
+        {
+            get { return new StringWrapper(_dataContainer.Values["ClientId"]).ToString().AsInt(); }
+            set { _dataContainer.Values["ClientId"] = value; }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Codemash.Client.Data.Repository
         /// </summary>
         /// <param name="id">The ID value, should be unique</param>
         /// <returns></returns>
-        T Get(int id);
+        T Get(long id);
 
         /// <summary>
         /// return a list of all items in the repository

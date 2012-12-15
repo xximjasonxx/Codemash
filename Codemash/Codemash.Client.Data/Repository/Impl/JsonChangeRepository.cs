@@ -49,7 +49,7 @@ namespace Codemash.Client.Data.Repository.Impl
             return 0;
         }
 
-        public Change Get(int id)
+        public Change Get(long id)
         {
             throw new NotImplementedException();
         }

@@ -100,7 +100,7 @@ namespace Codemash.Client.Data.Repository.Impl
         /// <summary>
         /// Save all dirty entities in the Repository
         /// </summary>
-        protected void Save()
+        public void Save()
         {
             using (var db = new SQLiteConnection(_databasePath))
             {

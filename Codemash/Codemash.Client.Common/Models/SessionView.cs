@@ -2,7 +2,7 @@
 {
     public class SessionView
     {
-        public int SessionId { get; set; }
+        public long SessionId { get; set; }
         public string Title { get; set; }
         public string Technology { get; set; }
         public string Room { get; set; }

@@ -18,7 +18,7 @@ namespace Codemash.Client.Data.Repository.Impl
         /// </summary>
         /// <param name="id">The ID value, should be unique</param>
         /// <returns></returns>
-        public Session Get(int id)
+        public Session Get(long id)
         {
             return Repository.FirstOrDefault(s => s.SessionId == id);
         }

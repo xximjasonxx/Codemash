@@ -18,5 +18,10 @@ namespace Codemash.Client.Data.Repository
         /// <param name="value"></param>
         /// <returns></returns>
         IList<Session> SearchSessions(string value);
+
+        /// <summary>
+        /// Save the sessions marked as dirty
+        /// </summary>
+        void Save();
     }
 }

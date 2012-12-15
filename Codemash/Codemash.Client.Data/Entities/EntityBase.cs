@@ -22,15 +22,12 @@ namespace Codemash.Client.Data.Entities
 
         internal bool IsDirty
         {
-            get
-            {
-                var dirty = false;
-                dirty |= EntityState == EntityState.Deleted;
-                dirty |= EntityState == EntityState.Modified;
-                dirty |= EntityState == EntityState.New;
+            get { return EntityState != EntityState.Unmodified; }
+        }
 
-                return dirty;
-            }
+        protected void MarkDirty()
+        {
+            EntityState = EntityState.Modified;
         }
     }
 }

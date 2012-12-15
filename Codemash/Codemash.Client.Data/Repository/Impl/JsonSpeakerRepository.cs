@@ -35,7 +35,7 @@ namespace Codemash.Client.Data.Repository.Impl
         /// </summary>
         /// <param name="id">The ID value, should be unique</param>
         /// <returns></returns>
-        public Speaker Get(int id)
+        public Speaker Get(long id)
         {
             return Repository.FirstOrDefault(s => s.SpeakerId == id);
         }

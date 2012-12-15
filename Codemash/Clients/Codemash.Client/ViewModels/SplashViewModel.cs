@@ -14,9 +14,10 @@ namespace Codemash.Client.ViewModels
         public ISpeakerRepository SpeakerRepository { get; private set; }
         public IAppService ApplicationService { get; private set; }
         public IChangeRepository ChangeRepository { get; private set; }
+        public IChangeService ChangeService { get; private set; }
 
         public SplashViewModel(INavigationService navigationService, ISessionRepository sessionRepository, ISpeakerRepository speakerRepository,
-            IAppService applicationService, IChangeRepository changeRepository)
+            IAppService applicationService, IChangeRepository changeRepository, IChangeService changeService)
             : base(navigationService)
         {
             // assignments
@@ -24,6 +25,8 @@ namespace Codemash.Client.ViewModels
             SpeakerRepository = speakerRepository;
             ChangeRepository = changeRepository;
             ApplicationService = applicationService;
+            ChangeService = changeService;
+
             LoadStatus = "Preparing Application...";
         }
 
@@ -78,6 +81,7 @@ namespace Codemash.Client.ViewModels
             if (changes.Count > 0)
             {
                 LoadStatus = "Applying Changes...";
+                ChangeService.ApplyChanges(changes);
             }
 
             return true;

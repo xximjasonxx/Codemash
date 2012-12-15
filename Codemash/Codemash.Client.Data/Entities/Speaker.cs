@@ -4,12 +4,52 @@ namespace Codemash.Client.Data.Entities
 {
     public class Speaker : EntityBase
     {
-        public string Name { get; internal set; }
-        public string Twitter { get; internal set; }
-        public string Biography { get; internal set; }
-        public string BlogUrl { get; internal set; }
+        private string _name;
+        private string _twitter;
+        private string _biography;
+        private string _blogUrl;
+
+        public string Name
+        {
+            get { return _name; }
+            internal set
+            {
+                MarkDirty();
+                _name = value;
+            }
+        }
+
+        public string Twitter
+        {
+            get { return _twitter; }
+            internal set
+            {
+                MarkDirty();
+                _twitter = value;
+            }
+        }
+
+        public string Biography
+        {
+            get { return _biography; }
+            internal set
+            {
+                MarkDirty();
+                _biography = value;
+            }
+        }
+
+        public string BlogUrl
+        {
+            get { return _blogUrl; }
+            internal set
+            {
+                MarkDirty();
+                _blogUrl = value;
+            }
+        }
 
         [PrimaryKey]
-        public int SpeakerId { get; internal set; }
+        public long SpeakerId { get; internal set; }
     }
 }

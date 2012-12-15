@@ -9,5 +9,9 @@ namespace Codemash.Client.Data.Repository
 {
     public interface ISpeakerRepository : IRepository<Speaker>
     {
+        /// <summary>
+        /// Save the dirty speakers
+        /// </summary>
+        void Save();
     }
 }

@@ -14,13 +14,13 @@
     <Tokens>
       <PrimaryToken TokenID="Codemash.Phone8.AppToken" TaskName="_default">
         <TemplateIconic>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\IconicTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\SmallTile.png</SmallImageURI>
           <Count>0</Count>
-          <IconImageURI IsRelative="true" IsResource="false">Assets\Tiles\IconicTileMediumLarge.png</IconImageURI>
-          <Title>Codemash 2.0.1.3</Title>
+          <IconImageURI IsRelative="true" IsResource="false">Assets\Tiles\MediumTile.png</IconImageURI>
+          <Title>Codemash</Title>
           <Message>
           </Message>
-          <BackgroundColor>#FB8102</BackgroundColor>
+          <BackgroundColor>FB8102</BackgroundColor>
           <HasLarge>True</HasLarge>
           <LargeContent1>
           </LargeContent1>

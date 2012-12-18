@@ -15,5 +15,16 @@ namespace Codemash.Phone.Shared.Services
         /// Event indicating that the Push Channel has been initialized
         /// </summary>
         event EventHandler PushChannelInitialized;
+
+        /// <summary>
+        /// Show a Progress message in the standard screen section
+        /// </summary>
+        /// <param name="message"></param>
+        void ShowProgressMessage(string message);
+
+        /// <summary>
+        /// Hide any progress message currently displayed
+        /// </summary>
+        void HideProgressMessage();
     }
 }

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Media;
 using Codemash.Phone.Core;
 using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.Common;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Notification;
+using Microsoft.Phone.Shell;
 using Ninject;
 
 namespace Codemash.Phone.Shared.Services.Impl
@@ -14,12 +17,18 @@ namespace Codemash.Phone.Shared.Services.Impl
         private const string PushNotificationChannelName = "CodemashPushChannel";
         private string _clientTypeName = string.Empty;
         private HttpNotificationChannel _notificationChannel;
+        private readonly PhoneApplicationFrame _rootFrame;
 
         [Inject]
         public INotificationRegistrationService RegistrationService { get; set; }
 
         [Inject]
         public ISettingsRepository SettingsRepository { get; set; }
+
+        public CustomAppService(PhoneApplicationFrame rootFrame)
+        {
+            _rootFrame = rootFrame;
+        }
 
         #region Implementation of IAppService
 
@@ -76,6 +85,24 @@ namespace Codemash.Phone.Shared.Services.Impl
         }
 
         public event EventHandler PushChannelInitialized;
+
+        private ProgressIndicator _progressIndicator;
+        public void ShowProgressMessage(string message = "Waiting...")
+        {
+            _progressIndicator = new ProgressIndicator { IsIndeterminate = true };
+            SystemTray.SetProgressIndicator((PhoneApplicationPage)_rootFrame.Content, _progressIndicator);
+            _progressIndicator.IsVisible = true;
+            _progressIndicator.Text = message;
+        }
+
+        public void HideProgressMessage()
+        {
+            if (_progressIndicator != null)
+            {
+                _progressIndicator.IsVisible = false;
+                _progressIndicator = null;
+            }
+        }
 
         #endregion
     }

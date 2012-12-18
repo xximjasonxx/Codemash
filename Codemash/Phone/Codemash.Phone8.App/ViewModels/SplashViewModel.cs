@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using Codemash.Phone.Data.Provider;
 using Codemash.Phone.Shared.Common;
 using Ninject;
 using Caliburn.Micro;
@@ -18,13 +17,7 @@ namespace Codemash.Phone8.App.ViewModels
         public ISpeakerRepository SpeakerRepository { get; set; }
 
         [Inject]
-        public IChangeProvider ChangeProvider { get; set; }
-
-        [Inject]
         public IAppService ApplicationService { get; set; }
-
-        [Inject]
-        public IChangeRepository ChangeRepository { get; set; }
 
         public SplashViewModel(INavigationService navigationService)
             : base(navigationService)
@@ -70,17 +63,6 @@ namespace Codemash.Phone8.App.ViewModels
         // the load of the Speaker Repository completed
         void SpeakerRepository_LoadCompleted(object sender, EventArgs e)
         {
-            ChangeRepository.LoadCompleted += ChangeRepository_LoadCompleted;
-            LoadStatus = "Checking for Changes...";
-            ChangeRepository.Load();
-        }
-
-        // load of the pending changes is completed (not applied)
-        void ChangeRepository_LoadCompleted(object sender, EventArgs e)
-        {
-            LoadStatus = "Applying Changes...";
-            ChangeProvider.ApplyChanges(ChangeRepository.GetAll());
-
             LoadStatus = "Loading Application";
             Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.UriFor<MainViewModel>().Navigate());
         }

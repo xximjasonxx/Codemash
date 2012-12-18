@@ -4,10 +4,12 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using Codemash.Phone.Core;
+using Codemash.Phone.Data.Provider;
 using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.Common;
 using Codemash.Phone.Shared.DataModels;
 using Codemash.Phone.Shared.Grouping;
+using Codemash.Phone.Shared.Services;
 using Ninject;
 
 namespace Codemash.Phone8.App.ViewModels
@@ -16,6 +18,15 @@ namespace Codemash.Phone8.App.ViewModels
     {
         [Inject]
         public ISessionRepository SessionRepository { get; set; }
+
+        [Inject]
+        public IChangeRepository ChangeRepository { get; set; }
+
+        [Inject]
+        public IAppService ApplicationService { get; set; }
+
+        [Inject]
+        public IChangeProvider ChangeProvider { get; set; }
 
         private bool _mySessionsLoaded;
 
@@ -79,12 +90,24 @@ namespace Codemash.Phone8.App.ViewModels
 
         public void PageLoaded()
         {
+            ChangeRepository.LoadCompleted += ChangeRepository_LoadCompleted;
+            ApplicationService.ShowProgressMessage("Checking for Changes...");
+            ChangeRepository.Load();
+
             if (_mySessionsLoaded)
             {
                 NotifyOfPropertyChange("MySessions");
                 NotifyOfPropertyChange("MySessionsEmpty");
                 NotifyOfPropertyChange("MySessionsNotEmpty");
             }
+        }
+
+        void ChangeRepository_LoadCompleted(object sender, System.EventArgs e)
+        {
+            var changes = ChangeRepository.GetAll();
+            if (changes.Count > 0)
+                ChangeProvider.ApplyChanges(changes);
+            ApplicationService.HideProgressMessage();
         }
 
         public void AllByName()

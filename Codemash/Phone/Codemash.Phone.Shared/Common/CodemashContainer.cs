@@ -21,7 +21,8 @@ namespace Codemash.Phone.Shared.Common
             Load(new[] {new CodemashRepositoryModule()});
 
             // bind custom services
-            Bind<IAppService>().To<CustomAppService>().InSingletonScope();
+            var appService = new CustomAppService(frame);
+            Bind<IAppService>().ToConstant(appService).InSingletonScope();
             Bind<INotificationRegistrationService>().To<CustomNotificationRegistrationService>();
 
             // bind version specific dependencies

@@ -20,7 +20,7 @@
           <Title>Codemash</Title>
           <Message>
           </Message>
-          <BackgroundColor>FB8102</BackgroundColor>
+          <BackgroundColor>#FB8102</BackgroundColor>
           <HasLarge>True</HasLarge>
           <LargeContent1>
           </LargeContent1>

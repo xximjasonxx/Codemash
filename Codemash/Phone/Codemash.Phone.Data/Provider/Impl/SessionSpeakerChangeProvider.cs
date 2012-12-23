@@ -32,11 +32,11 @@ namespace Codemash.Phone.Data.Provider.Impl
         /// Apply changes
         /// </summary>
         /// <param name="changeList"></param>
-        public void ApplyChanges(IList<Change> changeList)
+        public void ApplyChanges(ChangeList changeList)
         {
             // separate out the changes
-            var speakerChanges = changeList.Where(c => string.Compare("speaker", c.EntityType, StringComparison.OrdinalIgnoreCase) == 0);
-            var sessionChanges = changeList.Where(c => string.Compare("session", c.EntityType, StringComparison.OrdinalIgnoreCase) == 0);
+            var speakerChanges = changeList.SpeakerChanges;
+            var sessionChanges = changeList.SessionChanges;
 
             // apply the changes
             ApplySpeakerChanges(speakerChanges);

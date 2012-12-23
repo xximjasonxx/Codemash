@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Codemash.Phone.Data.Entities;
+﻿using Codemash.Phone.Data.Common;
 
 namespace Codemash.Phone.Data.Provider
 {
@@ -10,6 +8,6 @@ namespace Codemash.Phone.Data.Provider
         /// Apply changes
         /// </summary>
         /// <param name="changeList"></param>
-        void ApplyChanges(IList<Change> changeList);
+        void ApplyChanges(ChangeList changeList);
     }
 }

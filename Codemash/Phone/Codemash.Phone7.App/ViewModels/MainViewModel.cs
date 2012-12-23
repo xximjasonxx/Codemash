@@ -102,11 +102,18 @@ namespace Codemash.Phone7.App.ViewModels
 
         void ChangeRepository_LoadCompleted(object sender, System.EventArgs e)
         {
-            var changes = ChangeRepository.GetAll();
+            var changes = ChangeRepository.AllChanges;
             if (changes.Count > 0)
+            {
                 ChangeProvider.ApplyChanges(changes);
-
+                ApplicationService.ShowToast("Changes Applied", "Click to see Changes", ToastTap);
+            }
             ApplicationService.HideProgressMessage();
+        }
+
+        private void ToastTap()
+        {
+            NavigationService.UriFor<ChangesViewModel>().Navigate();
         }
 
         public void AllByName()

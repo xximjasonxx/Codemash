@@ -47,6 +47,13 @@
             </ContentPresenter>
         </DataTemplate>
 
+        <DataTemplate x:Key="PivotHeaderTemplate">
+            <ContentPresenter>
+                <TextBlock Text="{Binding}" Foreground="{StaticResource CodemashLightOrange}"
+                           FontSize="30" Margin="5,10,5,5" />
+            </ContentPresenter>
+        </DataTemplate>
+
         <DataTemplate x:Key="SessionDetailTitleTemplate">
             <Border>
                 <ContentPresenter>

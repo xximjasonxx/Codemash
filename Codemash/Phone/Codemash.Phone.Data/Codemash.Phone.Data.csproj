@@ -102,6 +102,7 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ChangeList.cs" />
     <Compile Include="Common\Enum.cs" />
     <Compile Include="Context\CodemashDataContext.cs" />
     <Compile Include="Entities\Change.cs" />

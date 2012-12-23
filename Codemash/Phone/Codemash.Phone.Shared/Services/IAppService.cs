@@ -1,5 +1,6 @@
 ﻿using System;
 using Codemash.Phone.Shared.Common;
+using Coding4Fun.Phone.Controls;
 
 namespace Codemash.Phone.Shared.Services
 {
@@ -26,5 +27,13 @@ namespace Codemash.Phone.Shared.Services
         /// Hide any progress message currently displayed
         /// </summary>
         void HideProgressMessage();
+
+        /// <summary>
+        /// Show a Toast Prompt
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="message"></param>
+        /// <param name="onTapHandler"></param>
+        void ShowToast(string title, string message, Action onTapHandler);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ using Codemash.Phone.Shared.Common;
 using Codemash.Phone.Shared.DataModels;
 using Codemash.Phone.Shared.Grouping;
 using Codemash.Phone.Shared.Services;
+using Microsoft.Phone.Shell;
 using Ninject;
 
 namespace Codemash.Phone8.App.ViewModels
@@ -104,10 +106,18 @@ namespace Codemash.Phone8.App.ViewModels
 
         void ChangeRepository_LoadCompleted(object sender, System.EventArgs e)
         {
-            var changes = ChangeRepository.GetAll();
+            var changes = ChangeRepository.AllChanges;
             if (changes.Count > 0)
+            {
                 ChangeProvider.ApplyChanges(changes);
+                ApplicationService.ShowToast("Changes Applied", "Click to see Changes", ToastTap);
+            }
             ApplicationService.HideProgressMessage();
+        }
+
+        private void ToastTap()
+        {
+            NavigationService.UriFor<ChangesViewModel>().Navigate();
         }
 
         public void AllByName()

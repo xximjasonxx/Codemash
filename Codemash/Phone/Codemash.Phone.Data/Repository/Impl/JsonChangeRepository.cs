@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Codemash.Phone.Core;
+using Codemash.Phone.Data.Common;
 using Codemash.Phone.Data.Entities;
 using Codemash.Phone.Data.Extensions;
 using Newtonsoft.Json.Linq;
@@ -12,7 +13,7 @@ namespace Codemash.Phone.Data.Repository.Impl
 {
     public class JsonChangeRepository : IChangeRepository
     {
-        private IList<Change> _repository;
+        private ChangeList _repository = new ChangeList();
 
         [Inject]
         public ISettingsRepository SettingsRepository { get; set; }
@@ -31,8 +32,9 @@ namespace Codemash.Phone.Data.Repository.Impl
             client.ExecuteAsync(request, resp =>
                                              {
                                                  JArray jsonArray = JArray.Parse(resp.Content);
-                                                 _repository = (from ch in jsonArray.AsJEnumerable()
-                                                                select CreateChangeEntity(ch)).ToList();
+                                                 _repository = new ChangeList();
+                                                 _repository.AddRange(from ch in jsonArray.AsJEnumerable()
+                                                                      select CreateChangeEntity(ch));
 
                                                  if (LoadCompleted != null)
                                                      LoadCompleted(this, new EventArgs());
@@ -41,23 +43,19 @@ namespace Codemash.Phone.Data.Repository.Impl
 
         public event EventHandler LoadCompleted;
 
-        /// <summary>
-        /// Get an item from the Repository based on its int key
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Change Get(long id)
+        public IList<Change> SpeakerChanges
         {
-            throw new NotImplementedException();
+            get { return _repository.SpeakerChanges; }
         }
 
-        /// <summary>
-        /// Return all changes in the current repository
-        /// </summary>
-        /// <returns></returns>
-        public IList<Change> GetAll()
+        public IList<Change> SessionChanges
         {
-            return _repository;
+            get { return _repository.SessionChanges; }
+        }
+
+        public ChangeList AllChanges
+        {
+            get { return _repository ?? (_repository = new ChangeList()); }
         }
 
         #endregion

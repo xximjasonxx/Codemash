@@ -5,6 +5,7 @@ using System.Windows.Media;
 using Codemash.Phone.Core;
 using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.Common;
+using Coding4Fun.Phone.Controls;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Notification;
 using Microsoft.Phone.Shell;
@@ -50,6 +51,7 @@ namespace Codemash.Phone.Shared.Services.Impl
             }
             else
             {
+                _notificationChannel.ChannelUriUpdated += NotificationChannel_ChannelUriUpdated;
                 if (PushChannelInitialized != null)
                     PushChannelInitialized(this, new EventArgs());
             }
@@ -102,6 +104,18 @@ namespace Codemash.Phone.Shared.Services.Impl
                 _progressIndicator.IsVisible = false;
                 _progressIndicator = null;
             }
+        }
+
+        public void ShowToast(string title, string message, Action onTapHandler)
+        {
+            var toastPrompt = new ToastPrompt();
+            toastPrompt.Title = title;
+            toastPrompt.Message = message;
+            toastPrompt.MillisecondsUntilHidden = 6000;
+            toastPrompt.Background = new SolidColorBrush(Color.FromArgb(255, 251, 129, 2));
+            toastPrompt.Tap += (sender, args) => onTapHandler.Invoke();
+
+            toastPrompt.Show();
         }
 
         #endregion

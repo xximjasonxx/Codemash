@@ -118,6 +118,7 @@ namespace Codemash.Phone.Shared.Services.Impl
             toastPrompt.Message = message;
             toastPrompt.MillisecondsUntilHidden = 6000;
             toastPrompt.Background = new SolidColorBrush(Color.FromArgb(255, 251, 129, 2));
+            toastPrompt.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
             toastPrompt.Tap += (sender, args) => onTapHandler.Invoke();
 
             toastPrompt.Show();

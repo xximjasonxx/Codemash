@@ -1,4 +1,5 @@
-﻿using Codemash.Phone.Data.Common;
+﻿using System.Collections.Generic;
+using Codemash.Phone.Data.Common;
 
 namespace Codemash.Phone.Data.Provider
 {

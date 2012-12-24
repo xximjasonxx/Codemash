@@ -21,5 +21,11 @@ namespace Codemash.Phone.Data.Repository
         /// <param name="id"></param>
         /// <returns></returns>
         T Get(long id);
+
+        /// <summary>
+        /// Add an item to the repository manually
+        /// </summary>
+        /// <param name="item"></param>
+        void Add(T item);
     }
 }

@@ -81,8 +81,8 @@ namespace Codemash.Phone.Data.Repository.Impl
         private void CleanRepository()
         {
             // remove any items that are marked as removed
-            foreach (var item in _repository.Where(i => i.EntityState == EntityState.Removed))
-                _repository.Remove(item);
+            var removeList = _repository.Where(i => i.EntityState == EntityState.Removed).ToList();
+            removeList.ForEach(l => _repository.Remove(l));
 
             // make sure we reset the flag for all items coming from the database
             foreach (var item in _repository)

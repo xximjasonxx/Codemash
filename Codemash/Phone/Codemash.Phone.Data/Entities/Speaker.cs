@@ -1,4 +1,5 @@
 ﻿using System.Data.Linq.Mapping;
+using Codemash.Phone.Core;
 
 namespace Codemash.Phone.Data.Entities
 {
@@ -24,36 +25,36 @@ namespace Codemash.Phone.Data.Entities
             }
         }
 
-        [Column(CanBeNull = false, DbType = "ntext", UpdateCheck = UpdateCheck.Never)]
+        [Column(CanBeNull = true, DbType = "ntext", UpdateCheck = UpdateCheck.Never)]
         public string Biography
         {
             get { return _biography; }
             set
             {
                 MarkAsDirty();
-                _biography = value;
+                _biography = new StringWrapper(value).ToString();
             }
         }
 
-        [Column(CanBeNull = false)]
+        [Column(CanBeNull = true)]
         public string Twitter
         {
             get { return _twitter; }
             set
             {
                 MarkAsDirty();
-                _twitter = value;
+                _twitter = new StringWrapper(value).ToString();
             }
         }
 
-        [Column(CanBeNull = false)]
+        [Column(CanBeNull = true)]
         public string BlogUrl
         {
             get { return _blogUrl; }
             set
             {
                 MarkAsDirty();
-                _blogUrl = value;
+                _blogUrl = new StringWrapper(value).ToString();
             }
         }
     }

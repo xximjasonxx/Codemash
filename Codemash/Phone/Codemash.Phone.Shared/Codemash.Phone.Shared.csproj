@@ -88,7 +88,7 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ChangeDistinctComparer.cs" />
+    <Compile Include="Common\ProviderLogEntryDistinctComparer.cs" />
     <Compile Include="Common\CodemashBootstrapper.cs" />
     <Compile Include="Common\CodemashContainer.cs" />
     <Compile Include="Common\Enum.cs" />

@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using Codemash.Phone.Data.Common;
-using Codemash.Phone.Data.Entities;
+using Codemash.Phone.Data.Provider;
 using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.Common;
 using Codemash.Phone.Shared.DataModels;
@@ -15,7 +15,7 @@ namespace Codemash.Phone7.App.ViewModels
     public class ChangesViewModel : ViewModelBase
     {
         [Inject]
-        public IChangeRepository ChangeRepository { get; set; }
+        public IChangeLogProvider ChangeLogProvider { get; set; }
 
         [Inject]
         public ISessionRepository SessionRepository { get; set; }
@@ -28,24 +28,18 @@ namespace Codemash.Phone7.App.ViewModels
         // attributes
         public string SessionsHeader
         {
-            get { return string.Format("sessions ({0})", ChangeRepository.SessionChanges.Distinct(new ChangeDistinctComparer()).Count()); }
-        }
-
-        public string SpeakersHeader
-        {
-            get { return string.Format("speakers ({0})", ChangeRepository.SpeakerChanges.Distinct(new ChangeDistinctComparer()).Count()); }
+            get { return string.Format("sessions ({0})", ChangeLogProvider.SessionChangeLog.Distinct(new ProviderLogEntryDistinctComparer()).Count()); }
         }
 
         public IList<ChangeView> SessionChanges
         {
             get
             {
-                return ChangeRepository.SessionChanges.Distinct(new ChangeDistinctComparer())
+                return ChangeLogProvider.SessionChangeLog.Distinct(new ProviderLogEntryDistinctComparer())
                                        .Select(s => new ChangeView()
                                                         {
                                                             EntityId = s.EntityId,
-                                                            EntityChangeAction = s.Action,
-                                                            EntityType = typeof(Session),
+                                                            EntityChangeAction = s.ActionType,
                                                             EntityDisplay = SessionRepository.Get(s.EntityId).Title
                                                         }).ToList();
             }
@@ -53,7 +47,7 @@ namespace Codemash.Phone7.App.ViewModels
 
         public bool HasSessionChanges
         {
-            get { return ChangeRepository.SessionChanges.Count > 0; }
+            get { return ChangeLogProvider.SessionChangeLog.Count > 0; }
         }
 
         public bool HasNoSessionChanges

@@ -156,6 +156,11 @@ namespace Codemash.Phone.Data.Repository.Impl
             return result;
         }
 
+        public void Add(Session item)
+        {
+            Repository.Add(item);
+        }
+
         #endregion
     }
 }

@@ -23,6 +23,7 @@ namespace Codemash.Phone.Data.Modules
 
             // bind providers
             Bind<IChangeProvider>().To<SessionSpeakerChangeProvider>();
+            Bind<IChangeLogProvider>().To<DefaultChangeLogProvider>().InSingletonScope();
         }
 
         #endregion

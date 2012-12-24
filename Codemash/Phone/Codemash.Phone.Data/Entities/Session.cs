@@ -28,47 +28,47 @@ namespace Codemash.Phone.Data.Entities
             }
         }
 
-        [Column(CanBeNull = false, DbType = "ntext", UpdateCheck = UpdateCheck.Never)]
+        [Column(CanBeNull = true, DbType = "ntext", UpdateCheck = UpdateCheck.Never)]
         public string Abstract
         {
             get { return _abstract; }
             set
             {
                 MarkAsDirty();
-                _abstract = value;
+                _abstract = new StringWrapper(value).ToString();
             }
         }
 
-        [Column(CanBeNull = false)]
+        [Column(CanBeNull = true)]
         public string Difficulty
         {
             get { return _difficulty; }
             set
             {
                 MarkAsDirty();
-                _difficulty = value;
+                _difficulty = new StringWrapper(value).ToString();
             }
         }
 
-        [Column(CanBeNull = false)]
+        [Column(CanBeNull = true)]
         public string Technology
         {
             get { return _technology; }
             set
             {
                 MarkAsDirty();
-                _technology = value;
+                _technology = new StringWrapper(value).ToString();
             }
         }
 
-        [Column(CanBeNull = false)]
+        [Column(CanBeNull = true)]
         public string Room
         {
             get { return _room; }
             set
             {
                 MarkAsDirty();
-                _room = value;
+                _room = new StringWrapper(value).ToString();
             }
         }
 
@@ -97,7 +97,7 @@ namespace Codemash.Phone.Data.Entities
         [Column(CanBeNull = false)]
         public string Ends
         {
-            get { return _ends; }
+            get { return new StringWrapper(_ends).ToString(); }
             set
             {
                 MarkAsDirty();

@@ -8,7 +8,6 @@ namespace Codemash.Phone.Shared.DataModels
         public long EntityId { get; set; }
         public string EntityDisplay { get; set; }
         public ActionType EntityChangeAction { get; set; }
-        public Type EntityType { get; set; }
 
         public string ActionTypeDisplay
         {

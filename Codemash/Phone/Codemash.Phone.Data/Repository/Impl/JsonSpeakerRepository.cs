@@ -82,6 +82,11 @@ namespace Codemash.Phone.Data.Repository.Impl
             return Repository.FirstOrDefault(s => s.SpeakerId == id);
         }
 
+        public void Add(Speaker item)
+        {
+            Repository.Add(item);
+        }
+
         #endregion
     }
 }

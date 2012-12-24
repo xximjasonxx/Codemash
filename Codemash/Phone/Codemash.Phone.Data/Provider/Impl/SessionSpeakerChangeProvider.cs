@@ -26,6 +26,9 @@ namespace Codemash.Phone.Data.Provider.Impl
         [Inject]
         public ITileService PhoneTileService { get; set; }
 
+        [Inject]
+        public IChangeLogProvider ChangeLogProvider { get; set; }
+
         #region Implementation of IChangeProvider
 
         /// <summary>
@@ -34,6 +37,9 @@ namespace Codemash.Phone.Data.Provider.Impl
         /// <param name="changeList"></param>
         public void ApplyChanges(ChangeList changeList)
         {
+            // clear the log provider
+            ChangeLogProvider.Clear();
+
             // separate out the changes
             var speakerChanges = changeList.SpeakerChanges;
             var sessionChanges = changeList.SessionChanges;
@@ -87,7 +93,9 @@ namespace Codemash.Phone.Data.Provider.Impl
         {
             var speaker = SpeakerRepository.Get(entityId);
             if (speaker != null)
+            {
                 speaker.MarkAsDeleted();
+            }
         }
 
         private void ModifySpeaker(long entityId, string propertyName, string value)
@@ -107,6 +115,8 @@ namespace Codemash.Phone.Data.Provider.Impl
                 speaker = new Speaker {SpeakerId = entityId};
                 foreach (var change in changes)
                     speaker.UpdateProperty(change.Key, change.Value);
+
+                SpeakerRepository.Add(speaker);
             }
         }
 
@@ -141,25 +151,50 @@ namespace Codemash.Phone.Data.Provider.Impl
             var session = SessionRepository.Get(entityId);
             if (session == null)
             {
-                // this speaker does not exist - create it
+                // this session does not exist - create it
                 session = new Session() { SessionId = entityId };
                 foreach (var change in changes)
                     session.UpdateProperty(change.Key, change.Value);
+
+                SessionRepository.Add(session);
+                ChangeLogProvider.SessionChangeLog.Add(new ProviderLogEntry
+                                                           {
+                                                               EntityId = session.SessionId,
+                                                               ActionType = ActionType.Add,
+                                                               EntityDisplay = session.Title
+                                                           });
             }
         }
 
         private void ModifySession(long entityId, string key, string value)
         {
-            var session = SpeakerRepository.Get(entityId);
+            var session = SessionRepository.Get(entityId);
             if (session != null)
+            {
                 session.UpdateProperty(key, value);
+
+                ChangeLogProvider.SessionChangeLog.Add(new ProviderLogEntry
+                                                           {
+                                                               EntityId = session.SessionId,
+                                                               ActionType = ActionType.Modify,
+                                                               EntityDisplay = session.Title
+                                                           });
+            }
         }
 
         private void DeleteSession(long entityId)
         {
             var session = SessionRepository.Get(entityId);
             if (session != null)
+            {
                 session.MarkAsDeleted();
+                ChangeLogProvider.SessionChangeLog.Add(new ProviderLogEntry
+                                                           {
+                                                               EntityId = session.SessionId,
+                                                               ActionType = ActionType.Delete,
+                                                               EntityDisplay = session.Title
+                                                           });
+            }
         }
 
         #endregion

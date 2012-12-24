@@ -67,7 +67,11 @@ namespace Codemash.Phone.Shared.Services.Impl
 
         void RegistrationService_RegistrationFailed(object sender, EventArgs e)
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() => MessageBox.Show("Push Notification Registration Failed"));
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+                                                          {
+                                                              if (PushChannelInitializationFailure != null)
+                                                                  PushChannelInitializationFailure(this, new EventArgs());
+                                                          });
         }
 
         void RegistrationService_RegistrationCompleted(object sender, EventArgs e)
@@ -87,6 +91,7 @@ namespace Codemash.Phone.Shared.Services.Impl
         }
 
         public event EventHandler PushChannelInitialized;
+        public event EventHandler PushChannelInitializationFailure;
 
         private ProgressIndicator _progressIndicator;
         public void ShowProgressMessage(string message = "Waiting...")

@@ -21,6 +21,9 @@ namespace Codemash.Phone.Data.Repository.Impl
             {
                 using (var storage = IsolatedStorageFile.GetUserStoreForApplication())
                 {
+                    if (!storage.FileExists(SeenListPageKey))
+                        return false;
+
                     using (var stream = new StreamReader(storage.OpenFile(SeenListPageKey, FileMode.Open, FileAccess.Read)))
                     {
                         return stream.ReadLine().Trim().AsBoolean(false);

@@ -40,8 +40,15 @@ namespace Codemash.Phone7.App.ViewModels
         public void PageLoaded()
         {
             ApplicationService.PushChannelInitialized += ApplicationService_PushChannelInitialized;
+            ApplicationService.PushChannelInitializationFailure += ApplicationService_PushChannelInitializationFailure;
             LoadStatus = "Initializing Push Channel...";
             ApplicationService.InitializePushChannel(PhoneClientType.WinPhone7);
+        }
+
+        void ApplicationService_PushChannelInitializationFailure(object sender, EventArgs e)
+        {
+            MessageBox.Show("Push Notification Registration Failed");
+            NavigationService.GoBack();
         }
 
         void ApplicationService_PushChannelInitialized(object sender, EventArgs e)

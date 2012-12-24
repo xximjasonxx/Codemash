@@ -18,6 +18,11 @@ namespace Codemash.Phone.Shared.Services
         event EventHandler PushChannelInitialized;
 
         /// <summary>
+        /// Event indicating the initialization of the Push channel failed
+        /// </summary>
+        event EventHandler PushChannelInitializationFailure;
+
+        /// <summary>
         /// Show a Progress message in the standard screen section
         /// </summary>
         /// <param name="message"></param>

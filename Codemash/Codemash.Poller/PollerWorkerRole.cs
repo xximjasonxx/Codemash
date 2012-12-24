@@ -27,8 +27,8 @@ namespace Codemash.Poller
 
         public override void Run()
         {
-            //while (true)
-            //{
+            while (true)
+            {
                 try
                 {
                     Logger.Current.LogInformation("Process Start");
@@ -43,8 +43,8 @@ namespace Codemash.Poller
                     Logger.Current.LogException(ex);
                 }
 
-                //Thread.Sleep(TimeSpan.FromMinutes(1));
-            //}
+                Thread.Sleep(TimeSpan.FromMinutes(Config.MinutesWaitTime));
+            }
         }
 
         public override bool OnStart()

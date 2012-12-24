@@ -203,9 +203,13 @@
     <Content Include="Handlers\Phone7Notification.ashx" />
     <None Include="Properties\PublishProfiles\codemashdelta - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\codemashdelta - FTP %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\codemashdelta - FTP %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\codemashdelta - FTP %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\codemashdelta - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\codemashdelta - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\codemashdelta - Web Deploy %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\codemashdelta - Web Deploy %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\codemashdelta - Web Deploy %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\codemashdelta - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>

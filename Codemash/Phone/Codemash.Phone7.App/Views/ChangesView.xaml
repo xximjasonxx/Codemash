@@ -16,43 +16,47 @@
         <custom:ActionTypeColorConverter x:Key="actionConverter" />
     </phone:PhoneApplicationPage.Resources>
 
-    <Border Padding="10" Background="{StaticResource ApplicationBackgroundBrush}">
-        <StackPanel Background="Transparent">
-            <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP" FontSize="45" Text="Session Changes" />
-            <Grid Margin="0,10,0,0">
-                <ListBox ItemsSource="{Binding SessionChanges}" Visibility="{Binding HasSessionChanges, Converter={StaticResource visibilityConverter}}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding ActionTypeDisplay}" FontSize="25" FontFamily="Segoe WP">
-                                    <TextBlock.Foreground>
-                                        <SolidColorBrush Color="{Binding EntityChangeAction, Converter={StaticResource actionConverter}}" />
-                                    </TextBlock.Foreground>
-                                </TextBlock>
-                                <TextBlock Text="{Binding EntityDisplay}" TextWrapping="Wrap" FontSize="30" FontFamily="Segoe WP"
-                                           Foreground="{StaticResource TextGrayBrush}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Margin" Value="7,0,5,12" />
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <cal:ActionMessage MethodName="SelectionChanged">
-                                <cal:Parameter Value="$eventArgs" />
-                            </cal:ActionMessage>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ListBox>
-                
-                <TextBlock Foreground="{StaticResource TextGrayBrush}"
+    <Grid Background="{StaticResource ApplicationBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="737*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Foreground="{StaticResource CodemashOrange}" FontFamily="Segoe WP" FontSize="45" Text="Session Changes"
+                       Grid.Row="0" />
+
+        <ListBox ItemsSource="{Binding SessionChanges}" Visibility="{Binding HasSessionChanges, Converter={StaticResource visibilityConverter}}"
+                 Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding ActionTypeDisplay}" FontSize="25" FontFamily="Segoe WP">
+                            <TextBlock.Foreground>
+                                <SolidColorBrush Color="{Binding EntityChangeAction, Converter={StaticResource actionConverter}}" />
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                        <TextBlock Text="{Binding EntityDisplay}" TextWrapping="Wrap" FontSize="30" FontFamily="Segoe WP"
+                                   Foreground="{StaticResource TextGrayBrush}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="7,0,5,12" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <cal:ActionMessage MethodName="SelectionChanged">
+                        <cal:Parameter Value="$eventArgs" />
+                    </cal:ActionMessage>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+
+        <TextBlock Foreground="{StaticResource TextGrayBrush}"
                            FontSize="30" FontFamily="Segoe WP"
-                           Text="No changes" Margin="10,0,0,0"
+                           Text="No changes" Margin="10,0,0,0" Grid.Row="1"
                            Visibility="{Binding HasNoSessionChanges, Converter={StaticResource visibilityConverter}}" />
-            </Grid>
-        </StackPanel>
-    </Border>
+    </Grid>
 </phone:PhoneApplicationPage>

@@ -32,26 +32,6 @@ namespace Codemash.Notification.Manager.Impl
         }
 
         /// <summary>
-        /// Send a notification to the client instructing the tile to revert to its pre notification state
-        /// </summary>
-        /// <param name="channelUri"></param>
-        public void SendClearTileNotification(string channelUri)
-        {
-            var payload = GetTileClearPayload();
-            var request = (HttpWebRequest)WebRequest.Create(channelUri);
-            request.Method = WebRequestMethods.Http.Post;
-            request.ContentLength = payload.Length;
-            request.ContentType = "text/xml";
-
-            request.Headers.Add("X-Message-ID", Guid.NewGuid().ToString());
-            request.Headers.Add("X-WindowsPhone-Target", "token");
-            request.Headers.Add("X-NotificationClass", ((int)BatchingInterval.ImmediateTile).ToString());
-
-            // send the request
-            SendNotification(request, payload);
-        }
-
-        /// <summary>
         /// Send a Toast notification
         /// </summary>
         /// <param name="channelUri"> </param>
@@ -104,37 +84,6 @@ namespace Codemash.Notification.Manager.Impl
 
                     writer.WriteStartElement("wp", "BackBackgroundImage", "WPNotification");
                     writer.WriteValue(backBackImage);
-                    writer.WriteEndElement();
-
-                    writer.WriteEndElement();
-                    writer.WriteEndDocument();
-                    writer.Flush();
-
-                    return memoryStream.ToArray();
-                }
-            }
-        }
-
-        private byte[] GetTileClearPayload()
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                using (XmlWriter writer = XmlWriter.Create(memoryStream))
-                {
-                    writer.WriteStartDocument();
-                    writer.WriteStartElement("wp", "Notification", "WPNotification");
-                    writer.WriteStartElement("wp", "Tile", "WPNotification");
-
-                    writer.WriteStartElement("wp", "BackgroundImage", "WPNotification");
-                    writer.WriteValue(string.Format("{0}/Handlers/Images/wp7/phone7_none.png", Config.DeltaApiDomain));
-                    writer.WriteEndElement();
-
-                    writer.WriteStartElement("wp", "BackContent", "WPNotification");
-                    writer.WriteAttributeString("Action", "Clear");
-                    writer.WriteEndElement();
-
-                    writer.WriteStartElement("wp", "BackBackgroundImage", "WPNotification");
-                    writer.WriteAttributeString("Action", "Clear");
                     writer.WriteEndElement();
 
                     writer.WriteEndElement();

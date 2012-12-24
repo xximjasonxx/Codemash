@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Linq.Mapping;
+using System.Text;
 using Codemash.Phone.Core;
 
 namespace Codemash.Phone.Data.Entities

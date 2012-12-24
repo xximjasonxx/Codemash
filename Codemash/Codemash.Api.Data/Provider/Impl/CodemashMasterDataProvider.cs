@@ -23,7 +23,7 @@ namespace Codemash.Api.Data.Provider.Impl
         /// </summary>
         public IList<Session> GetAllSessions()
         {
-            const string downloadUrl = "http://dl.dropbox.com/u/13029365/codemash_sessions.json";
+            const string downloadUrl = "http://dl.dropbox.com/u/13029365/codemash_sessions.jsonp";
             var client = new WebClient();
             var jsonString = client.DownloadString(downloadUrl);
             var jsonArray = JArray.Parse(jsonString);
@@ -37,7 +37,7 @@ namespace Codemash.Api.Data.Provider.Impl
         /// </summary>
         public IList<Speaker> GetAllSpeakers()
         {
-            const string downloadUrl = "http://dl.dropbox.com/u/13029365/codemash_speakers.json";
+            const string downloadUrl = "http://dl.dropbox.com/u/13029365/codemash_speakers.jsonp";
             var client = new WebClient();
             var jsonString = client.DownloadString(downloadUrl);
             var jsonArray = JArray.Parse(jsonString);

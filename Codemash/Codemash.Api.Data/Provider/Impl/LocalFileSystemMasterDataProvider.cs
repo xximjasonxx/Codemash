@@ -24,8 +24,8 @@ namespace Codemash.Api.Data.Provider.Impl
         /// </summary>
         public IList<Session> GetAllSessions()
         {
-            const string filepath = @"C:\Users\jason\Dropbox\Public\codemash_sessions.json";
-            using (var streamReader = new StreamReader(filepath))
+            const string filepath = @"C:\Users\jason\Dropbox\Public\codemash_sessions.jsonp";
+            using (var streamReader = new StreamReader(filepath, System.Text.Encoding.UTF8))
             {
                 string fileContents = streamReader.ReadToEnd();
                 JArray jsonArray = JArray.Parse(fileContents);
@@ -39,7 +39,7 @@ namespace Codemash.Api.Data.Provider.Impl
         /// </summary>
         public IList<Speaker> GetAllSpeakers()
         {
-            const string filepath = @"C:\Users\jason\Dropbox\Public\codemash_speakers.json";
+            const string filepath = @"C:\Users\jason\Dropbox\Public\codemash_speakers.jsonp";
             using (var streamReader = new StreamReader(filepath))
             {
                 string fileContents = streamReader.ReadToEnd();

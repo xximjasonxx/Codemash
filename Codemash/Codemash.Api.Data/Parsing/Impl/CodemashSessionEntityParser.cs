@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Codemash.Api.Data.Entities;
-using Codemash.Api.Data.Extensions;
+﻿using Codemash.Api.Data.Entities;
 using Codemash.Server.Core;
 using Codemash.Server.Core.Extensions;
 using Newtonsoft.Json.Linq;
-using Ninject;
 
 namespace Codemash.Api.Data.Parsing.Impl
 {

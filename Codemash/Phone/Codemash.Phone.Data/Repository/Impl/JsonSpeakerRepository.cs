@@ -46,7 +46,9 @@ namespace Codemash.Phone.Data.Repository.Impl
                                 db.Speakers.InsertOnSubmit(item);
                                 break;
                             case EntityState.Removed:
-                                db.Speakers.DeleteOnSubmit(item);
+                                var sp = db.Speakers.FirstOrDefault(s => s.SpeakerId == item.SpeakerId);
+                                if (sp != null)
+                                    db.Speakers.DeleteOnSubmit(sp);
                                 break;
                             case EntityState.Modified:
                                 var speaker = db.Speakers.FirstOrDefault(s => s.SpeakerId == item.SpeakerId);

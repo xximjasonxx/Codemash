@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using Codemash.Api.Data.Repositories;
@@ -26,18 +27,23 @@ namespace Codemash.Poller
 
         public override void Run()
         {
-            try
+            while (true)
             {
-                Logger.Current.LogInformation("Process Start");
+                try
+                {
+                    Logger.Current.LogInformation("Process Start");
 
-                ExecuteProcess();
-                ExecuteNotificationCheck();
+                    ExecuteProcess();
+                    ExecuteNotificationCheck();
 
-                Logger.Current.LogInformation("Process Complete");
-            }
-            catch (Exception ex)
-            {
-                Logger.Current.LogException(ex);
+                    Logger.Current.LogInformation("Process Complete");
+                }
+                catch (Exception ex)
+                {
+                    Logger.Current.LogException(ex);
+                }
+
+                Thread.Sleep(TimeSpan.FromMinutes(1));
             }
         }
 
@@ -45,9 +51,10 @@ namespace Codemash.Poller
         {
             // Set the maximum number of concurrent connections 
             ServicePointManager.DefaultConnectionLimit = 12;
+            
 
             // Establish Security Parameters for Notifications
-            ProvisionSecurity();
+            //ProvisionSecurity();
 
             return base.OnStart();
         }

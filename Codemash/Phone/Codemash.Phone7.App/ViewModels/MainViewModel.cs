@@ -106,7 +106,8 @@ namespace Codemash.Phone7.App.ViewModels
             if (changes.Count > 0)
             {
                 ChangeProvider.ApplyChanges(changes);
-                ApplicationService.ShowToast("Changes Applied", "Click to see Changes", ToastTap);
+                if (ChangeRepository.SessionChanges.Count > 0)
+                    ApplicationService.ShowToast("Changes Applied", "Click to see Changes", ToastTap);
             }
             ApplicationService.HideProgressMessage();
         }

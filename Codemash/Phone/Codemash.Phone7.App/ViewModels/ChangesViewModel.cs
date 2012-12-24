@@ -46,7 +46,7 @@ namespace Codemash.Phone7.App.ViewModels
                                                             EntityId = s.EntityId,
                                                             EntityChangeAction = s.Action,
                                                             EntityType = typeof(Session),
-                                                            EntityDisplay = "Session Title"
+                                                            EntityDisplay = SessionRepository.Get(s.EntityId).Title
                                                         }).ToList();
             }
         }

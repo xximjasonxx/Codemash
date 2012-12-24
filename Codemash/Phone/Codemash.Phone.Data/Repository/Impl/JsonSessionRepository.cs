@@ -52,7 +52,9 @@ namespace Codemash.Phone.Data.Repository.Impl
                                 db.Sessions.InsertOnSubmit(item);
                                 break;
                             case EntityState.Removed:
-                                db.Sessions.DeleteOnSubmit(item);
+                                var se = db.Sessions.FirstOrDefault(s => s.SessionId == item.SessionId);
+                                if (se != null)
+                                    db.Sessions.DeleteOnSubmit(se);
                                 break;
                             case EntityState.Modified:
                                 var session = db.Sessions.FirstOrDefault(s => s.SessionId == item.SessionId);
@@ -150,7 +152,8 @@ namespace Codemash.Phone.Data.Repository.Impl
         /// <returns></returns>
         public Session Get(long id)
         {
-            return Repository.FirstOrDefault(s => s.SessionId == id);
+            var result = Repository.FirstOrDefault(s => s.SessionId == id);
+            return result;
         }
 
         #endregion

@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{8691a8f1-12c8-4b6e-86cd-04753d708eef}" Title="Codemash 2.0.1.3" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Jason Farrell" Description="Sample description" Publisher="Farrellsoft">
+  <App xmlns="" ProductID="{8691a8f1-12c8-4b6e-86cd-04753d708eef}" Title="Codemash 2.0.1.3" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"
+       Author="Jason Farrell" Description="An app for managing the sessions for the Codemash 2013 conference. Supports updates to the schedule through Push Notification"
+       Publisher="Farrellsoft">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />

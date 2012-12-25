@@ -11,6 +11,9 @@
     xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"  SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="False" mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
     tk:TiltEffect.IsTiltEnabled="true">
+    <phone:PhoneApplicationPage.Resources>
+        <cal:BooleanToVisibilityConverter x:Key="visibilityConverter" />
+    </phone:PhoneApplicationPage.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <cal:ActionMessage MethodName="PageLoaded" />
@@ -28,7 +31,7 @@
                    FontFamily="Segoe WP" FontSize="45" Grid.Row="0" />
 
             <tk:LongListSelector Grid.Row="1" ItemsSource="{Binding SessionList}" ItemTemplate="{StaticResource SessionListItemTemplate}"
-                                 Background="Transparent" IsFlatList="False">
+                                 Background="Transparent" IsFlatList="False" Visibility="{Binding ShowGrid, Converter={StaticResource visibilityConverter}}">
                 <tk:LongListSelector.GroupHeaderTemplate>
                     <DataTemplate>
                         <Border Background="{StaticResource CodemashOrange}" Margin="2,6" Padding="7,2">
@@ -38,7 +41,39 @@
                 </tk:LongListSelector.GroupHeaderTemplate>
                 <tk:LongListSelector.GroupItemTemplate>
                     <DataTemplate>
-                        <Border Background="{StaticResource CodemashOrange}" Margin="6" MinWidth="99" Height="99"
+                        <Border Background="{StaticResource CodemashOrange}" Margin="6" MinWidth="110" Height="110"
+                                Padding="7">
+                            <TextBlock Text="{Binding Key}" FontSize="40" Foreground="White"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </DataTemplate>
+                </tk:LongListSelector.GroupItemTemplate>
+                <tk:LongListSelector.GroupItemsPanel>
+                    <ItemsPanelTemplate>
+                        <tk:WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </tk:LongListSelector.GroupItemsPanel>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <cal:ActionMessage MethodName="SelectionChanged">
+                            <cal:Parameter Value="$eventArgs" />
+                        </cal:ActionMessage>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </tk:LongListSelector>
+
+            <tk:LongListSelector Grid.Row="1" ItemsSource="{Binding SessionList}" ItemTemplate="{StaticResource SessionListItemTemplate}"
+                                 Background="Transparent" IsFlatList="False" Visibility="{Binding ShowList, Converter={StaticResource visibilityConverter}}">
+                <tk:LongListSelector.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Border Background="{StaticResource CodemashOrange}" Margin="2,6" Padding="7,2">
+                            <TextBlock Text="{Binding Key}" FontSize="40" Foreground="White"/>
+                        </Border>
+                    </DataTemplate>
+                </tk:LongListSelector.GroupHeaderTemplate>
+                <tk:LongListSelector.GroupItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{StaticResource CodemashOrange}" Margin="6" MinWidth="460" Height="70"
                                 Padding="7">
                             <TextBlock Text="{Binding Key}" FontSize="40" Foreground="White"
                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>

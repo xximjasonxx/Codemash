@@ -47,6 +47,9 @@ namespace Codemash.Phone7.App.ViewModels
             }
         }
 
+        public bool ShowGrid { get { return GroupingType == SessionGroupType.ByName; } }
+        public bool ShowList { get { return GroupingType != SessionGroupType.ByName; } }
+
         public string PageTitle
         {
             get

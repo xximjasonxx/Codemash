@@ -47,7 +47,7 @@ namespace Codemash.Phone8.App.ViewModels
                 {
                     SessionId = s.SessionId,
                     Title = s.Title,
-                    StartsAt = s.Starts.AsDateTime().AsTimeDisplay()
+                    StartsAt = s.Starts.AsDateTime().AsBlockDisplay()
                 }));
             }
         }
@@ -62,7 +62,7 @@ namespace Codemash.Phone8.App.ViewModels
                 {
                     Title = s.Title,
                     SessionId = s.SessionId,
-                    StartsAt = s.Starts.AsDateTime().AsTimeDisplay()
+                    StartsAt = s.Starts.AsDateTime().AsBlockDisplay()
                 }))).ToList();
 
                 _mySessionsLoaded = true;

@@ -15,6 +15,7 @@ namespace Codemash.Phone.Shared.Grouping
         /// <returns></returns>
         public IDictionary<string, IList<Session>> Group(IList<Session> sessionList)
         {
+            sessionList = sessionList.OrderBy(s => s.Starts.AsDateTime()).ToList();
             var groupedSessions = (from s in sessionList
                                    group s by s.Starts.AsDateTime().AsBlockDisplay() into GroupedSessions
                                    select new

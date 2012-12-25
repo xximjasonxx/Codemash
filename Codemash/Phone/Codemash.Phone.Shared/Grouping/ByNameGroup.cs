@@ -16,34 +16,33 @@ namespace Codemash.Phone.Shared.Grouping
         /// <returns></returns>
         public IDictionary<string, IList<Session>> Group(IList<Session> sessionList)
         {
-            Regex regex = new Regex(@"\w");
-            var groupedSessions = (from s in sessionList
-                                   group s by regex.Matches(s.Title)[0].Value into GroupedSessions
-                                   select new
-                                   {
-                                       Key = GroupedSessions.Key,
-                                       Value = GroupedSessions
-                                   }).ToList();
+            // gather all sessions by the first character
+            var rawList = (from s in sessionList
+                           group s by Regex.Match(s.Title, "[A-Za-z0-9]{1}").Value.ToUpper()
+                           into GroupedSessions
+                           select new
+                                      {
+                                          Key = GroupedSessions.Key,
+                                          Sessions = GroupedSessions
+                                      }).OrderBy(n => n.Key).ToList();
 
-            var finalDictionary = groupedSessions.ToDictionary(kv => kv.Key, kv => (IList<Session>)kv.Value.ToList());
-            return CondenseNumerics(finalDictionary);
+            // filter the base result for those sessions starting with a letter
+            var alphaSessions = rawList.Where(r => r.Key.AsInt() < 0).ToDictionary(r => r.Key, r => r.Sessions.ToList());
+
+            // group the sessions that start with a number into their own key value pair
+            var numericSessions = new List<Session>();
+            rawList.Where(r => r.Key.AsInt() >= 0).ToList().ForEach(r => numericSessions = numericSessions.Concat(r.Sessions).ToList());
+
+            // aggregate the final
+            var result = new Dictionary<string, IList<Session>>();
+            if (numericSessions.Count > 0)
+                result.Add("#", numericSessions);
+
+            alphaSessions.ToList().ForEach(kv => result.Add(kv.Key, kv.Value));
+
+            return result;
         }
 
         #endregion
-
-        private IDictionary<string, IList<Session>> CondenseNumerics(IDictionary<string, IList<Session>> dictionary)
-        {
-            var numerics = dictionary.Where(kv => kv.Key.AsInt() > 0);
-            var sessionList = new List<Session>();
-            sessionList = numerics.Aggregate(sessionList, (current, kv) => current.Concat(kv.Value).ToList());
-
-            var finalDictionary = dictionary.Where(kv => kv.Key.AsInt() == int.MinValue)
-                .ToDictionary(kv => kv.Key, kv => kv.Value);
-
-            if (sessionList.Count > 0)
-                finalDictionary.Add("#", sessionList);
-
-            return finalDictionary;
-        }
     }
 }

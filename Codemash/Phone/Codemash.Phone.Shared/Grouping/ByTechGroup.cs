@@ -15,6 +15,7 @@ namespace Codemash.Phone.Shared.Grouping
         public IDictionary<string, IList<Session>> Group(IList<Session> sessionList)
         {
             var groupedSessions = (from s in sessionList
+                                   where !string.IsNullOrEmpty(s.Technology)
                                    group s by s.Technology into GroupedSessions
                                    select new
                                    {
@@ -22,7 +23,7 @@ namespace Codemash.Phone.Shared.Grouping
                                        Value = GroupedSessions
                                    }).ToList();
 
-            return groupedSessions.ToDictionary(kv => kv.Key, kv => (IList<Session>)kv.Value.ToList());
+            return groupedSessions.OrderBy(gs => gs.Key).ToDictionary(kv => kv.Key, kv => (IList<Session>)kv.Value.ToList());
         }
 
         #endregion

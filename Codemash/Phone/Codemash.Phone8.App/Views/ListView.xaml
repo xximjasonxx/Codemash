@@ -50,14 +50,14 @@
                             <Setter.Value>
                                 <DataTemplate>
                                     <Border Background="{StaticResource CodemashOrange}" Margin="6" Padding="7">
-                                        <TextBlock Text="{Binding Key}" FontSize="40" Foreground="White"
+                                        <TextBlock Text="{Binding Key}" FontSize="50" Foreground="White"
                                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                 </DataTemplate>
                             </Setter.Value>
                         </Setter>
                         <Setter Property="LayoutMode" Value="Grid" />
-                        <Setter Property="GridCellSize" Value="99,99"/>
+                        <Setter Property="GridCellSize" Value="110,110"/>
                     </Style>
                 </phone:LongListSelector.JumpListStyle>
             </phone:LongListSelector>
@@ -88,7 +88,7 @@
                             </Setter.Value>
                         </Setter>
                         <Setter Property="LayoutMode" Value="List" />
-                        <Setter Property="GridCellSize" Value="110,140"/>
+                        <Setter Property="GridCellSize" Value="200,140"/>
                     </Style>
                 </phone:LongListSelector.JumpListStyle>
             </phone:LongListSelector>

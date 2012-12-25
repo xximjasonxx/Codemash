@@ -40,10 +40,10 @@ namespace Codemash.Phone7.App.ViewModels
                                                                                             {
                                                                                                 Title = s.Title,
                                                                                                 SessionId = s.SessionId,
-                                                                                                StartsAt = s.Starts.AsDateTime().AsTimeDisplay()
+                                                                                                StartsAt = s.Starts.AsDateTime().AsBlockDisplay()
                                                                                             }))).ToList();
 
-                return result.OrderBy(r => r.Key);
+                return result;
             }
         }
 

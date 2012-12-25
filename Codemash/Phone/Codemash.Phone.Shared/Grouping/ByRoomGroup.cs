@@ -15,6 +15,7 @@ namespace Codemash.Phone.Shared.Grouping
         public IDictionary<string, IList<Session>> Group(IList<Session> sessionList)
         {
             var result = (from session in sessionList
+                          where !string.IsNullOrEmpty(session.Room)
                           orderby session.Room
                           group session by session.Room
                           into Groups

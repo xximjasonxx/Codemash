@@ -9,12 +9,12 @@ namespace Codemash.Phone.Core
     {
         public static string DeltaApiDomain
         {
-            get { return "http://codemashdelta.azurewebsites.net"; }
+            get { return "http://192.168.1.9"; }
         }
 
         public static string DeltaApiRoot
         {
-            get { return DeltaApiDomain + "/api"; }
+            get { return DeltaApiDomain + "/DeltaApi/api"; }
         }
     }
 }

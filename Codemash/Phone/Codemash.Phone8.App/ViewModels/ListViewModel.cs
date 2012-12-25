@@ -41,11 +41,10 @@ namespace Codemash.Phone8.App.ViewModels
                                                                                             {
                                                                                                 Title = s.Title,
                                                                                                 SessionId = s.SessionId,
-                                                                                                StartsAt = s.Starts.AsDateTime().AsTimeDisplay()
+                                                                                                StartsAt = s.Starts.AsDateTime().AsBlockDisplay()
                                                                                             }).ToList())).ToList();
 
-                var finalList = result.OrderBy(r => r.Key).ToList();
-                return finalList;
+                return result;
             }
         }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -9,28 +8,7 @@ namespace Codemash.Phone.Core
     {
         public static string AsBlockDisplay(this DateTime dtVal)
         {
-            return dtVal.ToString("M/d hh:mm");
-        }
-
-        public static string AsParameterString(this IDictionary<string, string> configValues)
-        {
-            StringBuilder sb = new StringBuilder();
-            var isFirst = true;
-
-            foreach (var kv in configValues)
-            {
-                if (!isFirst)
-                    sb.Append("&");
-                sb.AppendFormat("{0}={1}", kv.Key, kv.Value);
-                isFirst = false;
-            }
-
-            return sb.ToString();
-        }
-
-        public static string AsTimeDisplay(this DateTime dt)
-        {
-            return dt.ToString("ddd") + " " + dt.ToString("h:mmt").ToLower();
+            return dtVal.ToString("ddd") + " " + dtVal.ToString("M/d hh:mmt").ToLower();
         }
 
         public static string AsFullDurationString(this TimeSpan ts)

@@ -89,12 +89,12 @@ namespace Codemash.Phone.Data.Repository.Impl
         public IList<Session> GetUpcomingSessions()
         {
             var blocks = Repository.Select(s => s.Starts.AsDateTime()).Distinct().ToList();
-            if (blocks.Count(d => d >= DateTime.Now) == 0)
-            {
+            var floor = DateTime.Now.AddMinutes(-20);
+            var ceiling = DateTime.Now.AddMinutes(40);
+            var upcomingBlock = blocks.FirstOrDefault(d => d >= floor && d <= ceiling);
+            if (upcomingBlock == DateTime.MinValue)
                 return new List<Session>();
-            }
 
-            var upcomingBlock = blocks.OrderBy(d => d).FirstOrDefault(d => d >= DateTime.Now);
             return Repository.Where(s => s.Starts.AsDateTime() == upcomingBlock).OrderBy(s => s.Title).ToList();
         }
 

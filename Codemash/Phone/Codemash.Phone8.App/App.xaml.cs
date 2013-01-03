@@ -4,6 +4,7 @@ using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using Codemash.Phone.Shared;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -21,7 +22,10 @@ namespace Codemash.Phone8.App
 
         void App_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
-            throw new System.NotImplementedException();
+            if (e.ExceptionObject.GetType() == typeof(NoInternetConnectionException))
+                MessageBox.Show("Could not find an Internet connection - please try again later");
+            else
+                MessageBox.Show("An error occured - the application will now close");
         }
     }
 }

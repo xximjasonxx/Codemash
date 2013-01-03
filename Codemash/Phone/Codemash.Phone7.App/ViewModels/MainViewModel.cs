@@ -70,6 +70,7 @@ namespace Codemash.Phone7.App.ViewModels
             }
         }
 
+        public bool UpcomingSessionsEmpty { get { return !UpcomingSessions.Any(); } }
         public bool MySessionsEmpty { get { return !MySessions.Any(); } }
 
         // behaviors

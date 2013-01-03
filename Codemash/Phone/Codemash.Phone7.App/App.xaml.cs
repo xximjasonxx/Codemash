@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Codemash.Phone.Shared;
 
 namespace Codemash.Phone7.App
 {
@@ -14,7 +15,10 @@ namespace Codemash.Phone7.App
 
         void App_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
-            throw new System.NotImplementedException();
+            if (e.ExceptionObject.GetType() == typeof (NoInternetConnectionException))
+                MessageBox.Show("Could not find an Internet connection - please try again later");
+            else
+                MessageBox.Show("An error occured - the application will now close");
         }
     }
 }

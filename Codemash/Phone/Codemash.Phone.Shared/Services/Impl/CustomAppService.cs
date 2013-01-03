@@ -7,6 +7,7 @@ using Codemash.Phone.Data.Repository;
 using Codemash.Phone.Shared.Common;
 using Coding4Fun.Phone.Controls;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Net.NetworkInformation;
 using Microsoft.Phone.Notification;
 using Microsoft.Phone.Shell;
 using Ninject;
@@ -43,6 +44,10 @@ namespace Codemash.Phone.Shared.Services.Impl
             _notificationChannel = HttpNotificationChannel.Find(PushNotificationChannelName);
             if (_notificationChannel == null)
             {
+                // check that a network connection is present
+                if (!NetworkInterface.GetIsNetworkAvailable())
+                    throw new NoInternetConnectionException();
+
                 _notificationChannel = new HttpNotificationChannel(PushNotificationChannelName);
                 _notificationChannel.ChannelUriUpdated += NotificationChannel_ChannelUriUpdated;
 

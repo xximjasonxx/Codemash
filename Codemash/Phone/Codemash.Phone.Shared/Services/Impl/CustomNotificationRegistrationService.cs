@@ -17,6 +17,7 @@ namespace Codemash.Phone.Shared.Services.Impl
         public void Register(string channelUri, string clientTypeName)
         {
             var client = new RestClient(Config.DeltaApiRoot);
+            client.Timeout = 5000;
             var request = new RestRequest("Notification", Method.POST);
             request.AddParameter("ChannelUri", channelUri);
             request.AddParameter("ClientType", clientTypeName);

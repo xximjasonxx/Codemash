@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Codemash.Phone.Core;
 using Codemash.Phone.Data.Common;
 using Codemash.Phone.Data.Entities;
@@ -31,10 +32,13 @@ namespace Codemash.Phone.Data.Repository.Impl
 
             client.ExecuteAsync(request, resp =>
                                              {
-                                                 JArray jsonArray = JArray.Parse(resp.Content);
                                                  _repository = new ChangeList();
-                                                 _repository.AddRange(from ch in jsonArray.AsJEnumerable()
-                                                                      select CreateChangeEntity(ch));
+                                                 if (resp.StatusCode == HttpStatusCode.OK)
+                                                 {
+                                                     JArray jsonArray = JArray.Parse(resp.Content);
+                                                     _repository.AddRange(from ch in jsonArray.AsJEnumerable()
+                                                                          select CreateChangeEntity(ch));
+                                                 }
 
                                                  if (LoadCompleted != null)
                                                      LoadCompleted(this, new EventArgs());

@@ -60,6 +60,13 @@
                         <Setter Property="GridCellSize" Value="110,110"/>
                     </Style>
                 </phone:LongListSelector.JumpListStyle>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <cal:ActionMessage MethodName="SelectionChanged">
+                            <cal:Parameter Value="$eventArgs" />
+                        </cal:ActionMessage>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </phone:LongListSelector>
 
             <!-- Used when we want to show the JumpList as a List -->
@@ -91,6 +98,13 @@
                         <Setter Property="GridCellSize" Value="200,140"/>
                     </Style>
                 </phone:LongListSelector.JumpListStyle>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <cal:ActionMessage MethodName="SelectionChanged">
+                            <cal:Parameter Value="$eventArgs" />
+                        </cal:ActionMessage>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </phone:LongListSelector>
         </Grid>
     </Border>

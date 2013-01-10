@@ -16,10 +16,14 @@ namespace Codemash.Phone.Data.Modules
         public override void Load()
         {
             // bind repositories
-            Bind<ISessionRepository>().To<JsonSessionRepository>().InSingletonScope();
-            Bind<ISpeakerRepository>().To<JsonSpeakerRepository>().InSingletonScope();
-            Bind<ISettingsRepository>().To<IsolatedStorageSettingsRepository>().InSingletonScope();
-            Bind<IChangeRepository>().To<JsonChangeRepository>().InSingletonScope();
+            //Bind<ISessionRepository>().To<JsonSessionRepository>().InSingletonScope();
+            Bind<ISessionRepository>().To<TestSessionRepository>().InSingletonScope();
+            //Bind<ISpeakerRepository>().To<JsonSpeakerRepository>().InSingletonScope();
+            Bind<ISpeakerRepository>().To<TestSpeakerRepository>().InSingletonScope();
+            //Bind<ISettingsRepository>().To<IsolatedStorageSettingsRepository>().InSingletonScope();
+            Bind<ISettingsRepository>().To<TestSettingsRepository>().InSingletonScope();
+            //Bind<IChangeRepository>().To<JsonChangeRepository>().InSingletonScope();
+            Bind<IChangeRepository>().To<TestChangeRepository>().InSingletonScope();
 
             // bind providers
             Bind<IChangeProvider>().To<SessionSpeakerChangeProvider>();

@@ -25,61 +25,61 @@
         <controls:Panorama Title="Codemash 2.0.1.3" TitleTemplate="{StaticResource MainViewPanoramaTitle}"
                            HeaderTemplate="{StaticResource MainViewPanoramaHeader}">
             <controls:PanoramaItem Header="upcoming">
-                <StackPanel Orientation="Vertical">
-                    <ListBox ItemsSource="{Binding UpcomingSessions}" ItemTemplate="{StaticResource SessionListItemTemplate}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <cal:ActionMessage MethodName="SelectionChanged">
-                                    <cal:Parameter Value="$eventArgs" />
-                                </cal:ActionMessage>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ListBox>
-                    <TextBlock Foreground="{StaticResource TextGrayBrush}"
+                <Grid>
+                        <ListBox ItemsSource="{Binding UpcomingSessions}" ItemTemplate="{StaticResource SessionListItemTemplate}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <cal:ActionMessage MethodName="SelectionChanged">
+                                        <cal:Parameter Value="$eventArgs" />
+                                    </cal:ActionMessage>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListBox>
+                        <TextBlock Foreground="{StaticResource TextGrayBrush}"
                                    FontSize="30" FontFamily="Segoe WP"
                                    Text="No upcoming sessions" Margin="10,0,0,0"
                                    Visibility="{Binding UpcomingSessionsEmpty, Converter={StaticResource visibilityConverter}}" />
-                </StackPanel>
+                </Grid>
             </controls:PanoramaItem>
             
             <controls:PanoramaItem Header="my sessions">
-                <StackPanel Orientation="Vertical">
-                    <tk:LongListSelector ItemsSource="{Binding MySessions}" ItemTemplate="{StaticResource SessionListItemTemplate}"
-                                 Background="Transparent" IsFlatList="False">
-                        <tk:LongListSelector.GroupHeaderTemplate>
-                            <DataTemplate>
-                                <Border Background="{StaticResource CodemashOrange}" Margin="2,6" Padding="7,2">
-                                    <TextBlock Text="{Binding Key}" FontSize="30" Foreground="White"/>
-                                </Border>
-                            </DataTemplate>
-                        </tk:LongListSelector.GroupHeaderTemplate>
-                        <tk:LongListSelector.GroupItemTemplate>
-                            <DataTemplate>
-                                <Border Background="{StaticResource CodemashOrange}" Margin="6" MinWidth="99" Height="99" Padding="7">
-                                    <TextBlock Text="{Binding Key}" FontSize="35" Foreground="White"
-                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </DataTemplate>
-                        </tk:LongListSelector.GroupItemTemplate>
-                        <tk:LongListSelector.GroupItemsPanel>
-                            <ItemsPanelTemplate>
-                                <tk:WrapPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </tk:LongListSelector.GroupItemsPanel>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <cal:ActionMessage MethodName="SelectionChanged">
-                                    <cal:Parameter Value="$eventArgs" />
-                                </cal:ActionMessage>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </tk:LongListSelector>
+                <Grid>
+                        <tk:LongListSelector ItemsSource="{Binding MySessions}" ItemTemplate="{StaticResource SessionListItemTemplate}"
+                                     Background="Transparent" IsFlatList="False">
+                            <tk:LongListSelector.GroupHeaderTemplate>
+                                <DataTemplate>
+                                    <Border Background="{StaticResource CodemashOrange}" Margin="2,6" Padding="7,2">
+                                        <TextBlock Text="{Binding Key}" FontSize="30" Foreground="White"/>
+                                    </Border>
+                                </DataTemplate>
+                            </tk:LongListSelector.GroupHeaderTemplate>
+                            <tk:LongListSelector.GroupItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{StaticResource CodemashOrange}" Margin="6" MinWidth="99" Height="99" Padding="7">
+                                        <TextBlock Text="{Binding Key}" FontSize="35" Foreground="White"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </tk:LongListSelector.GroupItemTemplate>
+                            <tk:LongListSelector.GroupItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <tk:WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </tk:LongListSelector.GroupItemsPanel>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <cal:ActionMessage MethodName="SelectionChanged">
+                                        <cal:Parameter Value="$eventArgs" />
+                                    </cal:ActionMessage>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </tk:LongListSelector>
 
-                    <TextBlock Foreground="{StaticResource TextGrayBrush}"
-                               FontSize="30" FontFamily="Segoe WP"
-                               Text="No sessions favorited" Margin="10,0,0,0"
-                               Visibility="{Binding MySessionsEmpty, Converter={StaticResource visibilityConverter}}" />
-                </StackPanel>
+                        <TextBlock Foreground="{StaticResource TextGrayBrush}"
+                                   FontSize="30" FontFamily="Segoe WP"
+                                   Text="No sessions favorited" Margin="10,0,0,0"
+                                   Visibility="{Binding MySessionsEmpty, Converter={StaticResource visibilityConverter}}" />
+                </Grid>
             </controls:PanoramaItem>
 
             <!-- Panorama item three -->

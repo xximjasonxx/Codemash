@@ -109,6 +109,8 @@
     <Compile Include="Services\IAppService.cs" />
     <Compile Include="Services\Impl\CustomAppService.cs" />
     <Compile Include="Services\Impl\CustomNotificationRegistrationService.cs" />
+    <Compile Include="Services\Impl\TestAppService.cs" />
+    <Compile Include="Services\Impl\TestNotificationRegistrationService.cs" />
     <Compile Include="Services\INotificationRegistrationService.cs" />
   </ItemGroup>
   <ItemGroup>

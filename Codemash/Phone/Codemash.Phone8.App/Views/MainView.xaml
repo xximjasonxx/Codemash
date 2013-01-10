@@ -24,25 +24,25 @@
                            HeaderTemplate="{StaticResource MainViewPanoramaHeader}">
             
             <controls:PanoramaItem Header="upcoming">
-                <StackPanel Orientation="Vertical">
-                    <ListBox ItemsSource="{Binding UpcomingSessions}" ItemTemplate="{StaticResource SessionListItemTemplate}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <cal:ActionMessage MethodName="SelectionChanged">
-                                    <cal:Parameter Value="$eventArgs" />
-                                </cal:ActionMessage>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ListBox>
-                    <TextBlock Foreground="{StaticResource TextGrayBrush}"
-                                   FontSize="30" FontFamily="Segoe WP"
-                                   Text="No upcoming sessions" Margin="10,0,0,0"
-                                   Visibility="{Binding UpcomingSessionsEmpty, Converter={StaticResource visibilityConverter}}" />
-                </StackPanel>
+                <Grid>
+                        <ListBox ItemsSource="{Binding UpcomingSessions}" ItemTemplate="{StaticResource SessionListItemTemplate}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <cal:ActionMessage MethodName="SelectionChanged">
+                                        <cal:Parameter Value="$eventArgs" />
+                                    </cal:ActionMessage>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListBox>
+                        <TextBlock Foreground="{StaticResource TextGrayBrush}"
+                                       FontSize="30" FontFamily="Segoe WP"
+                                       Text="No upcoming sessions" Margin="10,0,0,0"
+                                       Visibility="{Binding UpcomingSessionsEmpty, Converter={StaticResource visibilityConverter}}" />
+                </Grid>
             </controls:PanoramaItem>
 
             <controls:PanoramaItem Header="my sessions">
-                <StackPanel Orientation="Vertical">
+                <Grid>
                     <phone:LongListSelector IsGroupingEnabled="true" HideEmptyGroups="true"
                         ItemsSource="{Binding MySessions}" Background="Transparent"
                         ItemTemplate="{StaticResource SessionListItemTemplate}"
@@ -70,13 +70,20 @@
                                 <Setter Property="GridCellSize" Value="110,140"/>
                             </Style>
                         </phone:LongListSelector.JumpListStyle>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <cal:ActionMessage MethodName="SelectionChanged">
+                                    <cal:Parameter Value="$eventArgs" />
+                                </cal:ActionMessage>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </phone:LongListSelector>
 
                     <TextBlock Foreground="{StaticResource TextGrayBrush}"
                                FontSize="30" FontFamily="Segoe WP"
                                Text="No sessions favorited" Margin="10,0,0,0"
                                Visibility="{Binding MySessionsEmpty, Converter={StaticResource visibilityConverter}}" />
-                </StackPanel>
+                </Grid>
             </controls:PanoramaItem>
             
             <controls:PanoramaItem Header="all sessions">

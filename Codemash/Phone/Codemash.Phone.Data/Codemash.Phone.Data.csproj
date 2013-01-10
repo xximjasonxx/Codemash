@@ -125,6 +125,10 @@
     <Compile Include="Repository\Impl\JsonSessionRepository.cs" />
     <Compile Include="Repository\Impl\JsonSpeakerRepository.cs" />
     <Compile Include="Repository\Impl\RepositoryBase.cs" />
+    <Compile Include="Repository\Impl\TestChangeRepository.cs" />
+    <Compile Include="Repository\Impl\TestSessionRepository.cs" />
+    <Compile Include="Repository\Impl\TestSettingsRepository.cs" />
+    <Compile Include="Repository\Impl\TestSpeakerRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\ISessionRepository.cs" />
     <Compile Include="Repository\ISettingsRepository.cs" />

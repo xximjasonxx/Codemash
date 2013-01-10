@@ -22,8 +22,10 @@ namespace Codemash.Phone.Shared.Common
 
             // bind custom services
             var appService = new CustomAppService(frame);
-            Bind<IAppService>().ToConstant(appService).InSingletonScope();
-            Bind<INotificationRegistrationService>().To<CustomNotificationRegistrationService>();
+            //Bind<IAppService>().ToConstant(appService).InSingletonScope();
+            Bind<IAppService>().ToConstant(new TestAppService()).InSingletonScope();
+            //Bind<INotificationRegistrationService>().To<CustomNotificationRegistrationService>();
+            Bind<INotificationRegistrationService>().To<TestNotificationRegistrationService>();
 
             // bind version specific dependencies
             BindVersionSpecificDependencies(frame);
